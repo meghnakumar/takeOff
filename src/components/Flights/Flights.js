@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import FlightList from '../Flights/FlightList/FlightList';
+import SearchFlights from '../Flights/SearchFlights/SearchFlights';
 import './Flights.scss';
 
-const Flights = () => (
-  <div className="Flights">
-    Flights Component
+const Flights = () => {
+  const [isButtonClicked, setIsButtonClicked] = React.useState(false);
+  return (
+    <div>
+    <SearchFlights setIsButtonClicked = {setIsButtonClicked}></SearchFlights>
+    {isButtonClicked &&
+      <FlightList></FlightList>  
+    }
   </div>
-);
+)};
 
 Flights.propTypes = {};
 
