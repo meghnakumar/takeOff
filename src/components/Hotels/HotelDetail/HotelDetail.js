@@ -99,8 +99,13 @@ const HotelDetail = () => {
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, numberOfRoomError: "Please enter the number of rooms required"}
-                })
-            } else setValidationError(prevState => {
+                })}
+                else if(value > 15){
+                    setValidationError(prevState => {
+                        return {...prevState, numberOfRoomError: "Number of Rooms can't be greater than 15"}
+                    })
+                }
+            else setValidationError(prevState => {
                 return {...prevState, numberOfRoomError: ""}
             })
         }
@@ -109,8 +114,13 @@ const HotelDetail = () => {
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, contactNumberError: "Please enter the contact number"}
-                })
-            } else setValidationError(prevState => {
+                })}
+            else if(value.length > 10){
+                    setValidationError(prevState => {
+                        return {...prevState, contactNumberError: "Contact number cannot be greater than 10"}
+                    })
+                }
+            else setValidationError(prevState => {
                 return {...prevState, contactNumberError: ""}
             })
         }
@@ -304,104 +314,6 @@ const HotelDetail = () => {
                     </Grid>)}
 
                 </Grid>
-
-                {/*<Grid container style={{paddingTop: '30px'}}>*/}
-                {/*    <div className="container-fluid">*/}
-                {/*        <div className="row">*/}
-                {/*            <h3 style={{fontFamily: 'fantasy', textAlign: "left"}}>Booking Details</h3>*/}
-                {/*        </div>*/}
-                {/*        <div>*/}
-                {/*            <div>*/}
-                {/*                <Form onSubmit={handleSubmit}>*/}
-                {/*                    <div className="row justify-content-center">*/}
-                {/*                        <Form.Group className="col-3 mb-3">*/}
-                {/*                            <Form.Label>Guest Name</Form.Label>*/}
-                {/*                            <Form.Control id="guestName" placeholder="Guest Name" onChange={(e) => handleOnInput(e)}/>*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNameError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                        <Form.Group className="col-3 mb-3">*/}
-                {/*                            <Form.Label>Number of Guests</Form.Label>*/}
-                {/*                            <Form.Control id="guestNumber" placeholder="Number of Guests" type='number' onChange={(e) => handleOnInput(e)} />*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNumberError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                        <Form.Group className="col-3 mb-3">*/}
-                {/*                            <Form.Label>Contact Number</Form.Label>*/}
-                {/*                            <Form.Control id="contact" placeholder="Contact Number" type='number' onChange={(e) => handleOnInput(e)}/>*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.contactNumberError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                    </div>*/}
-                {/*                    <div className="row justify-content-center">*/}
-                {/*                        <Form.Group className="col-4 mb-3">*/}
-                {/*                            <Form.Label>Select type of Room</Form.Label>*/}
-                {/*                            <Form.Select id="roomtype" onChange={(e) => handleOnInput(e)}>*/}
-                {/*                                <option>Garden View Suit-Twin with Balcony</option>*/}
-                {/*                                <option>Garden View Suit King Bathtub</option>*/}
-                {/*                                <option>Luxury Suit-King with Balcony</option>*/}
-                {/*                                <option>Pool View Suit-King with Bathtub</option>*/}
-                {/*                                <option>The Legacy Suite with Jacuzzi</option>*/}
-                {/*                            </Form.Select>*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.roomTypeError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                        <Form.Group className="col-3 mb-3">*/}
-                {/*                            <Form.Label>Number of Rooms</Form.Label>*/}
-                {/*                            <Form.Control id="roomNumber" placeholder="Number of Rooms" type='number' onChange={(e) => handleOnInput(e)}/>*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.numberOfRoomError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                    </div>*/}
-                {/*                    <div className="row justify-content-center">*/}
-                {/*                        <div className="row col-3 justify-content-center m-3">*/}
-                {/*                        <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
-                {/*                            <DatePicker*/}
-                {/*                                id="startDate"*/}
-                {/*                                label="Start"*/}
-                {/*                                value={depatureValue}*/}
-                {/*                                disablePast*/}
-                {/*                                closeOnSelect*/}
-                {/*                                onChange={(newValue) => {*/}
-                {/*                                    setDepartureValue(newValue);*/}
-                {/*                                }}*/}
-                {/*                                renderInput={(params) => <TextField {...params} />}*/}
-                {/*                            />*/}
-                {/*                        </LocalizationProvider>*/}
-                {/*                        </div>*/}
-                {/*                        <div className="row col-3 justify-content-center m-3">*/}
-                {/*                        <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
-                {/*                            <DatePicker*/}
-                {/*                                id="endDate"*/}
-                {/*                                label="End"*/}
-                {/*                                value={returnValue}*/}
-                {/*                                disablePast*/}
-                {/*                                closeOnSelect*/}
-                {/*                                minDate={depatureValue}*/}
-                {/*                                onChange={(newValue) => {*/}
-                {/*                                    returnSetValue(newValue);*/}
-                {/*                                }}*/}
-                {/*                                renderInput={(params) => <TextField {...params} />}*/}
-                {/*                            />*/}
-                {/*                        </LocalizationProvider>*/}
-                {/*                        </div>*/}
-                {/*                    </div>*/}
-                {/*                    <div className="row justify-content-center">*/}
-                {/*                        <Form.Group className="col-6 mb-3 mt-2">*/}
-                {/*                            <Form.Label>Email</Form.Label>*/}
-                {/*                            <Form.Control id="email" placeholder="Provide your email" onChange={(e) => handleOnInput(e)}/>*/}
-                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.emailError}</Form.Label>*/}
-                {/*                        </Form.Group>*/}
-                {/*                    </div>*/}
-                {/*                    <div className="row col-3 justify-content-center">*/}
-                {/*                        <Button type="submit" variant="contained" color="primary">*/}
-                {/*                            Add to Cart*/}
-                {/*                        </Button>*/}
-                {/*                    </div>*/}
-
-                {/*                </Form>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</Grid>*/}
-
-
-
             </Paper>
             <Dialog open={open} onClose={handleCloseBookingForm}
                     fullWidth={true}
@@ -411,15 +323,6 @@ const HotelDetail = () => {
                     <Typography fontWeight={"bold"}>
                         {hotelData.name} - {createBooking.roomInfo.name}
                     </Typography>
-                    {/*<TextField*/}
-                    {/*    autoFocus*/}
-                    {/*    margin="dense"*/}
-                    {/*    id="name"*/}
-                    {/*    label="Email Address"*/}
-                    {/*    type="email"*/}
-                    {/*    fullWidth*/}
-                    {/*    variant="standard"*/}
-                    {/*/>*/}
                     <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
                             <Form.Group className="mb-2">
                                 <Form.Label>Guest Name</Form.Label>

@@ -78,12 +78,16 @@ const Bookings = () => {
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, contactNumberError: "Please enter the contact number"}
+                })}
+            else if(value.length > 10){
+                setValidationError(prevState => {
+                    return {...prevState, contactNumberError: "Contact number cannot be greater than 10"}
                 })
-            } else setValidationError(prevState => {
-                return {...prevState, contactNumberError: ""}
-            })
+            }
+            else setValidationError(prevState => {
+                    return {...prevState, contactNumberError: ""}
+                })
         }
-
     }
 
 
@@ -202,7 +206,7 @@ const Bookings = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setOpenModifyForm(false)
-        setOpenSnackBar(true);
+        setOpenModifySnackBar(true);
     }
 
     const [feedback, setFeedback] = useState();
@@ -211,6 +215,7 @@ const Bookings = () => {
     }
 
     const [openReviewSnackBar, setOpenReviewSnackBar] = useState(false);
+
 
 
 
@@ -409,9 +414,9 @@ const Bookings = () => {
 
             </Dialog>
 
-            <Snackbar anchorOrigin={{vertical: "top", horizontal: "right"}} open={openSnackBar} autoHideDuration={4000}
-                      onClose={() => setOpenSnackBar(false)}>
-                <Alert onClose={() => setOpenSnackBar(false)} severity="success" sx={{width: '100%'}}>
+            <Snackbar anchorOrigin={{vertical: "top", horizontal: "right"}} open={openModifySnackBar} autoHideDuration={4000}
+                      onClose={() => setOpenModifySnackBar(false)}>
+                <Alert onClose={() => setOpenModifySnackBar(false)} severity="success" sx={{width: '100%'}}>
                     Booking Successfully Modified!
                 </Alert>
             </Snackbar>
@@ -423,15 +428,6 @@ const Bookings = () => {
                     <DialogContentText>
                        Please add a feedback and rating for your stay.
                     </DialogContentText>
-                    {/*<TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Feedback"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />*/}
                     <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
                         <Form.Group className="mb-2">
                             <Form.Label>Rate out of 5</Form.Label>

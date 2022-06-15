@@ -3,6 +3,7 @@ import {Alert, Box, Button, Grid, Modal, Paper, Snackbar, Typography} from "@mui
 import {CardImg} from "react-bootstrap";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router";
+import background from "../../assets/images/beach-background.jpg";
 
 const Hotel = (props) => {
     const [addedToWishlist, setAddedToWishlist] = useState(false);
@@ -39,7 +40,7 @@ const Hotel = (props) => {
             <Grid container spacing={2}>
                 <Grid item sm={12} md={2}>
 
-                    <CardImg alt="complex" src="/beach-background.jpg"/>
+                    <CardImg alt="complex" src={background}/>
 
                 </Grid>
                 <Grid item sm={12} md={10} container>
