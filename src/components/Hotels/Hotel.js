@@ -1,29 +1,23 @@
 import React, {useState} from 'react'
-import {Box, Button, Grid, Modal, Paper, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Modal, Paper, Snackbar, Typography} from "@mui/material";
 import {CardImg} from "react-bootstrap";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router";
 
 const Hotel = (props) => {
-    const [addedToWishlist, setAddedtoWishlist] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
+    const [addedToWishlist, setAddedToWishlist] = useState(false);
+    const [openWishlistAlert, setOpenWishlistAlert] = useState({message:"", visibility:false});
     const goToDetailsPage= useNavigate();
 
     const handleClick =()=>{
 
-        setAddedtoWishlist(current=>!current)
-        if(addedToWishlist===true){
-            setModalOpen(true)
+        setAddedToWishlist(current=>!current)
+        console.log(addedToWishlist)
+        if(addedToWishlist===false){
+            setOpenWishlistAlert({message:"Hotel added to wishlist!", visibility:true})
         }
         else
-            setModalOpen(false)
-
-        console.log(addedToWishlist)
-        console.log(modalOpen)
-    }
-
-    const handleClose = () => {
-        setModalOpen(false)
+            setOpenWishlistAlert({message:"Hotel removed from wishlist!", visibility:true})
     }
 
     const handleBookClick = () =>{
@@ -66,37 +60,19 @@ const Hotel = (props) => {
                                     color:addedToWishlist? 'red':'grey' }} onClick={handleClick}/>
                             </Typography>
 
-                           <Modal
-                                open={modalOpen}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description" >
-                               <Box sx={{
-                                   width: 250,
-                                   height: 100,
-                                   backgroundColor: 'white',
-                                   alignItems:'center',
-                                   '&:hover': {
-                                       backgroundColor: 'primary.main',
-                                       opacity: [0.9, 0.8, 0.7],
-                                   },
-                               }}>
-                               <h6>Added to Wishlist</h6>
-                           </Box>
-                            </Modal>
-
                         </Grid>
                         <Grid
                             container
                             direction="row"
                             justifyContent="flex-start"
                             alignItems="flex-start">
-                            {[...Array(props.rating.length)].map(() => {
+                            {[...Array(props.rating)].map(() => {
                                 return (
                                     <span className="star" style={{color: '#ffd700'}}>&#9733;</span>
                                 );
                             })}
                         </Grid>
+
 
                         <Typography variant="body2" align="left" color="text.secondary">
                             {props.description}
@@ -117,8 +93,20 @@ const Hotel = (props) => {
                         </Grid>
 
                     </Grid>
+
                 </Grid>
+
             </Grid>
+            <div>
+                <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "right"}} open={openWishlistAlert.visibility} autoHideDuration={2000}
+                          onClose={() => setOpenWishlistAlert(false)}>
+                    <Alert onClose={() => setOpenWishlistAlert(false)} severity="success" sx={{width: '100%'}}>
+                        {openWishlistAlert.message}
+                    </Alert>
+                </Snackbar>
+            </div>
+
+
         </Paper>
 
     )

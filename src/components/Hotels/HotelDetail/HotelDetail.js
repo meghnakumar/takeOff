@@ -1,16 +1,157 @@
 import React, {useState} from 'react'
-import {Button, Card, CardActionArea, CardContent, CardMedia, Grid, Paper, Typography} from "@mui/material";
+import {Form} from "react-bootstrap";
+import {
+    Alert,
+    Button,
+    Card,
+    CardActionArea,
+    CardContent,
+    CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+    Grid,
+    Paper, Snackbar,
+    Typography
+} from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
-import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import {useNavigate} from "react-router";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import {DatePicker} from "@mui/x-date-pickers/DatePicker";
+import TextField from "@mui/material/TextField";
+import {red} from "@mui/material/colors";
+
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 
 const HotelDetail = () => {
 
+    const [departureValue, setDepartureValue] = useState(null);
+    const [returnValue, returnSetValue] = useState(null);
+    const [guestName, setGuestName] = useState();
+    const [guestNumber, setGuestNumber] = useState();
+    const [email, setEmail] = useState();
+    const [roomNumber, setRoomNumber] = useState();
+    const [contact, setContact] = useState();
+    const [showErrors, setShowErrors] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [validationError, setValidationError] = useState({
+        guestNameError: 'Please enter name of the guest',
+        guestNumberError: 'Please enter the number of guests',
+        emailError: 'Please enter email',
+        numberOfRoomError: 'Please enter the number of rooms required',
+        contactNumberError: 'Please enter the contact number',
+        startDateError: 'Please add the booking date',
+        endDateError: 'Please add the end booking date'
+
+    })
+
+    const handleOnInput = (e) => {
+        console.log(e.target)
+        const {id, value} = e.target;
+        setShowErrors(false)
+        if (id === 'guestName') {
+            setGuestName(value)
+            if (value === "") {
+                setValidationError(prevState => {
+                    return {...prevState, guestNameError: "Guest Name cannot be empty"}
+                })
+            } else if (!value.match(/[a-zA-Z]+$/)) {
+                setValidationError(prevState => {
+                    return {...prevState, guestNameError: "Guest Name should have only letters"}
+                })
+            } else setValidationError(prevState => {
+                return {...prevState, guestNameError: ""}
+            })
+        }
+        if (id === 'guestNumber') {
+            setGuestNumber(value)
+            if (value === "") {
+                setValidationError(prevState => {
+                    return {...prevState, guestNumberError: "Please provide number of guests"}
+                })
+            } else setValidationError(prevState => {
+                return {...prevState, guestNumberError: ""}
+            })
+        }
+        if (id === 'email') {
+            setEmail(value)
+
+            if (value === "") {
+                setValidationError(prevState => {
+                    return {...prevState, emailError: "Email cannot be empty"}
+                })
+            } else if (!value.match(/[a-zA-Z0-9]+[a-zA-Z0-9_]*@[a-zA-Z]+.[a-zA-Z]+/)) {
+                setValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        emailError: "Please provide a valid email address (e.g., jon_snow@westeros.com)"
+                    }
+                })
+            } else setValidationError(prevState => {
+                return {...prevState, emailError: ""}
+            })
+
+        }
+
+        if (id === 'roomNumber') {
+            setRoomNumber(value)
+            if (value === "") {
+                setValidationError(prevState => {
+                    return {...prevState, numberOfRoomError: "Please enter the number of rooms required"}
+                })
+            } else setValidationError(prevState => {
+                return {...prevState, numberOfRoomError: ""}
+            })
+        }
+        if (id === 'contact') {
+            setContact(value)
+            if (value === "") {
+                setValidationError(prevState => {
+                    return {...prevState, contactNumberError: "Please enter the contact number"}
+                })
+            } else setValidationError(prevState => {
+                return {...prevState, contactNumberError: ""}
+            })
+        }
+
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        console.log("here", validationError)
+        if (validationError.guestNameError === '' &&
+            validationError.endDateError === '' &&
+            validationError.emailError === '' &&
+            validationError.startDateError === '' &&
+            validationError.numberOfRoomError === '' &&
+            validationError.guestNumberError === '' &&
+            validationError.contactNumberError === '' &&
+            guestName !== null &&
+            guestNumber !== null &&
+            email !== null &&
+            contact !== null &&
+            roomNumber !== null) {
+            console.log(departureValue)
+            console.log(returnValue)
+            setOpen(false);
+            setOpenSnackBar(true);
+        } else {
+
+            setShowErrors(true)
+        }
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+
     const goToReadReviews = useNavigate();
+
+
 
     const hotelData = {
         "name": "Country Inn",
@@ -59,22 +200,54 @@ const HotelDetail = () => {
         "reviews": {}
     };
 
-    // function getWeeksAfter(date, amount) {
-    //     return date ? addWeeks(date, amount) : undefined;
-    // }
-    //
-    // const [value, setValue] = React.useState([null, null]);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(null);
-    const onChange = (dates) => {
-        const [start, end] = dates;
-        setStartDate(start);
-        setEndDate(end);
-    };
+    const handleOnChangeStartDate = (value) =>{
+        console.log(value)
+        setDepartureValue(value)
+        if (value === "") {
+            setValidationError(prevState => {
+                return {...prevState, startDateError: "Please enter the start booking date"}
+            })
+        } else setValidationError(prevState => {
+            return {...prevState, startDateError: ""}
+        })
+
+    }
+
+    const handleOnChangeEndDate = (value) =>{
+        console.log(value)
+        returnSetValue(value)
+        if (value === "") {
+            setValidationError(prevState => {
+                return {...prevState, endDateError: "Please enter the end booking date"}
+            })
+        } else setValidationError(prevState => {
+            return {...prevState, endDateError: ""}
+        })
+
+    }
+
 
     const handleReviewsClick = () => {
         goToReadReviews("/read-reviews")
     }
+
+
+    const [createBooking, setCreateBooking] = useState({roomInfo:"", show:false});
+
+
+    // Modal props
+
+    const [openSnackBar, setOpenSnackBar] = useState(false);
+
+    const handleClickRoomType = () => {
+        setOpen(true);
+    };
+
+    const handleCloseBookingForm = (e) => {
+        setShowErrors(false)
+        setOpen(false);
+    };
+
 
     return (
         <div>
@@ -104,7 +277,10 @@ const HotelDetail = () => {
                     justifyContent="start"
                     spacing={3} className="text-start">
                     {Object.values(hotelData.rooms).map(roomInfo => <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Card>
+                        <Card onClick={() => {
+                            handleClickRoomType();
+                            setCreateBooking({roomInfo: roomInfo, show: true})
+                        }}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -129,45 +305,195 @@ const HotelDetail = () => {
 
                 </Grid>
 
-                <Grid container style={{paddingTop: '30px'}}>
-                    <div className="container-fluid">
-                        <div className="row">
-                            <h3 style={{fontFamily: 'fantasy', textAlign: "left"}}>Booking Details</h3>
-                        </div>
-                        <div className="row">
+                {/*<Grid container style={{paddingTop: '30px'}}>*/}
+                {/*    <div className="container-fluid">*/}
+                {/*        <div className="row">*/}
+                {/*            <h3 style={{fontFamily: 'fantasy', textAlign: "left"}}>Booking Details</h3>*/}
+                {/*        </div>*/}
+                {/*        <div>*/}
+                {/*            <div>*/}
+                {/*                <Form onSubmit={handleSubmit}>*/}
+                {/*                    <div className="row justify-content-center">*/}
+                {/*                        <Form.Group className="col-3 mb-3">*/}
+                {/*                            <Form.Label>Guest Name</Form.Label>*/}
+                {/*                            <Form.Control id="guestName" placeholder="Guest Name" onChange={(e) => handleOnInput(e)}/>*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNameError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                        <Form.Group className="col-3 mb-3">*/}
+                {/*                            <Form.Label>Number of Guests</Form.Label>*/}
+                {/*                            <Form.Control id="guestNumber" placeholder="Number of Guests" type='number' onChange={(e) => handleOnInput(e)} />*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNumberError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                        <Form.Group className="col-3 mb-3">*/}
+                {/*                            <Form.Label>Contact Number</Form.Label>*/}
+                {/*                            <Form.Control id="contact" placeholder="Contact Number" type='number' onChange={(e) => handleOnInput(e)}/>*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.contactNumberError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                    </div>*/}
+                {/*                    <div className="row justify-content-center">*/}
+                {/*                        <Form.Group className="col-4 mb-3">*/}
+                {/*                            <Form.Label>Select type of Room</Form.Label>*/}
+                {/*                            <Form.Select id="roomtype" onChange={(e) => handleOnInput(e)}>*/}
+                {/*                                <option>Garden View Suit-Twin with Balcony</option>*/}
+                {/*                                <option>Garden View Suit King Bathtub</option>*/}
+                {/*                                <option>Luxury Suit-King with Balcony</option>*/}
+                {/*                                <option>Pool View Suit-King with Bathtub</option>*/}
+                {/*                                <option>The Legacy Suite with Jacuzzi</option>*/}
+                {/*                            </Form.Select>*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.roomTypeError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                        <Form.Group className="col-3 mb-3">*/}
+                {/*                            <Form.Label>Number of Rooms</Form.Label>*/}
+                {/*                            <Form.Control id="roomNumber" placeholder="Number of Rooms" type='number' onChange={(e) => handleOnInput(e)}/>*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.numberOfRoomError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                    </div>*/}
+                {/*                    <div className="row justify-content-center">*/}
+                {/*                        <div className="row col-3 justify-content-center m-3">*/}
+                {/*                        <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
+                {/*                            <DatePicker*/}
+                {/*                                id="startDate"*/}
+                {/*                                label="Start"*/}
+                {/*                                value={depatureValue}*/}
+                {/*                                disablePast*/}
+                {/*                                closeOnSelect*/}
+                {/*                                onChange={(newValue) => {*/}
+                {/*                                    setDepartureValue(newValue);*/}
+                {/*                                }}*/}
+                {/*                                renderInput={(params) => <TextField {...params} />}*/}
+                {/*                            />*/}
+                {/*                        </LocalizationProvider>*/}
+                {/*                        </div>*/}
+                {/*                        <div className="row col-3 justify-content-center m-3">*/}
+                {/*                        <LocalizationProvider dateAdapter={AdapterDateFns}>*/}
+                {/*                            <DatePicker*/}
+                {/*                                id="endDate"*/}
+                {/*                                label="End"*/}
+                {/*                                value={returnValue}*/}
+                {/*                                disablePast*/}
+                {/*                                closeOnSelect*/}
+                {/*                                minDate={depatureValue}*/}
+                {/*                                onChange={(newValue) => {*/}
+                {/*                                    returnSetValue(newValue);*/}
+                {/*                                }}*/}
+                {/*                                renderInput={(params) => <TextField {...params} />}*/}
+                {/*                            />*/}
+                {/*                        </LocalizationProvider>*/}
+                {/*                        </div>*/}
+                {/*                    </div>*/}
+                {/*                    <div className="row justify-content-center">*/}
+                {/*                        <Form.Group className="col-6 mb-3 mt-2">*/}
+                {/*                            <Form.Label>Email</Form.Label>*/}
+                {/*                            <Form.Control id="email" placeholder="Provide your email" onChange={(e) => handleOnInput(e)}/>*/}
+                {/*                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.emailError}</Form.Label>*/}
+                {/*                        </Form.Group>*/}
+                {/*                    </div>*/}
+                {/*                    <div className="row col-3 justify-content-center">*/}
+                {/*                        <Button type="submit" variant="contained" color="primary">*/}
+                {/*                            Add to Cart*/}
+                {/*                        </Button>*/}
+                {/*                    </div>*/}
 
-                            {/* MUI Date Range Picker, license issue*/}
-                            {/*<LocalizationProvider dateAdapter={AdapterDateFns}>*/}
-                            {/*    <DateRangePicker*/}
-                            {/*        disablePast*/}
-                            {/*        value={value}*/}
-                            {/*        maxDate={getWeeksAfter(value[0], 4)}*/}
-                            {/*        onChange={(newValue) => {*/}
-                            {/*            setValue(newValue);*/}
-                            {/*        }}*/}
-                            {/*        renderInput={(startProps, endProps) => (*/}
-                            {/*            <React.Fragment>*/}
-                            {/*                <TextField {...startProps} />*/}
-                            {/*                <Box sx={{ mx: 2 }}> to </Box>*/}
-                            {/*                <TextField {...endProps} />*/}
-                            {/*            </React.Fragment>*/}
-                            {/*        )}*/}
-                            {/*    />*/}
-                            {/*</LocalizationProvider>*/}
-                        </div>
-                    </div>
-                </Grid>
+                {/*                </Form>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</Grid>*/}
+
 
 
             </Paper>
-            <DatePicker
-                selected={startDate}
-                onChange={onChange}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                inline
-            />
+            <Dialog open={open} onClose={handleCloseBookingForm}
+                    fullWidth={true}
+                    maxWidth={"sm"}>
+                <DialogTitle>Booking Details</DialogTitle>
+                <DialogContent>
+                    <Typography fontWeight={"bold"}>
+                        {hotelData.name} - {createBooking.roomInfo.name}
+                    </Typography>
+                    {/*<TextField*/}
+                    {/*    autoFocus*/}
+                    {/*    margin="dense"*/}
+                    {/*    id="name"*/}
+                    {/*    label="Email Address"*/}
+                    {/*    type="email"*/}
+                    {/*    fullWidth*/}
+                    {/*    variant="standard"*/}
+                    {/*/>*/}
+                    <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
+                            <Form.Group className="mb-2">
+                                <Form.Label>Guest Name</Form.Label>
+                                <Form.Control id="guestName" placeholder="Guest Name" onChange={(e) => handleOnInput(e)}/>
+                                <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNameError}</Form.Label>
+                            </Form.Group>
+                            <Form.Group className="mb-2">
+                                <Form.Label>Number of Guests</Form.Label>
+                                <Form.Control id="guestNumber" placeholder="Number of Guests" type='number' onChange={(e) => handleOnInput(e)} />
+                                <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.guestNumberError}</Form.Label>
+                            </Form.Group>
+                            <Form.Group className=" mb-2">
+                                <Form.Label>Contact Number</Form.Label>
+                                <Form.Control id="contact" placeholder="Contact Number" type='number' onChange={(e) => handleOnInput(e)}/>
+                                <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.contactNumberError}</Form.Label>
+                            </Form.Group>
+                            <Form.Group className=" mb-2">
+                                <Form.Label>Number of Rooms</Form.Label>
+                                <Form.Control id="roomNumber" placeholder="Number of Rooms" type='number' onChange={(e) => handleOnInput(e)}/>
+                                <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.numberOfRoomError}</Form.Label>
+                            </Form.Group>
+                        <Form.Group className=" mt-3">
+                        <div className="row justify-content-evenly">
+                            <div className="row col-12 col-sm-6 justify-content-evenly">
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        id="startDate"
+                                        label="Check-in"
+                                        value={departureValue}
+                                        disablePast
+                                        closeOnSelect
+                                        onChange={(newValue) => handleOnChangeStartDate(newValue)}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </div>
+                            <div className="row col-12 col-sm-6 mt-2 mt-sm-0 justify-content-center">
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        id="endDate"
+                                        label="Check-out"
+                                        value={returnValue}
+                                        disablePast
+                                        closeOnSelect
+                                        minDate={departureValue}
+                                        onChange={(newValue) => handleOnChangeEndDate(newValue)}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </div>
+                        </div>
+                        </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control id="email" placeholder="Email" onChange={(e) => handleOnInput(e)}/>
+                                <Form.Label hidden={!showErrors} style={{color:'red'}}>{validationError.emailError}</Form.Label>
+                            </Form.Group>
+                        <DialogActions className="mt-1">
+                            <Button type="reset" color="error" >Cancel</Button>
+                            <Button type="submit">Add to cart</Button>
+                        </DialogActions>
+
+                    </Form>
+
+                </DialogContent>
+
+            </Dialog>
+
+            <Snackbar anchorOrigin={{vertical:"top", horizontal:"right"}} open={openSnackBar} autoHideDuration={4000} onClose={()=>setOpenSnackBar(false)}>
+                <Alert onClose={()=>setOpenSnackBar(false)} severity="success" sx={{ width: '100%' }}>
+                    Booking Successfully Added to Cart!
+                </Alert>
+            </Snackbar>
+
         </div>
 
 

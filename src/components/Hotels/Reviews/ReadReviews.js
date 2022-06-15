@@ -4,58 +4,78 @@ import {
     CardMedia,
     Dialog, DialogActions,
     DialogContent, DialogContentText,
-    DialogTitle,
-    Grid,
-    Paper,
+    DialogTitle, FormControl,
+    Grid, InputLabel, MenuItem,
+    Paper, Select,
     Typography
 } from "@mui/material";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 const ReadReviews = () =>{
 
     const reviewData = {
-        "reviews": {
-            "reveiw1": {
-                "name": "Varun Dhawan",
+        "reviews": [
+            {
+                "name": "Suyash Medhavi",
                 "hotelName": "Hotel Miramar",
                 "location": "San Juan, Puerto Rico",
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": [1,2,3,4]
+                "rating": 4
             },
-            "reveiw2": {
-                "name": "Varun Dhawan",
+            {
+                "name": "Ananaya Tiwari",
                 "hotelName": "Hotel Miramar",
                 "location": "San Juan, Puerto Rico",
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": [1,2,3]
+                "rating": 3
             },
-            "reveiw3": {
-                "name": "Varun Dhawan",
+            {
+                "name": "Priya Tyagi",
                 "hotelName": "Hotel Miramar",
                 "location": "San Juan, Puerto Rico",
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": [1,2,3,4,5]
+                "rating": 5
             },
-            "review4": {
-                "name": "Varun Dhawan",
+            {
+                "name": "Shriya Srivastava",
                 "hotelName": "Hotel Miramar",
                 "location": "San Juan, Puerto Rico",
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": [1,2,3,4]
+                "rating": 5
             },
-            "review5": {
+            {
                 "name": "Varun Dhawan",
                 "hotelName": "Hotel Miramar",
                 "location": "San Juan, Puerto Rico",
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": [1,2,3,4]
-            }
+                "rating": 2
+            }]
         }
-    }
+
+    const [sortedReviews, setSortedReviews] = useState("");
+    useEffect(() => {
+        return () => {
+            setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+        };
+    }, []);
+
+
+    const [sortReviews, setSortReviews] = React.useState('lowToHigh');
+    const handleChange = (event) => {
+        setSortReviews(event.target.value);
+        console.log(event.target.value);
+        if (event.target.value === "lowToHigh"){
+            setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+        }
+        else {
+            setSortedReviews(reviewData.reviews.sort((a, b) => b.rating - a.rating));
+        }
+    };
 
     return(
         <div>
+
             <Paper sx={{
                 p: 2,
                 margin: 'auto',
@@ -64,8 +84,22 @@ const ReadReviews = () =>{
             }} className="col-12 col-sm-8">
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
-                        <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
+                        <div className="col-6 col-sm-6 p-0 m-0" style={{paddingTop: '5px'}}>
                             <h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>Reviews</h1>
+                        </div>
+                        <div className="col-6 col-sm-6 text-end p-0 m-0" style={{paddingTop: '5px'}}>
+                            <FormControl size="small">
+                                <InputLabel id="travel-class-label">Sort By</InputLabel>
+                                <Select
+                                    labelId="travel-class-label"
+                                    id="demo-simple-select"
+                                    value={sortReviews}
+                                    label="Travel Class"
+                                    onChange={handleChange}>
+                                    <MenuItem value={"lowToHigh"}>Low to High</MenuItem>
+                                    <MenuItem value={"HighToLow"}>High to Low</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                     </div>
                 </div>
@@ -75,7 +109,7 @@ const ReadReviews = () =>{
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {Object.values(reviewData.reviews).map(review => <Grid item xs={12}>
+                    {Object.values(sortedReviews).map(review => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"
@@ -89,7 +123,7 @@ const ReadReviews = () =>{
                                         direction="row"
                                         justifyContent="flex-start"
                                         alignItems="flex-start">
-                                        {[...Array(review.rating.length)].map(() => {
+                                        {[...Array(review.rating)].map(() => {
                                             return (
                                                 <span className="star" style={{color: '#ffd700'}}>&#9733;</span>
                                             );
