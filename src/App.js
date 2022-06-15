@@ -21,6 +21,7 @@ import Login from "./components/Registration/Login";
 import SignUp from "./components/Registration/SignUp";
 import Reset from "./components/Registration/Reset";
 import Logout from "./components/Registration/Logout";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const location = useLocation();
@@ -44,6 +45,7 @@ function App() {
       )}
 
       <Routes>
+
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="flights" element={<Flights />} />
@@ -63,6 +65,8 @@ function App() {
         <Route path="signup" element={<SignUp/>} />
         <Route path="reset" element={<Reset/>} />
         <Route path="logout" element={<Logout/>} />
+        <Route path="profile" element={<Profile/>} />
+
       </Routes>
     </div>
   );

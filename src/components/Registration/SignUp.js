@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import Popup from './PopUp';
-import './SignUp.scss'
+import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
