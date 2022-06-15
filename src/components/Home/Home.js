@@ -31,9 +31,9 @@ const Home = () => {
     if (value === "flight") {
       navigator("/flights");
     } else if (value === "bus") {
-      navigator("/hotels");
-    } else if (value === "hotel") {
       navigator("/bus");
+    } else if (value === "hotels") {
+      navigator("/hotels");
     } else if (value === "event") {
       navigator("/events");
     } else if (value === "offers") {
