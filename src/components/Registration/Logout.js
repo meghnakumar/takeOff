@@ -115,8 +115,13 @@ export default function SignupForm() {
 
             <div class="mb-3 mt-3">
                 <h2>
-                    Login
+                    You are logged out!
                 </h2>
+                <br>
+                </br>
+                <h3>
+                    Login Again
+                </h3>
                 
             </div>
             
@@ -129,21 +134,18 @@ export default function SignupForm() {
             {errorMessage.email && <div> {errorMessage.email} </div>}
             </div>
 
-            <br>
-            </br>
-            
+           
             <div class="mb-3 mt-3">
             <TextField id="password" fullWidth='100%' label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e)  }/>
             {errorMessage.password && <div> {errorMessage.password} </div>}
             </div>
 
-            <br>
-            </br>
+           
             
             <div class="mb-3 mt-3">
             <Button id="submit" variant="contained" className='submit' onClick={SaveUserDetails}>Submit</Button>
             </div>
-            <br></br>
+            
             <div>
                 
                 <Link  to="/signup">or Signup</Link>

@@ -54,7 +54,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
-        navigate('/profile', {state:null})
+        setButtonPopup(true);
+        //navigate('/profile', {state:null})
     }   
   }
 
@@ -63,32 +64,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
     console.log(PersonalDetailsList);
     const errorlist = {};
 
-    
-    if(PersonalDetailsList.FirstName===''){
-      errorlist.firstName="First name is required!";
-      flag = "n";
-    }
-    else if(!namepattern.test(PersonalDetailsList.FirstName))
-    {
-        errorlist.firstName = "Please enter first name correctly"
-        flag = "n";
-    }
-
-    if(PersonalDetailsList.LastName===''){
-      errorlist.lastName="Last name is required!";
-      flag = "n";
-    }
-    else if(!namepattern.test(PersonalDetailsList.LastName))
-    {
-        errorlist.lastName = "Please enter last name correctly"
-        flag = "n";
-    }
-
-    if(PersonalDetailsList.UserName===''){
-      errorlist.userName="User name is required!";
-      flag = "n";
-    }
-    
     if(PersonalDetailsList.Email===''){
       errorlist.email="Email is required!";
       flag = "n";
@@ -148,31 +123,13 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
             <div class="mb-2 mt-3">
                 <h2>
-                    SignUp
+                    Reset Password
                 </h2>
                 
             </div>
             
             
-
-            <div class="row">
-                <div class="mb-3 mt-3 col-12 col-md-6">
-                    <TextField id="first-name" label="first name" name="FirstName" variant="outlined" onChange={(e) => handleUserDetails(e)} />
-                    {errorMessage.firstName && <div> {errorMessage.firstName} </div>}
-                </div>
-
-                <div class="mb-3 mt-3 col-12 col-md-6">
-                    <TextField id="last-name" label="last name" name="LastName" variant="outlined" onChange={(e) => handleUserDetails(e) }/>
-                    {errorMessage.lastName && <div> {errorMessage.lastName} </div>}
-                </div>  
-            </div>
-              
-
-              <div class="mb-12 mt-12" >
-              <TextField fullWidth='100%' id="user-name" label="user name" variant="outlined" name="UserName" onChange={(e) => handleUserDetails(e) }/>
-              {errorMessage.userName && <div> {errorMessage.userName} </div>}
-              </div>
-                <br></br>
+              <br></br>
               <div class="mb-12 mt-12">
               <TextField fullWidth='100%' id="email" label="email" variant="outlined"  name="Email" type='email' onChange={(e) => handleUserDetails(e)}/>
               {errorMessage.email && <div> {errorMessage.email} </div>}
@@ -184,7 +141,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
               </div>
               <br></br>
               <div class="mb-12 mt-12">
-              <TextField fullWidth='100%' id="confirmpassword" label="confirmpassword" variant="outlined" name="ConfirmPassword" type='password' onChange={(e) => handleUserDetails(e) }/>
+              <TextField fullWidth='100%' id="confirm password" label="confirm password" variant="outlined" name="ConfirmPassword" type='password' onChange={(e) => handleUserDetails(e) }/>
               {errorMessage.con && <div> {errorMessage.password} </div>}
               </div>
               <br></br>
@@ -202,7 +159,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
           </form>
 
           <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <h3>Registration complete!</h3>
+            <h3>Password is updated!</h3>
           </Popup>
 
     </div>
