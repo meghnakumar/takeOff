@@ -1,6 +1,5 @@
 import React from 'react'
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
-import {CardImg, Container} from "react-bootstrap";
 import {hotels} from './HotelsDummy'
 import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";

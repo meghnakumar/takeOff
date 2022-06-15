@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import background from "../../assets/images/skyline1.jpg";
 import './Hotels.scss';
-import SearchBar from "./SearchBar";
 import HotelList from "./HotelList";
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
-import ReactPlayground from "../ReactPlayground";
-import PlaygroundTwo from "../PlaygroundTwo";
-import {CardImg} from "react-bootstrap";
+
 
 const Dashboard = () => {
     const [isLocationSelected, setIsLocationSelected] = useState()
