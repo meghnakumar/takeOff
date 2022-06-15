@@ -24,7 +24,8 @@ deploy:      # This job runs in the deploy stage.
   script:
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   only:
-    - main
-    - develop
+    refs:
+      - main
+      - develop
   tags:
     - dalfcs_docker_kvm
