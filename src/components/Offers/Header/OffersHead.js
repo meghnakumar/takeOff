@@ -22,7 +22,7 @@ const OffersHead = () => {
         toast({
           title: "Promo Copied",
           description: value,
-          status: "success",
+          status: "info",
           duration: 5000,
           isClosable: true,
         });
@@ -33,7 +33,7 @@ const OffersHead = () => {
   };
 
   return (
-    <Box pt={10} pb={10} w="100%" bgGradient="linear(to-r, #F36084, #FF9090)">
+    <Box pt={10} pb={10} w="100%" bgGradient="linear(to-r, #63a4ff, #83c2f1)">
       <Grid
         tempgateRows="repeat(4, 1fr)"
         templateColumns={{ base: "repeat(10, 1fr)", md: "repeat(10, 1fr)" }}
@@ -45,7 +45,7 @@ const OffersHead = () => {
           colStart={{ base: 2, md: 2 }}
         >
           <Box>
-            <Badge colorScheme="green">OFFERS</Badge>
+            <Badge colorScheme="blue">OFFERS</Badge>
             <Heading color="white" as="h5" size="lg" lineHeight="40px" mt={3}>
               Get 15% off on your <br />
               first tour booking.
@@ -70,7 +70,7 @@ const OffersHead = () => {
                 p={5}
                 size="lg"
                 fontSize="15px"
-                colorScheme="green"
+                colorScheme="blue"
                 variant="solid"
                 mt={10}
               >

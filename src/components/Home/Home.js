@@ -12,7 +12,7 @@ import {
   Badge,
   Heading,
 } from "@chakra-ui/react";
-import Logo from "../../assets/images/building.png";
+import Logo from "../../assets/images/flight.png";
 import "./Home.scss";
 import HomeSearch from "./HomeSearch";
 import { MdFlight } from "react-icons/md";
@@ -23,6 +23,7 @@ import { BiTrip } from "react-icons/bi";
 import { TbDiscount2 } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
+import { RepeatTwoTone } from "@mui/icons-material";
 
 const Home = () => {
   const navigator = useNavigate("/home");
@@ -50,16 +51,16 @@ const Home = () => {
         pt={10}
         pb={10}
         w="100%"
-        h="100vh"
-        bgGradient="linear(to-r, #F36084, #FF9090)"
+        h={{ base: "100%", md: "100vh" }}
+        bgGradient="linear(to-r, #63a4ff, #83c2f1)"
       >
         <Grid
-          templateRows="repeat(3, 1fr)"
+          templateRows={{ base: "repeat(6, 0.2fr)", md: "repeat(3, 1fr)" }}
           templateColumns={{ base: "repeat(10, 1fr)", md: "repeat(10, 1fr)" }}
           gap={4}
         >
           <GridItem
-            rowSpan={1}
+            rowSpan={{ base: 1, md: 1 }}
             colStart={{ base: 2, md: 4 }}
             colEnd={{ base: 10, md: 8 }}
           >
@@ -75,11 +76,11 @@ const Home = () => {
           </GridItem>
 
           <GridItem
-            rowSpan={2}
+            rowSpan={{ base: 4, md: 2 }}
             colStart={{ base: 2, md: 2 }}
             colEnd={{ base: 10, md: 10 }}
           >
-            <SimpleGrid columns={3} spacing={10}>
+            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
               <Box
                 p="5"
                 minW="280px"
@@ -87,7 +88,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("flight")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Flights
                 </Badge>
                 <Flex mt={3} justifyContent="left">
@@ -108,7 +109,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("hotels")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Hotels
                 </Badge>
                 <Flex mt={3} justifyContent="left">
@@ -129,7 +130,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("bus")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Bus
                 </Badge>
                 <Flex mt={3} justifyContent="left">
@@ -150,7 +151,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("event")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Events
                 </Badge>
                 <Flex mt={3} justifyContent="left">
@@ -171,7 +172,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("tours")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Tour Packages
                 </Badge>
                 <Flex mt={3} justifyContent="left">
@@ -192,7 +193,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("offers")}
               >
-                <Badge variant="subtle" colorScheme="green">
+                <Badge variant="subtle" colorScheme="blue">
                   Offers
                 </Badge>
                 <Flex mt={3} justifyContent="left">

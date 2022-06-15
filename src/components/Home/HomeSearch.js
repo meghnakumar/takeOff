@@ -44,6 +44,9 @@ const HomeSearch = () => {
               {itemSelected}
             </MenuButton>
             <MenuList>
+              <MenuItem onClick={() => setItemSelected("Flight")}>
+                Flight
+              </MenuItem>
               <MenuItem onClick={() => setItemSelected("Hotel")}>
                 Hotel
               </MenuItem>
@@ -64,7 +67,7 @@ const HomeSearch = () => {
           _placeholder={{ fontSize: "15px", opacity: 0.5 }}
         />
       </InputGroup>
-      <Button colorScheme="green" size="lg">
+      <Button colorScheme="blue" size="lg">
         Search
       </Button>
     </Stack>
