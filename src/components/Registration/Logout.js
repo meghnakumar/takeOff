@@ -88,23 +88,11 @@ export default function SignupForm() {
     if(result !== "noerror"){
       updateErrorMessage(result);
     } else{
-      updatePost();
+      navigate('/profile', {state:null});
     } 
   }
   
 
-
-  function updatePost() {
-    console.log("email : "+PersonalDetailsList.Email);
-    console.log("password : "+PersonalDetailsList.Password);
-    const post = { email: PersonalDetailsList.Email,password:PersonalDetailsList.Password }
-    axios
-      .post("https://tutorial4-api.herokuapp.com/api/users/login", post)
-      .then((response) => {
-        console.log(response.data);
-        navigate('/userlist', {state:null})
-      });
-  }
 
   const navigate = useNavigate();
 

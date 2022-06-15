@@ -88,7 +88,7 @@ export default function SignupForm() {
     if(result !== "noerror"){
       updateErrorMessage(result);
     } else{
-      updatePost();
+      navigate('/profile', {state:null})
     } 
   }
   
@@ -102,21 +102,22 @@ export default function SignupForm() {
       .post("https://tutorial4-api.herokuapp.com/api/users/login", post)
       .then((response) => {
         console.log(response.data);
-        navigate('/userlist', {state:null})
+       
       });
   }
 
   const navigate = useNavigate();
 
   return (
-    <div class="div-1">
+    <div class="div-1"  >
         
-        <form class="col-md-3 col-10" >
+        <form class="col-sm-3 col-md col-10" >
 
             <div class="mb-3 mt-3">
-                <h2>
+                <h3>
+                  
                     Login
-                </h2>
+                </h3>
                 
             </div>
             
