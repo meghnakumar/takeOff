@@ -47,6 +47,7 @@ export default function Events() {
 	useEffect(() => {
 		setEvents(eventsList);
 	});
+	console.log(events);
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const search = {
@@ -233,7 +234,7 @@ export default function Events() {
 																	component="div"
 																	sx={{ color: "#00838f" }}
 																>
-																	{card.title}
+																	{card.destination}
 																</Typography>
 																<Typography
 																	variant="body2"
