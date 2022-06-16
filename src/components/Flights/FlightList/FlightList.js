@@ -7,7 +7,7 @@ import FlightTakeoffSharpIcon from '@mui/icons-material/FlightTakeoffSharp';
 const FlightList = () => {
   const navigate = useNavigate();
   const showFlightDetails = () => {
-    navigate('/flight-bookings') 
+    navigate('/flight-details') 
   };
 
   return (

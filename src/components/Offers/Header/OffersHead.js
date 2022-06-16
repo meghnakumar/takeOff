@@ -9,11 +9,13 @@ import {
   GridItem,
   useToast,
 } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
 
 import { MdContentCopy } from "react-icons/md";
+import { Navigate } from "react-router";
 const OffersHead = () => {
   const toast = useToast();
-
+  const navigate = useNavigate();
   const handleCopyClipboard = (e) => {
     const value = e.target.value;
     navigator.clipboard
@@ -73,6 +75,9 @@ const OffersHead = () => {
                 colorScheme="blue"
                 variant="solid"
                 mt={10}
+                onClick={() => {
+                  navigate('/tour-packages') 
+                }}
               >
                 Tour Packages
               </Button>

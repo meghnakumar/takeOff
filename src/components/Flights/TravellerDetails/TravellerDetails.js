@@ -17,6 +17,7 @@ const TravellerDetails = () => {
   const [errors, setErrors] = React.useState();
   const [snackBox, showSnackBox] = React.useState();
   const [travelerAdded, isTravelerAdded] = React.useState();
+  const [travelerCount, setTravelerCount] = React.useState(0);
   const [lastNameError, setLastNameError] = React.useState();
   const [emailError, setEmailError] = React.useState();
   const [cartBox, showCartBox] = React.useState();
@@ -499,7 +500,7 @@ const TravellerDetails = () => {
   }
 
   const addTraveller = () => {
-    isTravelerAdded(true);
+    setTravelerCount(travelerCount+1);
     showSnackBox(true);
     setTimeout(() => {
       showSnackBox(false);
@@ -618,7 +619,7 @@ const TravellerDetails = () => {
             <Button className="col-md-8"
               disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
                 Boolean(lastNameError?.lastName) || Boolean(emailError?.email)}
-              type="button" variant="contained" onClick={() => {
+              type="button" variant="outlined" onClick={() => {
                 addTraveller()
               }
               }>
@@ -635,10 +636,10 @@ const TravellerDetails = () => {
             {snackBox ?
               <Snackbox message="Traveler added succesfully" severity="success" /> : null
             }
-            {cartBox ?
+            {cartBox && travelerCount > 0 ?
               <Snackbox message="Booking added succesfully to the cart" severity="success" /> : null
             }
-            {travelerAdded ?
+            {(travelerAdded && travelerCount == 0) ?
               <Snackbox message="Please add traveler detail before proceeding" severity="error" /> : null
             }
           </div>

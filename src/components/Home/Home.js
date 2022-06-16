@@ -15,15 +15,13 @@ import {
 import Logo from "../../assets/images/flight.png";
 import "./Home.scss";
 import HomeSearch from "./HomeSearch";
-import { MdFlight } from "react-icons/md";
-import { FaBusAlt } from "react-icons/fa";
+import { MdFlight, MdLogin } from "react-icons/md";
 import { RiHotelFill } from "react-icons/ri";
 import { GiPartyPopper } from "react-icons/gi";
 import { BiTrip } from "react-icons/bi";
 import { TbDiscount2 } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
-import { RepeatTwoTone } from "@mui/icons-material";
 
 const Home = () => {
   const navigator = useNavigate("/home");
@@ -31,8 +29,8 @@ const Home = () => {
   const handleNavigation = (value) => {
     if (value === "flight") {
       navigator("/flights");
-    } else if (value === "bus") {
-      navigator("/bus");
+    } else if (value === "login") {
+      navigator("/login");
     } else if (value === "hotels") {
       navigator("/hotels");
     } else if (value === "event") {
@@ -87,6 +85,7 @@ const Home = () => {
                 borderRadius={5}
                 bg="white"
                 onClick={() => handleNavigation("flight")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Flights
@@ -108,6 +107,7 @@ const Home = () => {
                 borderRadius={5}
                 bg="white"
                 onClick={() => handleNavigation("hotels")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Hotels
@@ -119,7 +119,7 @@ const Home = () => {
                   </Heading>
                 </Flex>
                 <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
-                  Get best flight deals at cheaper rates with assurance of
+                  Get best hotel deals at cheaper rates with assurance of
                   takeoff.
                 </Text>
               </Box>
@@ -128,20 +128,20 @@ const Home = () => {
                 minW="280px"
                 borderRadius={5}
                 bg="white"
-                onClick={() => handleNavigation("bus")}
+                onClick={() => handleNavigation("login")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
-                  Bus
+                  Login
                 </Badge>
                 <Flex mt={3} justifyContent="left">
-                  <FaBusAlt size="40px" />
+                  <MdLogin size="40px" />
                   <Heading mt={2} ml={2} as="h4" size="md">
-                    Book Buses
+                    Login
                   </Heading>
                 </Flex>
                 <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
-                  Get best flight deals at cheaper rates with assurance of
-                  takeoff.
+                  Login into your account for faster checkout.
                 </Text>
               </Box>
               <Box
@@ -150,6 +150,7 @@ const Home = () => {
                 borderRadius={5}
                 bg="white"
                 onClick={() => handleNavigation("event")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Events
@@ -161,8 +162,7 @@ const Home = () => {
                   </Heading>
                 </Flex>
                 <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
-                  Get best flight deals at cheaper rates with assurance of
-                  takeoff.
+                  We are here to help you book a near by event.
                 </Text>
               </Box>
               <Box
@@ -171,6 +171,7 @@ const Home = () => {
                 borderRadius={5}
                 bg="white"
                 onClick={() => handleNavigation("tours")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Tour Packages
@@ -182,8 +183,7 @@ const Home = () => {
                   </Heading>
                 </Flex>
                 <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
-                  Get best flight deals at cheaper rates with assurance of
-                  takeoff.
+                  Get more than 1000 tour packges to choose from.
                 </Text>
               </Box>
               <Box
@@ -192,6 +192,7 @@ const Home = () => {
                 borderRadius={5}
                 bg="white"
                 onClick={() => handleNavigation("offers")}
+                style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Offers
@@ -203,8 +204,7 @@ const Home = () => {
                   </Heading>
                 </Flex>
                 <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
-                  Get best flight deals at cheaper rates with assurance of
-                  takeoff.
+                  Get best deals at cheaper rates with assurance of takeoff.
                 </Text>
               </Box>
             </SimpleGrid>
