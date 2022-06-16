@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import Snackbox from '../common/Snackbox/Snackbox';
 import './Registration.scss'
 
 export default function SignupForm() {
@@ -81,13 +81,22 @@ export default function SignupForm() {
         return "noerror";
   }
 
+  const [snackBox, showSnackBox] = React.useState();
+
+  const loginSuccessful = () => {
+    showSnackBox(true);
+    setTimeout(() => {
+      showSnackBox(false);
+      navigate('/profile', {state:null})
+    }, 3000);
+  }
 
   const SaveUserDetails = () => {   
     const result = validationscheck();
     if(result !== "noerror"){
       updateErrorMessage(result);
     } else{
-      navigate('/profile', {state:null})
+      loginSuccessful();
     } 
   }
   
@@ -120,6 +129,11 @@ export default function SignupForm() {
             <Button id="submit" variant="contained" className="registrationbutton" onClick={SaveUserDetails}>Submit</Button>
             </div>
             <br></br>
+
+            {snackBox ?
+              <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+
             <div className='reg-text'>
                 
                 <Link  to="/signup">or Signup</Link>

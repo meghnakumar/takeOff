@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-
+import Snackbox from '../common/Snackbox/Snackbox';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,9 +23,19 @@ export default function ProfileScreen() {
 
   const LogOutUser = () => {   
     
-    navigate('/logout', {state:null})   
+    logoutSuccessful(); 
   }
   
+  const [snackBox, showSnackBox] = React.useState();
+
+  const logoutSuccessful = () => {
+    showSnackBox(true);
+    setTimeout(() => {
+      showSnackBox(false);
+      navigate('/logout', {state:null})
+    }, 3000);
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -65,6 +75,11 @@ export default function ProfileScreen() {
                 <div class="mb-2 mt-2 col-12 col-md-6">
                     <Button id="submit" variant="contained" className="registrationbutton" onClick={LogOutUser} >Logout</Button>
                 </div>  
+                
+              {snackBox ?
+                <Snackbox message="User logged out succesfully" severity="success" /> : null
+              }
+
           
         </Grid>
       </Grid>
