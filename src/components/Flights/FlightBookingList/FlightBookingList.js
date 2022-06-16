@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import FlightTakeoffSharpIcon from '@mui/icons-material/FlightTakeoffSharp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ const FlightBookingList = () => {
 
   const handleClose = () => {
       setOpen(false);
+  };
+
+  const showFlightDetails = () => {
+    navigate('/flight-details') 
   };
 
   const handleClickOpen = () => {
@@ -170,13 +175,15 @@ const FlightBookingList = () => {
                 <div className='small-txt'>$ 360</div>
               </div>
               <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
-              <Button disabled type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => modifyDetails()}>
-                    Modify details
-                  </Button>
                   <Button disabled style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
-                  onClick={() => handleClickOpen()} startIcon={<DeleteIcon/>}>
+                    onClick={() => handleClickOpen()} startIcon={<DeleteIcon/>}>
                     Cancel
                   </Button>
+                  <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
+                    onClick={() => showFlightDetails()} startIcon={<RefreshIcon />}>
+                    Rebook
+                  </Button>
+                  
               </div>
           </div>
         </div>
