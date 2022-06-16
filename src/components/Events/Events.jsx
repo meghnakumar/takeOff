@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -6,7 +7,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -21,7 +21,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
-import { Center } from "@chakra-ui/react";
 
 const theme = createTheme();
 const style = {
@@ -37,6 +36,7 @@ const style = {
 };
 
 export default function Events() {
+	const navigate = useNavigate();
 	const [events, setEvents] = useState([]);
 	const [datePicker, setdatePricker] = useState("");
 	const [search, setSearch] = useState({
@@ -279,7 +279,9 @@ export default function Events() {
 																/>
 																<Button
 																	size="small"
-																	onClick={handleOpen}
+																	onClick={() => {
+																		navigate("/events-booking");
+																	}}
 																	sx={{ color: "#00838f", ml: 25 }}
 																>
 																	Book

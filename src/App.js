@@ -5,6 +5,7 @@ import Header from "./components/common/Header/Header";
 import Home from "./components/Home/Home";
 import Flights from "./components/Flights/Flights";
 import Events from "./components/Events/Events.jsx";
+import BookingEvents from "./components/Events/BookingEvents";
 import Dashboard from "./components/Hotels/Dashboard";
 import Offers from "./components/Offers/Offers";
 import TourPackages from "./components/TourPackages/TourPackages";
@@ -41,6 +42,7 @@ function App() {
 				<Route path="home" element={<Home />} />
 				<Route path="flights" element={<Flights />} />
 				<Route path="events" element={<Events />} />
+				<Route path="events-booking" element={<BookingEvents />} />
 				<Route path="hotels" element={<Dashboard2 />} />
 				<Route path="tour-packages" element={<TourPackages />} />
 				<Route path="Offers" element={<Offers />} />
