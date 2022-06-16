@@ -100,7 +100,7 @@ export default function SignupForm() {
         
         <form class="col-md-3 col-10" className='logoutform' >
 
-            <div class="mb-3 mt-3">
+            <div class="mb-3 mt-3" className='reg-text'>
                 <h2>
                     You are logged out!
                 </h2>
@@ -130,12 +130,12 @@ export default function SignupForm() {
             <Button id="submit" className="registrationbutton" size='small' variant="contained" onClick={SaveUserDetails}>Submit</Button>
             </div>
             
-            <div>
+            <div className='reg-text'>
                 
                 <Link  to="/signup">or Signup</Link>
             </div>
 
-            <div>
+            <div className='reg-text'>
                 <a href="/reset">Forgot password?</a>
             </div>
         </form>

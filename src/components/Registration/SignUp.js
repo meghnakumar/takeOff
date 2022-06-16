@@ -146,11 +146,15 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
           <form class="col-md-3 col-10"  className='signupform'>
 
-            <div class="mb-2 mt-3">
+            <div className='row reg-text'>
+              <div className='col-lg-12'>
+              {/* <div class="mb-2 mt-3" > */}
                 <h2>
                     SignUp
                 </h2>
                 
+            {/* </div> */}
+              </div>
             </div>
             
             
@@ -206,7 +210,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
               <br></br>
               
-              <div>
+              <div className='reg-text'>
                 Already have account? 
                 <Link  to="/login"> Login</Link>
               </div>

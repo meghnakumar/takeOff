@@ -121,7 +121,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
           <form class="col-md-3 col-10" className='resetform' >
 
-            <div class="mb-2 mt-3">
+            <div class="mb-2 mt-3" className='reg-text'>
                 <h2>
                     Reset Password
                 </h2>
@@ -152,7 +152,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
               <br></br>
               
-              <div>
+              <div className='reg-text'>
                 Already have account? 
                 <Link  to="/login"> Login</Link>
               </div>

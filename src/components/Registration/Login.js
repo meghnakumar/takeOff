@@ -98,7 +98,7 @@ export default function SignupForm() {
         
         <form class="col-sm-3 col-md col-10"  className='loginform'>
 
-            <div class="mb-3 mt-3">
+            <div class="mb-3 mt-3" className='reg-text'>
                 <h3>
                     Login
                 </h3>
@@ -120,12 +120,12 @@ export default function SignupForm() {
             <Button id="submit" variant="contained" className="registrationbutton" onClick={SaveUserDetails}>Submit</Button>
             </div>
             <br></br>
-            <div>
+            <div className='reg-text'>
                 
                 <Link  to="/signup">or Signup</Link>
             </div>
 
-            <div>
+            <div className='reg-text'>
                 <a href="/reset">Forgot password?</a>
             </div>
         </form>
