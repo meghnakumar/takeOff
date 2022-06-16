@@ -5,7 +5,7 @@
   "testLibrary": "None",
   "component": {
     "default": {
-      "path": "src/components",
+      "path": "src/components/Flights",
       "withStyle": true,
       "withTest": false,
       "withStory": false,

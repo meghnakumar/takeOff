@@ -13,6 +13,7 @@ import HotelDetail from "./components/Hotels/HotelDetail/HotelDetail";
 import Dashboard2 from "./components/Hotels/Dashboard";
 import Bookings from "./components/Hotels/Bookings/Bookings";
 import ReadReviews from "./components/Hotels/Reviews/ReadReviews";
+import FlightBookings from './components/Flights/FlightBookings/FlightBookings';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="flights" element={<Flights />} />
+          <Route path="flight-bookings" element={<FlightBookings />} />
           <Route path="events" element={<Events />} />
           <Route path="hotels" element={<Dashboard2 />} />
           <Route path="tour-packages" element={<TourPackages />} />
