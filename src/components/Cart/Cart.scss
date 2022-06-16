@@ -1,0 +1,40 @@
+.res-p {
+    padding: 3rem !important;
+}
+
+.b-title {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+    .res-p {
+        padding: 1rem !important;
+    }
+}
+
+.flight-list-bg {
+    background-color: #edededd1;
+    padding: 16px;
+}
+
+.card {
+    margin: 16px 0;
+    box-shadow: 9px 10px 10px 0 rgb(33 40 50 / 16%);
+    .small-txt {
+        font-size: 0.8rem;
+    }    
+}
+
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.m-bottom-16 {
+    margin-bottom: 16px;
+}
+
+.m-top-16 {
+    margin-top: 16px;
+}
