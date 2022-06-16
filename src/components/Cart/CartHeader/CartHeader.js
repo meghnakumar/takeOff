@@ -8,7 +8,7 @@ const CartHeader = () => {
         <div className="container cart-header-container res-p">
           <div className="row flex-center">
             <div className="row">
-              <div className="col-lg-12">MyCart</div>
+              <div className="col-lg-12 div-10">MyCart</div>
             </div>
           </div>
         </div>
