@@ -27,7 +27,6 @@ import TextField from "@mui/material/TextField";
 
 const Bookings = () => {
 
-    const [reviewButton, showReviewButton] = useState(false)
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
     const [email, setEmail] = useState();
