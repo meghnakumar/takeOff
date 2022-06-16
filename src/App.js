@@ -4,7 +4,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/common/Header/Header";
 import Home from "./components/Home/Home";
 import Flights from "./components/Flights/Flights";
-import Events from "./components/Events/Events";
+import Events from "./components/Events/Events.jsx";
+import BookingEvents from "./components/Events/BookingEvents";
 import Dashboard from "./components/Hotels/Dashboard";
 import Offers from "./components/Offers/Offers";
 import TourPackages from "./components/TourPackages/TourPackages";
@@ -44,31 +45,30 @@ function App() {
         </div>
       )}
 
-      <Routes>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="home" element={<Home />} />
+				<Route path="flights" element={<Flights />} />
+				<Route path="events" element={<Events />} />
+				<Route path="events-booking" element={<BookingEvents />} />
+				<Route path="hotels" element={<Dashboard2 />} />
+				<Route path="tour-packages" element={<TourPackages />} />
+				<Route path="Offers" element={<Offers />} />
+				<Route path="bus" element={<Bus />} />
+				<Route path="hotel-detail" element={<HotelDetail />} />
+				<Route path="bookings" element={<Bookings />} />
+				<Route path="payment" element={<Payment />} />
+				<Route path="read-reviews" element={<ReadReviews />} />
+              <Route path="wallet" element={<Wallet />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="login" element={<Login/>} />
+              <Route path="signup" element={<SignUp/>} />
+              <Route path="reset" element={<Reset/>} />
+              <Route path="logout" element={<Logout/>} />
+              <Route path="profile" element={<Profile/>} />
+            </Routes>
+		</div>
 
-        <Route path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
-        <Route path="flights" element={<Flights />} />
-        <Route path="flight-bookings" element={<FlightBookings />} />
-        <Route path="events" element={<Events />} />
-        <Route path="hotels" element={<Dashboard2 />} />
-        <Route path="tour-packages" element={<TourPackages />} />
-        <Route path="Offers" element={<Offers />} />
-        <Route path="bus" element={<Bus />} />
-        <Route path="hotel-detail" element={<HotelDetail />} />
-        <Route path="bookings" element={<Bookings />} />
-        <Route path="payment" element={<Payment />} />
-        <Route path="read-reviews" element={<ReadReviews />} />
-        <Route path="wallet" element={<Wallet />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="login" element={<Login/>} />
-        <Route path="signup" element={<SignUp/>} />
-        <Route path="reset" element={<Reset/>} />
-        <Route path="logout" element={<Logout/>} />
-        <Route path="profile" element={<Profile/>} />
-
-      </Routes>
-    </div>
   );
 }
 
