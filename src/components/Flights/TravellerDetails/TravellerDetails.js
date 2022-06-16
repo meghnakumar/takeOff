@@ -577,16 +577,17 @@ const TravellerDetails = () => {
                 )}
               />
             </div>
-            {/* disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
-          Boolean(lastNameError?.lastName) || Boolean(emailError?.email)} */}
-            <Button
-
+            <div className="row justify-content-center ">
+            <Button className="col-md-8"
+              disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
+                Boolean(lastNameError?.lastName) || Boolean(emailError?.email)}
               type="button" variant="contained" onClick={() => {
                 addTraveller()
               }
               }>
               Add traveller
             </Button>
+            </div>
             {snackBox ?
               <Snackbox message="Traveller added succesfully" severity="success" /> : null
             }
