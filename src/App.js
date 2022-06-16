@@ -14,7 +14,9 @@ import Dashboard2 from "./components/Hotels/Dashboard";
 import Bookings from "./components/Hotels/Bookings/Bookings";
 import Payment from "./components/Payment/Payment";
 import ReadReviews from "./components/Hotels/Reviews/ReadReviews";
-import FlightBookings from './components/Flights/FlightBookings/FlightBookings';
+import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
+import Wallet from "./components/Wallet/Wallet";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   const location = useLocation();
@@ -51,6 +53,8 @@ function App() {
         <Route path="bookings" element={<Bookings />} />
         <Route path="payment" element={<Payment />} />
         <Route path="read-reviews" element={<ReadReviews />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="cart" element={<Cart />} />
       </Routes>
     </div>
   );
