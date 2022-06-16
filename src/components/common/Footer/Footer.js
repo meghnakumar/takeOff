@@ -4,7 +4,11 @@ import './Footer.scss';
 
 const Footer = () => (
   <div className="Footer">
-    Footer Component
+    <div className="">
+      <div className='text-center footer'>
+        © 2022 Copyright: takeoff.com
+      </div>
+    </div>
   </div>
 );
 

@@ -9,8 +9,10 @@ const Flights = () => {
     <div>
     <SearchFlights setIsButtonClicked = {setIsButtonClicked}></SearchFlights>
     {isButtonClicked ?
-      <FlightList></FlightList> : null
-      // <img src='../../assets/images/flightList_Placeholder.svg' />
+      <FlightList></FlightList> :  
+      <div className="h2" style={{display: "flex", justifyContent: "center", margin: "40px 16px"}}>
+        Please fill details to see the flight list
+      </div> 
     }
   </div>
 )};
