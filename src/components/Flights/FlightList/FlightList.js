@@ -1,9 +1,15 @@
 import React from 'react';
 import './FlightList.scss';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import FlightTakeoffSharpIcon from '@mui/icons-material/FlightTakeoffSharp';
 
 const FlightList = () => {
+  const navigate = useNavigate();
+  const showFlightDetails = () => {
+    navigate('/flight-bookings') 
+  };
+
   return (
   <div className="flight-list-bg">
     <div className='container res-p'>
@@ -36,8 +42,8 @@ const FlightList = () => {
                 <div>$ 180</div>
               </div>
               <div className="col-lg-2 col-12 m-top-16">
-                  <Button type="submit" variant="contained">
-                    Book Now
+                  <Button type="button" variant="contained" onClick={() => showFlightDetails()}>
+                    See Details
                   </Button>
               </div>
           </div>
@@ -73,8 +79,8 @@ const FlightList = () => {
                 <div>$ 180</div>
               </div>
               <div className="col-lg-2 col-12 m-top-16">
-                  <Button type="submit" variant="contained">
-                    Book Now
+                <Button type="button" variant="contained" onClick={() => showFlightDetails()}>
+                    See Details
                   </Button>
               </div>
           </div>

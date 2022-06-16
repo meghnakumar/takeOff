@@ -3,12 +3,11 @@ import './TravellerDetails.scss';
 import { TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import {   Card, CardContent} from "@mui/material";
+import { Card, CardContent} from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Autocomplete from '@mui/material/Autocomplete';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Snackbox from '../../common/Snackbox/Snackbox';
+import { Box, FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
 
 const TravellerDetails = () => {
 
@@ -17,8 +16,24 @@ const TravellerDetails = () => {
   const [email, setEmail] = React.useState("");
   const [errors, setErrors] = React.useState();
   const [snackBox, showSnackBox] = React.useState();
+  const [travelerAdded, isTravelerAdded] = React.useState();
   const [lastNameError, setLastNameError] = React.useState();
   const [emailError, setEmailError] = React.useState();
+  const [cartBox, showCartBox] = React.useState();
+  const addToCart = () => {
+    if(!travelerAdded) {
+      isTravelerAdded(true);
+      setTimeout(() => {
+        isTravelerAdded(false);
+      }, 3000);
+    }else {
+      showCartBox(true);
+      setTimeout(() => {
+        showCartBox(false);
+      }, 3000);
+    }
+    
+  }
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {
@@ -443,6 +458,10 @@ const TravellerDetails = () => {
     { code: 'ZM', label: 'Zambia', phone: '260' },
     { code: 'ZW', label: 'Zimbabwe', phone: '263' },
   ];
+  const [fareType, setFareType] = React.useState('economy');
+  const handleFareChange = (event) => {
+    setFareType(event.target.value);
+  };
 
   var todaysDate = new Date();
   var maxDate = todaysDate.getFullYear() - 16;
@@ -480,6 +499,7 @@ const TravellerDetails = () => {
   }
 
   const addTraveller = () => {
+    isTravelerAdded(true);
     showSnackBox(true);
     setTimeout(() => {
       showSnackBox(false);
@@ -491,7 +511,7 @@ const TravellerDetails = () => {
   return (
     <div className="TravellerDetails col-md-6 col-12">
       {/* <h3>Traveller details</h3> */}
-      <div class="h3 center">Traveller details</div>
+      <div class="h3 center">Traveler details</div>
       <Card className="m-tp-16 col-sm-12" style={{ fontSize: "12px" }}>
         <CardContent>
           <div className="row container-box">
@@ -577,6 +597,23 @@ const TravellerDetails = () => {
                 )}
               />
             </div>
+            <div className="m-tb-8 col-6">
+              <Box>
+                <FormControl fullWidth>
+                  <InputLabel id="fare-type-label">Fare type</InputLabel>
+                  <Select
+                    labelId="fare-type-label"
+                    value={fareType}
+                    label="Fare type"
+                    onChange={handleFareChange}
+                  >
+                    <MenuItem value={"standart"}>Standard</MenuItem>
+                    <MenuItem value={"comfort"}>Comfort</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </div>
+
             <div className="row justify-content-center ">
             <Button className="col-md-8"
               disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
@@ -588,8 +625,21 @@ const TravellerDetails = () => {
               Add traveller
             </Button>
             </div>
+            <div className='row justify-content-center add-to-cart'>
+              <Button className="col-md-6 col-12"
+                type="button" variant="contained" onClick={() => { addToCart() }
+                }>
+                Add to cart
+              </Button>
+            </div>
             {snackBox ?
-              <Snackbox message="Traveller added succesfully" severity="success" /> : null
+              <Snackbox message="Traveler added succesfully" severity="success" /> : null
+            }
+            {cartBox ?
+              <Snackbox message="Booking added succesfully to the cart" severity="success" /> : null
+            }
+            {travelerAdded ?
+              <Snackbox message="Please add traveler detail before proceeding" severity="error" /> : null
             }
           </div>
         </CardContent>
