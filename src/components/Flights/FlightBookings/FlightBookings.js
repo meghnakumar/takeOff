@@ -1,6 +1,6 @@
 import React from 'react';
 import './FlightBookings.scss';
-import {  Button, Card, CardActions, CardContent, Grid, Modal, Paper, ButtonBase } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Grid, Modal, Paper, ButtonBase } from "@mui/material";
 import LuggageOutlinedIcon from '@mui/icons-material/LuggageOutlined';
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutline';
 import MoneyOffOutlinedIcon from '@mui/icons-material/MoneyOff';
@@ -17,17 +17,18 @@ const FlightBookings = () => {
           margin: 'auto',
           flexGrow: 1,
           mb: 2,
-          backgroundColor: 
-          (theme) =>
-            theme.palette.mode === 'dark' ? '#1A2027' : '#b3e3f4',
+          backgroundColor:
+            (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#b3e3f4',
         }}
         className="col-12 col-sm-10"
       >
-        <h3>Available fares</h3>
-        <div className='container res-p' style={{backgroundColor: "#b3e3f4"}}>
+        {/* <h3>Available fares</h3> */}
+        <div className="h3 center">Available fares</div>
+        <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-around'>
-          {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
-            <Card className="m-tp-16 col-sm-12 col-md-5" style={{fontSize: "12px"}}>
+            {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
+            <Card className="m-tp-16 col-sm-12 col-md-5" style={{ fontSize: "16px" }}>
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Standard</b></div>
@@ -52,11 +53,11 @@ const FlightBookings = () => {
                 {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
               </CardActions>
             </Card>
-          {/* </ButtonBase> */}
+            {/* </ButtonBase> */}
 
-          {/* 2nd fare card */}
-          {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
-            <Card className="m-tp-16 col-sm-12 col-md-5" style={{fontSize: "12px"}}>
+            {/* 2nd fare card */}
+            {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
+            <Card className="m-tp-16 col-sm-12 col-md-5" style={{ fontSize: "16px" }}>
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Comfort</b></div>
@@ -81,8 +82,24 @@ const FlightBookings = () => {
                 {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
               </CardActions>
             </Card>
-          {/* </ButtonBase> */}
+            {/* </ButtonBase> */}
           </div>
+        </div>
+      </Paper>
+
+      <Paper
+        sx={{
+          p: 2,
+          margin: 'auto',
+          flexGrow: 1,
+          mb: 2,
+          backgroundColor:
+            (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#b3e3f4',
+        }}
+        className="col-12 col-sm-10"
+      >
+        <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
             <TravellerDetails />
           </div>

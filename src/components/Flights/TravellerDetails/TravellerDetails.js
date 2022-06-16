@@ -490,8 +490,9 @@ const TravellerDetails = () => {
 
   return (
     <div className="TravellerDetails col-md-6 col-12">
-      <h3>Traveller details</h3>
-      <Card className="m-tp-16 col-sm-12 col-md-5" style={{ fontSize: "12px" }}>
+      {/* <h3>Traveller details</h3> */}
+      <div class="h3 center">Traveller details</div>
+      <Card className="m-tp-16 col-sm-12" style={{ fontSize: "12px" }}>
         <CardContent>
           <div className="row container-box">
             <div className="m-tb-8 col-6">
@@ -576,16 +577,17 @@ const TravellerDetails = () => {
                 )}
               />
             </div>
-            {/* disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
-          Boolean(lastNameError?.lastName) || Boolean(emailError?.email)} */}
-            <Button
-
+            <div className="row justify-content-center ">
+            <Button className="col-md-8"
+              disabled={!firstName || !lastName || !email || Boolean(errors?.firstName) ||
+                Boolean(lastNameError?.lastName) || Boolean(emailError?.email)}
               type="button" variant="contained" onClick={() => {
                 addTraveller()
               }
               }>
               Add traveller
             </Button>
+            </div>
             {snackBox ?
               <Snackbox message="Traveller added succesfully" severity="success" /> : null
             }
