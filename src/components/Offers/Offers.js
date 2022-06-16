@@ -1,12 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './Offers.scss';
+import { ChakraProvider } from "@chakra-ui/react";
+import "./Offers.scss";
+import OffersHead from "./Header/OffersHead";
+import OffersGrid from "./Grid/OffersGrid";
 
-const Offers = () => (
-  <div className="Offers">
-    Offers Component
-  </div>
-);
+const Offers = () => {
+  return (
+    <ChakraProvider>
+      <OffersHead />
+      <OffersGrid />
+    </ChakraProvider>
+  );
+};
 
 Offers.propTypes = {};
 

@@ -41,3 +41,10 @@
   margin: 56px 0;
 }
 
+.ta-l {
+  text-align: left;
+}
+
+.ta-r {
+  text-align: right;
+}
