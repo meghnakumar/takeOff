@@ -21,6 +21,7 @@ const SearchBar = () => {
                 sx={{ ml: 1, flex: 1 }}
                 placeholder="Search"
                 inputProps={{ 'aria-label': 'search' }}
+                type='text'
             />
             <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
                 <SearchIcon />

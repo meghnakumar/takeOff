@@ -38,6 +38,10 @@ const Bookings = () => {
         emailError: 'Please enter email',
         contactNumberError: 'Please enter the contact number'
     })
+    const [reviewValidationError, setReviewValidationError] = useState({
+        ratingError: 'Please enter the rating',
+        feedbackError: 'Please enter the feedback'
+    })
 
     const [openReview, setOpenReview] = useState(false);
     const handleReviewClick = () =>{
@@ -45,8 +49,14 @@ const Bookings = () => {
     }
 
     const handleCloseReview = () => {
-        setOpenReview(false)
-        setOpenReviewSnackBar(true);
+        if(reviewValidationError.ratingError===''&&
+        reviewValidationError.feedbackError===''){
+            setOpenReview(false)
+            setOpenReviewSnackBar(true);
+        }
+        else{
+            setShowErrors(true)
+        }
     }
 
     const handleOnInput = (e) => {
@@ -210,8 +220,57 @@ const Bookings = () => {
     }
 
     const [feedback, setFeedback] = useState();
+    const [rating, setRating] = useState();
     const handleFeedbackInput = (e) =>{
-        setFeedback(e.target.value)
+        const{id,value} = e.target
+        if(id==='rating'){
+            setRating(value)
+            if(value===''){
+                setReviewValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        ratingError: "Rating cannot be empty"
+                    }
+                })
+            }
+            else if(value>5){
+                setReviewValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        ratingError: "Rating cannot be greater than 5"
+                    }
+                })
+            }
+            else{
+                setReviewValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        ratingError: ""
+                    }
+                })
+            }
+        }
+
+        if(id==='feedback'){
+            setFeedback(value)
+            if(value===''){
+                setReviewValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        feedbackError: "Feedback cannot be empty"
+                    }
+                })
+            }
+            else{
+                setReviewValidationError(prevState => {
+                    return {
+                        ...prevState,
+                        feedbackError: ""
+                    }
+                })
+            }
+        }
+
     }
 
     const [openReviewSnackBar, setOpenReviewSnackBar] = useState(false);
@@ -433,11 +492,13 @@ const Bookings = () => {
                     <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
                         <Form.Group className="mb-2">
                             <Form.Label>Rate out of 5</Form.Label>
-                            <Form.Control id="rating" placeholder="rate out of 5" type='number' max='5' min='0'/>
+                            <Form.Control id="rating" placeholder="rate out of 5" type='number' max='5' min='0' onChange={(e)=>handleFeedbackInput(e)}/>
+                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{reviewValidationError.ratingError}</Form.Label>
                         </Form.Group>
                         <Form.Group className="mb-2">
                             <Form.Label>Feedback</Form.Label>
                             <Form.Control id="feedback" onChange={(e)=>handleFeedbackInput(e)}/>
+                            <Form.Label hidden={!showErrors} style={{color:'red'}}>{reviewValidationError.feedbackError}</Form.Label>
                         </Form.Group>
                         <DialogActions>
                             <Button onClick={handleCloseReview}>Add</Button>
