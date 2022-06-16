@@ -19,11 +19,11 @@ const WalletHistory = () => {
             <div className="card-body">
               <div className="row flex-center">
                 <div className="row">
-                  <div className="col-lg-1 col-md-4"></div>
-                  <div className="col-lg-3 col-md-3">Details</div>
-                  <div className="col-lg-3 col-md-3">Transaction ID</div>
-                  <div className="col-lg-2 col-md-2">Amount</div>
-                  <div className="col-lg-3 col-md-3">Status</div>
+                  <div className="col-lg-1 col-md-4 div-10"></div>
+                  <div className="col-lg-3 col-md-3 div-10">Details</div>
+                  <div className="col-lg-3 col-md-3 div-10">Transaction ID</div>
+                  <div className="col-lg-2 col-md-2 div-10">Amount</div>
+                  <div className="col-lg-3 col-md-3 div-10">Status</div>
                 </div>
               </div>
             </div>
@@ -38,14 +38,14 @@ const WalletHistory = () => {
                   </div>
                   <div className="col-lg-3 col-md-3">
                     <div className="row div-v1">
-                      <div className="col-lg-5 col-md-5">Toronto</div>
-                      <div className="col-lg-2 col-md-2">
+                      <div className="col-lg-5 col-md-5 div-10">Toronto</div>
+                      <div className="col-lg-2 col-md-2 div-10">
                         <ArrowForwardSharpIcon />
                       </div>
-                      <div className="col-lg-5 col-md-5">Halifax</div>
+                      <div className="col-lg-5 col-md-5 div-10">Halifax</div>
                     </div>
-                    <div className="div-v2">Air Canada, IS 555</div>
-                    <div className="div-v2">July 11, 2022</div>
+                    <div className="div-v2 div-10">Air Canada, IS 555</div>
+                    <div className="div-v2 div-10">July 11, 2022</div>
                   </div>
                   <div className="col-lg-3 col-md-3 div-v">
                     <div>964266273648</div>
@@ -74,11 +74,13 @@ const WalletHistory = () => {
                     <BedSharpIcon fontSize="large"></BedSharpIcon>
                   </div>
                   <div className="col-lg-3 col-md-3">
-                    <div className="row div-v1">Radisson Blu Hotel</div>
-                    <div className="div-v2">249 Queen's Quay West, Toronto</div>
-                    <div className="div-v2">July 11-15, 2022</div>
+                    <div className="row div-v1  div-10">Radisson Blu Hotel</div>
+                    <div className="div-v2 div-10">
+                      249 Queen's Quay West, Toronto
+                    </div>
+                    <div className="div-v2 div-10">July 11-15, 2022</div>
                   </div>
-                  <div className="col-lg-3 col-md-3 div-v">
+                  <div className="col-lg-3 col-md-3 div-v  div-10">
                     <div>374266835696</div>
                   </div>
                   <div className="col-lg-2 col-md-2 div-v">- $256.87</div>
