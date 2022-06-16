@@ -7,7 +7,7 @@ import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typ
 
 const Dashboard = () => {
     const [isLocationSelected, setIsLocationSelected] = useState()
-    const [location, setlocation] = useState('');
+    const [location, setlocation] = useState('Halifax');
     const styles = {
         paperContainer: {
             backgroundImage: `url(${background})`
@@ -45,9 +45,9 @@ const Dashboard = () => {
                         id="demo-simple-select"
                         label="location"
                         onChange={(event, value) => handleLocationSelected(value)}>
-                        <MenuItem value={10}>Halifax</MenuItem>
-                        <MenuItem value={20}>Montreal</MenuItem>
-                        <MenuItem value={30}>Toronto</MenuItem>
+                        <MenuItem value={"Halifax"}>Halifax</MenuItem>
+                        <MenuItem value={"Montreal"}>Montreal</MenuItem>
+                        <MenuItem value={"Toronto"}>Toronto</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
             }}>
 
-                {isLocationSelected && <HotelList/>}
+                {<HotelList/>}
 
 
             </Grid>
