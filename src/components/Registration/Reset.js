@@ -119,7 +119,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
     <div class="div-1">
           
 
-          <form class="col-md-3 col-10" >
+          <form class="col-md-3 col-10" className='resetform' >
 
             <div class="mb-2 mt-3">
                 <h2>
@@ -131,23 +131,23 @@ const [buttonPopup, setButtonPopup]=useState(false);
             
               <br></br>
               <div class="mb-12 mt-12">
-              <TextField fullWidth='100%' id="email" label="email" variant="outlined"  name="Email" type='email' onChange={(e) => handleUserDetails(e)}/>
+              <TextField fullWidth='100%' size='small' id="email" label="email" variant="outlined"  name="Email" type='email' onChange={(e) => handleUserDetails(e)}/>
               {errorMessage.email && <div> {errorMessage.email} </div>}
               </div>
               <br></br>
               <div class="mb-12 mt-12">
-              <TextField fullWidth='100%' id="password" label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e) }/>
+              <TextField fullWidth='100%' size='small' id="password" label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e) }/>
               {errorMessage.password && <div> {errorMessage.password} </div>}
               </div>
               <br></br>
               <div class="mb-12 mt-12">
-              <TextField fullWidth='100%' id="confirm password" label="confirm password" variant="outlined" name="ConfirmPassword" type='password' onChange={(e) => handleUserDetails(e) }/>
+              <TextField fullWidth='100%' size='small' id="confirm password" label="confirm password" variant="outlined" name="ConfirmPassword" type='password' onChange={(e) => handleUserDetails(e) }/>
               {errorMessage.con && <div> {errorMessage.password} </div>}
               </div>
               <br></br>
 
               <div class="mb-12 mt-12">
-              <Button id="submit" variant="contained" className='submit' onClick={SaveUserDetails}>Submit</Button>
+              <Button id="submit" size='small' variant="contained" className="registrationbutton" onClick={SaveUserDetails}>Submit</Button>
               </div>
 
               <br></br>

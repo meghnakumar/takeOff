@@ -63,7 +63,7 @@ export default function ProfileScreen() {
                 
 
                 <div class="mb-2 mt-2 col-12 col-md-6">
-                    <Button id="submit" variant="contained" className='submit' onClick={LogOutUser} >Logout</Button>
+                    <Button id="submit" variant="contained" className="registrationbutton" onClick={LogOutUser} >Logout</Button>
                 </div>  
           
         </Grid>

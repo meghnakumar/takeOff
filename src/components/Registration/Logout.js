@@ -2,7 +2,6 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState ,useEffect} from 'react';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -99,7 +98,7 @@ export default function SignupForm() {
   return (
     <div class="div-1">
         
-        <form class="col-md-3 col-10" >
+        <form class="col-md-3 col-10" className='logoutform' >
 
             <div class="mb-3 mt-3">
                 <h2>
@@ -112,26 +111,23 @@ export default function SignupForm() {
                 </h3>
                 
             </div>
-            
-            <br>
-            </br>
-
+          
             
             <div class="mb-3 mt-3">
-            <TextField id="email" fullWidth='100%' label="email" variant="outlined" name="Email" onChange={(e) => handleUserDetails(e)}/>
+            <TextField id="email" size='small' fullWidth='100%' label="email" variant="outlined" name="Email" onChange={(e) => handleUserDetails(e)}/>
             {errorMessage.email && <div> {errorMessage.email} </div>}
             </div>
 
            
             <div class="mb-3 mt-3">
-            <TextField id="password" fullWidth='100%' label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e)  }/>
+            <TextField id="password" size='small' fullWidth='100%' label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e)  }/>
             {errorMessage.password && <div> {errorMessage.password} </div>}
             </div>
 
            
             
             <div class="mb-3 mt-3">
-            <Button id="submit" variant="contained" className='submit' onClick={SaveUserDetails}>Submit</Button>
+            <Button id="submit" className="registrationbutton" size='small' variant="contained" onClick={SaveUserDetails}>Submit</Button>
             </div>
             
             <div>
