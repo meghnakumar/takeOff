@@ -9,12 +9,16 @@ import {
   Input,
   Button,
   extendTheme,
+  useToast,
 } from "@chakra-ui/react";
 import { FaAngleDown } from "react-icons/fa";
 import React, { useState } from "react";
 
 const HomeSearch = () => {
   const [itemSelected, setItemSelected] = useState("Flight");
+  const toast = useToast();
+
+  const [searchError, setSearchError] = useState(false);
 
   const inputTheme = extendTheme({
     components: {
@@ -30,6 +34,16 @@ const HomeSearch = () => {
       },
     },
   });
+
+  const handleSearchTerm = (e) => {
+    const value = e.target.value;
+    if (value.length > 10) {
+      setSearchError(true);
+    } else {
+      setSearchError(false);
+    }
+  };
+
   return (
     <Stack mt={5}>
       <InputGroup size="lg">
@@ -65,9 +79,28 @@ const HomeSearch = () => {
           borderColor="white"
           variant="inputTheme"
           _placeholder={{ fontSize: "15px", opacity: 0.5 }}
+          onChange={handleSearchTerm}
         />
       </InputGroup>
-      <Button colorScheme="blue" size="lg">
+      <Button
+        colorScheme="blue"
+        size="lg"
+        onClick={() => {
+          searchError
+            ? toast({
+                title: "It should be less than 10 characters",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+              })
+            : toast({
+                title: "Search by Keyword",
+                status: "info",
+                duration: 5000,
+                isClosable: true,
+              });
+        }}
+      >
         Search
       </Button>
     </Stack>
