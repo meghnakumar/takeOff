@@ -231,7 +231,9 @@ const Bookings = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            <h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</h1>
+                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</h1>*/}
+                            <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</div>
+                           {/* <Typography variant="h4" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</Typography>*/}
                         </div>
                     </div>
                 </div>
@@ -247,7 +249,7 @@ const Bookings = () => {
                               justifyContent="start"
                               style={{backgroundColor: "white"}}>
                             <Grid item xs={12} md={4}>
-                                <CardMedia
+                                <CardMedia className="imageSize"
                                     component="img"
                                     image={bookingInfo.img}
                                     height="207"
