@@ -159,7 +159,7 @@ const flightSource = [
 
         <div className="row">
           <div className="search-btn">
-            <Button disabled={!toLocation || !fromLocation || Boolean(errors?.numberOfTravellers)} type="button" variant="contained" endIcon={<SearchIcon />}
+            <Button disabled={!toLocation || !fromLocation || !depatureValue  || Boolean(errors?.numberOfTravellers)} type="button" variant="contained" endIcon={<SearchIcon />}
               onClick={() => setIsButtonClicked(true)}>
               Search
             </Button>

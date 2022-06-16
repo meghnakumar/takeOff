@@ -8,8 +8,9 @@ const Flights = () => {
   return (
     <div>
     <SearchFlights setIsButtonClicked = {setIsButtonClicked}></SearchFlights>
-    {isButtonClicked &&
-      <FlightList></FlightList>  
+    {isButtonClicked ?
+      <FlightList></FlightList> : null
+      // <img src='../../assets/images/flightList_Placeholder.svg' />
     }
   </div>
 )};

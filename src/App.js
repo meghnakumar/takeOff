@@ -14,6 +14,7 @@ import Dashboard2 from "./components/Hotels/Dashboard";
 import Bookings from "./components/Hotels/Bookings/Bookings";
 import Payment from "./components/Payment/Payment";
 import ReadReviews from "./components/Hotels/Reviews/ReadReviews";
+import FlightBookings from './components/Flights/FlightBookings/FlightBookings';
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="home" element={<Home />} />
         <Route path="flights" element={<Flights />} />
+        <Route path="flight-bookings" element={<FlightBookings />} />
         <Route path="events" element={<Events />} />
         <Route path="hotels" element={<Dashboard2 />} />
         <Route path="tour-packages" element={<TourPackages />} />

@@ -1,23 +1,35 @@
 import React from 'react';
 import './Header.scss';
 import { Link } from "react-router-dom";
-import { Image, Text, ChakraProvider, Flex, Center } from "@chakra-ui/react";
+import { Image, Text, ChakraProvider, Flex, Center, Box } from "@chakra-ui/react";
 import Logo from "../../../assets/images/flight.png";
+import { useNavigate } from "react-router-dom";
 
-const Header = () => (
+const Header = () => {
+  const navigator = useNavigate();
+  const handleHomeRedirection = () => {
+    navigator("/");
+  }
+return (
   <div className="fixed-top">
     <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <ChakraProvider>
+          <Box onClick={handleHomeRedirection}>
             <Flex justifyContent="center">
               <Center>
+                
                 <Image src={Logo} w="35px" h="35px" />
                 <Text ml={2} color="white" fontSize="22px" fontWeight="bold">
+                {/* <Link className="nav-link" to="/home"> */}
                   Takeoff
+                  {/* </Link> */}
                 </Text>
+               
               </Center>
             </Flex>
+            </Box>
           </ChakraProvider>
         </a>
         <img src="../../../assets/images/flight.png" alt="" />
@@ -46,11 +58,11 @@ const Header = () => (
                 Hotels
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/bus">
                 Bus
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/events">
                 Events
@@ -76,7 +88,8 @@ const Header = () => (
       </div>
     </nav>
   </div>
-);
+)
+};
 
 Header.propTypes = {};
 

@@ -43,8 +43,8 @@ const OffersGrid = () => {
             className="overflow x-scroll-disabled"
             spacing={5}
           >
-            {offers.map((offer) => (
-              <Box
+            {offers.map((offer, index) => (
+              <Box key={index}
                 p="5"
                 minW="280px"
                 borderWidth="1px"
