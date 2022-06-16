@@ -85,7 +85,8 @@ const ReadReviews = () =>{
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6 p-0 m-0" style={{paddingTop: '5px'}}>
-                            <h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>Reviews</h1>
+                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>Reviews</h1>*/}
+                            <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>Reviews</div>
                         </div>
                         <div className="col-6 col-sm-6 text-end p-0 m-0" style={{paddingTop: '5px'}}>
                             <FormControl size="small">

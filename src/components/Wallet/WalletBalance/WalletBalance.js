@@ -29,7 +29,7 @@ const WalletBalance = () => {
         <div className="container balance-container res-p balance-card">
           <div className="row flex-center">
             <div className="row">
-              <div className="col-lg-12 title">MyWallet</div>
+              <div className="col-lg-12 title  div-10">MyWallet</div>
             </div>
 
             <div className="row">

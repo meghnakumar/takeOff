@@ -42,7 +42,7 @@ const HotelList = () => {
                     <div className="col-6 col-sm-6 " style={{paddingTop: '5px'}}>Showing 3 of 3 results
                     </div>
                     <div className="col-6 col-sm-6 ">
-                        <Box>
+                        <Box className="float-end">
                             <FormControl size="small">
                                 <InputLabel id="travel-class-label">Sort By</InputLabel>
                                 <Select

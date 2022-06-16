@@ -270,7 +270,8 @@ const HotelDetail = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            <h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>{hotelData.name}</h1>
+                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>{hotelData.name}</h1>*/}
+                            <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>{hotelData.name}</div>
                         </div>
 
                         <div className="col-6 col-sm-6">
@@ -292,7 +293,7 @@ const HotelDetail = () => {
                             setCreateBooking({roomInfo: roomInfo, show: true})
                         }}>
                             <CardActionArea>
-                                <CardMedia
+                                <CardMedia className="imageSize"
                                     component="img"
                                     height="200"
                                     image={roomInfo.img}
