@@ -23,7 +23,8 @@ const FlightBookings = () => {
         }}
         className="col-12 col-sm-10"
       >
-        <h3>Available fares</h3>
+        {/* <h3>Available fares</h3> */}
+        <div className="h3 center">Available fares</div>
         <div className='container res-p' style={{backgroundColor: "#b3e3f4"}}>
           <div className='row justify-content-around'>
           {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
@@ -83,7 +84,7 @@ const FlightBookings = () => {
             </Card>
           {/* </ButtonBase> */}
           </div>
-          <div className='row justify-content-center'>
+          <div className='row justify-content-center m-5'>
             <TravellerDetails />
           </div>
         </div>
