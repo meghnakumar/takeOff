@@ -16,7 +16,7 @@ import Dashboard2 from "./components/Hotels/Dashboard";
 import Bookings from "./components/Hotels/Bookings/Bookings";
 import Payment from "./components/Payment/Payment";
 import ReadReviews from "./components/Hotels/Reviews/ReadReviews";
-import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
+import FlightDetails from "./components/Flights/FlightDetails/FlightDetails";
 import Wallet from "./components/Wallet/Wallet";
 import Cart from "./components/Cart/Cart";
 import Login from "./components/Registration/Login";
@@ -50,6 +50,8 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="home" element={<Home />} />
 				<Route path="flights" element={<Flights />} />
+        <Route path="flight-details" element={<FlightDetails />} />
+        <Route path="booking" element={<Bookings />} />
 				<Route path="events" element={<Events />} />
 				<Route path="events-booking" element={<BookingEvents />} />
 				<Route path="hotels" element={<Dashboard2 />} />

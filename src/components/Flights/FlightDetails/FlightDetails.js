@@ -1,5 +1,5 @@
 import React from 'react';
-import './FlightBookings.scss';
+import './FlightDetails.scss';
 import { Button, Card, CardActions, CardContent, Grid, Modal, Paper, ButtonBase } from "@mui/material";
 import LuggageOutlinedIcon from '@mui/icons-material/LuggageOutlined';
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutline';
@@ -7,7 +7,7 @@ import MoneyOffOutlinedIcon from '@mui/icons-material/MoneyOff';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
 
 
-const FlightBookings = () => {
+const FlightDetails = () => {
 
   return (
     <div className="flightBooking">
@@ -109,4 +109,4 @@ const FlightBookings = () => {
   )
 };
 
-export default FlightBookings;
+export default FlightDetails;
