@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -27,12 +27,42 @@ const style = {
 
 export default function SignUp() {
 	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
+	const handleOpen = () => {
+		setOpen(true);
+	};
 	const handleClose = () => setOpen(false);
-
+	const [error, setError] = useState({
+		firstName: "",
+		lastName: "",
+		seat: "",
+		number: "",
+	});
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [seat, setSeat] = useState("");
+	const [number, setNumber] = useState("");
 	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
+		const errors = {};
+		if (!firstName) {
+			errors.firstName = "First name is required!";
+		} else if (!/^[A-Za-z]+$/.test(firstName)) {
+			errors.firstName = "First name can only have characters!";
+		}
+		if (!lastName) {
+			errors.lastName = "Last name is required!";
+		} else if (!/^[A-Za-z]+$/.test(lastName)) {
+			errors.lastName = "Last name can only have characters!";
+		}
+		if (!seat) {
+			errors.seat = "Seats is required!";
+		}
+		if (!number) {
+			errors.number = "Phone number is required!";
+		}
+		setError(errors);
+		if (Object.keys(error).length === 0) {
+			handleOpen();
+		}
 	};
 
 	return (
@@ -67,7 +97,9 @@ export default function SignUp() {
 										id="firstName"
 										label="First Name"
 										autoFocus
+										onChange={(e) => setFirstName(e.target.value)}
 									/>
+									<p>{error.firstName}</p>
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
@@ -77,7 +109,9 @@ export default function SignUp() {
 										label="Last Name"
 										name="lastName"
 										autoComplete="family-name"
+										onChange={(e) => setLastName(e.target.value)}
 									/>
+									<p>{error.lastName}</p>
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
@@ -87,7 +121,9 @@ export default function SignUp() {
 										label="Seat"
 										name="seat"
 										type="number"
+										onChange={(e) => setSeat(e.target.value)}
 									/>
+									<p>{error.seat}</p>
 								</Grid>
 								<Grid item xs={12}>
 									<TextField
@@ -97,7 +133,9 @@ export default function SignUp() {
 										label="Contact Number"
 										type="number"
 										id="number"
+										onChange={(e) => setNumber(e.target.value)}
 									/>
+									<p>{error.number}</p>
 								</Grid>
 								<Grid item xs={12}>
 									<FormControlLabel
@@ -119,7 +157,7 @@ export default function SignUp() {
 										height: 60,
 										left: 100,
 									}}
-									onClick={handleOpen}
+									onClick={handleSubmit}
 								>
 									Add to Cart
 								</Button>
