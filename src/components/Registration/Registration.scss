@@ -6,7 +6,7 @@ body{
 .loginform{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,5%);
     top: 55%;
     left: 50%;
     border-radius: 10px;
@@ -20,8 +20,8 @@ body{
 .signupform{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
-    transform: translate(-50%,-50%);
-    top: 55%;
+    transform: translate(-50%,5%);
+    top: 10%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -34,7 +34,7 @@ body{
 .resetform{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,5%);
     top: 55%;
     left: 50%;
     border-radius: 10px;
@@ -48,7 +48,7 @@ body{
 .logoutform{
     background-color: rgba(255,255,255,0.13);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,5%);
     top: 55%;
     left: 50%;
     border-radius: 10px;

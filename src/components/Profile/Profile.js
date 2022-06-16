@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useState ,useEffect} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import {Grid} from '@material-ui/core';
+import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
