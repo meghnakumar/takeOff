@@ -66,7 +66,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
       updateErrorMessage(result);
     }else{
       passwordRest();
-      //navigate('/login', {state:null})
     }   
   }
 

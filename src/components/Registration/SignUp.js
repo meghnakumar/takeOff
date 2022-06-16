@@ -6,13 +6,23 @@ import Popup from './PopUp';
 import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Snackbox from '../common/Snackbox/Snackbox';
 
 export default function SignupForm() {
 
   let flag = "y";
 
-
+  const [snackBox, showSnackBox] = React.useState();
   
+  const signupSuccessful = () => {
+    showSnackBox(true);
+    setTimeout(() => {
+      showSnackBox(false);
+      navigate('/profile', {state:null})
+    }, 3000);
+  }
+
+
   const handleUserDetails = (e) => {
 
     console.log("entered");
@@ -54,7 +64,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
-        navigate('/profile', {state:null})
+      signupSuccessful();
     }   
   }
 
@@ -210,6 +220,10 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
               <br></br>
               
+              {snackBox ?
+              <Snackbox message="Account created succesfully" severity="success" /> : null
+              }
+
               <div className='reg-text'>
                 Already have account? 
                 <Link  to="/login"> Login</Link>
