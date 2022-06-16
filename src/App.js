@@ -9,6 +9,7 @@ import BookingEvents from "./components/Events/BookingEvents";
 import Dashboard from "./components/Hotels/Dashboard";
 import Offers from "./components/Offers/Offers";
 import TourPackages from "./components/TourPackages/TourPackages";
+import BookingTours from "./components/TourPackages/BookingTour";
 import Bus from "./components/Bus/Bus";
 import HotelDetail from "./components/Hotels/HotelDetail/HotelDetail";
 import Dashboard2 from "./components/Hotels/Dashboard";
@@ -25,25 +26,25 @@ import Logout from "./components/Registration/Logout";
 import Profile from "./components/Profile/Profile";
 
 function App() {
-  const location = useLocation();
-  const [ishome, setHome] = useState(false);
-  useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/home") {
-      setHome(true);
-    } else {
-      setHome(false);
-    }
-  });
+	const location = useLocation();
+	const [ishome, setHome] = useState(false);
+	useEffect(() => {
+		if (location.pathname === "/" || location.pathname === "/home") {
+			setHome(true);
+		} else {
+			setHome(false);
+		}
+	});
 
-  return (
-    <div className="App">
-      {ishome ? (
-        <></>
-      ) : (
-        <div>
-          <Header></Header> <div className="header-footer-margin"></div>
-        </div>
-      )}
+	return (
+		<div className="App">
+			{ishome ? (
+				<></>
+			) : (
+				<div>
+					<Header></Header> <div className="header-footer-margin"></div>
+				</div>
+			)}
 
 			<Routes>
 				<Route path="/" element={<Home />} />
@@ -53,23 +54,23 @@ function App() {
 				<Route path="events-booking" element={<BookingEvents />} />
 				<Route path="hotels" element={<Dashboard2 />} />
 				<Route path="tour-packages" element={<TourPackages />} />
+				<Route path="tour-booking" element={<BookingTours />} />
 				<Route path="Offers" element={<Offers />} />
 				<Route path="bus" element={<Bus />} />
 				<Route path="hotel-detail" element={<HotelDetail />} />
 				<Route path="bookings" element={<Bookings />} />
 				<Route path="payment" element={<Payment />} />
 				<Route path="read-reviews" element={<ReadReviews />} />
-              <Route path="wallet" element={<Wallet />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="login" element={<Login/>} />
-              <Route path="signup" element={<SignUp/>} />
-              <Route path="reset" element={<Reset/>} />
-              <Route path="logout" element={<Logout/>} />
-              <Route path="profile" element={<Profile/>} />
-            </Routes>
+				<Route path="wallet" element={<Wallet />} />
+				<Route path="cart" element={<Cart />} />
+				<Route path="login" element={<Login />} />
+				<Route path="signup" element={<SignUp />} />
+				<Route path="reset" element={<Reset />} />
+				<Route path="logout" element={<Logout />} />
+				<Route path="profile" element={<Profile />} />
+			</Routes>
 		</div>
-
-  );
+	);
 }
 
 export default App;
