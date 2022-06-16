@@ -39,6 +39,7 @@ export default function Events() {
 	const navigate = useNavigate();
 	const [events, setEvents] = useState([]);
 	const [datePicker, setdatePricker] = useState("");
+	const [error, setError] = useState("");
 	const [search, setSearch] = useState({
 		city: "",
 		date: "",
@@ -50,11 +51,20 @@ export default function Events() {
 	console.log(events);
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const search = {
-			city: city,
-			date: datePicker,
-		};
-		setSearch(search);
+		if (city === "") {
+			setError("City is empty");
+		} else if (!/^[A-Za-z]+$/.test(city)) {
+			setError("City is not valid");
+		}
+		if (!error) {
+			const search = {
+				city: city,
+				date: datePicker,
+			};
+			setSearch(search);
+		} else {
+			alert(error);
+		}
 	};
 	const [open, setOpen] = React.useState(false);
 
@@ -64,6 +74,7 @@ export default function Events() {
 		setOpen(false);
 		setOpenSnack(false);
 	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -223,7 +234,7 @@ export default function Events() {
 														<Card sx={{ maxWidth: 345 }}>
 															<CardMedia
 																component="img"
-																height="140"
+																maxHeight="100"
 																image="https://source.unsplash.com/random"
 																alt="party"
 															/>
