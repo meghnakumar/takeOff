@@ -6,6 +6,7 @@ import Popup from './PopUp';
 import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Snackbox from '../common/Snackbox/Snackbox';
 
 export default function SignupForm() {
 
@@ -23,6 +24,8 @@ export default function SignupForm() {
     UpdatePersonalDetailsList(PersonalList);
   }
 
+  const [snackBox, showSnackBox] = React.useState();
+
   const [errorMessage,updateErrorMessage] = useState({
     email : "",
     userName:"",
@@ -33,6 +36,14 @@ export default function SignupForm() {
     password: "",
     confirmpassword: ""
   });
+
+  const passwordRest = () => {
+    showSnackBox(true);
+    setTimeout(() => {
+      showSnackBox(false);
+      navigate('/login', {state:null})
+    }, 3000);
+  }
 
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
 const namepattern = /^[a-z]+$/i;
@@ -54,8 +65,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
-        setButtonPopup(true);
-        //navigate('/profile', {state:null})
+      passwordRest();
+      //navigate('/login', {state:null})
     }   
   }
 
@@ -152,15 +163,16 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
               <br></br>
               
+              {snackBox ?
+              <Snackbox message="Password updated succesfully" severity="success" /> : null
+              }
+
               <div className='reg-text'>
                 Already have account? 
                 <Link  to="/login"> Login</Link>
               </div>
           </form>
 
-          <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <h3>Password is updated!</h3>
-          </Popup>
 
     </div>
         
