@@ -237,6 +237,7 @@ export default function Events() {
 																maxHeight="100"
 																image="https://source.unsplash.com/random"
 																alt="party"
+																sx={{ maxHeight: 200 }}
 															/>
 															<CardContent>
 																<Typography
