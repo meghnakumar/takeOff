@@ -1,0 +1,45 @@
+.SearchFlights {
+    padding: 3rem !important;
+ //    background-color: #000000c7;
+ //    background-color: #2a2a72;
+ //     background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+     background-color: #63a4ff;
+     background-image: linear-gradient(315deg, #63a4ff 0%, #83f1ecba 74%);
+     .container {
+         box-shadow: 9px 10px 10px 0 rgb(33 40 50 / 16%);
+     }
+ }
+ 
+ .container {
+     background-color: #fff;
+     border-radius: 8px;
+ }
+ 
+ .search-btn {
+     display: flex;
+     justify-content: center;
+ }
+ 
+ .search-btn Button{
+     margin-top: 31px;
+     padding: 12px 37px;
+     border-radius: 25px;
+ }
+ 
+ .m-top-16 {
+     margin-top: 16px !important;
+ }
+ 
+ .res-p {
+     padding: 3rem !important;
+ }
+ 
+ .b-title {
+     opacity: 0.8;
+ }
+ 
+ @media screen and (max-width: 768px) {
+     .res-p {
+         padding: 1rem !important;
+     }
+ }
