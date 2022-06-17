@@ -25,6 +25,8 @@ import TextField from "@mui/material/TextField";
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 
+//references
+//https://mui.com/material-ui/
 const Bookings = () => {
 
     const [openSnackBar, setOpenSnackBar] = useState(false);

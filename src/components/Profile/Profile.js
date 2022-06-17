@@ -17,6 +17,10 @@ import Paper from '@mui/material/Paper';
 import { useNavigate } from "react-router-dom";
 import './Profile.scss'
 
+//references
+//https://mui.com/material-ui/api/text-field/
+//https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
+//https://mui.com/material-ui/material-icons/?query=account
 
 export default function ProfileScreen() {
 

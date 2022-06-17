@@ -2,11 +2,15 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import Popup from './PopUp';
 import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
+
+//references
+//https://mui.com/material-ui/api/text-field/
+//https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
+//https://mui.com/material-ui/material-icons/?query=account
 
 export default function SignupForm() {
 
@@ -230,9 +234,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
               </div>
           </form>
 
-          <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            <h3>Registration complete!</h3>
-          </Popup>
 
     </div>
         

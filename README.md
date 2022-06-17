@@ -1,92 +1,365 @@
-# csci-5709-group13
 
+  
 
+  
 
-## Getting started
+<!--- The following README.md sample file was adapted from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md by Gabriella Mosquera for academic use --->
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+ 
+  
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+# Group 13 - Project Proposal 'TakeOff'
+  
+'TakeOff' is a travel management website which aims on providing the users with a one stop platform for flights, hotels, events and tours booking. The deployed website is currently a semi functional prototype demonstrating each feature of the website and the experience it will provide to the users. The website aims on providing a feedback to the user for all their actions. Every button provides a message to the user enhancing the user experience and usability of the website and also making sure that users are aware what each functionality offers. 
+  
 
-## Add your files
+*  *Date Created*: 14 June 2022
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+  
+
+*  *Last Modification Date*: 16 June 2022
+
+  
+
+*  *Heroku URL*: <https://gp-13-we-project.herokuapp.com/>
+
+*  *Netlify URL*: <https://csci-5709-group13-takeoff.netlify.app/>
+  
+
+*  *Gitlab URL*: <https://git.cs.dal.ca/meghnak/csci-5709-group13/-/tree/main>
+
+  
+
+  
+
+## Authors
+  
+
+* [Meghna Kumar](meghna.kumar@dal.ca) - *(Developer)*
+* [Bhavesh Lalwani](bhavesh.lalwani@dal.ca) - *(Developer)*
+* [Sharad Kumar](sharad.kumar@dal.ca) - *(Developer)*
+* [Harshit Lakhani](harshit.lakhani@dal.ca) - *(Developer)*
+* [Kalpit Macchi](kalpit.macchi@dal.ca) - *(Developer)*
+* [Jayasree Koluthungan](jy525824@dal.ca) - *(Developer)*
+
+  
+  
+
+  
+
+## Getting Started
+
+  
+
+To get this app up and ready in your local, please adhere by the below details
+
+  
+
+### Prerequisites
+
+  
+
+  
+
+To have a local copy of this lab / assingnment / project up and running on your local machine, you will first need to install the following software / libraries / plug-ins
+
+  
+
+  
 
 ```
-cd existing_repo
-git remote add origin https://git.cs.dal.ca/meghnak/csci-5709-group13.git
-git branch -M main
-git push -uf origin main
+
+  
+
+1. Install npm to run the app
+
+2. Any IDE as per your preference - used Webstorm
+
+3. CSS Library used - react-bootstrap
+
+4. Component Library used - Material UI and Chakra UI  
+
+``` 
+
+  
+
+See the following section for detailed step-by-step instructions on how to install this software / libraries / plug-ins
+
+  
+
+  
+
+### Installing
+
+  
+
+  
+
+A step by step series of examples that tell you how to get a development env running
+
+  
+
+  
+  
+  
+
+  
+
 ```
 
-## Integrate with your tools
+  
 
-- [ ] [Set up project integrations](https://git.cs.dal.ca/meghnak/csci-5709-group13/-/settings/integrations)
+1. Install Node in the System - Download it from <https://nodejs.org/en/download/>
 
-## Collaborate with your team
+2. Install any IDE of the required preference - example Webstorm from JetBrains
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+3. Import the project from git into the IDE using the git clone command with 'https://git.cs.dal.ca/meghnak/csci-5709-group13.git'
 
-## Test and Deploy
+4. Let the project build and install the node modules
 
-Use the built-in continuous integration in GitLab.
+5. If the libraries haven't loaded then install them explicitly - npm install react-bootstrap bootstrap, npm install @mui/material @emotion/react @emotion/styled
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+6. Run the project from terminal by executing - npm run start
 
-***
+7. This will start the application on localhost:3000
 
-# Editing this README
+8. The application will be up and running on the browser
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+  
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```
 
-## Name
-Choose a self-explaining name for your project.
+  
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+  
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+The application when running will render the home page of the website displaying all the options the website offers. All the options are accessible via routing and each feature can be accessed by the user with proper feedbacks added to help user understand the functionality.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+It is a completely responsive website, hence all the components on the pages adjusts on the screen irrespective of the device.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+  
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+  
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Running the tests
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+  
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+  
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+This project has no test cases
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+  
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+  
 
-## License
-For open source projects, say how it is licensed.
+### Break down into end to end tests
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+  
+
+  
+
+NA
+
+  
+
+  
+
+```
+
+  
+
+NA
+
+  
+
+```
+
+  
+
+  
+
+### And coding style tests
+
+  
+
+  
+
+NA
+
+  
+
+  
+
+```
+
+  
+
+NA
+
+  
+
+```
+
+  
+
+  
+
+## Deployment
+
+  
+
+This project is deployed on Heroku and netlify.
+
+To deploy either Heroku CLI or CI/CD pipeline on git can be used.
+
+  
+
+  
+
+## Built With
+
+  
+
+  
+
+<!--- Provide a list of the frameworks used to build this application, your list should include the name of the framework used, the url where the framework is available for download and what the framework was used for, see the example below --->
+
+  
+
+  
+
+* [React](https://reactjs.org/) - Frontend library
+
+* [Node](https://nodejs.org/en/download/) - Backend Javascript runtime
+
+* [NPM](https://www.npmjs.com/) - Package Manager
+
+* [Webstorm](https://www.jetbrains.com/webstorm/) - IDE
+
+* [Heroku](https://id.heroku.com/login) - Deployment Platform
+
+* [Material UI](https://mui.com/) - React Component Based library
+* [Chakra UI](https://chakra-ui.com/) - React Component Based library
+
+* [react-bootstrap](https://react-bootstrap.netlify.app/getting-started/introduction/) - CSS React library
+
+* [Google Chrome](https://www.google.com/chrome/?brand=YTUH&gclsrc=aw.ds&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-M6CqP2YuWDYt-kUixqdZh3aJZmmYidnlKteQBojtpHPIToxTL5ZlYaAtzXEALw_wcB) - Browser used for testing
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+
+
+## Sources Used
+The following sources were used in understanding some parts of this tutorial
+
+1. https://mui.com/material-ui/react-card/
+Referred to understand how the Card component of Material UI works and how it can be used in the website. Most of the pages like - Hotel detail page, flight detail page, flight bookings page have used it.
+
+2. https://mui.com/material-ui/react-grid/
+Referred to understand how to align card components in the form of grid. The files using card components have mostly used mui grid to align the cards.
+ 
+3. https://mui.com/material-ui/react-snackbar/
+Used Material UI's snackbar component to pop a toast message on click of certain user actions. 
+
+4. https://mui.com/material-ui/react-dialog/
+User Material UI's dialog component to have booking form and modified it as per the requirement of the website.
+
+5. https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js
+Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
+
+6. https://mui.com/material-ui/api/text-field/
+Referred to access text field and its properties while building signup form
+
+7. https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
+Referred to access regex expression for email validation
+
+8. https://mui.com/material-ui/material-icons/?query=account
+Referred to access account icons to be places in profile screen
+
+  
+
+## Group Project Team - Group 13
+
+### Team Members
+
+- Bhavesh Lalwani
+
+- Harshit Lakhani
+
+- Kalpit Macchi
+
+- Sharad Kumar
+
+- Jayasree Koluthungan
+
+- Meghna Kumar
+
+  
+
+  
+
+## Acknowledgments
+
+- IDE Reference: https://www.jetbrains.com/webstorm/
+
+- Deployment Reference: https://id.heroku.com/login
+
+- Software Reference: https://nodejs.org/en/download/
+
+- Frontend Library Reference: https://reactjs.org/
+
+- CSS Reference: https://react-bootstrap.netlify.app/getting-started/introduction/ 
+
+- Color combination Reference: https://material.io/design/color/the-color-system.html
+
+- Component library Reference: https://mui.com/ and https://chakra-ui.com/
+
+
+  
+
+### Image/Icon Reference
+
+- Application Logo Reference : https://www.flaticon.com/premium-icon/flight_4283062?term=flight&related_id=4283062
+
+- Skyline hotel listing background Image - https://search.openverse.engineering/image/fe4fae86-acf6-46bb-8345-2f5423ff9a61 , "File:Kaohsiung Skyline 2020.jpg" by 毛貓大少爺 is licensed under CC BY-SA 2.0."
+
+- Hotel Card Image Reference: https://unsplash.com/photos/jmkMl20jNS0
+
+- Hotel Card My bookings page References:  https://search.openverse.engineering/image/b1d8eef1-5ef9-411a-804d-e4148ef297eb
+https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
+https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
+https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
+https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
+
+- Hotel detail room type image Reference: https://search.openverse.engineering/image/b3bbb3d2-b758-40f6-83c2-33bb3dd4d6aa
+https://search.openverse.engineering/image/b1277ef8-ce4d-4725-ac01-d50db359494f
+https://search.openverse.engineering/image/275e55c6-73fb-4197-bead-41e800b3724f
+https://search.openverse.engineering/image/302dc0c5-d728-4bcc-bb23-f4f9d0481b15
+
+-User Icon: https://mui.com/material-ui/material-icons/?query=user&theme=Outlined&selected=AccountCircleOutlined
+
+
+
+
+## References
+[1] Mui.com. 2022. _React Card component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-card/> [Accessed 13 June 2022].
+
+[2] Mui.com. 2022. _React Grid component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-grid/> [Accessed 14 June 2022].
+
+[3] Mui.com. 2022. _React Snackbar component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-snackbar/> [Accessed 16 June 2022].
+
+[4] Mui.com. 2022. _React Dialog component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-dialog/> [Accessed 16 June 2022].
+
+[5] JS, S., Balan, P., Louis, V. and Shukla, M., 2022. _Sort array by dates in React JS_. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js> [Accessed 16 June 2022].
+
+[6] Creative Commons. 2022. _When we share, everyone wins - Creative Commons_. [online] Available at: <https://creativecommons.org/> [Accessed 16 June 2022].
+
+ 
