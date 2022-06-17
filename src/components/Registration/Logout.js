@@ -8,6 +8,11 @@ import Snackbox from '../common/Snackbox/Snackbox';
 
 import './Registration.scss'
 
+//references
+//https://mui.com/material-ui/api/text-field/
+//https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
+//https://mui.com/material-ui/material-icons/?query=account
+
 export default function SignupForm() {
 
   let flag = "y";

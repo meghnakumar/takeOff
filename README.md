@@ -21,8 +21,9 @@
 
   
 
-*  *Heroku URL*: <add url here/>
+*  *Heroku URL*: <https://gp-13-we-project.herokuapp.com/>
 
+*  *Netlify URL*: <https://csci-5709-group13-takeoff.netlify.app/>
   
 
 *  *Gitlab URL*: <https://git.cs.dal.ca/meghnak/csci-5709-group13/-/tree/main>
@@ -208,7 +209,7 @@ NA
 
   
 
-This project is deployed on Heroku.
+This project is deployed on Heroku and netlify.
 
 To deploy either Heroku CLI or CI/CD pipeline on git can be used.
 
@@ -274,7 +275,14 @@ User Material UI's dialog component to have booking form and modified it as per 
 5. https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js
 Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
 
-  
+6. https://mui.com/material-ui/api/text-field/
+Referred to access text field and its properties while building signup form
+
+7. https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
+Referred to access regex expression for email validation
+
+8. https://mui.com/material-ui/material-icons/?query=account
+Referred to access account icons to be places in profile screen
 
   
 

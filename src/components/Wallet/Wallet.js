@@ -3,6 +3,7 @@ import "./Wallet.scss";
 import WalletBalance from "./WalletBalance/WalletBalance";
 import WalletHistory from "./WalletHistory/WalletHistory";
 
+
 const Wallet = () => {
   return (
     <>
