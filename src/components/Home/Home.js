@@ -23,6 +23,9 @@ import { TbDiscount2 } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
 
+//references
+//https://mui.com/material-ui/
+
 const Home = () => {
   const navigator = useNavigate("/home");
 

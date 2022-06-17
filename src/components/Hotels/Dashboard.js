@@ -4,6 +4,8 @@ import './Hotels.scss';
 import HotelList from "./HotelList";
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 
+//references
+//https://mui.com/material-ui/
 
 const Dashboard = () => {
     const [isLocationSelected, setIsLocationSelected] = useState()
