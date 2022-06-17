@@ -7,7 +7,7 @@ const Events = [
 		state: "Nova Scotia",
 		date: "2022-06-07",
 		details:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus nulla sit amet nulla dictum, vitae euismod odio condimentum. Vivamus sollicitudin quis eros varius tempus.",
+			"One premium reserved seat Early entry into the venue Access to an intimate preshow soundcheck with The Australian Pink Floyd Show pecial Q&A with members of TAPFS Limited edition tour poster; autographed by the band Exclusive TAPFS merchandise item Official VIP soundcheck laminate Limited availability",
 		seats: "77",
 	},
 	{
@@ -18,7 +18,7 @@ const Events = [
 		state: "Nova Scotia",
 		date: "2022-06-08",
 		details:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus nulla sit amet nulla dictum, vitae euismod odio condimentum. Vivamus sollicitudin quis eros varius tempus.",
+			"One premium reserved seat Early entry into the venue Access to an intimate preshow soundcheck with The Australian Pink Floyd Show pecial Q&A with members of TAPFS Limited edition tour poster; autographed by the band Exclusive TAPFS merchandise item Official VIP soundcheck laminate Limited availability",
 		seats: "77",
 	},
 	{
@@ -29,7 +29,7 @@ const Events = [
 		state: "Nova Scotia",
 		date: "2022-06-09",
 		details:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus nulla sit amet nulla dictum, vitae euismod odio condimentum. Vivamus sollicitudin quis eros varius tempus.",
+			"One premium reserved seat Early entry into the venue Access to an intimate preshow soundcheck with The Australian Pink Floyd Show pecial Q&A with members of TAPFS Limited edition tour poster; autographed by the band Exclusive TAPFS merchandise item Official VIP soundcheck laminate Limited availability",
 		seats: "77",
 	},
 	{
@@ -40,7 +40,7 @@ const Events = [
 		state: "Nova Scotia",
 		date: "2022-06-07",
 		details:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus nulla sit amet nulla dictum, vitae euismod odio condimentum. Vivamus sollicitudin quis eros varius tempus.",
+			"One premium reserved seat Early entry into the venue Access to an intimate preshow soundcheck with The Australian Pink Floyd Show pecial Q&A with members of TAPFS Limited edition tour poster; autographed by the band Exclusive TAPFS merchandise item Official VIP soundcheck laminate Limited availability",
 		seats: "77",
 	},
 	{
@@ -51,7 +51,7 @@ const Events = [
 		state: "Nova Scotia",
 		date: "2022-06-11",
 		details:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus nulla sit amet nulla dictum, vitae euismod odio condimentum. Vivamus sollicitudin quis eros varius tempus.",
+			"One premium reserved seat Early entry into the venue Access to an intimate preshow soundcheck with The Australian Pink Floyd Show pecial Q&A with members of TAPFS Limited edition tour poster; autographed by the band Exclusive TAPFS merchandise item Official VIP soundcheck laminate Limited availability",
 		seats: "77",
 	},
 ];
