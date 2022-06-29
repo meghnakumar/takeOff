@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.App{
+  text-align: left;
+}
+
+
+.payBackground{
+    position: relative;
+  }
+  
+.cardType{
+  font-family: "Poppins";
+  font-weight: bold;
+  color: #ffffff;
+  font-size:12px;
+  position: absolute;
+  top: 15%;
+  left: 10%;
+}
+
+.cardLogo{
+  min-width:25px;
+  max-width: 50px;
+  position: absolute;
+  top: 17%;
+  left: 70%;
+}
+
+.cardName{
+  font-family: "Poppins";
+  color: #ffffff;
+  font-size:12px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+}
+
+.cardNumber{
+  font-family: "Poppins";
+  color: #ffffff;
+  font-size:12px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+}
+
+.overflow{
+  overflow: auto;
+}
+
+.margin_bottom_15{
+  margin-bottom: 15px !important;
+}
+
+.non-highlight{
+  border: none;
+}
+.highlight{
+  border: 3px solid #0091FF  
+  }
