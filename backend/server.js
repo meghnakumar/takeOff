@@ -1,8 +1,12 @@
 const express = require("express");
+const connectDB = require("./config/db");
 const app = express();
-const userRoute = require("./routes");
+// Connect Database
+connectDB();
 
-app.use("/", userRoute);
+//Events
+const eventRoute = require("./routes/eventRoute");
+app.use("/events", eventRoute);
 
 app.listen(process.env.PORT || 5001, () => {
 	console.log("server started");
