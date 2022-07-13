@@ -30,6 +30,8 @@ import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 //event management imports
 import EventContext from "./context/eventContext";
 import { getEvents } from "./services/eventServices";
+import HotelContext from "./context/hotelContext";
+import {getHotels} from "./services/hotelServices";
 
 function App() {
 	const location = useLocation();
@@ -51,8 +53,26 @@ function App() {
 		getData();
 	}, []);
 
+	//hotel list
+	const[hotels, setHotels] = useState([]);
+	useEffect(()=>{
+		if (location.pathname === "/" || location.pathname === "/home") {
+			setHome(true);
+		} else {
+			setHome(false);
+		}
+
+		const getData = async () => {
+			const { data: dataHotels } = await getHotels();
+			setHotels(dataHotels);
+		};
+
+		getData();
+	}, []);
+
 	return (
 		<EventContext.Provider value={{ events }}>
+			<HotelContext.Provider value = {{hotels}}>
 			<div className="App">
 				{ishome ? (
 					<></>
@@ -89,6 +109,7 @@ function App() {
 				</Routes>
 				<div>{/* <Footer></Footer> */}</div>
 			</div>
+			</HotelContext.Provider>
 		</EventContext.Provider>
 	);
 }
