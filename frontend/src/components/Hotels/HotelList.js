@@ -1,11 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 import {hotels} from './HotelsDummy'
 import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";
+import HotelContext from "../../context/hotelContext";
 
 const HotelList = () => {
+    const hotelContext = useContext(HotelContext);
+    const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');
+    useEffect(() => {
+        setHotels(hotelContext.hotels);
+    });
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         if (event.target.value === "lowToHigh"){
