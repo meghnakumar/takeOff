@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -21,6 +21,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
+import axios from "axios";
+import EventContext from "../../context/eventContext.js";
 
 const theme = createTheme();
 const style = {
@@ -36,8 +38,8 @@ const style = {
 };
 
 export default function Events() {
+	const eventContext = useContext(EventContext);
 	const navigate = useNavigate();
-	const [events, setEvents] = useState([]);
 	const [datePicker, setdatePricker] = useState("");
 	const [error, setError] = useState("");
 	const [search, setSearch] = useState({
@@ -45,10 +47,10 @@ export default function Events() {
 		date: "",
 	});
 	const [city, setCity] = useState("");
+	const [events, setEvents] = useState([]);
 	useEffect(() => {
-		setEvents(eventsList);
+		setEvents(eventContext.events);
 	});
-	console.log(events);
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (city === "") {

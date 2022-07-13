@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Events = require("../models/eventModel");
+const { getAll } = require("../controller/event");
 
 // @route GET /events/get
 // @description get all events
 // @access Public
-router.get("/get", (req, res) => {
-	Events.find().then((events) => res.json(events));
-});
+router.get("/get", getAll);
+
 module.exports = router;
