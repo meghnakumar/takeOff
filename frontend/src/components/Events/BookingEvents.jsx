@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -19,8 +19,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import eventBookingContext from "../../context/eventBookingContext";
-
+import { createEventBooking } from "../../services/eventBookingServices";
 const theme = createTheme({});
 const style = {
 	position: "absolute",
@@ -37,7 +36,6 @@ const style = {
 export default function BookEvents() {
 	const location = useLocation();
 	const eventId = location.state.eventId;
-	const EventBookingContext = useContext(eventBookingContext);
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -59,6 +57,7 @@ export default function BookEvents() {
 		eventId: "",
 		userId: "",
 	});
+
 	const handleSubmit = (event) => {
 		const errors = {};
 		if (!firstName) {
@@ -90,7 +89,19 @@ export default function BookEvents() {
 			handleOpen();
 		}
 	};
-
+	const handleCreateEventBooking = async (bookingInfo) => {
+		try {
+			await createEventBooking(bookingInfo);
+		} catch (ex) {
+			if (
+				ex.response &&
+				ex.response.status >= 400 &&
+				ex.response.status < 500
+			) {
+				console.log(ex.response.data);
+			}
+		}
+	};
 	return (
 		<ThemeProvider theme={theme}>
 			<Grid
@@ -270,9 +281,7 @@ export default function BookEvents() {
 														color: "#00838f",
 													}}
 													onClick={(e) => {
-														EventBookingContext.handleCreateEventBooking(
-															bookingSummary
-														);
+														handleCreateEventBooking(bookingSummary);
 														console.log("added");
 													}}
 												>

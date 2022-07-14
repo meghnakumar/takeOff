@@ -20,7 +20,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
-import EventContext from "../../context/eventContext.js";
+import { getEvents } from "../../services/eventServices";
 
 const theme = createTheme();
 const style = {
@@ -36,7 +36,6 @@ const style = {
 };
 
 export default function Events() {
-	const eventContext = useContext(EventContext);
 	const navigate = useNavigate();
 	const [datePicker, setdatePricker] = useState("");
 	const [error, setError] = useState("");
@@ -47,8 +46,14 @@ export default function Events() {
 	const [city, setCity] = useState("");
 	const [events, setEvents] = useState([]);
 	useEffect(() => {
-		setEvents(eventContext.events);
-	});
+		getEvents()
+			.then((result) => {
+				setEvents(result.data);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}, []);
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (city === "") {
