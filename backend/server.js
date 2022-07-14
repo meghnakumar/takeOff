@@ -18,6 +18,14 @@ app.use("/events", eventRoute);
 const eventBookingRoute = require("./routes/eventBookingRoute");
 app.use("/events/booking", eventBookingRoute);
 
+//Flights
+const flightRoute = require("./routes/FlightRoute");
+app.use("/flights", flightRoute);
+
+//FlightBooking
+// const flightBookingRoute = require("./routes/FlightBookingRoute");
+// app.use("/flights/booking", flightBookingRoute);
+
 const hotelListRoute = require("./routes/hotelRoute")
 app.use("/hotels",hotelListRoute)
 
