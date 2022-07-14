@@ -101,6 +101,7 @@ const flightSource = [
                 value={depatureValue}
                 disablePast
                 closeOnSelect
+                inputFormat="yyyy-MM-dd"
                 onChange={(newValue) => {
                   setDepartureValue(newValue);
                 }}
@@ -115,6 +116,7 @@ const flightSource = [
                 value={returnValue}
                 disablePast
                 closeOnSelect
+                inputFormat="yyyy-MM-dd"
                 minDate={depatureValue}
                 onChange={(newValue) => {
                   returnSetValue(newValue);
