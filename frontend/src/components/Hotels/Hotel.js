@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Alert, Box, Button, Grid, Modal, Paper, Snackbar, Typography} from "@mui/material";
 import {CardImg} from "react-bootstrap";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -9,6 +9,13 @@ const Hotel = (props) => {
     const [addedToWishlist, setAddedToWishlist] = useState(false);
     const [openWishlistAlert, setOpenWishlistAlert] = useState({message:"", visibility:false});
     const goToDetailsPage= useNavigate();
+
+    useEffect(()=>{
+       console.log(props.name)
+        console.log(hotelname)
+    })
+
+
 
     const handleClick =()=>{
 
@@ -21,8 +28,10 @@ const Hotel = (props) => {
             setOpenWishlistAlert({message:"Hotel removed from wishlist!", visibility:true})
     }
 
+    const id = props.id
+    const hotelname = props.name
     const handleBookClick = () =>{
-        goToDetailsPage("/hotel-detail")
+        goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, location:props.location}})
 
     }
     return(
@@ -40,7 +49,7 @@ const Hotel = (props) => {
             <Grid container spacing={2}>
                 <Grid item sm={12} md={2}>
 
-                    <CardImg alt="complex" src={background}/>
+                    <CardImg alt="complex" src={props.img}/>
 
                 </Grid>
                 <Grid item sm={12} md={10} container>

@@ -5,13 +5,13 @@ import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";
 import HotelContext from "../../context/hotelContext";
 
-const HotelList = () => {
+const HotelList = (props) => {
     const hotelContext = useContext(HotelContext);
     const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');
-    useEffect(() => {
+    /*useEffect(() => {
         setHotels(hotelContext.hotels);
-    });
+    });*/
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         if (event.target.value === "lowToHigh"){
@@ -23,7 +23,12 @@ const HotelList = () => {
     };
 
     const [sortedHotels, setSortedHotels] = useState([]);
+    const [filterHotels, setFilterHotels] = useState([]);
     useEffect(() => {
+        setHotels(hotelContext.hotels);
+        // setFilterHotels(hotels.filter((hotel)=>hotel.location === props.location));
+        /*console.log("Props location",props.location)
+        console.log(filterHotels)*/
         return () => {
             setSortedHotels(hotels.sort((a, b) => a.rating - b.rating));
         };
@@ -68,7 +73,7 @@ const HotelList = () => {
             </div>
 
             {sortedHotels.map((hotels) => {
-                return (<Hotel name = {hotels.name} description={hotels.description} rating={hotels.rating} image={hotels.img}/>);
+                return (<Hotel name = {hotels.name} description={hotels.description} rating={hotels.rating} image={hotels.img} id={hotels._id} rooms={hotels.rooms} place={hotels.location}/>);
             })}
         </Paper>
         </div>
