@@ -9,7 +9,7 @@ const { getUser,getAllUser, addUser, editUser } = require("../controller/user");
 
 router.get("/getall", getAllUser);
 
-router.get("/fetch/:userId", getUser);
+router.get("/fetch/:email", getUser);
 
 // @route POST /events/booking/addInfo
 // @description create booking info

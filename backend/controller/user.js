@@ -9,7 +9,7 @@ module.exports.getAllUser = (req, res) => {
 
 module.exports.getUser = (req, res) => {
 	Users
-		.find({ userId: req.params.userId })
+		.find({ email: req.params.email })
 		.then((info) => res.json(info))
 		.catch((err) => res.status(404).json({ error: "unable to find info" }));
 };
