@@ -22,6 +22,7 @@ import TextField from "@mui/material/TextField";
 import {red} from "@mui/material/colors";
 import HotelContext from "../../../context/hotelContext";
 import {useLocation} from "react-router-dom";
+import {createHotelBooking} from "../../../services/hotelServices";
 
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
@@ -61,6 +62,7 @@ const HotelDetail = () => {
         numberOfRooms:0,
         guestName:'',
         status:'',
+        userID:'',
         img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
     })
 
@@ -159,30 +161,11 @@ const HotelDetail = () => {
             email !== null &&
             contact !== null &&
             roomNumber !== null) {
-            setHotelBookingSummary({
-                startDate: departureValue,
-                endDate:returnValue,
-                roomType:createBooking.roomInfo.roomType,
-                hotelName:location.state.hotelname,
-                location:location.state.location,
-                guests:guestNumber,
-                contactNumber:contact,
-                numberOfRooms:roomNumber,
-                guestName:guestName,
-                status:'Pending',
-                img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
-            });
-            console.log(hotelBookingSummary)
-            hotelContext.handleCreateHotelBooking(hotelBookingSummary).then(r => {
-                setOpen(false);
-                setOpenSnackBar(true);
-                console.log(r)
-            });
-
-
-
+            console.log("Booking Summary",hotelBookingSummary)
+            createHotelBooking(hotelBookingSummary).then(result => {
+                console.log("API result of adding booking", result.data)
+            })
         } else {
-
             setShowErrors(true)
         }
     }
@@ -368,7 +351,23 @@ const HotelDetail = () => {
                             </Form.Group>
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error" >Cancel</Button>
-                            <Button type="submit" >Add to cart</Button>
+                            <Button type="submit" onClick={()=>{
+                                setHotelBookingSummary({
+                                    startDate: departureValue,
+                                    endDate:returnValue,
+                                    roomType:createBooking.roomInfo.roomType,
+                                    hotelName:location.state.hotelname,
+                                    location:location.state.place,
+                                    guests:guestNumber,
+                                    contactNumber:contact,
+                                    numberOfRooms:parseInt(roomNumber),
+                                    guestName:guestName,
+                                    email:email,
+                                    status:'Pending',
+                                    userID:'user1',
+                                    img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
+                                });
+                            }}>Add to cart</Button>
                         </DialogActions>
 
                     </Form>

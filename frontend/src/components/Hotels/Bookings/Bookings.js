@@ -22,7 +22,13 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
-import {getHotelBookingByUserId, getHotels} from "../../../services/hotelServices";
+import {
+    cancelHotelBooking,
+    createBooking,
+    getHotelBookingByUserId,
+    getHotels,
+    modifyHotelBooking
+} from "../../../services/hotelServices";
 
 import HotelContext from "../../../context/hotelContext";
 import {getAllFlights} from "../../../services/flightServices";
@@ -36,8 +42,8 @@ const Bookings = () => {
     const hotelContext = useContext(HotelContext);
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
-    const [email, setEmail] = useState(modifyBooking.bookingInfo.contactNumber);
-    const [contact, setContact] = useState(modifyBooking.bookingInfo.email);
+    const [modifiedEmail, setEmail] = useState();
+    const [modifiedContact, setContact] = useState();
     const [showErrors, setShowErrors] = useState(false);
     const [openModifyForm, setOpenModifyForm] = useState(false);
     const [validationError, setValidationError] = useState({
@@ -71,7 +77,7 @@ const Bookings = () => {
         setShowErrors(false)
         if (id === 'email') {
             setEmail(value)
-
+            console.log(modifiedEmail)
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, emailError: "Email cannot be empty"}
@@ -106,18 +112,6 @@ const Bookings = () => {
         }
     }
 
-
-   /* useEffect(() => {
-        return () => {
-            console.log(new Date());
-            const dateStr = "Thu Jun 16 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)"
-            const bookingStartDate = Date.parse(dateStr);
-            console.log(bookingStartDate)
-            console.log(bookingStartDate > new Date())
-            console.log(dateStr.substring(0, 15))
-        };
-    }, []);*/
-
     // Reference: https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
 
 
@@ -125,7 +119,6 @@ const Bookings = () => {
     const [modifyBooking, setModifyBooking] = useState({bookingInfo: ""});
     const [bookingData, setBookingData] = useState([]);
     let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate));
-    console.log('sorted', sortedBookings)
     useEffect(() => {
         getHotelBookingByUserId("user1").then(result => {
             setBookingData(result.data);
@@ -137,10 +130,8 @@ const Bookings = () => {
 
     const [open, setOpen] = React.useState(false);
     const [modifySummary, setModifySummary] = React.useState({
-        email:'',
-        contactNumber:0
-
-
+        email: modifiedEmail,
+        contactNumber:modifiedContact
     })
 
     const handleClickOpen = () => {
@@ -150,11 +141,18 @@ const Bookings = () => {
 
     const handleClose = () => {
         setOpen(false);
+        getHotelBookingByUserId("user1").then(result => {
+            setBookingData(result.data);
+        }).catch(err => {
+            console.error(err);
+        });
+
     };
 
     const handleModifyClick = () => {
         console.log(modifyBooking)
         setOpenModifyForm(true)
+
     }
 
     const handleCloseBookingForm = (e) => {
@@ -162,14 +160,18 @@ const Bookings = () => {
         setOpenModifyForm(false);
     };
 
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setOpenModifyForm(false)
         setOpenModifySnackBar(true);
-        setModifySummary({
-            email: email,
-            contactNumber:contact
+        console.log('modified data',modifySummary)
+        modifyHotelBooking(modifySummary, modifyBooking.bookingInfo._id).then(result =>{
+            console.log(result.data)
         })
+
 
 
     }
@@ -299,6 +301,8 @@ const Bookings = () => {
                                         startIcon={<EditIcon/>} onClick={() => {
                                     handleModifyClick();
                                     setModifyBooking({bookingInfo: bookingInfo})
+                                    setEmail(bookingInfo.email)
+                                    setContact(bookingInfo.contactNumber)
                                 }}>
                                     Modify
                                 </Button>
@@ -335,8 +339,12 @@ const Bookings = () => {
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button color="error" onClick={() => {
+                        cancelHotelBooking(removeBooking.bookingInfo._id).then(result =>{
+                            console.log(result.data)
+                        })
                         handleClose();
                         setOpenSnackBar(true)
+
                     }} autoFocus>
                         Confirm
                     </Button>
@@ -421,7 +429,10 @@ const Bookings = () => {
                         </Form.Group>
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error">Cancel</Button>
-                            <Button type="submit">Modify</Button>
+                            <Button type="submit" onClick={()=>{setModifySummary({
+                                email: modifiedEmail,
+                                contactNumber:parseInt(modifiedContact)
+                            })}}>Modify</Button>
                         </DialogActions>
 
                     </Form>
