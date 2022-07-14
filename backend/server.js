@@ -33,14 +33,6 @@ app.use("/flights", flightRoute);
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
 
-//Hotels
-const hotelListRoute = require("./routes/hotelRoute");
-app.use("/hotels", hotelListRoute);
-
-//Tour Packages
-const tourPackageRoute = require("./routes/tourRoute");
-app.use("/tourPackages", tourPackageRoute);
-
 app.listen(process.env.PORT || 5001, () => {
 	console.log("server started");
 });
