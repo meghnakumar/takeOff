@@ -9,8 +9,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { format } from 'date-fns';
 
-const SearchFlights = ({setIsButtonClicked}) => {
+const SearchFlights = ({setIsButtonClicked, setReqFlights}) => {
   const [depatureValue, setDepartureValue] = React.useState(
     new Date()
   );
@@ -64,6 +65,21 @@ const flightSource = [
     setToLocation(value);
     const filteredLocations = flightSource.filter((item) => item.title !== value);
     setFromLocationList(filteredLocations);
+  }
+
+  const searchSubmit = () => {
+    let departureDate = format(depatureValue, 'yyyy-MM-dd');
+    let arrivalDate = returnValue ? format(returnValue, 'yyyy-MM-dd') : "";
+    let obj = {
+      travelersCount: numberOfTravellers,
+      fromLocation: fromLocation,
+      toLocation: toLocation,
+      departureDate: departureDate,
+      arrivalDate: arrivalDate,
+      class: travelClass
+    }
+    setIsButtonClicked(true);
+    setReqFlights(obj);
   }
 
   return (
@@ -163,7 +179,7 @@ const flightSource = [
         <div className="row">
           <div className="search-btn">
             <Button disabled={!toLocation || !fromLocation || !depatureValue  || Boolean(errors?.numberOfTravellers)} type="button" variant="contained" endIcon={<SearchIcon />}
-              onClick={() => setIsButtonClicked(true)}>
+              onClick={() => searchSubmit()}>
               Search
             </Button>
           </div>

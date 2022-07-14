@@ -5,10 +5,14 @@ import LuggageOutlinedIcon from '@mui/icons-material/LuggageOutlined';
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutline';
 import MoneyOffOutlinedIcon from '@mui/icons-material/MoneyOff';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
+import {useLocation} from "react-router-dom";
 
 
 const FlightDetails = () => {
-
+  const flightDetails = useLocation().state.flightDetails;
+  const flightReqDetails = useLocation().state.flightReqDetails;
+  console.log("navigationData ", flightDetails);
+  console.log("flightReqDetails ", flightReqDetails);
   return (
     <div className="flightBooking">
       <Paper
