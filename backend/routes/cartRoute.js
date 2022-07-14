@@ -16,7 +16,6 @@ router.post("/", addItem);
 // @route DELETE /cart/:item_id
 // @description delete item from cart
 // @access Public
-router.delete("/:itemId", deleteItem);
-
+router.delete("/:cartId", deleteItem);
 
 module.exports = router;

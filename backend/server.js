@@ -18,9 +18,13 @@ app.use("/events", eventRoute);
 const eventBookingRoute = require("./routes/eventBookingRoute");
 app.use("/events/booking", eventBookingRoute);
 
-const hotelListRoute = require("./routes/hotelRoute")
-app.use("/hotels",hotelListRoute)
+const hotelListRoute = require("./routes/hotelRoute");
+app.use("/hotels", hotelListRoute);
+
+// Cart
+const cartRoute = require("./routes/cartRoute");
+app.use("/cart", cartRoute);
 
 app.listen(process.env.PORT || 5001, () => {
-	console.log("server started");
+  console.log("server started");
 });
