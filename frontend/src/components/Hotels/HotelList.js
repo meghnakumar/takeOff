@@ -4,9 +4,9 @@ import {hotels} from './HotelsDummy'
 import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";
 import HotelContext from "../../context/hotelContext";
+import {createHotelBooking, getHotels} from "../../services/hotelServices";
 
 const HotelList = (props) => {
-    const hotelContext = useContext(HotelContext);
     const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');
     /*useEffect(() => {
@@ -25,7 +25,11 @@ const HotelList = (props) => {
     const [sortedHotels, setSortedHotels] = useState([]);
     const [filterHotels, setFilterHotels] = useState([]);
     useEffect(() => {
-        setHotels(hotelContext.hotels);
+        getHotels().then(result => {
+            setHotels(result.data);
+            console.log(result.data)
+        })
+
         // setFilterHotels(hotels.filter((hotel)=>hotel.location === props.location));
         /*console.log("Props location",props.location)
         console.log(filterHotels)*/

@@ -28,7 +28,7 @@ import Profile from "./components/Profile/Profile";
 import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 
 import HotelContext from "./context/hotelContext";
-import { getHotels, createBooking } from "./services/hotelServices";
+import { getHotels } from "./services/hotelServices";
 
 function App() {
 	const location = useLocation();
@@ -48,13 +48,8 @@ function App() {
 	//hotel list
 	const [hotels, setHotels] = useState([]);
 	//hotel booking by userId
-	const [bookingData, setBookingData] = useState([]);
+
 	const [hotelBookingSummary, setHotelBookingSummary] = useState();
-
-	const handleCreateHotelBooking = async (hotelBookingSummary) => {
-		await createBooking(hotelBookingSummary);
-	};
-
 	return (
 		<HotelContext.Provider value={{ hotels }}>
 			<div className="App">
