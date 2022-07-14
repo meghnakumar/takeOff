@@ -8,6 +8,7 @@ module.exports.getBooking = (req, res) => {
 };
 
 module.exports.addInfo = (req, res) => {
+	console.log(req.body);
 	eventsBooking
 		.create(req.body)
 		.then((info) => res.json(info))

@@ -13,7 +13,6 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import eventsList from "../Events/Events.js";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -21,7 +20,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
-import axios from "axios";
 import EventContext from "../../context/eventContext.js";
 
 const theme = createTheme();
@@ -264,7 +262,7 @@ export default function Events() {
 																	sx={{ mt: 2, color: "#00838f" }}
 																>
 																	<LocationOnIcon />
-																	{card.addressLine1} {card.city} {card.state}
+																	{card.addressLine1}, {card.city}, {card.state}
 																</Typography>
 																<Typography
 																	variant="body2"
@@ -278,6 +276,12 @@ export default function Events() {
 																	sx={{ mt: 2, color: "#00838f" }}
 																>
 																	{card.details}
+																</Typography>
+																<Typography
+																	paragraph
+																	sx={{ mt: 2, color: "#00838f" }}
+																>
+																	Price : ${card.price}
 																</Typography>
 															</CardContent>
 															<CardActions>
@@ -295,7 +299,11 @@ export default function Events() {
 																<Button
 																	size="small"
 																	onClick={() => {
-																		navigate("/events-booking");
+																		navigate("/events-booking", {
+																			state: {
+																				eventId: card._id,
+																			},
+																		});
 																	}}
 																	sx={{ color: "#00838f", ml: 25 }}
 																>

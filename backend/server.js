@@ -26,8 +26,8 @@ app.use("/flights", flightRoute);
 // const flightBookingRoute = require("./routes/FlightBookingRoute");
 // app.use("/flights/booking", flightBookingRoute);
 
-const hotelListRoute = require("./routes/hotelRoute")
-app.use("/hotels",hotelListRoute)
+const hotelListRoute = require("./routes/hotelRoute");
+app.use("/hotels", hotelListRoute);
 
 app.listen(process.env.PORT || 5001, () => {
 	console.log("server started");
