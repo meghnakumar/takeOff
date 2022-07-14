@@ -18,6 +18,7 @@ app.use("/events", eventRoute);
 const eventBookingRoute = require("./routes/eventBookingRoute");
 app.use("/events/booking", eventBookingRoute);
 
+<<<<<<< HEAD
 //Flights
 const flightRoute = require("./routes/FlightRoute");
 app.use("/flights", flightRoute);
@@ -28,6 +29,10 @@ app.use("/flights", flightRoute);
 
 const hotelListRoute = require("./routes/hotelRoute")
 app.use("/hotels",hotelListRoute)
+=======
+const hotelListRoute = require("./routes/hotelRoute");
+app.use("/hotels", hotelListRoute);
+>>>>>>> 280584c (event-flow)
 
 app.listen(process.env.PORT || 5001, () => {
 	console.log("server started");

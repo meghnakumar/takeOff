@@ -31,13 +31,20 @@ import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 import EventContext from "./context/eventContext";
 import { getEvents } from "./services/eventServices";
 import HotelContext from "./context/hotelContext";
-import {getHotels} from "./services/hotelServices";
+import { getHotels } from "./services/hotelServices";
+import EventBookingContext from "./context/eventBookingContext";
+import {
+	getEventBooking,
+	createEventBooking,
+	updateEventBooking,
+} from "./services/eventBookingServices";
 
 function App() {
 	const location = useLocation();
 	const [ishome, setHome] = useState(false);
 
 	const [events, setEvents] = useState([]);
+	const [eventsBooking, setEventsBooking] = useState([]);
 	useEffect(() => {
 		if (location.pathname === "/" || location.pathname === "/home") {
 			setHome(true);
@@ -48,14 +55,31 @@ function App() {
 		const getData = async () => {
 			const { data: dataEvents } = await getEvents();
 			setEvents(dataEvents);
+			const { data: dataBookingEvents } = await getEventBooking();
+			setEventsBooking(dataBookingEvents);
 		};
 
 		getData();
 	}, []);
 
+	const handleCreateEventBooking = async (bookingInfo) => {
+		try {
+			//console.log(bookingInfo);
+			await createEventBooking(bookingInfo);
+		} catch (ex) {
+			if (
+				ex.response &&
+				ex.response.status >= 400 &&
+				ex.response.status < 500
+			) {
+				console.log(ex.response.data);
+			}
+		}
+	};
+
 	//hotel list
-	const[hotels, setHotels] = useState([]);
-	useEffect(()=>{
+	const [hotels, setHotels] = useState([]);
+	useEffect(() => {
 		if (location.pathname === "/" || location.pathname === "/home") {
 			setHome(true);
 		} else {
@@ -72,44 +96,48 @@ function App() {
 
 	return (
 		<EventContext.Provider value={{ events }}>
-			<HotelContext.Provider value = {{hotels}}>
-			<div className="App">
-				{ishome ? (
-					<></>
-				) : (
-					<div>
-						<Header></Header> <div className="header-footer-margin"></div>
+			<EventBookingContext.Provider
+				value={{ eventsBooking, handleCreateEventBooking }}
+			>
+				<HotelContext.Provider value={{ hotels }}>
+					<div className="App">
+						{ishome ? (
+							<></>
+						) : (
+							<div>
+								<Header></Header> <div className="header-footer-margin"></div>
+							</div>
+						)}
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="home" element={<Home />} />
+							<Route path="flights" element={<Flights />} />
+							<Route path="flight-details" element={<FlightDetails />} />
+							<Route path="flight-bookings" element={<FlightBookings />} />
+							<Route path="booking" element={<Bookings />} />
+							<Route path="events" element={<Events />} />
+							<Route path="events-booking" element={<BookingEvents />} />
+							<Route path="hotels" element={<Dashboard2 />} />
+							<Route path="tour-packages" element={<TourPackages />} />
+							<Route path="tour-booking" element={<BookingTours />} />
+							<Route path="Offers" element={<Offers />} />
+							<Route path="bus" element={<Bus />} />
+							<Route path="hotel-detail" element={<HotelDetail />} />
+							<Route path="bookings" element={<Bookings />} />
+							<Route path="payment" element={<Payment />} />
+							<Route path="read-reviews" element={<ReadReviews />} />
+							<Route path="wallet" element={<Wallet />} />
+							<Route path="cart" element={<Cart />} />
+							<Route path="login" element={<Login />} />
+							<Route path="signup" element={<SignUp />} />
+							<Route path="reset" element={<Reset />} />
+							<Route path="logout" element={<Logout />} />
+							<Route path="profile" element={<Profile />} />
+						</Routes>
+						<div>{/* <Footer></Footer> */}</div>
 					</div>
-				)}
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="home" element={<Home />} />
-					<Route path="flights" element={<Flights />} />
-					<Route path="flight-details" element={<FlightDetails />} />
-					<Route path="flight-bookings" element={<FlightBookings />} />
-					<Route path="booking" element={<Bookings />} />
-					<Route path="events" element={<Events />} />
-					<Route path="events-booking" element={<BookingEvents />} />
-					<Route path="hotels" element={<Dashboard2 />} />
-					<Route path="tour-packages" element={<TourPackages />} />
-					<Route path="tour-booking" element={<BookingTours />} />
-					<Route path="Offers" element={<Offers />} />
-					<Route path="bus" element={<Bus />} />
-					<Route path="hotel-detail" element={<HotelDetail />} />
-					<Route path="bookings" element={<Bookings />} />
-					<Route path="payment" element={<Payment />} />
-					<Route path="read-reviews" element={<ReadReviews />} />
-					<Route path="wallet" element={<Wallet />} />
-					<Route path="cart" element={<Cart />} />
-					<Route path="login" element={<Login />} />
-					<Route path="signup" element={<SignUp />} />
-					<Route path="reset" element={<Reset />} />
-					<Route path="logout" element={<Logout />} />
-					<Route path="profile" element={<Profile />} />
-				</Routes>
-				<div>{/* <Footer></Footer> */}</div>
-			</div>
-			</HotelContext.Provider>
+				</HotelContext.Provider>
+			</EventBookingContext.Provider>
 		</EventContext.Provider>
 	);
 }
