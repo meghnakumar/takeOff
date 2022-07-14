@@ -41,6 +41,13 @@ app.use("/tours/booking", tourBookingRoute);
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
 
+//Users
+const userRoute = require("./routes/userRoute");
+app.use("/users", userRoute);
+
+const hotelListRoute = require("./routes/hotelRoute")
+app.use("/hotels",hotelListRoute)
+
 app.listen(process.env.PORT || 5001, () => {
 	console.log("server started");
 });

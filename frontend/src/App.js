@@ -27,6 +27,17 @@ import Logout from "./components/Registration/Logout";
 import Profile from "./components/Profile/Profile";
 import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 
+
+//user management imports
+import userContext from "./context/userContext";
+import { getUsers } from "./services/userServices";
+//event management imports
+import EventContext from "./context/eventContext";
+import { getEvents } from "./services/eventServices";
+
+import HotelContext from "./context/hotelContext";
+import { getHotels, createBooking } from "./services/hotelServices";
+
 function App() {
 	const location = useLocation();
 	const [ishome, setHome] = useState(false);
