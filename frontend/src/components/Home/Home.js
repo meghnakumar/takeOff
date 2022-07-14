@@ -131,11 +131,7 @@ const Home = () => {
                 minW="280px"
                 borderRadius={5}
                 bg="white"
-<<<<<<< HEAD:frontend/src/components/Home/Home.js
-                onClick={() => handleNavigation("login")}
-=======
                 onClick={() => handleNavigation("bus")}
->>>>>>> 2a1040474df19eb3807320a383c57b17d8acf300:src/components/Home/Home.js
                 style={{ cursor: "pointer" }}
               >
                 <Badge variant="subtle" colorScheme="blue">
