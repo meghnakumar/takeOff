@@ -31,7 +31,7 @@ import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 import EventContext from "./context/eventContext";
 import { getEvents } from "./services/eventServices";
 import HotelContext from "./context/hotelContext";
-import { getHotels } from "./services/hotelServices";
+import {getHotels, getHotelById, getHotelBookingByUserId, createBooking} from "./services/hotelServices";
 import EventBookingContext from "./context/eventBookingContext";
 import {
 	getEventBooking,
@@ -53,11 +53,17 @@ function App() {
 		}
 
 		const getData = async () => {
-			const { data: dataEvents } = await getEvents();
+			const {data: dataEvents} = await getEvents();
 			setEvents(dataEvents);
-			const { data: dataBookingEvents } = await getEventBooking();
+			const {data: dataBookingEvents} = await getEventBooking();
 			setEventsBooking(dataBookingEvents);
-		};
+			const {data: dataHotels} = await getHotels();
+			setHotels(dataHotels);
+			const {data: dataHotelBookings} = await getHotelBookingByUserId('user1');
+			setBookingData(dataHotelBookings)
+			console.log('I am in ', bookingData)
+
+		}
 
 		getData();
 	}, []);
@@ -78,28 +84,22 @@ function App() {
 	};
 
 	//hotel list
-	const [hotels, setHotels] = useState([]);
-	useEffect(() => {
-		if (location.pathname === "/" || location.pathname === "/home") {
-			setHome(true);
-		} else {
-			setHome(false);
-		}
+	const[hotels, setHotels] = useState([]);
+	//hotel booking by userId
+	const[bookingData, setBookingData] = useState([])
+	const[hotelBookingSummary, setHotelBookingSummary] = useState()
 
-		const getData = async () => {
-			const { data: dataHotels } = await getHotels();
-			setHotels(dataHotels);
-		};
+	const handleCreateHotelBooking = async (hotelBookingSummary) =>{
+		await createBooking(hotelBookingSummary)
+	}
 
-		getData();
-	}, []);
+
 
 	return (
 		<EventContext.Provider value={{ events }}>
 			<EventBookingContext.Provider
-				value={{ eventsBooking, handleCreateEventBooking }}
-			>
-				<HotelContext.Provider value={{ hotels }}>
+				value={{ eventsBooking, handleCreateEventBooking }}>
+				<HotelContext.Provider value = {{hotels,bookingData, handleCreateHotelBooking}}>
 					<div className="App">
 						{ishome ? (
 							<></>

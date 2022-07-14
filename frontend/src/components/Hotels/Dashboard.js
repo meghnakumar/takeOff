@@ -8,17 +8,19 @@ import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typ
 //https://mui.com/material-ui/
 
 const Dashboard = () => {
-    const [isLocationSelected, setIsLocationSelected] = useState()
-    const [location, setlocation] = useState('Halifax');
+    const [isLocationSelected, setIsLocationSelected] = useState(false)
+    const [location, setlocation] = useState('');
     const styles = {
         paperContainer: {
             backgroundImage: `url(${background})`
         }
     };
 
-    const handleLocationSelected = (value) => {
-        setlocation(value)
+    const handleLocationSelected = (e) => {
+        setlocation(e.target.value)
         setIsLocationSelected(true)
+        console.log('Print if location selected',isLocationSelected)
+        console.log('location',location)
 
     }
 
@@ -46,7 +48,7 @@ const Dashboard = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="location"
-                        onChange={(event, value) => handleLocationSelected(value)}>
+                        onChange={(e)=>handleLocationSelected(e)}>
                         <MenuItem value={"Halifax"}>Halifax</MenuItem>
                         <MenuItem value={"Montreal"}>Montreal</MenuItem>
                         <MenuItem value={"Toronto"}>Toronto</MenuItem>
