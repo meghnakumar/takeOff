@@ -51,12 +51,15 @@ function App() {
 
 	return (
 
+
+		<HotelContext.Provider value={{ hotels }}>
 			<div className="App">
 				{ishome ? (
 					<></>
 				) : (
 					<div>
 						<Header></Header> <div className="header-footer-margin"></div>
+
 					</div>
 				)}
 				<Routes>

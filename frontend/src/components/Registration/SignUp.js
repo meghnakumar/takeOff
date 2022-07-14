@@ -6,6 +6,7 @@ import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
+import { addUser } from "./../../../services/flightServices";
 
 //references
 //https://mui.com/material-ui/api/text-field/
@@ -68,6 +69,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
+       import
       signupSuccessful();
     }   
   }
