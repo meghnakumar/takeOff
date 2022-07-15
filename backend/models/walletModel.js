@@ -3,7 +3,7 @@
 
 const mongoose = require("mongoose");
 
-const CartSchema = new mongoose.Schema(
+const WalletSchema = new mongoose.Schema(
   {
     type: {
       type: String,

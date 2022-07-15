@@ -13,6 +13,7 @@ const Hotel = (props) => {
     useEffect(()=>{
        console.log(props.name)
         console.log(hotelname)
+        console.log("location of hotel",props.place)
     })
 
 
@@ -30,8 +31,9 @@ const Hotel = (props) => {
 
     const id = props.id
     const hotelname = props.name
+    const place = props.place
     const handleBookClick = () =>{
-        goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, location:props.location}})
+        goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, place:place}})
 
     }
     return(

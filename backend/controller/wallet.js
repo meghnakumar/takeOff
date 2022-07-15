@@ -1,10 +1,12 @@
 // @author: Kalpit Machhi
 // @banner: B00911364
 
-const Cart = require("../models/cartModel");
+// getWalletBalance, addMoney, getWalletHistory
+
+const Wallet = require("../models/walletModel");
 const mongodb = require("mongodb");
 
-module.exports.getItems = (req, res) => {
+module.exports.getWalletBalance = (req, res) => {
   Cart.find({ userId: req.params.userId })
     .then((info) => {
       console.log("Cart data fetched.");
@@ -16,7 +18,7 @@ module.exports.getItems = (req, res) => {
     });
 };
 
-module.exports.addItem = (req, res) => {
+module.exports.addMoney = (req, res) => {
   const item = new Cart({
     type: req.body.type,
     userId: req.body.userId,
@@ -36,7 +38,7 @@ module.exports.addItem = (req, res) => {
   res.json(result);
 };
 
-module.exports.deleteItem = (req, res) => {
+module.exports.getWalletHistory = (req, res) => {
   const cartId = req.params.cartId;
 
   const result = Cart.deleteOne({ _id: new mongodb.ObjectId(cartId) })
