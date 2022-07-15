@@ -21,7 +21,7 @@ const tourBookingSchema = new mongoose.Schema({
 	},
 	type: {
 		type: String,
-		default: "tour package",
+		default: "tour",
 	},
 	status: {
 		type: String,
