@@ -1,8 +1,12 @@
 const FlightBookings = require("../models/flightBookings");
 var mongodb = require('mongodb');
 
-module.exports.getFlightBookings = (req, res) => {
+module.exports.getAllFlightBookings = (req, res) => {
 	FlightBookings.find().then((bookings) => res.json(bookings));
+};
+
+module.exports.getFlightBookings = (req, res) => {
+	FlightBookings.find({ userId: req.params.id }).then((bookings) => res.json(bookings));
 };
 
 module.exports.addFlightBooking = (req, res) => {
