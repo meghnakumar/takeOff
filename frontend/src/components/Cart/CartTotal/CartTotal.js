@@ -2,9 +2,23 @@ import React from "react";
 import "./CartTotal.scss";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const CartTotal = () => {
+  const [cartTotal, setCartTotal] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const res = axios.get(`http://localhost:5001/cart/u1`).then((result) => {
+      let sum = 0;
+      for (let i = 0; i < result.data.length; i++) {
+        sum += result.data[i].price;
+      }
+      setCartTotal(sum);
+    });
+  }, []);
+
   return (
     <div className="CartTotal">
       <div className="cart-total-bg">
@@ -13,7 +27,9 @@ const CartTotal = () => {
             <div className="col-lg-12 history-title div-10">Cart Total</div>
           </div>
           <div className="row">
-            <div className="cart-total div-10">$767.25</div>
+            <div className="cart-total div-10">
+              ${Math.round(cartTotal * 1.15)}
+            </div>
           </div>
           <div className="div-10">
             <Button
