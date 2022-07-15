@@ -9,25 +9,34 @@ import { getAllFlights } from "./../../../services/flightServices";
 const FlightList = (props) => {
   const navigate = useNavigate();
   const [flightList, setFlights] = useState([]);
-  useEffect(() => {
+  const flightReqDetails = props.reqFlightDetails;
+  const fetchFlights = () => {
     getAllFlights().then(result => {
       setFlights(result.data);
     }).catch(err => {
       console.error(err);
     });
+  }
+
+  useEffect(() => {
+    fetchFlights();
   }, []);
 
-  const showFlightDetails = () => {
-    navigate('/flight-details') 
+  const showFlightDetails = (details) => {
+    navigate('/flight-details', {state:{flightDetails: details, flightReqDetails: flightReqDetails }}) 
   };
+
+  const filteredList = flightList.filter((val) => {
+    if(val.source.toLowerCase() == props.reqFlightDetails.fromLocation.toLowerCase() && 
+       val.destination.toLowerCase() == props.reqFlightDetails.toLocation.toLowerCase()) {
+      return val;
+    }
+  })
 
   return (
   <div className="flight-list-bg">
     <div className='container res-p'>
-      {flightList?.length ? flightList
-        .filter((val) => {
-          return val;
-        })
+      {filteredList?.length ? filteredList
         .map((item, index) => {
           return (
             <div className="card" key={index}>
@@ -59,7 +68,7 @@ const FlightList = (props) => {
                     <div>$ {item?.price}</div>
                   </div>
                   <div className="col-lg-2 col-12 m-top-16">
-                    <Button type="button" variant="contained" onClick={() => showFlightDetails()}>
+                    <Button type="button" variant="contained" onClick={() => showFlightDetails(item)}>
                       See Details
                     </Button>
                   </div>
@@ -67,7 +76,7 @@ const FlightList = (props) => {
               </div>
             </div>
           )
-        }) : null
+        }) : <b> No flights available for the given source and destination </b>
       }
     </div>
   </div>

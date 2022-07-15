@@ -5,11 +5,12 @@ import './Flights.scss';
 
 const Flights = () => {
   const [isButtonClicked, setIsButtonClicked] = React.useState(false);
+  const [reqFlights, setReqFlights] = React.useState();
   return (
     <div>
-    <SearchFlights setIsButtonClicked = {setIsButtonClicked}></SearchFlights>
+    <SearchFlights setReqFlights = {setReqFlights} setIsButtonClicked = {setIsButtonClicked}></SearchFlights>
     {isButtonClicked ?
-      <FlightList></FlightList> :  
+      <FlightList reqFlightDetails = {reqFlights}></FlightList> :  
       <div className="h2" style={{display: "flex", justifyContent: "center", margin: "40px 16px"}}>
         Please fill details to see the flight list
       </div> 
