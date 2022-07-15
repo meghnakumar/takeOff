@@ -6,6 +6,9 @@ import {
   Button,
   Input,
   Stack,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getCartItems } from "../../../services/cartServices";
@@ -13,9 +16,9 @@ import { getPromoValidation } from "../../../services/offerServices";
 
 const Cart = ({ payment }) => {
   const [cart, setCart] = useState([]);
-  const [amountTotal, setAmountTotal] = useState([]);
   const [promocode, setPromo] = useState("");
   const [price, setNewPrice] = useState(0);
+  const [promoError, setPromoError] = useState(false);
 
   const getData = () => {
     const fetchPromise = getCartItems("u3");
@@ -48,31 +51,31 @@ const Cart = ({ payment }) => {
     });
 
     if (mySet.size > 1) {
-      getPromoValidation(
-        JSON.parse(
-          JSON.stringify({ promocode: promocode, price: total, type: "Mix" })
-        )
-      ).then((response) => {
+      let data = JSON.parse(
+        JSON.stringify({ promocode: promocode, price: total, type: "Mix" })
+      );
+      getPromoValidation(data).then((response) => {
         if (response.data.status == 200) {
           setNewPrice(response.data.amount);
+          setPromoError(false);
         } else {
-          console.log(response.data);
+          setPromoError(true);
         }
       });
     } else {
-      getPromoValidation(
-        JSON.parse(
-          JSON.stringify({
-            promocode: promocode,
-            price: total,
-            type: mySet.values().next().value,
-          })
-        )
-      ).then((response) => {
+      let data = JSON.parse(
+        JSON.stringify({
+          promocode: promocode,
+          price: total,
+          type: mySet.values().next().value,
+        })
+      );
+      getPromoValidation(data).then((response) => {
         if (response.data.status == 200) {
           setNewPrice(response.data.amount);
+          setPromoError(false);
         } else {
-          console.log(response.data);
+          setPromoError(true);
         }
       });
     }
@@ -93,16 +96,24 @@ const Cart = ({ payment }) => {
       <Text mt={5} fontWeight="bold" fontSize="28px">
         $ {price}
       </Text>
-      <Stack direction="row" mt={5}>
-        <Input
-          value={promocode}
-          size="lg"
-          width="50%"
-          variant="filled"
-          placeholder="PROMOCODE"
-          _placeholder={{ fontSize: "15px", opacity: 0.5 }}
-          onChange={handlePromoValue}
-        />
+      <Stack direction={{ base: "column", md: "row" }} mt={5}>
+        <FormControl isInvalid={promoError}>
+          <Input
+            value={promocode}
+            size="lg"
+            width="50%"
+            variant="filled"
+            placeholder="PROMOCODE"
+            _placeholder={{ fontSize: "15px", opacity: 0.5 }}
+            onChange={handlePromoValue}
+            width={{ base: "100%", md: "70%" }}
+          />
+          {!promoError ? (
+            <></>
+          ) : (
+            <FormErrorMessage>Promocode is Invalid</FormErrorMessage>
+          )}
+        </FormControl>
         <Button
           colorScheme="green"
           p={5}

@@ -39,6 +39,6 @@ module.exports.getPromoValidation = (req, res) => {
       }
     })
     .catch((error) => {
-      res.json({ status: 200, validation: false });
+      res.json({ status: 400, validation: false });
     });
 };
