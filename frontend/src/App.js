@@ -39,19 +39,10 @@ function App() {
 		} else {
 			setHome(false);
 		}
-
-		const getData = async () => {};
-
-		getData();
 	}, []);
 
-	//hotel list
-	const [hotels, setHotels] = useState([]);
-	//hotel booking by userId
-
-	const [hotelBookingSummary, setHotelBookingSummary] = useState();
 	return (
-		<HotelContext.Provider value={{ hotels }}>
+
 			<div className="App">
 				{ishome ? (
 					<></>
@@ -88,7 +79,7 @@ function App() {
 				</Routes>
 				<div>{/* <Footer></Footer> */}</div>
 			</div>
-		</HotelContext.Provider>
+
 	);
 }
 

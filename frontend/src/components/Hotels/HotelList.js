@@ -27,7 +27,6 @@ const HotelList = (props) => {
     useEffect(() => {
         getHotels().then(result => {
             setHotels(result.data);
-            console.log(result.data)
         })
 
         // setFilterHotels(hotels.filter((hotel)=>hotel.location === props.location));
