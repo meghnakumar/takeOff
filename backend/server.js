@@ -40,6 +40,7 @@ app.use("/tours/booking", tourBookingRoute);
 // Cart
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
+
 const OffersRoute = require("./routes/offersRoute");
 app.use("/offers", OffersRoute);
 
