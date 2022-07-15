@@ -3,8 +3,14 @@ const mongodb = require("mongodb");
 
 module.exports.getItems = (req, res) => {
   Cart.find({ userId: req.params.userId })
-    .then((info) => res.json(info))
-    .catch((err) => res.status(404).json({ error: "Unable to find info" }));
+    .then((info) => {
+      console.log("Cart data fetched.");
+      res.json(info);
+    })
+    .catch((err) => {
+      console.log("Error in fetching cart data.");
+      res.status(404).json({ error: "Unable to find info" });
+    });
 };
 
 module.exports.addItem = (req, res) => {
