@@ -20,6 +20,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { createEventBooking } from "../../services/eventBookingServices";
+import { addCartItem } from "../../services/cartServices";
 const theme = createTheme({});
 const style = {
 	position: "absolute",
@@ -35,9 +36,11 @@ const style = {
 
 export default function BookEvents() {
 	const location = useLocation();
-	const eventId = location.state.eventId;
+	//const eventId = location.state.eventId;
 	const [open, setOpen] = React.useState(false);
-	const handleOpen = () => setOpen(true);
+	const handleOpen = () => {
+		setOpen(true);
+	};
 	const handleClose = () => setOpen(false);
 	const [error, setError] = useState({
 		firstName: "",
@@ -54,8 +57,18 @@ export default function BookEvents() {
 		lastName: "",
 		seat: "",
 		contact: "",
-		eventId: "",
 		userId: "",
+		eventId: "",
+		price: "",
+		title: "",
+		city: "",
+		date: "",
+	});
+	const [addToCart, setAddToCart] = useState({
+		type: "",
+		userId: "",
+		itemId: "",
+		price: "",
 	});
 
 	const handleSubmit = (event) => {
@@ -77,21 +90,31 @@ export default function BookEvents() {
 			errors.number = "Phone number is required!";
 		}
 		setError(errors);
+		const price = location.state.price * seat;
 		if (Object.keys(error).length === 0) {
 			setBookingSummary({
 				firstName: firstName,
 				lastName: lastName,
 				seat: seat,
 				contact: number,
-				eventId: eventId,
 				userId: "heyheyfghc536uh2d",
+				eventId: location.state.eventId,
+				title: location.state.title,
+				city: location.state.city,
+				date: location.state.date,
+				price: price,
 			});
 			handleOpen();
 		}
 	};
+	const [bookingId, setBookingId] = useState("");
+	const [type, setType] = useState("");
+
 	const handleCreateEventBooking = async (bookingInfo) => {
 		try {
-			await createEventBooking(bookingInfo);
+			let info = await createEventBooking(bookingInfo);
+			setBookingId(info.data._id);
+			setType(info.data.type);
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -101,6 +124,32 @@ export default function BookEvents() {
 				console.log(ex.response.data);
 			}
 		}
+	};
+	const handleAddToCart = async (addToCart) => {
+		try {
+			//console.log(addToCart);
+			await addCartItem(addToCart);
+		} catch (ex) {
+			if (
+				ex.response &&
+				ex.response.status >= 400 &&
+				ex.response.status < 500
+			) {
+				console.log(ex.response.data);
+			}
+		}
+	};
+	const onConfirmation = () => {
+		handleCreateEventBooking(bookingSummary);
+		console.log(bookingSummary.price);
+		const addToCart = {
+			type: type,
+			userId: bookingSummary.userId,
+			itemId: bookingId,
+			price: bookingSummary.price,
+		};
+		//console.log(addToCart);
+		handleAddToCart(addToCart);
 	};
 	return (
 		<ThemeProvider theme={theme}>
@@ -281,8 +330,7 @@ export default function BookEvents() {
 														color: "#00838f",
 													}}
 													onClick={(e) => {
-														handleCreateEventBooking(bookingSummary);
-														console.log("added");
+														onConfirmation();
 													}}
 												>
 													Add to Cart

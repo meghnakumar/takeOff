@@ -16,7 +16,7 @@ module.exports.addBookingInfo = (req, res) => {
 
 module.exports.editBookingInfo = (req, res) => {
 	toursBooking
-		.findOneAndUpdate(req.params.userId, req.body)
+		.findOneAndUpdate(req.params.id, req.body)
 		.then((info) =>
 			res.json({
 				msg: "Updated successfully",

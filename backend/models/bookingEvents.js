@@ -3,27 +3,42 @@ const mongoose = require("mongoose");
 const eventBookingSchema = new mongoose.Schema({
 	firstName: {
 		type: String,
-		required: true,
 	},
 	lastName: {
 		type: String,
-		required: true,
 	},
 	seat: {
 		type: String,
-		required: true,
 	},
 	contact: {
 		type: String,
-		required: true,
 	},
 	userId: {
 		type: String,
-		required: true,
 	},
 	eventId: {
 		type: String,
-		required: true,
+	},
+	type: {
+		type: String,
+		default: "event",
+	},
+	status: {
+		type: String,
+		default: "pending",
+	},
+	title: {
+		type: String,
+		default: false,
+	},
+	city: {
+		type: String,
+	},
+	date: {
+		type: String,
+	},
+	price: {
+		type: String,
 	},
 });
 
