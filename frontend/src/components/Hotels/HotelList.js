@@ -3,15 +3,11 @@ import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typ
 import {hotels} from './HotelsDummy'
 import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";
-import HotelContext from "../../context/hotelContext";
-import {createHotelBooking, getHotels} from "../../services/hotelServices";
+import {getHotels} from "../../services/hotelServices";
 
 const HotelList = (props) => {
     const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');
-    /*useEffect(() => {
-        setHotels(hotelContext.hotels);
-    });*/
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         if (event.target.value === "lowToHigh"){
@@ -23,37 +19,30 @@ const HotelList = (props) => {
     };
 
     const [sortedHotels, setSortedHotels] = useState([]);
-    const [filterHotels, setFilterHotels] = useState([]);
     useEffect(() => {
         getHotels().then(result => {
             setHotels(result.data);
+            setSortedHotels(result.data.sort((a, b) => a.rating - b.rating));
         })
-
-        // setFilterHotels(hotels.filter((hotel)=>hotel.location === props.location));
-        /*console.log("Props location",props.location)
-        console.log(filterHotels)*/
-        return () => {
-            setSortedHotels(hotels.sort((a, b) => a.rating - b.rating));
-        };
     }, []);
 
+    let filteredHotels = sortedHotels.filter((item) => item.location === props.location);
 
     return(
         <div>
             <SearchBar/>
 
-        <Paper
+            { <Paper
             sx={{
                 p: 2,
                 margin: 'auto',
                 flexGrow: 1,
                 backgroundColor: "rgb(225, 253, 234)",
             }}
-            className="col-12 col-sm-10"
-        >
-            <div className="container-fluid">
+            className="col-12 col-sm-10">
+            <div className="container-fluid" >
                 <div className="row justify-content-between mb-1">
-                    <div className="col-6 col-sm-6 " style={{paddingTop: '5px'}}>Showing 3 of 3 results
+                    <div className="col-6 col-sm-6 " style={{paddingTop: '5px'}}>Showing {filteredHotels.length} of {filteredHotels.length} results
                     </div>
                     <div className="col-6 col-sm-6 ">
                         <Box className="float-end">
@@ -75,10 +64,10 @@ const HotelList = (props) => {
                 </div>
             </div>
 
-            {sortedHotels.map((hotels) => {
-                return (<Hotel name = {hotels.name} description={hotels.description} rating={hotels.rating} image={hotels.img} id={hotels._id} rooms={hotels.rooms} place={hotels.location}/>);
+            {filteredHotels.map((hotels) => {
+                return (<Hotel name = {hotels.name} description={hotels.description} rating={hotels.rating} image={hotels.img} id={hotels._id} rooms={hotels.rooms} place={hotels.location} feedback={hotels.reviews}/>);
             })}
-        </Paper>
+        </Paper>}
         </div>
     )
 }

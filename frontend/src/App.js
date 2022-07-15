@@ -27,9 +27,6 @@ import Logout from "./components/Registration/Logout";
 import Profile from "./components/Profile/Profile";
 import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 
-import HotelContext from "./context/hotelContext";
-import { getHotels } from "./services/hotelServices";
-
 function App() {
 	const location = useLocation();
 	const [ishome, setHome] = useState(false);
