@@ -1,4 +1,5 @@
 const FlightBookings = require("../models/flightBookings");
+var mongodb = require('mongodb');
 
 module.exports.getFlightBookings = (req, res) => {
 	FlightBookings.find().then((bookings) => res.json(bookings));
@@ -17,6 +18,17 @@ module.exports.modifyFlightBooking = (req, res) => {
         .then((info) =>
             res.json({
                 msg: "Updated successfully",
+            })
+        )
+        .catch((err) => res.status(400).json({ error: "Unable to update info" }));
+};
+
+module.exports.updateBookingStatus=(req,res)=>{
+    FlightBookings
+        .update({_id: new mongodb.ObjectID(req.params.id)}, {$set: req.body})
+        .then((info) =>
+            res.json({
+                msg: "Booking status Updated successfully",
             })
         )
         .catch((err) => res.status(400).json({ error: "Unable to update info" }));
