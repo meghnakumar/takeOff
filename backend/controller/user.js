@@ -22,12 +22,7 @@ module.exports.getUser = (req, res) => {
 		.catch((err) => res.status(404).json({ error: "unable to find info" }));
 };
 
-//module.exports.addUser = (req, res) => {
-//	Users
-//		.create(req.body)
-//		.then((info) => res.json(info))
-//		.catch((err) => res.json(err));
-//};
+
 
 module.exports.editUser = (req, res) => {
 	Users
@@ -44,16 +39,17 @@ module.exports.editUser = (req, res) => {
 // @desc Register user
 // @access Public
 module.exports.addUser = (req, res) => {
-    // Form validation
-    const { errors, isValid } = validateRegisterInput(req.body);
-    // Check validation
-      if (!isValid) {
-        return res.status(400).json(errors);
-      }
+    console.log("A1");
+
+
     Users.findOne({ email: req.body.email }).then(user => {
+    console.log("B1");
         if (user) {
+          console.log("C1");
           return res.status(400).json({ email: "Email already exists" });
+
         } else {
+        console.log("D");
           const newUser = new Users({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -81,12 +77,10 @@ module.exports.addUser = (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 module.exports.login = (req, res) => {
-  // Form validation
-const { errors, isValid } = validateLoginInput(req.body);
-// Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+    console.log("A1"+req.body.email)
+    console.log("B1"+req.body.password)
+
+
     const email = req.body.email;
     const password = req.body.password;
     // Find user by email
@@ -95,16 +89,25 @@ const { errors, isValid } = validateLoginInput(req.body);
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
-// Check password
+
+    // Check password
+    console.log(" a1"+password);
+    console.log(" a2"+user.password);
+
     bcrypt.compare(password, user.password).then(isMatch => {
+      console.log("A");
+
       if (isMatch) {
         // User matched
         // Create JWT Payload
+        console.log("B");
+
         const payload = {
           id: user.id,
           name: user.name
         };
-// Sign token
+
+        // Sign token
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -112,7 +115,10 @@ const { errors, isValid } = validateLoginInput(req.body);
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-            res.json({
+          console.log("C");
+            console.log("token is "+token)
+            return res.
+            status(200).json({
               success: true,
               token: "Bearer " + token
             });

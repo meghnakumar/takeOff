@@ -6,6 +6,7 @@ import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
+import {signup} from '../../services/authService';
 
 //references
 //https://mui.com/material-ui/api/text-field/
@@ -68,8 +69,9 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
-
-      signupSuccessful();
+       console.log("front 1"+PersonalDetailsList.FirstName);
+       signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword);
+      //signupSuccessful();
     }   
   }
 
@@ -118,8 +120,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
       errorlist.password="Password is required!";
       flag = "n";
     }
-    else if(PersonalDetailsList.Password.length<8){
-      errorlist.password="Please enter a password having atleast 8 characters"
+    else if(PersonalDetailsList.Password.length<5){
+      errorlist.password="Please enter a password having atleast 5 characters"
       flag = "n";
     }
     else if(PersonalDetailsList.Password.length>15){
@@ -131,8 +133,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
         errorlist.confirmpassword="Confirm Password is required!";
         flag = "n";
       }
-      else if(PersonalDetailsList.ConfirmPassword.length<8){
-        errorlist.confirmpassword="Please enter a confirm password having atleast 8 characters"
+      else if(PersonalDetailsList.ConfirmPassword.length<5){
+        errorlist.confirmpassword="Please enter a confirm password having atleast 5 characters"
         flag = "n";
       }
       else if(PersonalDetailsList.ConfirmPassword.length>15){
