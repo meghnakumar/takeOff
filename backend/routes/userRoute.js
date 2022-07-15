@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getUser,getAllUser, addUser, editUser } = require("../controller/user");
+const { getUser,getAllUser, addUser, editUser,login } = require("../controller/user");
 
 // @route GET /events/booking/:id
 // @description get booking info by id
@@ -16,6 +16,8 @@ router.get("/fetch/:email", getUser);
 // @access Public
 
 router.post("/addUser", addUser);
+
+router.post("/login", login);
 
 // @route PUT /events/booking/update/:id
 // @description update info based on id

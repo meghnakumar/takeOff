@@ -31,7 +31,12 @@ import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 //user management imports
 import userContext from "./context/userContext";
 import { getUsers } from "./services/userServices";
-
+import {
+	fetchUser,
+	addUser,
+	updateUser,
+} from "./services/userServices";
+import UserContext from "./context/userContext";
 
 import HotelContext from "./context/hotelContext";
 import { getHotels, createBooking } from "./services/hotelServices";
@@ -39,12 +44,23 @@ import { getHotels, createBooking } from "./services/hotelServices";
 function App() {
 	const location = useLocation();
 	const [ishome, setHome] = useState(false);
+	const [user, setUser] = useState([]);
 	useEffect(() => {
 		if (location.pathname === "/" || location.pathname === "/home") {
 			setHome(true);
 		} else {
 			setHome(false);
 		}
+
+
+
+        const getData = async () => {
+        			const { data: userData } = await fetchUser();
+        			setUser(userData);
+
+        		};
+
+		getData();
 	}, []);
 
 	return (

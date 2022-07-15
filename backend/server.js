@@ -7,6 +7,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const passport = require("passport");
+const users = require("./routes/userRoute");
+
 // Connect Database
 connectDB();
 
@@ -44,6 +47,12 @@ app.use("/cart", cartRoute);
 //Users
 const userRoute = require("./routes/userRoute");
 app.use("/users", userRoute);
+
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
 
 
 app.listen(process.env.PORT || 5001, () => {
