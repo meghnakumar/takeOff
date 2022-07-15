@@ -10,6 +10,8 @@ import {
     Typography
 } from "@mui/material";
 import React, {useEffect, useState} from "react";
+import {getHotels} from "../../../services/hotelServices";
+import {useLocation} from "react-router-dom";
 
 //references
 //https://mui.com/material-ui/
@@ -54,11 +56,18 @@ const ReadReviews = () =>{
                 "rating": 2
             }]
         }
-
+    const location = useLocation();
+    //const [reviewData, setReviewData] = useState("");
     const [sortedReviews, setSortedReviews] = useState("");
     useEffect(() => {
+        console.log(location.state.reviews)
+       // setReviewData(location.state.reviews)
         return () => {
-            setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            console.log(reviewData);
+            if(reviewData.reviews !== ''){
+                setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            }
+
         };
     }, []);
 

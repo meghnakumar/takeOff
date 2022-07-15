@@ -11,17 +11,13 @@ const Hotel = (props) => {
     const goToDetailsPage= useNavigate();
 
     useEffect(()=>{
-       console.log(props.name)
-        console.log(hotelname)
-        console.log("location of hotel",props.place)
+        console.log(props.reviews)
     })
 
 
 
     const handleClick =()=>{
-
         setAddedToWishlist(current=>!current)
-        console.log(addedToWishlist)
         if(addedToWishlist===false){
             setOpenWishlistAlert({message:"Hotel added to wishlist!", visibility:true})
         }
