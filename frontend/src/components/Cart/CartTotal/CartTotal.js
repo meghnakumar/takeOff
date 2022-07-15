@@ -17,8 +17,6 @@ const CartTotal = () => {
       }
       setCartTotal(sum);
     });
-    // console.log(res.json());
-    // console.log("Hi");
   }, []);
 
   return (
@@ -29,7 +27,9 @@ const CartTotal = () => {
             <div className="col-lg-12 history-title div-10">Cart Total</div>
           </div>
           <div className="row">
-            <div className="cart-total div-10">${cartTotal * 1.15}</div>
+            <div className="cart-total div-10">
+              ${Math.round(cartTotal * 1.15)}
+            </div>
           </div>
           <div className="div-10">
             <Button
