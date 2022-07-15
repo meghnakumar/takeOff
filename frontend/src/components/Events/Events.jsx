@@ -307,6 +307,10 @@ export default function Events() {
 																		navigate("/events-booking", {
 																			state: {
 																				eventId: card._id,
+																				title: card.title,
+																				city: card.city,
+																				date: card.date,
+																				price: card.price,
 																			},
 																		});
 																	}}

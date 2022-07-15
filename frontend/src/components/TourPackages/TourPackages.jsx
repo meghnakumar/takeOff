@@ -209,6 +209,9 @@ export default function Album() {
 																navigate("/tour-booking", {
 																	state: {
 																		tourId: card._id,
+																		days: card.days,
+																		destination: card.destination,
+																		price: card.price,
 																	},
 																});
 															}}

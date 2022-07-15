@@ -20,6 +20,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { createtourBooking } from "../../services/tourBookingServices";
+import { addCartItem } from "../../services/cartServices";
+import { useNavigate } from "react-router-dom";
 const theme = createTheme({});
 const style = {
 	position: "absolute",
@@ -35,6 +37,7 @@ const style = {
 
 export default function BookTours() {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const tourId = location.state.tourId;
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
@@ -49,6 +52,7 @@ export default function BookTours() {
 	const [lastName, setLastName] = useState("");
 	const [seat, setSeat] = useState("");
 	const [number, setNumber] = useState("");
+	const [date, setDate] = useState("");
 	const [bookingSummary, setBookingSummary] = useState({
 		firstName: "",
 		lastName: "",
@@ -56,6 +60,7 @@ export default function BookTours() {
 		contact: "",
 		eventId: "",
 		userId: "",
+		date: "",
 	});
 
 	const handleSubmit = (event) => {
@@ -77,6 +82,7 @@ export default function BookTours() {
 			errors.number = "Phone number is required!";
 		}
 		setError(errors);
+		const price = location.state.price * seat;
 		if (Object.keys(error).length === 0) {
 			setBookingSummary({
 				firstName: firstName,
@@ -85,13 +91,21 @@ export default function BookTours() {
 				contact: number,
 				tourId: tourId,
 				userId: "heyheyfghc536uh2d",
+				date: date,
+				days: location.state.days,
+				destination: location.state.destination,
+				price: price,
 			});
 			handleOpen();
 		}
 	};
+	const [bookingId, setBookingId] = useState("");
+	const [type, setType] = useState("");
 	const handleCreateTourBooking = async (bookingInfo) => {
 		try {
-			await createtourBooking(bookingInfo);
+			let info = await createtourBooking(bookingInfo);
+			setBookingId(info.data._id);
+			setType(info.data.type);
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -101,6 +115,29 @@ export default function BookTours() {
 				console.log(ex.response.data);
 			}
 		}
+	};
+	const handleAddToCart = async (addToCart) => {
+		try {
+			await addCartItem(addToCart);
+		} catch (ex) {
+			if (
+				ex.response &&
+				ex.response.status >= 400 &&
+				ex.response.status < 500
+			) {
+				console.log(ex.response.data);
+			}
+		}
+	};
+	const onConfirmation = () => {
+		handleCreateTourBooking(bookingSummary);
+		const addToCart = {
+			type: type,
+			userId: bookingSummary.userId,
+			itemId: bookingId,
+			price: bookingSummary.price,
+		};
+		handleAddToCart(addToCart);
 	};
 	return (
 		<ThemeProvider theme={theme}>
@@ -184,6 +221,18 @@ export default function BookTours() {
 												type="number"
 												id="number"
 												onChange={(e) => setNumber(e.target.value)}
+											/>
+											<p style={{ color: "red" }}>{error.number}</p>
+										</Grid>
+										<Grid item xs={12}>
+											<TextField
+												required
+												fullWidth
+												name="date"
+												label="Date"
+												type="date"
+												id="date"
+												onChange={(e) => setDate(e.target.value)}
 											/>
 											<p style={{ color: "red" }}>{error.number}</p>
 										</Grid>
@@ -281,8 +330,8 @@ export default function BookTours() {
 														color: "#00838f",
 													}}
 													onClick={(e) => {
-														handleCreateTourBooking(bookingSummary);
-														console.log("added");
+														onConfirmation();
+														navigate("/tour-packages");
 													}}
 												>
 													Add to Cart

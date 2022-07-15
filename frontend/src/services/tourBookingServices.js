@@ -4,8 +4,8 @@ const tourBookingGet = "/tours/booking/fetch";
 const tourBookingPost = "/tours/booking/addInfo";
 const tourBookingPut = "/tours/booking/update";
 
-export const gettourBooking = async (userId) => {
-	return http.get(`${tourBookingGet}/${userId}`);
+export const gettourBooking = async (id) => {
+	return http.get(`${tourBookingGet}/${id}`);
 };
 
 export const createtourBooking = async (bookingInfo) => {
@@ -13,5 +13,5 @@ export const createtourBooking = async (bookingInfo) => {
 };
 
 export const updatetourBooking = async (bookingInfo) => {
-	return http.put(`${tourBookingPut}`, bookingInfo);
+	return http.put(`${tourBookingPut}/${id}`, bookingInfo);
 };
