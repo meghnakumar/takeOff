@@ -11,7 +11,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Tour from "./tour";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -19,6 +18,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
+import { getTours } from "../../services/tourServices";
 const theme = createTheme();
 const style = {
 	position: "absolute",
@@ -34,9 +34,6 @@ const style = {
 export default function Album() {
 	const navigate = useNavigate();
 	const [tour, setTour] = useState([]);
-	useEffect(() => {
-		setTour(Tour);
-	});
 	const [open, setOpen] = React.useState(false);
 
 	const [openSnack, setOpenSnack] = React.useState(false);
@@ -45,6 +42,16 @@ export default function Album() {
 		setOpen(false);
 		setOpenSnack(false);
 	};
+	useEffect(() => {
+		getTours()
+			.then((result) => {
+				setTour(result.data);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}, []);
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -199,7 +206,11 @@ export default function Album() {
 														<Button
 															size="small"
 															onClick={() => {
-																navigate("/tour-booking");
+																navigate("/tour-booking", {
+																	state: {
+																		tourId: card._id,
+																	},
+																});
 															}}
 															sx={{ color: "#00838f", ml: 70 }}
 														>

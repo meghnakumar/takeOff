@@ -29,6 +29,14 @@ app.use("/flights", flightRoute);
 // const flightBookingRoute = require("./routes/FlightBookingRoute");
 // app.use("/flights/booking", flightBookingRoute);
 
+//Tour
+const tourRoute = require("./routes/tourPackageRoute");
+app.use("/tours", tourRoute);
+
+//TourBooking
+const tourBookingRoute = require("./routes/tourBookingRoute");
+app.use("/tours/booking", tourBookingRoute);
+
 // Cart
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
