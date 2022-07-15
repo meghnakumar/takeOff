@@ -8,20 +8,74 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import {getCartItems} from "../../../services/cartServices/"
+import { getCartItems } from "../../../services/cartServices";
+import { getPromoValidation } from "../../../services/offerServices";
 
 const Cart = ({ payment }) => {
+  const [cart, setCart] = useState([]);
   const [amountTotal, setAmountTotal] = useState([]);
+  const [promocode, setPromo] = useState("");
+  const [price, setNewPrice] = useState(0);
 
   const getData = () => {
-    const fetchPromise = getCartItems();
+    const fetchPromise = getCartItems("u3");
     fetchPromise
       .then((response) => {
         return response.data;
       })
       .then((data) => {
-        setAmountTotal(data);
+        let total = 0;
+        setCart(data);
+        data.map((item) => {
+          total += item.price;
+        });
+        setNewPrice(total);
       });
+  };
+
+  const handlePromoValue = (e) => {
+    let value = e.target.value;
+    setPromo(value);
+  };
+
+  const handlePromoValidation = () => {
+    let mySet = new Set();
+    let total = 0;
+
+    cart.map((item) => {
+      mySet.add(item.type);
+      total += item.price;
+    });
+
+    if (mySet.size > 1) {
+      getPromoValidation(
+        JSON.parse(
+          JSON.stringify({ promocode: promocode, price: total, type: "Mix" })
+        )
+      ).then((response) => {
+        if (response.data.status == 200) {
+          setNewPrice(response.data.amount);
+        } else {
+          console.log(response.data);
+        }
+      });
+    } else {
+      getPromoValidation(
+        JSON.parse(
+          JSON.stringify({
+            promocode: promocode,
+            price: total,
+            type: mySet.values().next().value,
+          })
+        )
+      ).then((response) => {
+        if (response.data.status == 200) {
+          setNewPrice(response.data.amount);
+        } else {
+          console.log(response.data);
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -37,17 +91,25 @@ const Cart = ({ payment }) => {
         Payment Amount
       </Heading>
       <Text mt={5} fontWeight="bold" fontSize="28px">
-        $ {payment.amount}
+        $ {price}
       </Text>
       <Stack direction="row" mt={5}>
         <Input
+          value={promocode}
           size="lg"
           width="50%"
           variant="filled"
           placeholder="PROMOCODE"
           _placeholder={{ fontSize: "15px", opacity: 0.5 }}
+          onChange={handlePromoValue}
         />
-        <Button colorScheme="green" p={5} size="lg" fontSize="15px">
+        <Button
+          colorScheme="green"
+          p={5}
+          size="lg"
+          fontSize="15px"
+          onClick={handlePromoValidation}
+        >
           Apply Promo
         </Button>
       </Stack>

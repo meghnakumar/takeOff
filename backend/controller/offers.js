@@ -16,17 +16,18 @@ module.exports.getMainOffer = (req, res) => {
 
 module.exports.getPromoValidation = (req, res) => {
   offers
-    .find({ promocode: req.query.promocode })
+    .find({ promocode: req.body.promocode })
     .then((info) => {
       if (info) {
+        console.log(info);
         if (
-          parseInt(req.query.price) >= info[0].min_amount &&
-          parseInt(req.query.price) <= info[0].max_amount &&
-          req.query.type == info[0].type
+          parseInt(req.body.price) >= info[0].min_amount &&
+          parseInt(req.body.price) <= info[0].max_amount &&
+          req.body.type.toLowerCase() == info[0].type.toLowerCase()
         ) {
           const discountedPrice =
-            parseInt(req.query.price) -
-            parseInt(req.query.price) * (info[0].percentage / 100);
+            parseInt(req.body.price) -
+            parseInt(req.body.price) * (info[0].percentage / 100);
           res.json({
             status: 200,
             validation: true,
@@ -37,5 +38,7 @@ module.exports.getPromoValidation = (req, res) => {
         }
       }
     })
-    .catch((err) => res.json(err));
+    .catch((error) => {
+      res.json({ status: 200, validation: false });
+    });
 };

@@ -14,6 +14,6 @@ router.get("/getoffers", getOffers);
 router.get("/mainoffer", getMainOffer);
 
 // to check for promocode validation
-router.get("/validoffer", getPromoValidation);
+router.post("/validoffer", getPromoValidation);
 
 module.exports = router;
