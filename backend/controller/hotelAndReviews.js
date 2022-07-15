@@ -12,10 +12,6 @@ module.exports.getById = (req,res) =>{
     Hotels.findById(req._id,(hotel)=>res.json(hotel))
 }
 
-module.exports.postToCarts = (req,res) =>{
-   //TODO
-}
-
 module.exports.getHotelBooking = (req,res) =>{
     HotelBookings.find({ userID: req.params.userID })
         .then((info) => res.json(info))
