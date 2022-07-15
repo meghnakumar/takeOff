@@ -37,6 +37,10 @@ const FlightBookingSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    status: {
+        type: String,
+        required: true,
+    },
     travelerDetails: {
         type: Object,
         required: true

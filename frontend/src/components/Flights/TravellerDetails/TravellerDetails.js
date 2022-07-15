@@ -9,6 +9,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Snackbox from '../../common/Snackbox/Snackbox';
 import { Box, FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
 import { createFlightBooking } from "./../../../services/flightBookingService";
+import {addCartItem} from "../../../services/cartServices";
 
 //references
 //https://mui.com/material-ui/
@@ -32,21 +33,33 @@ const TravellerDetails = ({flightObj}) => {
   // }, []);
 
   const addToCart = () => {
-    if(!travelerCount) {
+    if (!travelerCount) {
       isTravelerAdded(true);
       setTimeout(() => {
         isTravelerAdded(false);
       }, 3000);
-    }else {
+    } else {
       let travelerObj = flightObj;
       travelerObj.userId = 1;
       travelerObj.travelerDetails = travelerDetails;
+      travelerObj.status = "pending";
       createFlightBooking(travelerObj).then(result => {
         console.log(result);
-        showCartBox(true);
-        setTimeout(() => {
-          showCartBox(false);
-        }, 3000);
+        if (result.status === 200) {
+          const bookingId = result.data._id
+          const cartItem = {
+            type: "flight",
+            userId: "user1",
+            itemId: bookingId,
+            price: travelerObj.totalPrice
+          }
+          addCartItem(cartItem).then(result => {
+            showCartBox(true);
+            setTimeout(() => {
+              showCartBox(false);
+            }, 3000);
+          })
+        }
       }).catch(err => {
         console.error(err);
       });
