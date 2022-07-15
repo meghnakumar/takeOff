@@ -21,6 +21,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { createEventBooking } from "../../services/eventBookingServices";
 import { addCartItem } from "../../services/cartServices";
+import { useNavigate } from "react-router-dom";
 const theme = createTheme({});
 const style = {
 	position: "absolute",
@@ -36,6 +37,7 @@ const style = {
 
 export default function BookEvents() {
 	const location = useLocation();
+	const navigate = useNavigate();
 	//const eventId = location.state.eventId;
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => {
@@ -97,7 +99,7 @@ export default function BookEvents() {
 				lastName: lastName,
 				seat: seat,
 				contact: number,
-				userId: "heyheyfghc536uh2d",
+				userId: "user1",
 				eventId: location.state.eventId,
 				title: location.state.title,
 				city: location.state.city,
@@ -107,14 +109,22 @@ export default function BookEvents() {
 			handleOpen();
 		}
 	};
-	const [bookingId, setBookingId] = useState("");
-	const [type, setType] = useState("");
 
 	const handleCreateEventBooking = async (bookingInfo) => {
 		try {
-			let info = await createEventBooking(bookingInfo);
-			setBookingId(info.data._id);
-			setType(info.data.type);
+			createEventBooking(bookingInfo)
+				.then((result) => {
+					const addToCart = {
+						type: result.data.type,
+						userId: bookingSummary.userId,
+						itemId: result.data._id,
+						price: bookingSummary.price,
+					};
+					handleAddToCart(addToCart);
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -127,8 +137,13 @@ export default function BookEvents() {
 	};
 	const handleAddToCart = async (addToCart) => {
 		try {
-			//console.log(addToCart);
-			await addCartItem(addToCart);
+			addCartItem(addToCart)
+				.then((res) => {
+					console.log(res.status);
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -141,15 +156,14 @@ export default function BookEvents() {
 	};
 	const onConfirmation = () => {
 		handleCreateEventBooking(bookingSummary);
-		console.log(bookingSummary.price);
-		const addToCart = {
-			type: type,
-			userId: bookingSummary.userId,
-			itemId: bookingId,
-			price: bookingSummary.price,
-		};
-		//console.log(addToCart);
-		handleAddToCart(addToCart);
+		// const addToCart = {
+		// 	type: type,
+		// 	userId: bookingSummary.userId,
+		// 	itemId: bookingId,
+		// 	price: bookingSummary.price,
+		// };
+		// handleAddToCart(addToCart);
+		navigate("/events");
 	};
 	return (
 		<ThemeProvider theme={theme}>

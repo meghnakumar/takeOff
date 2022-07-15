@@ -83,6 +83,7 @@ export default function BookTours() {
 		}
 		setError(errors);
 		const price = location.state.price * seat;
+
 		if (Object.keys(error).length === 0) {
 			setBookingSummary({
 				firstName: firstName,
@@ -90,7 +91,7 @@ export default function BookTours() {
 				seat: seat,
 				contact: number,
 				tourId: tourId,
-				userId: "heyheyfghc536uh2d",
+				userId: "user1",
 				date: date,
 				days: location.state.days,
 				destination: location.state.destination,
@@ -99,13 +100,23 @@ export default function BookTours() {
 			handleOpen();
 		}
 	};
-	const [bookingId, setBookingId] = useState("");
-	const [type, setType] = useState("");
-	const handleCreateTourBooking = async (bookingInfo) => {
+
+	const handleCreateTourBooking = (bookingInfo) => {
 		try {
-			let info = await createtourBooking(bookingInfo);
-			setBookingId(info.data._id);
-			setType(info.data.type);
+			createtourBooking(bookingInfo)
+				.then((result) => {
+					const addToCart = {
+						type: result.data.type,
+						userId: bookingSummary.userId,
+						itemId: result.data._id,
+						price: bookingSummary.price,
+					};
+					handleAddToCart(addToCart);
+					navigate("/tour-packages");
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -116,9 +127,16 @@ export default function BookTours() {
 			}
 		}
 	};
-	const handleAddToCart = async (addToCart) => {
+	const handleAddToCart = (addToCart) => {
+		console.log(addToCart);
 		try {
-			await addCartItem(addToCart);
+			addCartItem(addToCart)
+				.then((res) => {
+					console.log(res.status);
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 		} catch (ex) {
 			if (
 				ex.response &&
@@ -131,13 +149,6 @@ export default function BookTours() {
 	};
 	const onConfirmation = () => {
 		handleCreateTourBooking(bookingSummary);
-		const addToCart = {
-			type: type,
-			userId: bookingSummary.userId,
-			itemId: bookingId,
-			price: bookingSummary.price,
-		};
-		handleAddToCart(addToCart);
 	};
 	return (
 		<ThemeProvider theme={theme}>
@@ -331,7 +342,6 @@ export default function BookTours() {
 													}}
 													onClick={(e) => {
 														onConfirmation();
-														navigate("/tour-packages");
 													}}
 												>
 													Add to Cart
