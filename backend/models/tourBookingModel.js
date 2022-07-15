@@ -3,27 +3,41 @@ const mongoose = require("mongoose");
 const tourBookingSchema = new mongoose.Schema({
 	firstName: {
 		type: String,
-		required: true,
 	},
 	lastName: {
 		type: String,
-		required: true,
 	},
 	seat: {
 		type: String,
-		required: true,
 	},
 	contact: {
 		type: String,
-		required: true,
 	},
 	userId: {
 		type: String,
-		required: true,
 	},
 	tourId: {
 		type: String,
-		required: true,
+	},
+	type: {
+		type: String,
+		default: "tour package",
+	},
+	status: {
+		type: String,
+		default: "pending",
+	},
+	days: {
+		type: String,
+	},
+	destination: {
+		type: String,
+	},
+	date: {
+		type: String,
+	},
+	price: {
+		type: String,
 	},
 });
 
