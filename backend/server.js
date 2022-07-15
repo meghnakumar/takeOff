@@ -26,8 +26,8 @@ const flightRoute = require("./routes/FlightRoute");
 app.use("/flights", flightRoute);
 
 //FlightBooking
-// const flightBookingRoute = require("./routes/FlightBookingRoute");
-// app.use("/flights/booking", flightBookingRoute);
+const flightBookingRoute = require("./routes/FlightBookingRoute");
+app.use("/flightbookings", flightBookingRoute);
 
 // Cart
 const cartRoute = require("./routes/cartRoute");

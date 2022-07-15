@@ -13,6 +13,20 @@ const FlightDetails = () => {
   const flightReqDetails = useLocation().state.flightReqDetails;
   console.log("navigationData ", flightDetails);
   console.log("flightReqDetails ", flightReqDetails);
+  console.log("req details: flightCompany,source,departureTime,destination,arrivalTime,stops,totalPrice,noOfTravelers,travelerDetails");
+  let flightObj = {
+    flightCompany: flightDetails.flightCompany,
+    source: flightDetails.source,
+    departureTime: flightDetails.departureTime,
+    destination: flightDetails.destination,
+    arrivalTime: flightDetails.arrivalTime,
+    stops: flightDetails.stops,
+    price: flightDetails.price,
+    totalPrice: flightDetails.price * flightReqDetails.travelersCount,
+    flightDate: flightReqDetails.departureDate,
+    noOfTravelers: flightReqDetails.travelersCount
+  }
+  console.log("flight details object", flightObj);
   return (
     <div className="flightBooking">
       <Paper
@@ -105,7 +119,7 @@ const FlightDetails = () => {
       >
         <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
-            <TravellerDetails />
+            <TravellerDetails flightObj = {flightObj} />
           </div>
         </div>
       </Paper>

@@ -8,11 +8,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Autocomplete from '@mui/material/Autocomplete';
 import Snackbox from '../../common/Snackbox/Snackbox';
 import { Box, FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
+import { createFlightBooking } from "./../../../services/flightBookingService";
 
 //references
 //https://mui.com/material-ui/
 
-const TravellerDetails = () => {
+const TravellerDetails = ({flightObj}) => {
 
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -24,20 +25,34 @@ const TravellerDetails = () => {
   const [lastNameError, setLastNameError] = React.useState();
   const [emailError, setEmailError] = React.useState();
   const [cartBox, showCartBox] = React.useState();
+  const [travelerDetails, setTravelerDetails] = React.useState([]);
+
+  // useEffect(() => {
+  //   // fetchFlights();
+  // }, []);
+
   const addToCart = () => {
-    if(!travelerAdded) {
+    if(!travelerCount) {
       isTravelerAdded(true);
       setTimeout(() => {
         isTravelerAdded(false);
       }, 3000);
     }else {
-      showCartBox(true);
-      setTimeout(() => {
-        showCartBox(false);
-      }, 3000);
+      let travelerObj = flightObj;
+      travelerObj.userId = 1;
+      travelerObj.travelerDetails = travelerDetails;
+      createFlightBooking(travelerObj).then(result => {
+        console.log(result);
+        showCartBox(true);
+        setTimeout(() => {
+          showCartBox(false);
+        }, 3000);
+      }).catch(err => {
+        console.error(err);
+      });
     }
-    
   }
+
   const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {
@@ -467,11 +482,11 @@ const TravellerDetails = () => {
     setFareType(event.target.value);
   };
 
-  var todaysDate = new Date();
-  var maxDate = todaysDate.getFullYear() - 16;
-  var maxAllowedDate = new Date();
+  let todaysDate = new Date();
+  let maxDate = todaysDate.getFullYear() - 16;
+  let maxAllowedDate = new Date();
   maxAllowedDate.setFullYear(maxDate);
-  const [depatureValue, setDepartureValue] = React.useState(maxAllowedDate);
+  const [dateOfBirth, setDateOfBirth] = React.useState(maxAllowedDate);
   const handleFirstNameChange = (event) => {
     const { target: { value } } = event;
     setErrors({ firstName: '' })
@@ -504,6 +519,21 @@ const TravellerDetails = () => {
 
   const addTraveller = () => {
     setTravelerCount(travelerCount+1);
+    let obj = {
+      firstName: firstName,
+      lastName: lastName,
+      dateOfBirth: dateOfBirth,
+      email: email,
+      country: "CA",
+      fareType: fareType,  
+    };
+    console.log(obj);
+    if(travelerDetails.length == 0) {
+      setTravelerDetails([obj]);
+    } else {
+      setTravelerDetails(travelerDetails => [...travelerDetails, obj]);
+    }
+  console.log("travellers array", travelerDetails);
     showSnackBox(true);
     setTimeout(() => {
       showSnackBox(false);
@@ -550,11 +580,11 @@ const TravellerDetails = () => {
                 <DatePicker
                   fullWidth
                   label="Date of Birth"
-                  value={depatureValue}
+                  value={dateOfBirth}
                   disableFuture
                   closeOnSelect
                   onChange={(newValue) => {
-                    setDepartureValue(newValue);
+                    setDateOfBirth(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
