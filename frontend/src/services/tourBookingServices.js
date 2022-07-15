@@ -12,6 +12,6 @@ export const createtourBooking = async (bookingInfo) => {
 	return http.post(`${tourBookingPost}`, bookingInfo);
 };
 
-export const updatetourBooking = async (bookingInfo) => {
+export const updatetourBooking = async (bookingInfo, id) => {
 	return http.put(`${tourBookingPut}/${id}`, bookingInfo);
 };
