@@ -64,7 +64,7 @@ const Confirmation = ({ CloseModal }) => {
   );
 };
 
-const DeductConfirm = ({ PayNowonClose, handlePayNow }) => {
+const DeductConfirm = ({ PayNowonClose, handlePayNow, price, cart }) => {
   return (
     <ModalContent align="center">
       <ModalHeader fontSize="22px" fontWeight="bold" color="black">
@@ -86,7 +86,7 @@ const DeductConfirm = ({ PayNowonClose, handlePayNow }) => {
           </AlertDescription>
         </Alert>
         <Heading as="h4" size="lg" m={10}>
-          $187.97
+          {price}
         </Heading>
       </ModalBody>
 

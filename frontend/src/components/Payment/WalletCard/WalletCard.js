@@ -25,8 +25,10 @@ import { useState } from "react";
 import CardList from "../Card/CardList";
 import { FaCaretDown, FaMoneyBill } from "react-icons/fa";
 import { DeductConfirm, Confirmation } from "./DeductConfirm";
+import {modifyHotelBooking} from "../../../services/hotelServices";
 
-const WalletCard = ({ wallet }) => {
+
+const WalletCard = ({ wallet, price, cart }) => {
   const {
     isOpen: AddMoneyisOpen,
     onOpen: AddMoneyonOpen,
@@ -76,6 +78,21 @@ const WalletCard = ({ wallet }) => {
   };
 
   const handlePayNow = () => {
+    cart.map((item) => {
+      if(item.type == "hotel"){
+        let res = JSON.parse(JSON.stringify({"status":"confirmed"}));
+        modifyHotelBooking(res, item.itemId);
+      }elseif(item.type == "flight"){
+        let res = JSON.parse(JSON.stringify({"status":"confirmed"}));
+        modifyHotelBooking(res, item.itemId);
+      }elseif(item.type == "event"){
+        let res = JSON.parse(JSON.stringify({"status":"confirmed"}));
+        modifyHotelBooking(res, item.itemId);
+      }elseif(item.type == "tour"){
+        let res = JSON.parse(JSON.stringify({"status":"confirmed"}));
+        modifyHotelBooking(res, item.itemId);
+      }
+    });
     setPaymentStatus(true);
   };
 
@@ -216,6 +233,7 @@ const WalletCard = ({ wallet }) => {
             <DeductConfirm
               PayNowonClose={PayNowonClose}
               handlePayNow={handlePayNow}
+              price={price}
             />
           )}
         </Modal>

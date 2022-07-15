@@ -7,34 +7,14 @@ import {
   Input,
   Stack,
   FormControl,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { getCartItems } from "../../../services/cartServices";
+import { useState } from "react";
 import { getPromoValidation } from "../../../services/offerServices";
 
-const Cart = ({ payment }) => {
-  const [cart, setCart] = useState([]);
+const Cart = ({ price, setNewPrice, cart }) => {
   const [promocode, setPromo] = useState("");
-  const [price, setNewPrice] = useState(0);
   const [promoError, setPromoError] = useState(false);
-
-  const getData = () => {
-    const fetchPromise = getCartItems("u3");
-    fetchPromise
-      .then((response) => {
-        return response.data;
-      })
-      .then((data) => {
-        let total = 0;
-        setCart(data);
-        data.map((item) => {
-          total += item.price;
-        });
-        setNewPrice(total);
-      });
-  };
 
   const handlePromoValue = (e) => {
     let value = e.target.value;
@@ -80,10 +60,6 @@ const Cart = ({ payment }) => {
       });
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <Box mt={5} p={5} minW="100%" borderRadius={10} borderWidth={1}>
