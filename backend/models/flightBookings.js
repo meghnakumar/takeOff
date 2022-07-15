@@ -9,6 +9,10 @@ const FlightBookingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userId: {
+        type: String,
+        required: true,
+    },
     departureTime: {
         type: String,
         required: true,
