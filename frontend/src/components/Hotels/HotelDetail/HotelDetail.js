@@ -31,7 +31,6 @@ import {createHotelBooking} from "../../../services/hotelServices";
 
 const HotelDetail = () => {
 
-    const hotelContext = useContext(HotelContext);
     const [departureValue, setDepartureValue] = useState(null);
     const [returnValue, returnSetValue] = useState(null);
     const [guestName, setGuestName] = useState();
@@ -65,7 +64,6 @@ const HotelDetail = () => {
         userID:'',
         img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
     })
-
     const handleOnInput = (e) => {
         const {id, value} = e.target;
         setShowErrors(false)
@@ -163,7 +161,8 @@ const HotelDetail = () => {
             roomNumber !== null) {
             console.log("Booking Summary",hotelBookingSummary)
             createHotelBooking(hotelBookingSummary).then(result => {
-                console.log("API result of adding booking", result.data)
+                setOpenSnackBar(true)
+                setOpen(false);
             })
         } else {
             setShowErrors(true)
@@ -352,10 +351,11 @@ const HotelDetail = () => {
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error" >Cancel</Button>
                             <Button type="submit" onClick={()=>{
+                                console.log("location", location.state.place)
                                 setHotelBookingSummary({
                                     startDate: departureValue,
                                     endDate:returnValue,
-                                    roomType:createBooking.roomInfo.roomType,
+                                    roomType:createBooking.roomInfo.name,
                                     hotelName:location.state.hotelname,
                                     location:location.state.place,
                                     guests:guestNumber,
