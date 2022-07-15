@@ -22,12 +22,12 @@ module.exports.getUser = (req, res) => {
 		.catch((err) => res.status(404).json({ error: "unable to find info" }));
 };
 
-module.exports.addUser = (req, res) => {
-	Users
-		.create(req.body)
-		.then((info) => res.json(info))
-		.catch((err) => res.json(err));
-};
+//module.exports.addUser = (req, res) => {
+//	Users
+//		.create(req.body)
+//		.then((info) => res.json(info))
+//		.catch((err) => res.json(err));
+//};
 
 module.exports.editUser = (req, res) => {
 	Users
@@ -43,38 +43,38 @@ module.exports.editUser = (req, res) => {
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-module.exports.login = (req, res) => {
-  // Form validation
-const { errors, isValid } = validateRegisterInput(req.body);
-// Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-User.findOne({ email: req.body.email }).then(user => {
-    if (user) {
-      return res.status(400).json({ email: "Email already exists" });
-    } else {
-      const newUser = new Users({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userName: req.body.userName,
-        email: req.body.email,
-        password: req.body.password
-
+module.exports.addUser = (req, res) => {
+    // Form validation
+    const { errors, isValid } = validateRegisterInput(req.body);
+    // Check validation
+      if (!isValid) {
+        return res.status(400).json(errors);
+      }
+    Users.findOne({ email: req.body.email }).then(user => {
+        if (user) {
+          return res.status(400).json({ email: "Email already exists" });
+        } else {
+          const newUser = new Users({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userName: req.body.userName,
+            email: req.body.email,
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword
+          });
+    // Hash password before saving in database
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              newUser
+                .save()
+                .then(user => res.json(user))
+                .catch(err => console.log(err));
+            });
+          });
+        }
       });
-// Hash password before saving in database
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.log(err));
-        });
-      });
-    }
-  });
 }
 
 // @route POST api/users/login
