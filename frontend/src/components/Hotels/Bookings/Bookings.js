@@ -126,7 +126,6 @@ const Bookings = () => {
             console.error(err);
         });
     }, []);
-    // Modal props
 
     const [open, setOpen] = React.useState(false);
     const [modifySummary, setModifySummary] = React.useState({

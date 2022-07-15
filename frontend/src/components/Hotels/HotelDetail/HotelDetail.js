@@ -23,6 +23,7 @@ import {red} from "@mui/material/colors";
 import HotelContext from "../../../context/hotelContext";
 import {useLocation} from "react-router-dom";
 import {createHotelBooking} from "../../../services/hotelServices";
+import {addCartItem} from "../../../services/cartServices";
 
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
@@ -144,6 +145,12 @@ const HotelDetail = () => {
 
     }
 
+    useEffect(()=>{
+        console.log(location.state)
+    })
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -159,8 +166,20 @@ const HotelDetail = () => {
             email !== null &&
             contact !== null &&
             roomNumber !== null) {
-            console.log("Booking Summary",hotelBookingSummary)
             createHotelBooking(hotelBookingSummary).then(result => {
+                if(result.status === 200){
+                    const bookingId = result.data._id
+                    const cartItem = {
+                        type:"hotel",
+                        userId:"user1",
+                        itemId:bookingId,
+                        price: hotelBookingSummary.price
+                    }
+                    addCartItem(cartItem).then(result =>{
+                        console.log("successfully added to cart", result.data)
+                    })
+
+                }
                 setOpenSnackBar(true)
                 setOpen(false);
             })
@@ -205,7 +224,8 @@ const HotelDetail = () => {
 
 
     const handleReviewsClick = () => {
-        goToReadReviews("/read-reviews")
+        console.log(location.state)
+        goToReadReviews("/read-reviews", {state:{hotelid:location.state.hotelid, reviews:location.state.reviews}})
     }
 
 
@@ -365,6 +385,7 @@ const HotelDetail = () => {
                                     email:email,
                                     status:'Pending',
                                     userID:'user1',
+                                    price: parseInt(roomNumber)*(createBooking.roomInfo.price+createBooking.roomInfo.tax),
                                     img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
                                 });
                             }}>Add to cart</Button>
