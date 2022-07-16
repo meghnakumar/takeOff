@@ -30,6 +30,8 @@ const Hotel = (props) => {
     const id = props.id
     const hotelname = props.name
     const place = props.place
+
+    //function to redirect to the hotel detail page based on which hotel cards book button is clicked.
     const handleBookClick = () =>{
         goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, place:place}})
 

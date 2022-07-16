@@ -19,6 +19,7 @@ const Dashboard = () => {
         }
     };
 
+    //function to set the value of selected location so that it can be passed to the HotelList component
     const handleLocationSelected = (e) => {
         setlocation(e.target.value)
         setIsLocationSelected(true)

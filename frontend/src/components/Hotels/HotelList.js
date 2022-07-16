@@ -11,6 +11,8 @@ Iterates over the filtered list of hotel object and calls the Hotel component*/
 const HotelList = (props) => {
     const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');
+
+    //function to perform the sorting operation on the hotel list
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         if (event.target.value === "lowToHigh"){
@@ -22,6 +24,8 @@ const HotelList = (props) => {
     };
 
     const [sortedHotels, setSortedHotels] = useState([]);
+
+    //to load the hotel list data as soon as the page loads/reloads
     useEffect(() => {
         getHotels().then(result => {
             setHotels(result.data);
@@ -29,6 +33,7 @@ const HotelList = (props) => {
         })
     }, []);
 
+    //filter the list based on the selected location
     let filteredHotels = sortedHotels.filter((item) => item.location === props.location);
 
     return(
