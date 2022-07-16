@@ -24,7 +24,7 @@ export default function SignupForm() {
     setTimeout(() => {
       showSnackBox(false);
       navigate('/profile', {state:null})
-    }, 3000);
+    }, 1000);
   }
 
 
@@ -70,8 +70,11 @@ const [buttonPopup, setButtonPopup]=useState(false);
       updateErrorMessage(result);
     }else{
        console.log("front 1"+PersonalDetailsList.FirstName);
-       signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword);
-      //signupSuccessful();
+       signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword).then(()=>{
+                           signupSuccessful();
+
+                       });
+
     }   
   }
 

@@ -94,7 +94,7 @@ export default function SignupForm() {
     setTimeout(() => {
       showSnackBox(false);
       navigate('/profile', {state:null})
-    }, 3000);
+    }, 1000);
   }
 
   const SaveUserDetails = () => {   
@@ -103,8 +103,10 @@ export default function SignupForm() {
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password);
-      //loginSuccessful();
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
+                    loginSuccessful();
+
+                });
     } 
   }
   
