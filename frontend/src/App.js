@@ -66,7 +66,7 @@ function App() {
 	return (
 
 
-		<HotelContext.Provider value={{ hotels }}>
+
 			<div className="App">
 				{ishome ? (
 					<></>
@@ -102,8 +102,8 @@ function App() {
 					<Route path="logout" element={<Logout />} />
 					<Route path="profile" element={<Profile />} />
 				</Routes>
-				<div>{/* <Footer></Footer> */}</div>
-			</div>
+</div>
+
 
 	);
 }

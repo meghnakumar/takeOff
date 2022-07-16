@@ -1,5 +1,5 @@
 import http from "./httpService";
-import jwtDecode from "jwt-decode";
+
 
 
 const apiEndpoint = "/auth/jwt/create/";
@@ -64,25 +64,25 @@ function loginWithJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
 
-async function getCurrentUser() {
-  try {
-    const jwt = getJwt();
-    if (jwt === null) return null;
-    jwtDecode(jwt);
-
-    http.setJwt(jwt);
-    const data  = await http.get(apiUserEndpoint);
-
-  } catch (ex) {
-    return null;
-  }
-}
+//async function getCurrentUser() {
+//  try {
+//    const jwt = getJwt();
+//    if (jwt === null) return null;
+//    jwtDecode(jwt);
+//
+//    http.setJwt(jwt);
+//    const data  = await http.get(apiUserEndpoint);
+//
+//  } catch (ex) {
+//    return null;
+//  }
+//}
 
 export  {
   login,
   signup,
   logout,
-  getCurrentUser,
-  loginWithJwt,
-  getJwt,
+//  getCurrentUser,
+//  loginWithJwt,
+//  getJwt,
 };
