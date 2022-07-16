@@ -29,7 +29,6 @@ const TravellerDetails = ({flightObj}) => {
   const [cartBox, showCartBox] = React.useState();
   const [travelerDetails, setTravelerDetails] = React.useState([]);
 
-
   const addToCart = () => {
     if (!travelerCount) {
       isTravelerAdded(true);
@@ -38,9 +37,10 @@ const TravellerDetails = ({flightObj}) => {
       }, 3000);
     } else {
       let travelerObj = flightObj;
-      travelerObj.userId = 1;
+      travelerObj.userId = "user1";
       travelerObj.travelerDetails = travelerDetails;
       travelerObj.status = "pending";
+      console.log("travel obj", travelerObj );
       createFlightBooking(travelerObj).then(result => {
         console.log(result);
         if (result.status === 200) {
@@ -131,7 +131,7 @@ const TravellerDetails = ({flightObj}) => {
 
 
   return (
-    <div className="TravellerDetails col-md-6 col-12">
+    <div className="TravellerDetails col-12">
       {/* <h3>Traveller details</h3> */}
       <div class="h3 center">Traveler details</div>
       <Card className="m-tp-16 col-sm-12" style={{ fontSize: "12px" }}>

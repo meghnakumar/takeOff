@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getAllFlightBookings, getFlightBookings, addFlightBooking, modifyFlightBooking, updateBookingStatus } = require("../controller/flightBookings");
+const { getAllFlightBookings, getFlightBookings, addFlightBooking, modifyFlightBooking, updateBookingStatus, cancelFlightBooking } = require("../controller/flightBookings");
 
 // @route GET /flightbookings
 // @description get all flights
@@ -25,5 +25,6 @@ router.get("/:id", getFlightBookings);
 
 
 router.put("/updateBookingStatus/:id", updateBookingStatus)
+router.get("/cancel/:id", cancelFlightBooking)
 
 module.exports = router;

@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
-import { getFlightBooking } from "./../../../services/flightBookingService";
+import { getFlightBooking, cancelFlightBooking } from "./../../../services/flightBookingService";
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
@@ -23,6 +23,9 @@ const FlightBookingList = () => {
     alert("This section will cancel the booking")
   };
   const [open, setOpen] = React.useState(false);
+  const [cancelId, setCancelId] = React.useState(false);
+  const [upcomingBookings, setUpcomingBookings] = React.useState([]);
+  const [pastBookings, setPastBookings] = React.useState([]);
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
@@ -33,19 +36,40 @@ const FlightBookingList = () => {
 
   const fetchBookings = () => {
     getFlightBooking(userId).then(result => {
-      let date = result.data.flightDate;
-      // if() {
-
-      // }
-      console.log(result.data);
+      let bookingsData = result.data;
+      let currentDate = new Date();
+      if(upcomingBookings.length > 0) {
+        setUpcomingBookings([]);
+        setPastBookings([]);
+      }
+      for(const element of bookingsData) {
+        let flightDate = new Date(element.flightDate + " GMT-0300");
+        if(flightDate.getDate() < currentDate.getDate()) {
+          setPastBookings(pastBookings => [...pastBookings, element]);
+        }else {
+          setUpcomingBookings(upcomingBookings => [...upcomingBookings, element]);
+        }
+        console.log("booking data inside for loop", element);
+      }
+      console.log("postBookings", pastBookings);
+      console.log("upcoming Bookings", upcomingBookings);
     }).catch(err => {
       console.error(err);
     });
   }
 
-  const handleModifyClickOpen = () => {
+  const handleModifyClickOpen = (item) => {
     setOpenModify(true);
   };
+
+  const confirmCancelBooking = () => {
+    cancelFlightBooking(cancelId).then(result =>{
+      fetchBookings();
+      console.log(result.data)
+    })
+    handleClose();
+    setOpenSnackBar(true);
+  }
 
   const handleModifyClose = () => {
     setOpenModify(false);
@@ -59,7 +83,8 @@ const FlightBookingList = () => {
     navigate('/flight-details') 
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id) => {
+    setCancelId(id);
     console.log(removeBooking);
     setOpen(true);
 };
@@ -69,7 +94,10 @@ const FlightBookingList = () => {
   <div className="flight-list-bg">
     <div className='container res-p'>
     <div className="h3">Upcoming bookings</div>
-      <div className="card">
+      {upcomingBookings?.length ? upcomingBookings
+        .map((item, index) => {
+          return (
+      <div className="card" key={index}>
         <div className="card-body">
           <div className="row flex-center">
               <div className="col-lg-2 col-12 m-bottom-16">
@@ -78,93 +106,51 @@ const FlightBookingList = () => {
                     <FlightTakeoffSharpIcon fontSize="large"></FlightTakeoffSharpIcon>
                   </div>
                   <div className="col-lg-8">
-                    <div>Air Canada</div>
-                    <div className='small-txt'>IS 555, RT 443</div>
+                    <div>{item?.flightCompany}</div>
+                    <div className='small-txt'>{item?.flightId}</div>
                   </div>
                 </div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>10:00</div>
-                <div className='small-txt'>Toronto</div>
+                <div>{item?.departureTime}</div>
+                <div className='small-txt'>{item?.source}</div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>13:00</div>
-                <div className='small-txt'>Halifax</div>
+                <div>{item?.arrivalTime}</div>
+                <div className='small-txt'>{item?.destination}</div>
               </div>
               <div className="col-lg-2 col-4">
                 <div>Departure date</div>
-                <div className='small-txt'>07 July 2022</div>
+                <div className='small-txt'>{item?.flightDate}</div>
               </div>
               <div className="col-lg-1 col-4">
                 <div>Travlers</div>
-                <div className='small-txt'>2</div>
+                <div className='small-txt '>{item?.noOfTravelers}</div>
               </div>
-              <div className="col-lg-1 col-4 ">
+              <div className="col-lg-1 col-4">
                 <div>Cost</div>
-                <div className='small-txt'>$ 360</div>
+                <div className='small-txt'>$ {item?.price}</div>
               </div>
               <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
-              <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => handleModifyClickOpen()}>
+                <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => handleModifyClickOpen(item)}>
                     Modify details
                   </Button>
                   <Button style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
-                  onClick={() => handleClickOpen()} startIcon={<DeleteIcon/>}>
+                  onClick={() => handleClickOpen(item._id)} startIcon={<DeleteIcon/>}>
                     Cancel
                   </Button>
               </div>
           </div>
         </div>
       </div>
-
-      <div className="card">
-        <div className="card-body">
-          <div className="row flex-center">
-              <div className="col-lg-2 col-12 m-bottom-16">
-                <div className="row">
-                  <div className="col-lg-4">
-                    <FlightTakeoffSharpIcon fontSize="large"></FlightTakeoffSharpIcon>
-                  </div>
-                  <div className="col-lg-8">
-                    <div>Air Canada</div>
-                    <div className='small-txt'>IS 555, RT 443</div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-1 col-4">
-                <div>10:00</div>
-                <div className='small-txt'>Toronto</div>
-              </div>
-              <div className="col-lg-1 col-4">
-                <div>13:00</div>
-                <div className='small-txt'>Halifax</div>
-              </div>
-              <div className="col-lg-2 col-4">
-                <div>Departure date</div>
-                <div className='small-txt'>10 July 2022</div>
-              </div>
-              <div className="col-lg-1 col-4">
-                <div>Travlers</div>
-                <div className='small-txt '>1</div>
-              </div>
-              <div className="col-lg-1 col-4">
-                <div>Cost</div>
-                <div className='small-txt'>$ 180</div>
-              </div>
-              <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
-                <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => handleModifyClickOpen()}>
-                    Modify details
-                  </Button>
-                  <Button style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
-                  onClick={() => handleClickOpen()} startIcon={<DeleteIcon/>}>
-                    Cancel
-                  </Button>
-              </div>
-          </div>
-        </div>
-      </div>
-
+      )
+        }) : <b> No upcoming flights bookings </b>
+      }
       <div className="h3">Past bookings</div>
-      <div className="card">
+      {pastBookings?.length ? pastBookings
+        .map((item, index) => {
+          return (
+      <div className="card" key={index}>
         <div className="card-body">
           <div className="row flex-center">
               <div className="col-lg-2 col-12 m-bottom-16">
@@ -173,38 +159,38 @@ const FlightBookingList = () => {
                     <FlightTakeoffSharpIcon fontSize="large"></FlightTakeoffSharpIcon>
                   </div>
                   <div className="col-lg-8">
-                    <div>Air Canada</div>
-                    <div className='small-txt'>IS 555, RT 443</div>
+                    <div>{item?.flightCompany}</div>
+                    <div className='small-txt'>{item?.flightId}</div>
                   </div>
                 </div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>10:00</div>
-                <div className='small-txt'>Montreal</div>
+                <div>{item?.departureTime}</div>
+                <div className='small-txt'>{item?.source}</div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>13:00</div>
-                <div className='small-txt'>Vancouver</div>
+                <div>{item?.arrivalTime}</div>
+                <div className='small-txt'>{item?.destination}</div>
               </div>
               <div className="col-lg-2 col-4">
                 <div>Departure date</div>
-                <div className='small-txt'>10 May 2022</div>
+                <div className='small-txt'>{item?.flightDate}</div>
               </div>
               <div className="col-lg-1 col-4">
                 <div>Travlers</div>
-                <div className='small-txt'>2</div>
+                <div className='small-txt'>{item?.noOfTravelers}</div>
               </div>
               <div className="col-lg-1 col-4 ">
                 <div>Cost</div>
-                <div className='small-txt'>$ 360</div>
+                <div className='small-txt'>$ {item?.price}</div>
               </div>
               <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
                   <Button disabled style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
-                    onClick={() => handleClickOpen()} startIcon={<DeleteIcon/>}>
+                    onClick={() => handleClickOpen(item?._id)} startIcon={<DeleteIcon/>}>
                     Cancel
                   </Button>
                   <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
-                    onClick={() => showFlightDetails()} startIcon={<RefreshIcon />}>
+                    onClick={() => alert("In progress, This is part of feature 2.")} startIcon={<RefreshIcon />}>
                     Rebook
                   </Button>
                   
@@ -212,6 +198,9 @@ const FlightBookingList = () => {
           </div>
         </div>
       </div>
+      )
+        }) : <b> No Past bookings </b>
+      }
     </div>
       <Dialog
         open={open}
@@ -230,8 +219,7 @@ const FlightBookingList = () => {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button color="error" onClick={() => {
-            handleClose();
-            setOpenSnackBar(true)
+            confirmCancelBooking();
           }} autoFocus>
             Confirm
           </Button>
