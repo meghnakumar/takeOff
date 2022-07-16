@@ -1,7 +1,6 @@
 // @author: Kalpit Machhi
-// @banner: B00911364
-
-// getWalletBalance, addMoney, getWalletHistory
+// @description: This file contains login for adding money to wallet, getting wallet balance, and fetching wallet history.
+// @feature: Wallet Management
 
 const Wallet = require("../models/walletModel");
 const mongodb = require("mongodb");
