@@ -1,14 +1,31 @@
 import React from 'react';
 import './FlightDetails.scss';
-import { Button, Card, CardActions, CardContent, Grid, Modal, Paper, ButtonBase } from "@mui/material";
+import { Card, CardActions, CardContent, Paper } from "@mui/material";
 import LuggageOutlinedIcon from '@mui/icons-material/LuggageOutlined';
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutline';
 import MoneyOffOutlinedIcon from '@mui/icons-material/MoneyOff';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
+import {useLocation} from "react-router-dom";
 
 
 const FlightDetails = () => {
-
+  const flightDetails = useLocation().state.flightDetails;
+  const flightReqDetails = useLocation().state.flightReqDetails;
+  console.log("navigationData ", flightDetails);
+  console.log("flightReqDetails ", flightReqDetails);
+  let flightObj = {
+    flightCompany: flightDetails.flightCompany,
+    source: flightDetails.source,
+    departureTime: flightDetails.departureTime,
+    destination: flightDetails.destination,
+    arrivalTime: flightDetails.arrivalTime,
+    stops: flightDetails.stops,
+    individualPrice: flightDetails.price,
+    price: flightDetails.price * flightReqDetails.travelersCount,
+    flightDate: flightReqDetails.departureDate,
+    noOfTravelers: flightReqDetails.travelersCount
+  }
+  console.log("flight details object", flightObj);
   return (
     <div className="flightBooking">
       <Paper
@@ -101,7 +118,7 @@ const FlightDetails = () => {
       >
         <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
-            <TravellerDetails />
+            <TravellerDetails flightObj = {flightObj} />
           </div>
         </div>
       </Paper>

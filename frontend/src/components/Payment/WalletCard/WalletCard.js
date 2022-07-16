@@ -16,17 +16,20 @@ import {
   FormControl,
   FormHelperText,
   FormErrorMessage,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import CardList from "../Card/CardList";
 import { FaCaretDown, FaMoneyBill } from "react-icons/fa";
 import { DeductConfirm, Confirmation } from "./DeductConfirm";
+import { modifyHotelBooking } from "../../../services/hotelServices";
+import { updateEventBooking } from "../../../services/eventBookingServices";
+import { updateBookingStatus } from "../../../services/flightBookingService";
+import { deleteCartItem } from "../../../services/cartServices";
 
-const WalletCard = ({ wallet }) => {
+const WalletCard = ({ wallet, price, cart }) => {
+  const toast = useToast();
+
   const {
     isOpen: AddMoneyisOpen,
     onOpen: AddMoneyonOpen,
@@ -76,7 +79,32 @@ const WalletCard = ({ wallet }) => {
   };
 
   const handlePayNow = () => {
+    cart.map((item) => {
+      let res = JSON.parse(JSON.stringify({ status: "confirmed" }));
+      if (item.type == "hotel") {
+        modifyHotelBooking(res, item.itemId);
+      } else if (item.type == "flight") {
+        updateBookingStatus(res, item.itemId);
+      } else if (item.type == "event") {
+        updateEventBooking(res, item.itemId);
+      }
+      deleteCartItem(item._id);
+    });
     setPaymentStatus(true);
+  };
+
+  const handlePay = () => {
+    if (price) {
+      PayNowonOpen();
+    } else {
+      toast({
+        title: "No Items in The Cart",
+        description: "Please add items in cart.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -197,7 +225,7 @@ const WalletCard = ({ wallet }) => {
           size="lg"
           fontSize="15px"
           colorScheme="blue"
-          onClick={PayNowonOpen}
+          onClick={handlePay}
         >
           Pay Now
         </Button>
@@ -216,6 +244,7 @@ const WalletCard = ({ wallet }) => {
             <DeductConfirm
               PayNowonClose={PayNowonClose}
               handlePayNow={handlePayNow}
+              price={price}
             />
           )}
         </Modal>

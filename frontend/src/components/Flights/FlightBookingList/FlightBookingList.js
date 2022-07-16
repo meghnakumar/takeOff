@@ -1,4 +1,4 @@
-import React,  { useState} from 'react';
+import React,  { useState, useEffect} from 'react';
 import './FlightBookingList.scss';
 import { Button, 
   Dialog,
@@ -13,12 +13,11 @@ import FlightTakeoffSharpIcon from '@mui/icons-material/FlightTakeoffSharp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import TravellerDetails from '../TravellerDetails/TravellerDetails';
+import { getFlightBooking } from "./../../../services/flightBookingService";
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
-  const modifyDetails = () => {
-    alert("This section will modify the booking details")
-  };
 
   const cancelBooking = () => {
     alert("This section will cancel the booking")
@@ -26,6 +25,31 @@ const FlightBookingList = () => {
   const [open, setOpen] = React.useState(false);
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [openModify, setOpenModify] = React.useState(false);
+  const userId = "user1"; 
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = () => {
+    getFlightBooking(userId).then(result => {
+      let date = result.data.flightDate;
+      // if() {
+
+      // }
+      console.log(result.data);
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+
+  const handleModifyClickOpen = () => {
+    setOpenModify(true);
+  };
+
+  const handleModifyClose = () => {
+    setOpenModify(false);
+  };
 
   const handleClose = () => {
       setOpen(false);
@@ -80,7 +104,7 @@ const FlightBookingList = () => {
                 <div className='small-txt'>$ 360</div>
               </div>
               <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
-              <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => modifyDetails()}>
+              <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => handleModifyClickOpen()}>
                     Modify details
                   </Button>
                   <Button style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
@@ -127,7 +151,7 @@ const FlightBookingList = () => {
                 <div className='small-txt'>$ 180</div>
               </div>
               <div className="col-lg-4 col-12 m-top-16 d-flex justify-content-end">
-                <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => modifyDetails()}>
+                <Button type="button" variant="outlined" color="primary" startIcon={<EditIcon/>} onClick={() => handleModifyClickOpen()}>
                     Modify details
                   </Button>
                   <Button style={{marginLeft: "8px"}} color="error" type="button" variant="outlined" 
@@ -220,6 +244,15 @@ const FlightBookingList = () => {
           Booking Successfully Cancelled!
         </Alert>
       </Snackbar>
+
+      <Dialog open={openModify} onClose={handleModifyClose}>
+      <DialogTitle>Modify traveler details</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <TravellerDetails />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
   </div>
 )};
 

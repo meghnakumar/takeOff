@@ -27,56 +27,84 @@ import Logout from "./components/Registration/Logout";
 import Profile from "./components/Profile/Profile";
 import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 
+
+//user management imports
+import userContext from "./context/userContext";
+import { getUsers } from "./services/userServices";
+import {
+	fetchUser,
+	addUser,
+	updateUser,
+} from "./services/userServices";
+import UserContext from "./context/userContext";
+
+import HotelContext from "./context/hotelContext";
+import { getHotels, createBooking } from "./services/hotelServices";
+
 function App() {
 	const location = useLocation();
 	const [ishome, setHome] = useState(false);
+	const [user, setUser] = useState([]);
 	useEffect(() => {
 		if (location.pathname === "/" || location.pathname === "/home") {
 			setHome(true);
 		} else {
 			setHome(false);
 		}
-	});
+
+
+
+        const getData = async () => {
+        			const { data: userData } = await fetchUser();
+        			setUser(userData);
+
+        		};
+
+		getData();
+	}, []);
 
 	return (
-		<div className="App">
-			{ishome ? (
-				<></>
-			) : (
-				<div>
-					<Header></Header> <div className="header-footer-margin"></div>
-				</div>
-			)}
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="home" element={<Home />} />
-				<Route path="flights" element={<Flights />} />
-        <Route path="flight-details" element={<FlightDetails />} />
-        <Route path="flight-bookings" element={<FlightBookings />} />
-        <Route path="booking" element={<Bookings />} />
-				<Route path="events" element={<Events />} />
-				<Route path="events-booking" element={<BookingEvents />} />
-				<Route path="hotels" element={<Dashboard2 />} />
-				<Route path="tour-packages" element={<TourPackages />} />
-				<Route path="tour-booking" element={<BookingTours />} />
-				<Route path="Offers" element={<Offers />} />
-				<Route path="bus" element={<Bus />} />
-				<Route path="hotel-detail" element={<HotelDetail />} />
-				<Route path="bookings" element={<Bookings />} />
-				<Route path="payment" element={<Payment />} />
-				<Route path="read-reviews" element={<ReadReviews />} />
-				<Route path="wallet" element={<Wallet />} />
-				<Route path="cart" element={<Cart />} />
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<SignUp />} />
-				<Route path="reset" element={<Reset />} />
-				<Route path="logout" element={<Logout />} />
-				<Route path="profile" element={<Profile />} />
-			</Routes>
-      <div>
-        {/* <Footer></Footer> */}
-      </div>
-		</div>
+
+
+
+			<div className="App">
+				{ishome ? (
+					<></>
+				) : (
+					<div>
+						<Header></Header> <div className="header-footer-margin"></div>
+
+					</div>
+				)}
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="home" element={<Home />} />
+					<Route path="flights" element={<Flights />} />
+					<Route path="flight-details" element={<FlightDetails />} />
+					<Route path="flight-bookings" element={<FlightBookings />} />
+					<Route path="booking" element={<Bookings />} />
+					<Route path="events" element={<Events />} />
+					<Route path="events-booking" element={<BookingEvents />} />
+					<Route path="hotels" element={<Dashboard2 />} />
+					<Route path="tour-packages" element={<TourPackages />} />
+					<Route path="tour-booking" element={<BookingTours />} />
+					<Route path="Offers" element={<Offers />} />
+					<Route path="bus" element={<Bus />} />
+					<Route path="hotel-detail" element={<HotelDetail />} />
+					<Route path="bookings" element={<Bookings />} />
+					<Route path="payment" element={<Payment />} />
+					<Route path="read-reviews" element={<ReadReviews />} />
+					<Route path="wallet" element={<Wallet />} />
+					<Route path="cart" element={<Cart />} />
+					<Route path="login" element={<Login />} />
+					<Route path="signup" element={<SignUp />} />
+					<Route path="reset" element={<Reset />} />
+					<Route path="logout" element={<Logout />} />
+					<Route path="profile" element={<Profile />} />
+				</Routes>
+</div>
+
+
 	);
 }
 

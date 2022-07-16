@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {
     Alert,
     Button,
@@ -22,17 +22,27 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
+import {
+    cancelHotelBooking,
+    createBooking,
+    getHotelBookingByUserId,
+    getHotels,
+    modifyHotelBooking
+} from "../../../services/hotelServices";
+
+/*Author: Created by Meghna Kumar
+Renders the list of bookings for the user by sorting them from latest to oldest. Providing modify and cancel option for upcoming bookings and
+add review option for completed bookings*/
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 
 //references
 //https://mui.com/material-ui/
 const Bookings = () => {
-
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
-    const [email, setEmail] = useState();
-    const [contact, setContact] = useState();
+    const [modifiedEmail, setEmail] = useState();
+    const [modifiedContact, setContact] = useState();
     const [showErrors, setShowErrors] = useState(false);
     const [openModifyForm, setOpenModifyForm] = useState(false);
     const [validationError, setValidationError] = useState({
@@ -66,7 +76,7 @@ const Bookings = () => {
         setShowErrors(false)
         if (id === 'email') {
             setEmail(value)
-
+            console.log(modifiedEmail)
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, emailError: "Email cannot be empty"}
@@ -101,99 +111,26 @@ const Bookings = () => {
         }
     }
 
-
-    useEffect(() => {
-        return () => {
-            console.log(new Date());
-            const dateStr = "Thu Jun 16 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)"
-            const bookingStartDate = Date.parse(dateStr);
-            console.log(bookingStartDate)
-            console.log(bookingStartDate > new Date())
-            console.log(dateStr.substring(0, 15))
-        };
-    }, []);
-
-    const bookingData = [
-        {
-            "startDate": "Thu Jun 16 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "endDate": "Thu Jun 23 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "roomType": "Garden View Suite - Twin with Balcony",
-            "hotelName": "Hotel Miramar",
-            "location": "San Juan, Puerto Rico",
-            "guests": "3",
-            "contactNumber": 8527419632,
-            "numberOfRooms": 2,
-            "guestName": "Varun Dhawan",
-            "img": "https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg"
-            //    https://search.openverse.engineering/image/b1d8eef1-5ef9-411a-804d-e4148ef297eb
-        },
-        {
-            "startDate": "Tue Jul 12 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "endDate": "Thu Jul 14 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "roomType": "Garden View Suite King with Bathtub",
-            "hotelName": "Ibsens Hotel",
-            "location": "Copenhagen, Denmark",
-            "guests": "1",
-            "contactNumber": 8527419632,
-            "numberOfRooms": 1,
-            "email": "some@example.com",
-            "guestName": "Varun Dhawan",
-            "img": "https://live.staticflickr.com/7569/15760578227_d946d0b27c_b.jpg"
-            //    https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
-        },
-        {
-            "startDate": "Wed Jul 27 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "endDate": "Fri Jul 29 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "roomType": "Luxury Suite - King with Balcony",
-            "hotelName": "Schwarzer Bock Hotel",
-            "location": "Wiesbaden, Germany",
-            "guests": "4",
-            "contactNumber": 8527419632,
-            "numberOfRooms": 2,
-            "email": "some@example.com",
-            "guestName": "Varun Dhawan",
-            "img": "https://live.staticflickr.com/2175/2504826760_06f2d29c60_b.jpg",
-            //    https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
-        },
-        {
-            "startDate": "Thu Jun 02 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "endDate": "Sat Jun 04 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "roomType": "Pool View Suite King with Bathtub",
-            "hotelName": "El Cortez Hotel",
-            "location": "Las Vegas, United States",
-            "guests": "2",
-            "contactNumber": 8527419632,
-            "numberOfRooms": 1,
-            "email": "some@example.com",
-            "guestName": "Varun Dhawan",
-            "img": "https://live.staticflickr.com/3241/2970607810_c94fea5a8e_b.jpg",
-            //    https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
-        },
-        {
-            "startDate": "Tue May 10 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "endDate": "Mon May 16 2022 00:00:00 GMT-0300 (Atlantic Daylight Time)",
-            "roomType": "The Legacy Suite with Jacuzzi",
-            "hotelName": "Raffles Hotel",
-            "location": "Singapore",
-            "guests": "1",
-            "contactNumber": 8527419632,
-            "numberOfRooms": 2,
-            "email": "some@example.com",
-            "guestName": "Varun Dhawan",
-            "img": "https://live.staticflickr.com/4112/5444940496_3bf47e3929_b.jpg",
-            //    https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
-        }];
-
     // Reference: https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
-    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate));
+
 
     const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
     const [modifyBooking, setModifyBooking] = useState({bookingInfo: ""});
-
-
-// Modal props
+    const [bookingData, setBookingData] = useState([]);
+    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate));
+    useEffect(() => {
+        getHotelBookingByUserId("user1").then(result => {
+            setBookingData(result.data);
+        }).catch(err => {
+            console.error(err);
+        });
+    }, []);
 
     const [open, setOpen] = React.useState(false);
+    const [modifySummary, setModifySummary] = React.useState({
+        email: modifiedEmail,
+        contactNumber:modifiedContact
+    })
 
     const handleClickOpen = () => {
         console.log(removeBooking);
@@ -202,11 +139,18 @@ const Bookings = () => {
 
     const handleClose = () => {
         setOpen(false);
+        getHotelBookingByUserId("user1").then(result => {
+            setBookingData(result.data);
+        }).catch(err => {
+            console.error(err);
+        });
+
     };
 
     const handleModifyClick = () => {
         console.log(modifyBooking)
         setOpenModifyForm(true)
+
     }
 
     const handleCloseBookingForm = (e) => {
@@ -214,10 +158,20 @@ const Bookings = () => {
         setOpenModifyForm(false);
     };
 
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setOpenModifyForm(false)
         setOpenModifySnackBar(true);
+        console.log('modified data',modifySummary)
+        modifyHotelBooking(modifySummary, modifyBooking.bookingInfo._id).then(result =>{
+            console.log(result.data)
+        })
+
+
+
     }
 
     const [feedback, setFeedback] = useState();
@@ -345,6 +299,8 @@ const Bookings = () => {
                                         startIcon={<EditIcon/>} onClick={() => {
                                     handleModifyClick();
                                     setModifyBooking({bookingInfo: bookingInfo})
+                                    setEmail(bookingInfo.email)
+                                    setContact(bookingInfo.contactNumber)
                                 }}>
                                     Modify
                                 </Button>
@@ -381,8 +337,12 @@ const Bookings = () => {
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button color="error" onClick={() => {
+                        cancelHotelBooking(removeBooking.bookingInfo._id).then(result =>{
+                            console.log(result.data)
+                        })
                         handleClose();
                         setOpenSnackBar(true)
+
                     }} autoFocus>
                         Confirm
                     </Button>
@@ -467,7 +427,10 @@ const Bookings = () => {
                         </Form.Group>
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error">Cancel</Button>
-                            <Button type="submit">Modify</Button>
+                            <Button type="submit" onClick={()=>{setModifySummary({
+                                email: modifiedEmail,
+                                contactNumber:parseInt(modifiedContact)
+                            })}}>Modify</Button>
                         </DialogActions>
 
                     </Form>

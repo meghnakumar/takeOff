@@ -4,22 +4,25 @@ import './Hotels.scss';
 import HotelList from "./HotelList";
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 
+/*Author: Created by Meghna Kumar
+Renders a list of hotels based on the location selected*/
+
 //references
 //https://mui.com/material-ui/
 
 const Dashboard = () => {
-    const [isLocationSelected, setIsLocationSelected] = useState()
-    const [location, setlocation] = useState('Halifax');
+    const [isLocationSelected, setIsLocationSelected] = useState(false)
+    const [location, setlocation] = useState("Halifax");
     const styles = {
         paperContainer: {
             backgroundImage: `url(${background})`
         }
     };
 
-    const handleLocationSelected = (value) => {
-        setlocation(value)
+    //function to set the value of selected location so that it can be passed to the HotelList component
+    const handleLocationSelected = (e) => {
+        setlocation(e.target.value)
         setIsLocationSelected(true)
-
     }
 
     return (
@@ -46,7 +49,8 @@ const Dashboard = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="location"
-                        onChange={(event, value) => handleLocationSelected(value)}>
+                        value={location}
+                        onChange={(e)=>handleLocationSelected(e)}>
                         <MenuItem value={"Halifax"}>Halifax</MenuItem>
                         <MenuItem value={"Montreal"}>Montreal</MenuItem>
                         <MenuItem value={"Toronto"}>Toronto</MenuItem>
@@ -60,7 +64,7 @@ const Dashboard = () => {
 
             }}>
 
-                {<HotelList/>}
+                {<HotelList location={location}/>}
 
 
             </Grid>
