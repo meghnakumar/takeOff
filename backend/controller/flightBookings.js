@@ -37,3 +37,10 @@ module.exports.updateBookingStatus=(req,res)=>{
         )
         .catch((err) => res.status(400).json({ error: "Unable to update info" }));
 };
+
+module.exports.cancelFlightBooking = (req, res) => {
+    FlightBookings
+        .deleteOne({_id: new mongodb.ObjectID(req.params.id)})
+        .then((info) => res.json(info))
+        .catch((err) => res.json(err));
+};
