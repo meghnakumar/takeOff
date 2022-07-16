@@ -1,6 +1,6 @@
 import React from 'react';
 import './FlightDetails.scss';
-import { Button, Card, CardActions, CardContent, Grid, Modal, Paper, ButtonBase } from "@mui/material";
+import { Card, CardActions, CardContent, Paper } from "@mui/material";
 import LuggageOutlinedIcon from '@mui/icons-material/LuggageOutlined';
 import WorkOutlinedIcon from '@mui/icons-material/WorkOutline';
 import MoneyOffOutlinedIcon from '@mui/icons-material/MoneyOff';
@@ -13,7 +13,6 @@ const FlightDetails = () => {
   const flightReqDetails = useLocation().state.flightReqDetails;
   console.log("navigationData ", flightDetails);
   console.log("flightReqDetails ", flightReqDetails);
-  console.log("req details: flightCompany,source,departureTime,destination,arrivalTime,stops,totalPrice,noOfTravelers,travelerDetails");
   let flightObj = {
     flightCompany: flightDetails.flightCompany,
     source: flightDetails.source,
@@ -21,8 +20,8 @@ const FlightDetails = () => {
     destination: flightDetails.destination,
     arrivalTime: flightDetails.arrivalTime,
     stops: flightDetails.stops,
-    price: flightDetails.price,
-    totalPrice: flightDetails.price * flightReqDetails.travelersCount,
+    individualPrice: flightDetails.price,
+    price: flightDetails.price * flightReqDetails.travelersCount,
     flightDate: flightReqDetails.departureDate,
     noOfTravelers: flightReqDetails.travelersCount
   }

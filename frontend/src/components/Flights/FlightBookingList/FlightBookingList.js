@@ -1,4 +1,4 @@
-import React,  { useState} from 'react';
+import React,  { useState, useEffect} from 'react';
 import './FlightBookingList.scss';
 import { Button, 
   Dialog,
@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
+import { getFlightBooking } from "./../../../services/flightBookingService";
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
@@ -25,6 +26,22 @@ const FlightBookingList = () => {
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
+  const userId = "user1"; 
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = () => {
+    getFlightBooking(userId).then(result => {
+      let date = result.data.flightDate;
+      // if() {
+
+      // }
+      console.log(result.data);
+    }).catch(err => {
+      console.error(err);
+    });
+  }
 
   const handleModifyClickOpen = () => {
     setOpenModify(true);
