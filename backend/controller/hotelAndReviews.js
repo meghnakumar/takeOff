@@ -13,7 +13,7 @@ module.exports.getById = (req,res) =>{
 }
 
 module.exports.getHotelBooking = (req,res) =>{
-    HotelBookings.find({ userID: req.params.userID })
+    HotelBookings.find({ userId: req.params.userId })
         .then((info) => res.json(info))
         .catch((err) => res.status(404).json({ error: "unable to find info" }));
 }

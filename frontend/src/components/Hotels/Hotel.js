@@ -9,7 +9,6 @@ const Hotel = (props) => {
     const [addedToWishlist, setAddedToWishlist] = useState(false);
     const [openWishlistAlert, setOpenWishlistAlert] = useState({message:"", visibility:false});
     const goToDetailsPage= useNavigate();
-
     useEffect(()=>{
         console.log(props.reviews)
     })
@@ -47,7 +46,7 @@ const Hotel = (props) => {
             <Grid container spacing={2}>
                 <Grid item sm={12} md={2}>
 
-                    <CardImg alt="complex" src={props.img}/>
+                    <CardImg alt="complex" src={background}/>
 
                 </Grid>
                 <Grid item sm={12} md={10} container>

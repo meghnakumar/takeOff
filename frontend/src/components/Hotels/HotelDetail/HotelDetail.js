@@ -62,7 +62,7 @@ const HotelDetail = () => {
         numberOfRooms:0,
         guestName:'',
         status:'',
-        userID:'',
+        userId:'',
         img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
     })
     const handleOnInput = (e) => {
@@ -384,7 +384,7 @@ const HotelDetail = () => {
                                     guestName:guestName,
                                     email:email,
                                     status:'Pending',
-                                    userID:'user1',
+                                    userId:'user1',
                                     price: parseInt(roomNumber)*(createBooking.roomInfo.price+createBooking.roomInfo.tax),
                                     img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
                                 });
