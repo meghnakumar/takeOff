@@ -1,3 +1,7 @@
+// @author: Kalpit Machhi
+// @description: This file contains the header for the cart feature.
+// @feature: Cart Management
+
 import React from "react";
 import "./CartHeader.scss";
 

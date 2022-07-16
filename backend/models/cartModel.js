@@ -1,5 +1,6 @@
 // @author: Kalpit Machhi
-// @banner: B00911364
+// @description: This file contains the model schema for cart table.
+// @feature: Cart Management
 
 const mongoose = require("mongoose");
 
