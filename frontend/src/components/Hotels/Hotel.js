@@ -5,6 +5,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router";
 import background from "../../assets/images/beach-background.jpg";
 
+/*Author: Created by Meghna Kumar
+Contains the format of hotel card which gets rendered on the dashboard*/
+
 const Hotel = (props) => {
     const [addedToWishlist, setAddedToWishlist] = useState(false);
     const [openWishlistAlert, setOpenWishlistAlert] = useState({message:"", visibility:false});
@@ -27,6 +30,8 @@ const Hotel = (props) => {
     const id = props.id
     const hotelname = props.name
     const place = props.place
+
+    //function to redirect to the hotel detail page based on which hotel cards book button is clicked.
     const handleBookClick = () =>{
         goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, place:place}})
 

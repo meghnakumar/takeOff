@@ -1,5 +1,9 @@
 import http from "./httpService";
 
+/* Author: Created by Meghna Kumar
+exports functions that create a connection with the backend and make the API calls
+ */
+
 const hotelsAPIEndpoint = "/hotels/get";
 const hotelbyIdAPIEndpoint = "/hotels/get/:id"
 const hotelBookingByUserAPIEndpoint = "/hotels/get/hotelBookings/"

@@ -20,11 +20,12 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
 import {red} from "@mui/material/colors";
-import HotelContext from "../../../context/hotelContext";
 import {useLocation} from "react-router-dom";
 import {createHotelBooking} from "../../../services/hotelServices";
 import {addCartItem} from "../../../services/cartServices";
 
+/*Author: Created by Meghna Kumar
+Renders the room details about a specific hotel and provides the option to create a booking by clicking on specific room card*/
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 //references
@@ -65,6 +66,8 @@ const HotelDetail = () => {
         userId:'',
         img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
     })
+
+    //function to handle all the form input and provide appropriate validation checks for it.
     const handleOnInput = (e) => {
         const {id, value} = e.target;
         setShowErrors(false)
@@ -150,7 +153,7 @@ const HotelDetail = () => {
     })
 
 
-
+    //function to perform actions on submitting the form by calling the add to cart API and then storing it in booking collection by making a an api call
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -198,6 +201,7 @@ const HotelDetail = () => {
 
     const location = useLocation();
 
+    //function to validate start date change
     const handleOnChangeStartDate = (value) =>{
         setDepartureValue(value)
         if (value === "") {
@@ -210,6 +214,7 @@ const HotelDetail = () => {
 
     }
 
+    //function to validate end date change
     const handleOnChangeEndDate = (value) =>{
         returnSetValue(value)
         if (value === "") {

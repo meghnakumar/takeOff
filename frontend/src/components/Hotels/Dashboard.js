@@ -4,6 +4,9 @@ import './Hotels.scss';
 import HotelList from "./HotelList";
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 
+/*Author: Created by Meghna Kumar
+Renders a list of hotels based on the location selected*/
+
 //references
 //https://mui.com/material-ui/
 
@@ -16,6 +19,7 @@ const Dashboard = () => {
         }
     };
 
+    //function to set the value of selected location so that it can be passed to the HotelList component
     const handleLocationSelected = (e) => {
         setlocation(e.target.value)
         setIsLocationSelected(true)

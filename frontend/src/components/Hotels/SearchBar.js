@@ -3,7 +3,8 @@ import {Grid, InputBase, Paper} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from '@mui/icons-material/Search';
 
-/*Add code reference*/
+/*Author: Created by Meghna Kumar
+Frontend code for search bar which is rendered on the hotel dashboard page*/
 
 const SearchBar = () => {
     return (
