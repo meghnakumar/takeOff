@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import './TravellerDetails.scss';
 import { TextField } from '@mui/material';
@@ -40,7 +44,6 @@ const TravellerDetails = ({flightObj}) => {
       travelerObj.userId = "user1";
       travelerObj.travelerDetails = travelerDetails;
       travelerObj.status = "pending";
-      console.log("travel obj", travelerObj );
       createFlightBooking(travelerObj).then(result => {
         console.log(result);
         if (result.status === 200) {

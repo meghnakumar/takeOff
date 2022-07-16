@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import './FlightDetails.scss';
 import { Card, CardActions, CardContent, Paper } from "@mui/material";

@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import './Header.scss';
 import { Link } from "react-router-dom";
