@@ -1,5 +1,6 @@
 // @author: Kalpit Machhi
-// @banner: B00911364
+// @description: This file contains the routes for the cart feature.
+// @feature: Cart Management
 
 const express = require("express");
 const router = express.Router();

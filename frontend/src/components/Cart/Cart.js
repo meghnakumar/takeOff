@@ -1,5 +1,8 @@
+// @author: Kalpit Machhi
+// @description: This file is the parent component for the cart management feature.
+// @feature: Cart Management
+
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import "./Cart.scss";
 import CartHeader from "./CartHeader/CartHeader";
 import CartList from "./CartList/CartList";
@@ -7,7 +10,9 @@ import CartTotal from "./CartTotal/CartTotal";
 import { useEffect } from "react";
 
 const Cart = () => {
-  const [userId, setUserId] = useState("u1");
+  // get userId using Redux
+
+  const [userId, setUserId] = useState("user1");
   useEffect(() => {
     // set userid
   });

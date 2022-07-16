@@ -1,16 +1,21 @@
+// @author: Kalpit Machhi
+// @description: This file calculates and displays the total amount for all the cart items.
+// @feature: Cart Management
+
 import React from "react";
 import "./CartTotal.scss";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { baseURL } from "../../../services/httpService";
 
-const CartTotal = () => {
+const CartTotal = (props) => {
   const [cartTotal, setCartTotal] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const res = axios.get(`http://localhost:5001/cart/u1`).then((result) => {
+    const res = axios.get(baseURL + `/cart/` + props.userid).then((result) => {
       let sum = 0;
       for (let i = 0; i < result.data.length; i++) {
         sum += result.data[i].price;
@@ -50,14 +55,6 @@ const CartTotal = () => {
               Checkout
             </Button>
           </div>
-
-          {/* <div className="card">
-            <div className="card-body">
-              <div className="row flex-center">
-                <div className="row"></div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
