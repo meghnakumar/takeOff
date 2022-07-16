@@ -49,7 +49,7 @@ const TravellerDetails = ({flightObj}) => {
             type: "flight",
             userId: "user1",
             itemId: bookingId,
-            price: travelerObj.totalPrice
+            price: travelerObj.price
           }
           addCartItem(cartItem).then(result => {
             showCartBox(true);

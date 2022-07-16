@@ -33,7 +33,7 @@ const FlightBookingSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    totalPrice: {
+    price: {
         type: Number,
         required: true,
     },
