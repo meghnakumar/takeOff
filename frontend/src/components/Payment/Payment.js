@@ -5,10 +5,36 @@ import Cart from "./Cart/Cart";
 
 import wallet from "../../assets/data/wallet.js";
 import payment from "../../assets/data/payment.js";
+import { getCartItems } from "../../services/cartServices";
+
+import { useState, useEffect } from "react";
 
 import "./Payment.scss";
 
 const Payment = () => {
+  const [cart, setCart] = useState([]);
+  const [price, setNewPrice] = useState(0);
+
+  const getData = () => {
+    const fetchPromise = getCartItems("user1");
+    fetchPromise
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        let total = 0;
+        setCart(data);
+        data.map((item) => {
+          total += item.price;
+        });
+        setNewPrice(total);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <ChakraProvider>
       <Grid
@@ -22,8 +48,8 @@ const Payment = () => {
           colEnd={{ base: 10, md: 8 }}
         >
           <Box>
-            <Cart payment={payment} />
-            <WalletCard wallet={wallet} />
+            <Cart price={price} setNewPrice={setNewPrice} cart={cart} />
+            <WalletCard price={price} wallet={wallet} cart={cart} />
             <AddCard />
           </Box>
         </GridItem>
