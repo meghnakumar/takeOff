@@ -36,10 +36,6 @@ import {
 	addUser,
 	updateUser,
 } from "./services/userServices";
-import UserContext from "./context/userContext";
-
-import HotelContext from "./context/hotelContext";
-import { getHotels, createBooking } from "./services/hotelServices";
 
 function App() {
 	const location = useLocation();

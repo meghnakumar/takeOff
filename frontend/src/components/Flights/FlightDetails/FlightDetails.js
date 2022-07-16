@@ -15,6 +15,7 @@ const FlightDetails = () => {
   console.log("flightReqDetails ", flightReqDetails);
   let flightObj = {
     flightCompany: flightDetails.flightCompany,
+    flightId: flightDetails.flightId,
     source: flightDetails.source,
     departureTime: flightDetails.departureTime,
     destination: flightDetails.destination,
@@ -118,7 +119,9 @@ const FlightDetails = () => {
       >
         <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
-            <TravellerDetails flightObj = {flightObj} />
+            <div className="col-12">
+              <TravellerDetails flightObj = {flightObj} />
+            </div>
           </div>
         </div>
       </Paper>
