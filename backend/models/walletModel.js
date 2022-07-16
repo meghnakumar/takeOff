@@ -1,5 +1,6 @@
 // @author: Kalpit Machhi
-// @banner: B00911364
+// @description: This file contains the model schema for wallet table.
+// @feature: Wallet Management
 
 const mongoose = require("mongoose");
 

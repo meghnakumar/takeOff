@@ -30,16 +30,15 @@ import {
     modifyHotelBooking
 } from "../../../services/hotelServices";
 
-import HotelContext from "../../../context/hotelContext";
-import {getAllFlights} from "../../../services/flightServices";
+/*Author: Created by Meghna Kumar
+Renders the list of bookings for the user by sorting them from latest to oldest. Providing modify and cancel option for upcoming bookings and
+add review option for completed bookings*/
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 
 //references
 //https://mui.com/material-ui/
 const Bookings = () => {
-
-    const hotelContext = useContext(HotelContext);
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
     const [modifiedEmail, setEmail] = useState();

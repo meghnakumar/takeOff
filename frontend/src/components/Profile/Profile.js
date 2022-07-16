@@ -15,6 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from "react-router-dom";
+import {logout} from '../../services/authService';
 import './Profile.scss'
 
 //references
@@ -25,9 +26,13 @@ import './Profile.scss'
 export default function ProfileScreen() {
 
 
-  const LogOutUser = () => {   
-    
-    logoutSuccessful(); 
+  const LogOutUser = () => {
+//    logout().then(()=>{
+//                logoutSuccessful();
+//
+//    });
+    logout();
+    logoutSuccessful();
   }
   
   const [snackBox, showSnackBox] = React.useState();
@@ -37,7 +42,7 @@ export default function ProfileScreen() {
     setTimeout(() => {
       showSnackBox(false);
       navigate('/logout', {state:null})
-    }, 3000);
+    }, 500);
   }
 
   const navigate = useNavigate();

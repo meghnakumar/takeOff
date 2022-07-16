@@ -21,6 +21,14 @@ const AddBankCard = () => {
   const [isCardExpiryError, setCardExpiryError] = useState(false);
   const [cardNameError, setcardNameError] = useState(false);
 
+  const handleAddCard = () => {
+    if (!isCardNumberError && !isCardExpiryError && cardNameError && cardinput != "" && expiryinput != "" && cardName != "") {
+      
+    }else{
+
+    }
+  };
+
   // regex cpied for card name validation
   // https://www.codegrepper.com/profile/david-diamant
   const handleCardName = (e) => {

@@ -7,6 +7,9 @@ const { getAll, getById, getHotelBooking, cancelHotelBooking, modifyHotelBooking
 // @route GET /hotels/get
 // @description get all hotels list
 // @access Public
+/*Author: Created by Meghna Kumar
+Contains routes for all the functions exposed in controller hotelAndReviews*/
+
 router.get("/get", getAll);
 router.get("/get/:id",getById);
 router.get("/get/hotelBookings/:userID", getHotelBooking)
