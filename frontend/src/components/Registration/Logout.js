@@ -5,7 +5,7 @@ import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
-
+import {login} from '../../services/authService';
 import './Registration.scss'
 
 //references
@@ -81,8 +81,8 @@ export default function SignupForm() {
       errorlist.password="Password is required!";
       flag = "n";
     }
-    else if(PersonalDetailsList.Password.length<8){
-      errorlist.password="Please enter a password having atleast 8 characters"
+    else if(PersonalDetailsList.Password.length<5){
+      errorlist.password="Please enter a password having atleast 5 characters"
       flag = "n";
     }
     else if(PersonalDetailsList.Password.length>15){
@@ -99,12 +99,16 @@ export default function SignupForm() {
 
 
   const SaveUserDetails = () => {   
+
     const result = validationscheck();
-    if(result !== "noerror"){
-      updateErrorMessage(result);
-    } else{
-      loginSuccessful();
-    } 
+        if(result !== "noerror"){
+          updateErrorMessage(result);
+        } else{
+
+            login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
+                        loginSuccessful();
+            });
+        }
   }
   
 
