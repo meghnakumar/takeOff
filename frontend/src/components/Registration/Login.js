@@ -94,7 +94,7 @@ export default function SignupForm() {
     setTimeout(() => {
       showSnackBox(false);
       navigate('/profile', {state:null})
-    }, 1000);
+    }, 500);
   }
 
   const SaveUserDetails = () => {   

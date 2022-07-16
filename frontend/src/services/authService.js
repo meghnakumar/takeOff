@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 const apiEndpoint = "/auth/jwt/create/";
 const apiUserEndpoint = "/users/login";
 const apiUserSignupEndpoint = "/users/addUser";
+const apiUserFetchEndpoint = "/users/fetch";
 
 
 
@@ -14,25 +15,45 @@ async function login(email, password) {
 
 
   http.post(apiUserEndpoint, { email, password }).then((res) => {
-  console.log("data "+res.data);
-  localStorage.setItem("token",res.data.token);
+      console.log("data "+res.data.success);
+
+       setUserToken(email);
+      localStorage.setItem("token",res.data.token);
+
+
   }).catch((err)=>{
   console.log("data "+err);
   });
 
 }
 
+function setUserToken(email){
+    let url=apiUserFetchEndpoint+"/"+email;
+           console.log(url);
+            http.get(url).then((user)=>{
+                console.log("user data : "+user.data[0].lastName);
+                localStorage.setItem("userDetails", JSON.stringify(user.data[0]));
+            })
+}
+
 async function signup(firstName,lastName, userName,email,password,confirmPassword) {
 
-  const { data } = await http.post(apiUserSignupEndpoint, { firstName,lastName, userName,email,password,confirmPassword });
-  console.log("signup data "+data.access);
-  localStorage.setItem(tokenKey, data.access);
+  http.post(apiUserSignupEndpoint, { firstName,lastName, userName,email,password,confirmPassword })
+  .then((res) => {
+             console.log("data "+res.data);
+             setUserToken(email);
+             localStorage.setItem("token",res.data.token);
+             }).catch((err)=>{
+             console.log("data "+err);
+             });
+
 }
 
 
 function logout() {
-    console.log("deleting token");
-  localStorage.removeItem(tokenKey);
+  console.log("deleting token");
+  localStorage.removeItem("token");
+  localStorage.removeItem("userDetails")
 }
 
 function getJwt() {
@@ -50,7 +71,7 @@ async function getCurrentUser() {
     jwtDecode(jwt);
 
     http.setJwt(jwt);
-    const { data } = await http.get(apiUserEndpoint);
+    const data  = await http.get(apiUserEndpoint);
 
   } catch (ex) {
     return null;

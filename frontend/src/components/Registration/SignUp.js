@@ -23,7 +23,7 @@ export default function SignupForm() {
     showSnackBox(true);
     setTimeout(() => {
       showSnackBox(false);
-      navigate('/profile', {state:null})
+      navigate('/login', {state:null})
     }, 1000);
   }
 
@@ -62,6 +62,15 @@ const namepattern = /^[a-z]+$/i;
     ConfirmPassword : ""
   });
 
+//  let obj = {
+//      UserID : ,
+//      UserName:,
+//      FirstName: ,
+//      LastName :,
+//      Email : ,
+//  }
+//  localStorage.setItem("userDetails", obj);
+
 const [buttonPopup, setButtonPopup]=useState(false);
 
   const SaveUserDetails = () => {   
@@ -71,9 +80,10 @@ const [buttonPopup, setButtonPopup]=useState(false);
     }else{
        console.log("front 1"+PersonalDetailsList.FirstName);
        signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword).then(()=>{
-                           signupSuccessful();
 
-                       });
+            signupSuccessful();
+
+       });
 
     }   
   }
