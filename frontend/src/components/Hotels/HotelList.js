@@ -5,6 +5,9 @@ import Hotel from "./Hotel";
 import SearchBar from "./SearchBar";
 import {getHotels} from "../../services/hotelServices";
 
+/*Author: Created by Meghna Kumar
+Iterates over the filtered list of hotel object and calls the Hotel component*/
+
 const HotelList = (props) => {
     const [hotels, setHotels] = useState([]);
     const [sortReviews, setSortReviews] = React.useState('lowToHigh');

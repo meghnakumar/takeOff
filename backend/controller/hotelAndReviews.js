@@ -1,7 +1,9 @@
 var mongodb = require('mongodb');
 const Hotels = require("../models/hotelList");
 const HotelBookings = require("../models/hotelBookings");
-const eventsBooking = require("../models/bookingEvents");
+
+/*Author: Created by Meghna Kumar
+Contains all the functions for hotels and the operations related to modify, cancel and update status booking*/
 
 module.exports.getAll = (req, res) => {
     console.log("making hotel list db call")
@@ -59,5 +61,4 @@ module.exports.updateBookingStatus=(req,res)=>{
         .catch((err) => res.status(400).json({ error: "Unable to update info" }));
 };
 
-//ask Sharad to provide whole user object, along with user ID and name
 

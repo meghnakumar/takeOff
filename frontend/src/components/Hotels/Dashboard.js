@@ -4,6 +4,9 @@ import './Hotels.scss';
 import HotelList from "./HotelList";
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
 
+/*Author: Created by Meghna Kumar
+Renders a list of hotels based on the location selected*/
+
 //references
 //https://mui.com/material-ui/
 

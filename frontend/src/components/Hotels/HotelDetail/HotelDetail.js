@@ -25,6 +25,8 @@ import {useLocation} from "react-router-dom";
 import {createHotelBooking} from "../../../services/hotelServices";
 import {addCartItem} from "../../../services/cartServices";
 
+/*Author: Created by Meghna Kumar
+Renders the room details about a specific hotel and provides the option to create a booking by clicking on specific room card*/
 
 /*https://www.expedia.ca/Page-Hotels-Country-Inn-Suites-By-Radisson.h22413242.Hotel-Information?pwaDialogNested=media-gallery - Image*/
 //references
