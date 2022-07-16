@@ -93,6 +93,8 @@ const Cart = ({ price, setNewPrice, cart }) => {
         <Button
           colorScheme="green"
           p={5}
+          pl={{ base: 5, md: 10 }}
+          pr={{ base: 5, md: 10 }}
           size="lg"
           fontSize="15px"
           onClick={handlePromoValidation}

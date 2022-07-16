@@ -2,7 +2,7 @@ import http from "./httpService";
 
 const cartItemsget = "/cart";
 const cartAddItem = "/cart";
-const cartItemDelete = "/cart/:cartId";
+const cartItemDelete = "/cart";
 
 export const getCartItems = async (userId) => {
   return http.get(`${cartItemsget}/${userId}`);

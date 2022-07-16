@@ -13,9 +13,15 @@ import {
   AlertTitle,
 } from "@chakra-ui/react";
 
-import { FaCheckCircle } from "react-icons/fa";
+
+import { useNavigate } from "react-router-dom";
 
 const Confirmation = ({ CloseModal }) => {
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate("../home");
+  };
+
   return (
     <ModalContent>
       <ModalHeader fontSize="22px" fontWeight="bold" color="black">
@@ -44,17 +50,8 @@ const Confirmation = ({ CloseModal }) => {
             p={5}
             size="lg"
             fontSize="15px"
-            colorScheme="green"
-            onClick={CloseModal}
-          >
-            Order History
-          </Button>
-          <Button
-            p={5}
-            size="lg"
-            fontSize="15px"
             colorScheme="gray"
-            onClick={CloseModal}
+            onClick={handleRedirect}
           >
             close
           </Button>
