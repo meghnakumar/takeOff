@@ -44,21 +44,20 @@ app.use("/tours/booking", tourBookingRoute);
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
 
+const OffersRoute = require("./routes/offersRoute");
+app.use("/offers", OffersRoute);
 //Users
 const userRoute = require("./routes/userRoute");
 app.use("/users", userRoute);
-
 
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-
 app.listen(process.env.PORT || 5001, () => {
-	console.log("server started");
+  console.log("server started");
 });
-
 
 //references for passport and encryption
 //https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669

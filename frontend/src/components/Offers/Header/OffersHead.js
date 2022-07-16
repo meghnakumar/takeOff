@@ -12,10 +12,32 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { MdContentCopy } from "react-icons/md";
-import { Navigate } from "react-router";
+import { getMainOffer } from "../../../services/offerServices";
+import { useState, useEffect } from "react";
+
 const OffersHead = () => {
   const toast = useToast();
   const navigate = useNavigate();
+
+  const [mainoffer, setOffers] = useState([]);
+
+  const getData = () => {
+    const fetchPromise = getMainOffer();
+    fetchPromise
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        setOffers(data["0"]);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(mainoffer);
+
   const handleCopyClipboard = (e) => {
     const value = e.target.value;
     navigator.clipboard
@@ -49,15 +71,14 @@ const OffersHead = () => {
           <Box>
             <Badge colorScheme="blue">OFFERS</Badge>
             <Heading color="white" as="h5" size="lg" lineHeight="40px" mt={3}>
-              Get 15% off on your <br />
-              first tour booking.
+              {mainoffer.title}
             </Heading>
             <Text color="white" fontSize="md" opacity="75%">
               copy the below given promocode and use it while you checkout.
             </Text>
             <ButtonGroup gap={2}>
               <Button
-                value="SUMMER22"
+                value={mainoffer.promocode}
                 leftIcon={<MdContentCopy />}
                 p={5}
                 size="lg"
@@ -66,7 +87,7 @@ const OffersHead = () => {
                 mt={10}
                 onClick={handleCopyClipboard}
               >
-                SUMMER22
+                {mainoffer.promocode}
               </Button>
               <Button
                 p={5}
@@ -76,7 +97,7 @@ const OffersHead = () => {
                 variant="solid"
                 mt={10}
                 onClick={() => {
-                  navigate('/tour-packages') 
+                  navigate("/tour-packages");
                 }}
               >
                 Tour Packages
