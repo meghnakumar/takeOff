@@ -19,7 +19,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
 import { getFlightBooking, cancelFlightBooking } from "./../../../services/flightBookingService";
-import { cookieStorageManager } from '@chakra-ui/react';
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
@@ -35,20 +34,17 @@ const FlightBookingList = () => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
   const [modifyBooking, setModifyBooking] = React.useState({});
-  const userId = "user1"; 
   useEffect(() => {
     fetchBookings();
   }, []);
 
   const fetchBookings = () => {
-    // let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
-    getFlightBooking(userId).then(result => {
+    let id = JSON.parse(localStorage.getItem("userDetails"))._id;
+    getFlightBooking(id).then(result => {
       let bookingsData = result.data;
       let currentDate = new Date();
-      if(upcomingBookings.length > 0) {
-        setUpcomingBookings([]);
-        setPastBookings([]);
-      }
+      setUpcomingBookings([]);
+      setPastBookings([]);
       for(const element of bookingsData) {
         let flightDate = new Date(element.flightDate + " GMT-0300");
         if(flightDate.getDate() < currentDate.getDate()) {
@@ -56,10 +52,7 @@ const FlightBookingList = () => {
         }else {
           setUpcomingBookings(upcomingBookings => [...upcomingBookings, element]);
         }
-        console.log("booking data inside for loop", element);
       }
-      console.log("postBookings", pastBookings);
-      console.log("upcoming Bookings", upcomingBookings);
     }).catch(err => {
       console.error(err);
     });

@@ -76,8 +76,9 @@ const TravellerDetails = (props) => {
         isTravelerAdded(false);
       }, 3000);
     } else {
+      let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
       let travelerObj = props.flightObj;
-      travelerObj.userId = "user1";
+      travelerObj.userId = userId;
       travelerObj.travelerDetails = travelerDetails;
       travelerObj.status = "pending";
       createFlightBooking(travelerObj).then(result => {
@@ -86,7 +87,7 @@ const TravellerDetails = (props) => {
           const bookingId = result.data._id
           const cartItem = {
             type: "flight",
-            userId: "user1",
+            userId: userId,
             itemId: bookingId,
             price: travelerObj.price
           }
