@@ -19,6 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import TravellerDetails from '../TravellerDetails/TravellerDetails';
 import { getFlightBooking, cancelFlightBooking } from "./../../../services/flightBookingService";
+import { cookieStorageManager } from '@chakra-ui/react';
 
 const FlightBookingList = () => {
   const navigate = useNavigate();
@@ -33,12 +34,14 @@ const FlightBookingList = () => {
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
+  const [modifyBooking, setModifyBooking] = React.useState({});
   const userId = "user1"; 
   useEffect(() => {
     fetchBookings();
   }, []);
 
   const fetchBookings = () => {
+    // let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
     getFlightBooking(userId).then(result => {
       let bookingsData = result.data;
       let currentDate = new Date();
@@ -64,6 +67,8 @@ const FlightBookingList = () => {
 
   const handleModifyClickOpen = (item) => {
     setOpenModify(true);
+    setModifyBooking(item);
+    console.log("Modify item ", item)
   };
 
   const confirmCancelBooking = () => {
@@ -241,7 +246,7 @@ const FlightBookingList = () => {
       <DialogTitle>Modify traveler details</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <TravellerDetails />
+            <TravellerDetails setOpenModify = {setOpenModify} isModify={true} modifyBooking={modifyBooking} />
           </DialogContentText>
         </DialogContent>
       </Dialog>
