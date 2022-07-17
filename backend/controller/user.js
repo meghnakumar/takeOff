@@ -77,9 +77,6 @@ module.exports.addUser = (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 module.exports.login = (req, res) => {
-    console.log("A1"+req.body.email)
-    console.log("B1"+req.body.password)
-
 
     const email = req.body.email;
     const password = req.body.password;
