@@ -6,19 +6,11 @@ const mongoose = require("mongoose");
 
 const WalletSchema = new mongoose.Schema(
   {
-    type: {
-      type: String,
-      required: true,
-    },
     userId: {
       type: String,
       required: true,
     },
-    itemId: {
-      type: String,
-      required: true,
-    },
-    price: {
+    balance: {
       type: Number,
       required: true,
     },
@@ -26,4 +18,4 @@ const WalletSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-module.exports = Cart = mongoose.model("cart_items", CartSchema);
+module.exports = Wallet = mongoose.model("wallet_details", WalletSchema);
