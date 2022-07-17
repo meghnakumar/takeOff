@@ -4,8 +4,8 @@ import AddCard from "./Card/AddCard";
 import Cart from "./Cart/Cart";
 
 import wallet from "../../assets/data/wallet.js";
-import payment from "../../assets/data/payment.js";
 import { getCartItems } from "../../services/cartServices";
+import { getAllCards } from "../../services/paymentService";
 
 import { useState, useEffect } from "react";
 
@@ -14,10 +14,13 @@ import "./Payment.scss";
 const Payment = () => {
   const [cart, setCart] = useState([]);
   const [price, setNewPrice] = useState(0);
+  const [cards, setCards] = useState("");
 
   const getData = () => {
-    const fetchPromise = getCartItems("user1");
-    fetchPromise
+    const fetchCartPromise = getCartItems("user1");
+    const fetchCardPromise = getAllCards("user1");
+
+    fetchCartPromise
       .then((response) => {
         return response.data;
       })
@@ -28,6 +31,15 @@ const Payment = () => {
           total += item.price;
         });
         setNewPrice(total);
+      });
+
+    fetchCardPromise
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setCards(data);
       });
   };
 
@@ -49,7 +61,12 @@ const Payment = () => {
         >
           <Box>
             <Cart price={price} setNewPrice={setNewPrice} cart={cart} />
-            <WalletCard price={price} wallet={wallet} cart={cart} />
+            <WalletCard
+              price={price}
+              wallet={wallet}
+              cart={cart}
+              cards={cards}
+            />
             <AddCard />
           </Box>
         </GridItem>

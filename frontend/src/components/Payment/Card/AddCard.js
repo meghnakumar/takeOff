@@ -8,24 +8,76 @@ import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import validator from "validator";
 import { FaCcVisa } from "react-icons/fa";
+import { addCard } from "../../../services/paymentService";
 
 const AddBankCard = () => {
+  const toast = useToast();
   const [cardinput, setCardInput] = useState("");
   const [expiryinput, setCardExpiry] = useState("");
   const [cardName, setCardName] = useState("");
+  const [cardType, setCardType] = useState("");
+  const [cardCompany, setCardCompany] = useState("");
+
   const [isCardNumberError, setCardNumberError] = useState(false);
   const [isCardExpiryError, setCardExpiryError] = useState(false);
   const [cardNameError, setcardNameError] = useState(false);
 
+  // event handler for adding a new card
   const handleAddCard = () => {
-    if (!isCardNumberError && !isCardExpiryError && cardNameError && cardinput != "" && expiryinput != "" && cardName != "") {
-      
-    }else{
+    if (
+      !isCardNumberError &&
+      !isCardExpiryError &&
+      !cardNameError &&
+      cardinput !== "" &&
+      expiryinput !== "" &&
+      cardName !== "" &&
+      cardType !== "" &&
+      cardCompany !== ""
+    ) {
+      let card = {
+        user: "user1",
+        card_name: cardName,
+        card_number: cardinput,
+        card_type: cardType,
+        card_company: cardCompany,
+      };
+      addCard(JSON.parse(JSON.stringify(card))).then((response) => {
+        if (response.status === 200) {
+          toast({
+            title: "Card Added",
+            description: "",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
 
+          setCardInput("");
+          setCardName("");
+          setCardCompany("");
+          setCardExpiry("");
+        } else {
+          toast({
+            title: "Invalid Card Information",
+            description: "",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      });
+    } else {
+      toast({
+        title: "Invalid Card Information",
+        description: "",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
@@ -66,6 +118,12 @@ const AddBankCard = () => {
     setCardExpiry(value);
   };
 
+  const handleTypeSelector = (e) => {
+    let value = e.target.value;
+    setCardType(value.split("-")[0].toLowerCase());
+    setCardCompany(value.split("-")[1].toLowerCase());
+  };
+
   return (
     <Box mt={5} p={5} minW="100%" borderRadius={10} borderWidth={1}>
       <Heading as="h5" size="md">
@@ -74,14 +132,18 @@ const AddBankCard = () => {
       <Text fontSize="16px" fontWeight="medium" mt={10} mb={3}>
         Card Number
       </Text>
-      <Select placeholder="Select option" size="lg">
-        <option value="option1">
+      <Select
+        placeholder="Select option"
+        size="lg"
+        onChange={handleTypeSelector}
+      >
+        <option value="Credit - Visa">
           <FaCcVisa />
           Credit - Visa
         </option>
-        <option value="option2">Debit - Visa</option>
-        <option value="option3">Credit - MasterCard</option>
-        <option value="option3">Debit - MasterCard</option>
+        <option value="Debit-Visa">Debit-Visa</option>
+        <option value="Credit-MasterCard">Credit-MasterCard</option>
+        <option value="Debit-MasterCard">Debit-MasterCard</option>
       </Select>
 
       <Text fontSize="16px" fontWeight="medium" mt={5} mb={3}>
@@ -147,11 +209,12 @@ const AddBankCard = () => {
         colorScheme="purple"
         width="100%"
         mt={15}
+        onClick={handleAddCard}
       >
         Add Card
       </Button>
     </Box>
   );
-};
+};;
 
 export default AddBankCard;

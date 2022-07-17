@@ -1,12 +1,12 @@
 import http from "./httpService";
 
-const getCardsEndpoint = "/payment/getcards/";
-const addCardEndpoint = "/payment/addcard/";
+const getCardsEndpoint = "/payment/getcards";
+const addCardEndpoint = "/payment/addcard";
 
-export const getAllCards = async () => {
-  return http.get(`${getCardsEndpoint}`);
+export const getAllCards = async (id) => {
+  return http.get(`${getCardsEndpoint}?id=${id}`);
 };
 
-export const addCard = async () => {
-  return http.post(`${addCardEndpoint}`);
+export const addCard = async (body) => {
+  return http.post(`${addCardEndpoint}`, body);
 };

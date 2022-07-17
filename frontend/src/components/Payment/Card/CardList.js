@@ -1,6 +1,5 @@
-import cards from "../../../assets/data/cards";
 import Card from "./Card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Payment.scss";
 import {
   Stack,
@@ -18,15 +17,13 @@ import BG4 from "../../../assets/images/DebitCard1.png";
 import BG5 from "../../../assets/images/DebitCard2.png";
 import BG6 from "../../../assets/images/DebitCard3.png";
 
-const PaymentCardList = () => {
+const PaymentCardList = ({ cards }) => {
   const [highlight, setHighLight] = useState("");
   const [selectedCardDetails, setSelectedCard] = useState(
     "You have not selected any card."
   );
   const [selectionStatus, setSelectionStatus] = useState("info");
-
   const backgrounds = [BG1, BG2, BG3, BG4, BG5, BG6];
-  const iterator = backgrounds.values();
 
   let getSelectedCard = (id) => {
     let details = {};
@@ -51,7 +48,7 @@ const PaymentCardList = () => {
         {cards.map((card) => (
           <Card
             card={card}
-            bg={iterator.next().value}
+            bg={backgrounds[Math.floor(Math.random() * backgrounds.length)]}
             highlight={highlight}
             handleSelectedCard={handleSelectedCard}
           />

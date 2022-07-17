@@ -27,7 +27,7 @@ import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
 
-const WalletCard = ({ wallet, price, cart }) => {
+const WalletCard = ({ wallet, price, cart, cards }) => {
   const toast = useToast();
 
   const {
@@ -152,7 +152,7 @@ const WalletCard = ({ wallet, price, cart }) => {
                 Select Card
               </Text>
               <Box>
-                <CardList />
+                <CardList cards={cards} />
               </Box>
             </ModalBody>
 
