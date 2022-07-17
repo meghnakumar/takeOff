@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React,  { useState, useEffect} from 'react';
 import './FlightBookingList.scss';
 import { Button, 
@@ -29,19 +33,18 @@ const FlightBookingList = () => {
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
-  const userId = "user1"; 
+  const [modifyBooking, setModifyBooking] = React.useState({});
   useEffect(() => {
     fetchBookings();
   }, []);
 
   const fetchBookings = () => {
-    getFlightBooking(userId).then(result => {
+    let id = JSON.parse(localStorage.getItem("userDetails"))._id;
+    getFlightBooking(id).then(result => {
       let bookingsData = result.data;
       let currentDate = new Date();
-      if(upcomingBookings.length > 0) {
-        setUpcomingBookings([]);
-        setPastBookings([]);
-      }
+      setUpcomingBookings([]);
+      setPastBookings([]);
       for(const element of bookingsData) {
         let flightDate = new Date(element.flightDate + " GMT-0300");
         if(flightDate.getDate() < currentDate.getDate()) {
@@ -49,10 +52,7 @@ const FlightBookingList = () => {
         }else {
           setUpcomingBookings(upcomingBookings => [...upcomingBookings, element]);
         }
-        console.log("booking data inside for loop", element);
       }
-      console.log("postBookings", pastBookings);
-      console.log("upcoming Bookings", upcomingBookings);
     }).catch(err => {
       console.error(err);
     });
@@ -60,6 +60,8 @@ const FlightBookingList = () => {
 
   const handleModifyClickOpen = (item) => {
     setOpenModify(true);
+    setModifyBooking(item);
+    console.log("Modify item ", item)
   };
 
   const confirmCancelBooking = () => {
@@ -237,7 +239,7 @@ const FlightBookingList = () => {
       <DialogTitle>Modify traveler details</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <TravellerDetails />
+            <TravellerDetails setOpenModify = {setOpenModify} isModify={true} modifyBooking={modifyBooking} />
           </DialogContentText>
         </DialogContent>
       </Dialog>

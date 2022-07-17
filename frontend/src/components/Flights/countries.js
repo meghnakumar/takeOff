@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 export const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
     {

@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 const FlightList = require("../models/flightList");
 
 module.exports.getFlights = (req, res) => {

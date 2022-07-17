@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "https://csci5709-backend.herokuapp.com";
-export const baseURL = "https://csci5709-backend.herokuapp.com";
+axios.defaults.baseURL = "http://localhost:5001";
+export const baseURL = "http://localhost:5001";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =

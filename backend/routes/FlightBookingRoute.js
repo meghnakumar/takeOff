@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 const express = require("express");
 const router = express.Router();
 const { getAllFlightBookings, getFlightBookings, addFlightBooking, modifyFlightBooking, updateBookingStatus, cancelFlightBooking } = require("../controller/flightBookings");
