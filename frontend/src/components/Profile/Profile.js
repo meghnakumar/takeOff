@@ -24,13 +24,50 @@ import './Profile.scss'
 //https://mui.com/material-ui/material-icons/?query=account
 
 export default function ProfileScreen() {
+    const [userFullName, setFullName] = React.useState();
+    const [userEmail, setEmail] = React.useState();
+    const [userName, setUserName] = React.useState();
+      useEffect(() => {
+        getFullName();
+        getEmail();
+        getUserName();
+      }, []);
+
+
+      const getFullName = () => {
+        let fullName = "";
+        if(localStorage.getItem("userDetails")) {
+          let firstName = JSON.parse(localStorage.getItem("userDetails")).firstName;
+          let lastName = JSON.parse(localStorage.getItem("userDetails")).lastName;
+          fullName = firstName + " " + lastName;
+        }
+        setFullName(fullName);
+        return fullName;
+      };
+
+      const getEmail = () => {
+              let email = "";
+              if(localStorage.getItem("userDetails")) {
+                email = JSON.parse(localStorage.getItem("userDetails")).email;
+
+              }
+              setEmail(email);
+              return email;
+            };
+
+       const getUserName = () => {
+                     let userName = "";
+                     if(localStorage.getItem("userDetails")) {
+                       userName = JSON.parse(localStorage.getItem("userDetails")).userName;
+                     }
+                     setUserName(userName);
+                     return userName;
+                   };
+
 
 
   const LogOutUser = () => {
-//    logout().then(()=>{
-//                logoutSuccessful();
-//
-//    });
+
     logout();
     logoutSuccessful();
   }
@@ -62,17 +99,17 @@ export default function ProfileScreen() {
                       <TableBody>
                           <TableRow key="Name" >
                             
-                            <TableCell align="center">Sharad Kumar</TableCell>
+                            <TableCell align="center">{userFullName}</TableCell>
                             
                           </TableRow>
                           <TableRow key="Email" >
                             
-                            <TableCell align="center">Sharad99kr@gmail.com</TableCell>
+                            <TableCell align="center"> {userEmail} </TableCell>
                             
                           </TableRow>
                           <TableRow key="Gender" >
                             
-                            <TableCell align="center">Male</TableCell>
+                            <TableCell align="center">{userName}</TableCell>
                             
                           </TableRow>
                       </TableBody>

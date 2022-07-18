@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
 import {login} from '../../services/authService';
 import './Registration.scss'
+import { send } from 'emailjs-com';
 
 //references
 //https://mui.com/material-ui/api/text-field/
@@ -18,7 +19,7 @@ export default function SignupForm() {
   let flag = "y";
 
   const handleUserDetails = (e) => {
-
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
@@ -32,6 +33,18 @@ export default function SignupForm() {
   const loginSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
+        send(
+                      'service_aks72nt',
+                      'template_j2fcgeg',
+                      toSend,
+                      'BbOaPQawKNmE3FZf4'
+                    )
+                      .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                      })
+                      .catch((err) => {
+                        console.log('FAILED...', err);
+                      });
       showSnackBox(false);
       navigate('/profile', {state:null})
     }, 3000);
@@ -60,6 +73,14 @@ export default function SignupForm() {
     Password : "",
     ConfirmPassword : ""
   });
+
+    const [toSend, setToSend] = useState({
+        from_name: "team@takeoff.com",
+        to_name: "",
+        reply_to:"",
+        Email:"",
+        message: "You are logged in! Welcome to the takeoff",
+      });
 
   const validationscheck = () => {
 

@@ -18,7 +18,7 @@ import {useLocation} from "react-router-dom";
 
 const ReadReviews = () =>{
 
-    const reviewData = {
+   /* const reviewData = {
         "reviews": [
             {
                 "name": "Suyash Medhavi",
@@ -55,17 +55,17 @@ const ReadReviews = () =>{
                 "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 "rating": 2
             }]
-        }
+        }*/
     const location = useLocation();
-    //const [reviewData, setReviewData] = useState("");
+    const [reviewData, setReviewData] = useState("");
     const [sortedReviews, setSortedReviews] = useState("");
     useEffect(() => {
-        console.log(location.state.reviews)
-       // setReviewData(location.state.reviews)
+       console.log(location.state.reviews)
+       setReviewData(location.state.reviews)
         return () => {
             console.log(reviewData);
-            if(reviewData.reviews !== ''){
-                setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            if(reviewData !== ''){
+                setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
             }
 
         };
@@ -77,10 +77,10 @@ const ReadReviews = () =>{
         setSortReviews(event.target.value);
         console.log(event.target.value);
         if (event.target.value === "lowToHigh"){
-            setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
         }
         else {
-            setSortedReviews(reviewData.reviews.sort((a, b) => b.rating - a.rating));
+            setSortedReviews(reviewData.sort((a, b) => b.rating - a.rating));
         }
     };
 

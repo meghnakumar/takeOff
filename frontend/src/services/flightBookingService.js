@@ -14,8 +14,8 @@ export const createFlightBooking = async (bookingInfo) => {
 	return http.post(`${createFlightBookingsAPI}`, bookingInfo);
 };
 
-export const updateFlightBooking = async (bookingInfo) => {
-	return http.put(`${updateFlightBookingsAPI}`, bookingInfo);
+export const updateFlightBooking = async (bookingInfo,id) => {
+	return http.put(`${updateFlightBookingsAPI}/${id}`, bookingInfo);
 };
 
 export const updateBookingStatus = (body, id) => {

@@ -21,8 +21,6 @@ import { baseURL } from "../../../services/httpService";
 import moment from "moment";
 
 const CartList = (props) => {
-  console.log("HTTP");
-  console.log(baseURL);
   const [userId, setUserId] = useState();
   const [items, setItems] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -32,111 +30,9 @@ const CartList = (props) => {
     const res = axios.get(baseURL + `/cart/` + props.userid).then((result) => {
       var output = result.data;
       setItems(output);
+      setUserId(props.userid);
     });
   }, []);
-
-  const getCartData = () => {
-    setUserId(props.userid);
-    const res = axios.get(baseURL + `/cart/` + props.userid).then((result) => {
-      // setItems(result.data);
-      var info = result.data;
-      console.log("INFOOOOOOOOOOO");
-      console.log(info);
-      var output = [];
-      let userId = props.userid;
-
-      for (let i = 0; i < info.length; i++) {
-        let itemId = info[i].itemId;
-        let item = {};
-
-        if (info[i].type === "hotel") {
-          const res = axios
-            .get(baseURL + `/hotels/get/hotelBookings/` + userId)
-            .then((r) => {
-              r = r.data;
-              for (let j = 0; j < r.length; j++) {
-                if (r[j]._id === itemId) {
-                  let item = {};
-
-                  item["_id"] = info[i]._id;
-                  item["type"] = info[i].type;
-                  item["ItemId"] = info[i].itemId;
-                  item["userId"] = info[i].userId;
-                  item["price"] = info[i].price;
-
-                  item["hotelName"] = r[j].hotelName;
-                  item["numberOfRooms"] = r[j].numberOfRooms;
-                  item["startDate"] = r[j].startDate;
-                  item["endDate"] = r[j].endDate;
-                  item["location"] = r[j].location;
-
-                  output.push(item);
-                }
-              }
-            });
-        } else if (info[i].type === "flight") {
-        } else if (info[i].type === "event") {
-          const res = axios
-            .get(baseURL + `/events/booking/fetch/` + userId)
-            .then((r) => {
-              r = r.data;
-              for (let j = 0; j < r.length; j++) {
-                if (r[j]._id === itemId) {
-                  let item = {};
-
-                  item["_id"] = info[i]._id;
-                  item["type"] = info[i].type;
-                  item["ItemId"] = info[i].itemId;
-                  item["userId"] = info[i].userId;
-                  item["price"] = info[i].price;
-
-                  item["title"] = r[j].title;
-                  item["seat"] = r[j].seat;
-                  item["date"] = r[j].date;
-                  item["city"] = r[j].city;
-
-                  output.push(item);
-                }
-              }
-            });
-        } else if (info[i].type === "tour") {
-          const res = axios
-            .get(baseURL + `/tours/booking/fetch/` + userId)
-            .then((r) => {
-              r = r.data;
-              for (let j = 0; j < r.length; j++) {
-                if (r[j]._id === itemId) {
-                  let item = {};
-
-                  item["_id"] = info[i]._id;
-                  item["type"] = info[i].type;
-                  item["ItemId"] = info[i].itemId;
-                  item["userId"] = info[i].userId;
-                  item["price"] = info[i].price;
-
-                  item["seat"] = r[j].seat;
-                  item["destination"] = r[j].destination;
-                  item["date"] = r[j].date;
-
-                  output.push(item);
-                }
-              }
-            });
-        }
-      }
-      delay(1000).then(() => {
-        console.log("OUTPUT");
-        console.log(output);
-        // setItems((items) => [...items, output]);
-        setItems(output);
-
-        delay(100).then(() => {
-          console.log("ITEMS:::");
-          console.log(items);
-        });
-      });
-    });
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -652,16 +548,6 @@ const CartList = (props) => {
                 );
               }
             })}
-
-          {/* ------------- */}
-
-          {/* ------------- */}
-
-          {/* ------------- */}
-
-          {/* ------------- */}
-
-          {/* ---------------- */}
         </div>
       </div>
     </div>

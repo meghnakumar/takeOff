@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import './Registration.scss'
+import { send } from 'emailjs-com';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
@@ -22,6 +23,19 @@ export default function SignupForm() {
   const signupSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
+        console.log(toSend);
+        send(
+              'service_aks72nt',
+              'template_j2fcgeg',
+              toSend,
+              'BbOaPQawKNmE3FZf4'
+            )
+              .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+              })
+              .catch((err) => {
+                console.log('FAILED...', err);
+              });
       showSnackBox(false);
       navigate('/login', {state:null})
     }, 1000);
@@ -29,8 +43,7 @@ export default function SignupForm() {
 
 
   const handleUserDetails = (e) => {
-
-    console.log("entered");
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
@@ -49,6 +62,15 @@ export default function SignupForm() {
     confirmpassword: ""
   });
 
+    const [toSend, setToSend] = useState({
+          from_name: "team@takeoff.com",
+          to_name: "",
+          reply_to:"",
+          Email:"",
+          message: "You are successfully registered! Welcome to the takeoff application",
+        });
+
+
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
 const namepattern = /^[a-z]+$/i;
 
@@ -62,14 +84,6 @@ const namepattern = /^[a-z]+$/i;
     ConfirmPassword : ""
   });
 
-//  let obj = {
-//      UserID : ,
-//      UserName:,
-//      FirstName: ,
-//      LastName :,
-//      Email : ,
-//  }
-//  localStorage.setItem("userDetails", obj);
 
 const [buttonPopup, setButtonPopup]=useState(false);
 

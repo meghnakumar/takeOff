@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import './FlightDetails.scss';
 import { Card, CardActions, CardContent, Paper } from "@mui/material";
@@ -120,7 +124,7 @@ const FlightDetails = () => {
         <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
             <div className="col-12">
-              <TravellerDetails flightObj = {flightObj} />
+              <TravellerDetails isModify={false} flightObj = {flightObj} />
             </div>
           </div>
         </div>

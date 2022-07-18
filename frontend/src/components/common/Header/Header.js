@@ -1,4 +1,8 @@
-import React from 'react';
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
+import React,  { useState, useEffect} from 'react';
 import './Header.scss';
 import { Link } from "react-router-dom";
 import { Image, Text, ChakraProvider, Flex, Center, Box } from "@chakra-ui/react";
@@ -7,10 +11,33 @@ import { useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Header = () => {
+
+  const [userName, setUserName] = useState();
   const navigator = useNavigate();
   const handleHomeRedirection = () => {
     navigator("/");
   }
+
+  useEffect(() => {
+    getUserName();
+  }, []);
+
+  const getUserName = () => {
+    let fullName = "";
+    if(localStorage.getItem("userDetails")) {
+      let firstName = JSON.parse(localStorage.getItem("userDetails")).firstName;
+      let lastName = JSON.parse(localStorage.getItem("userDetails")).lastName;
+      fullName = firstName + " " + lastName;
+    }
+    setUserName(fullName);
+    return fullName;
+  };
+
+  const logout = () => {
+    setUserName("");
+    localStorage.clear();
+  };
+
 return (
   <div className="fixed-top">
     <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -59,11 +86,6 @@ return (
                 Hotels
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/bus">
-                Bus
-              </Link>
-            </li> */}
             <li className="nav-item">
               <Link className="nav-link" to="/events">
                 Events
@@ -81,8 +103,9 @@ return (
             </li>
           </ul>
           <ul className="navbar-nav" style={{marginRight: "60px"}}>
+          {userName ? 
             <li className="nav-item dropdown">
-              <a style={{color: "#fff"}} className="nav-link dropdown-toggle" role="button"  data-bs-toggle="dropdown" href="#"><AccountCircleOutlinedIcon />
+              <a style={{color: "#fff"}} className="nav-link dropdown-toggle" role="button"  data-bs-toggle="dropdown" href="#"><AccountCircleOutlinedIcon /> {userName}
                 </a>
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to="/profile" >My Profile</Link></li>
@@ -98,11 +121,14 @@ return (
                 </li> */}
                 <li><Link className="dropdown-item" to="/cart" >Cart</Link></li>
                 <li><Link className="dropdown-item" to="/wallet" >Wallet</Link></li>
+                <li className="dropdown-item logout" onClick={() => { logout() }}>Logout</li>
               </ul>
             </li>
+             : 
             <li className="nav-item ml-auto" >
-              <Link className="nav-link" to="/login" >Login</Link>
+              <Link className="nav-link" to="/login" ><AccountCircleOutlinedIcon /> Login</Link>
             </li>
+            }
           </ul>
         </div>
       </div>
