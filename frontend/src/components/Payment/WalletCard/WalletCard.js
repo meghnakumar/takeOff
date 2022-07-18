@@ -27,7 +27,7 @@ import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
 
-const WalletCard = ({ wallet, price, cart, cards }) => {
+const WalletCard = ({ wallet, price, cart, cards, balance }) => {
   const toast = useToast();
 
   const {
@@ -123,7 +123,7 @@ const WalletCard = ({ wallet, price, cart, cards }) => {
         Your Balance
       </Heading>
       <Text mt={5} fontWeight="bold" fontSize="28px">
-        $ {wallet.balance}
+        $ {balance}
       </Text>
       <Stack direction="row" mt={5} spacing="14px">
         <Button

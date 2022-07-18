@@ -6,6 +6,7 @@ import Cart from "./Cart/Cart";
 import wallet from "../../assets/data/wallet.js";
 import { getCartItems } from "../../services/cartServices";
 import { getAllCards } from "../../services/paymentService";
+import { getWalletBalance } from "../../services/walletServices";
 
 import { useState, useEffect } from "react";
 
@@ -15,10 +16,13 @@ const Payment = () => {
   const [cart, setCart] = useState([]);
   const [price, setNewPrice] = useState(0);
   const [cards, setCards] = useState("");
+  const [balance, setBalance] = useState(0);
 
   const getData = () => {
-    const fetchCartPromise = getCartItems("user1");
-    const fetchCardPromise = getAllCards("user1");
+    const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
+    const fetchCartPromise = getCartItems(userid);
+    const fetchCardPromise = getAllCards(userid);
+    const fetchBalance = getWalletBalance(userid);
 
     fetchCartPromise
       .then((response) => {
@@ -26,6 +30,7 @@ const Payment = () => {
       })
       .then((data) => {
         let total = 0;
+        console.log(data);
         setCart(data);
         data.map((item) => {
           total += item.price;
@@ -40,6 +45,15 @@ const Payment = () => {
       .then((data) => {
         console.log(data);
         setCards(data);
+      });
+
+    fetchBalance
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setBalance(data);
       });
   };
 
@@ -66,6 +80,7 @@ const Payment = () => {
               wallet={wallet}
               cart={cart}
               cards={cards}
+              balance={balance}
             />
             <AddCard />
           </Box>
