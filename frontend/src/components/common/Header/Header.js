@@ -20,7 +20,6 @@ const Header = (props) => {
 
   useEffect(() => {
     getUserName();
-    console.log("isLoggedIn", props.isLoggedIn);
   }, [props.isLoggedIn]);
 
   const getUserName = () => {
