@@ -96,16 +96,16 @@ This project is deployed on Heroku.
 
 #### Sharad Kumar
 
-<br/>
+
 #### Meghna Kumar
 
-<br/>
+
 #### Bhavesh Lalwani
 
-<br/>
+
 #### Jayasree Kulothungan
 
-<br/>
+
 #### Kalpit Machhi
 
 Feature developed:
@@ -115,7 +115,7 @@ Feature developed:
   - Calculating cart total
   - Removing items from cart
   - Displaying cart items
-    <br/>
+
 - **Wallet Management**
   - Adding items to cart
   - Calculating cart total
@@ -124,27 +124,27 @@ Feature developed:
 
 **Front-end Files**
 
-_1. frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
-_2. rontend\src\components\Cart\CartHeader\CartHeader.js_: It is child component for displaying the header for the cart page.
-_3. frontend\src\components\Cart\CartList\CartList.js_: It makes a get request to fetch all the cart items for the user. Then, it displays the list of items. It also provides a button to delete a cart item which makes a delete request. It removes the item from the database.
-_4. frontend\src\components\Cart\CartTotal\CartTotal.js_: It is responsible for getting the item data from the database and calculating the total amount for the cart items.
-_5. frontend\src\components\Wallet\Wallet.js_: It is the parent component for the wallet feature.
-_6. frontend\src\components\Wallet\WalletHistory\WalletHistory.js_: It makes a get request to fetch the wallet history from the database and displays the wallet transactions.
-_7. frontend\src\components\Wallet\WalletBalance\WalletBalance.js_: It is responsible for dispaying the current wallet balance to the user.
+1. _frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
+2. _frontend\src\components\Cart\CartHeader\CartHeader.js_: It is child component for displaying the header for the cart page.
+3. _frontend\src\components\Cart\CartList\CartList.js_: It makes a get request to fetch all the cart items for the user. Then, it displays the list of items. It also provides a button to delete a cart item which makes a delete request. It removes the item from the database.
+4. _frontend\src\components\Cart\CartTotal\CartTotal.js_: It is responsible for getting the item data from the database and calculating the total amount for the cart items.
+5. _frontend\src\components\Wallet\Wallet.js_: It is the parent component for the wallet feature.
+6. _frontend\src\components\Wallet\WalletHistory\WalletHistory.js_: It makes a get request to fetch the wallet history from the database and displays the wallet transactions.
+7. _frontend\src\components\Wallet\WalletBalance\WalletBalance.js_: It is responsible for dispaying the current wallet balance to the user.
 
 **Back-end Files**
 
-_1. backend\routes\cartRoute.js_: It includes all the routes for the cart feature.
-_2. backend\controller\cart.js_: It includes the controller logic for adding item to the cart, deleting item from the cart, and getting cart items from the database.
-_3. backend\models\cartModel.js_: It contains the model schema for the cart table.
-_4. backend\routes\walletRoute.js_: It includes all the routes for the wallet feature.
-_5. backend\controller\wallet.js_: It contains controller logic for adding money to wallet, getting wallet balance, and fetching wallet history.
-_6. backend\models\walletModel.js_: It contains the model schema for the wallet table.
+1. _backend\routes\cartRoute.js_: It includes all the routes for the cart feature.
+2. _backend\controller\cart.js_: It includes the controller logic for adding item to the cart, deleting item from the cart, and getting cart items from the database.
+3. _backend\models\cartModel.js_: It contains the model schema for the cart table.
+4. _backend\routes\walletRoute.js_: It includes all the routes for the wallet feature.
+5. _backend\controller\wallet.js_: It contains controller logic for adding money to wallet, getting wallet balance, and fetching wallet history.
+6. _backend\models\walletModel.js_: It contains the model schema for the wallet table.
 <br/>
 
 #### Harshit Lakhani
 
-<br/>
+
 ## Sources Used
 
 The following sources were used in understanding some parts of this tutorial
