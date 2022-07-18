@@ -1,9 +1,10 @@
 const payment = require("../models/payment");
 
 module.exports.addInitialUser = (req, res) => {
-  const user = { userId: req.body.userId };
+  const user = { userId: req.params.id, balance:0, cards:[] };
+  console.log(user);
   payment
-    .insertOne(user, (err, res))
+    .insertOne(user.id, (err, res))
     .then((info) => res.json(info[0].cards))
     .catch((err) => res.status(404).json({ error: err }));
 };
