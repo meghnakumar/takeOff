@@ -94,7 +94,7 @@ const [buttonPopup, setButtonPopup]=useState(false);
     }else{
        console.log("front 1"+PersonalDetailsList.FirstName);
        signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword).then(()=>{
-
+            
             signupSuccessful();
 
        });
