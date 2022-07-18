@@ -31,9 +31,16 @@ export default function ResetGenerateForm() {
       }
 
     const getOTP = () => {
-      let otp =randomNumberInRange(1, 5);
+      let otp =randomNumberInRange(1000, 10000);
       setOTP(otp);
       localStorage.setItem("OTP",otp);
+      setToSend({
+        from_name: "team@takeoff.com",
+        to_name: "",
+        reply_to:"",
+        Email:"",
+        message: otp,
+      })
       return otp;
     };
   
@@ -48,13 +55,7 @@ export default function ResetGenerateForm() {
     UpdatePersonalDetailsList(PersonalList);
   }
 
-  const [toSend, setToSend] = useState({
-    from_name: "team@takeoff.com",
-    to_name: "",
-    reply_to:"",
-    Email:"",
-    message: "",
-  });
+  const [toSend, setToSend] = useState();
 
   const [snackBox, showSnackBox] = React.useState();
 
@@ -72,7 +73,18 @@ export default function ResetGenerateForm() {
   const passwordRest = () => {
     showSnackBox(true);
     setTimeout(() => {
-        
+        send(
+            'service_aks72nt',
+            'template_ml6rtkn',
+            toSend,
+            'BbOaPQawKNmE3FZf4'
+          )
+            .then((response) => {
+              console.log('SUCCESS!', response.status, response.text);
+            })
+            .catch((err) => {
+              console.log('FAILED...', err);
+            });
       showSnackBox(false);
       navigate('/reset', {state:null})
     }, 1000);
