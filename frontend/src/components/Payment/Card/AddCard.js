@@ -40,13 +40,14 @@ const AddBankCard = () => {
       cardCompany !== ""
     ) {
       let card = {
-        user: "user1",
+        userId: JSON.parse(localStorage.getItem("userDetails"))._id,
         card_name: cardName,
         card_number: cardinput,
         card_type: cardType,
         card_company: cardCompany,
       };
-      addCard(JSON.parse(JSON.stringify(card))).then((response) => {
+      let cardFinal = JSON.parse(JSON.stringify(card));
+      addCard(cardFinal).then((response) => {
         if (response.status === 200) {
           toast({
             title: "Card Added",

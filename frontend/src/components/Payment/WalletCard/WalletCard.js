@@ -152,7 +152,7 @@ const WalletCard = ({ wallet, price, cart, cards, balance }) => {
                 Select Card
               </Text>
               <Box>
-                <CardList cards={cards} />
+                <CardList cards={cards ? cards : []} />
               </Box>
             </ModalBody>
 
