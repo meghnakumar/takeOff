@@ -4,8 +4,9 @@ import AddCard from "./Card/AddCard";
 import Cart from "./Cart/Cart";
 
 import wallet from "../../assets/data/wallet.js";
-import payment from "../../assets/data/payment.js";
 import { getCartItems } from "../../services/cartServices";
+import { getAllCards } from "../../services/paymentService";
+import { getWalletBalance } from "../../services/walletServices";
 
 import { useState, useEffect } from "react";
 
@@ -14,20 +15,45 @@ import "./Payment.scss";
 const Payment = () => {
   const [cart, setCart] = useState([]);
   const [price, setNewPrice] = useState(0);
+  const [cards, setCards] = useState("");
+  const [balance, setBalance] = useState(0);
 
   const getData = () => {
-    const fetchPromise = getCartItems("user1");
-    fetchPromise
+    const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
+    const fetchCartPromise = getCartItems(userid);
+    const fetchCardPromise = getAllCards(userid);
+    const fetchBalance = getWalletBalance(userid);
+
+    fetchCartPromise
       .then((response) => {
         return response.data;
       })
       .then((data) => {
         let total = 0;
+        console.log(data);
         setCart(data);
         data.map((item) => {
           total += item.price;
         });
         setNewPrice(total);
+      });
+
+    fetchCardPromise
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setCards(data);
+      });
+
+    fetchBalance
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        console.log(data);
+        setBalance(data);
       });
   };
 
@@ -49,7 +75,13 @@ const Payment = () => {
         >
           <Box>
             <Cart price={price} setNewPrice={setNewPrice} cart={cart} />
-            <WalletCard price={price} wallet={wallet} cart={cart} />
+            <WalletCard
+              price={price}
+              wallet={wallet}
+              cart={cart}
+              cards={cards}
+              balance={balance}
+            />
             <AddCard />
           </Box>
         </GridItem>

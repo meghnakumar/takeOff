@@ -59,6 +59,8 @@ const Bookings = () => {
         dateFormatting.endDate = moment(new Date(booking.endDate)).format('ddd MMM D YYYY')
         return dateFormatting
     });
+
+    let filteredSortedBooking = sortedBookings.filter(item=>(item.status==="confirmed"))
     let hotelNameFetched='';
     let hotelLocationFetched = '';
     const [hotelId, setHotelId] = useState();
@@ -283,7 +285,7 @@ const Bookings = () => {
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {Object.values(sortedBookings).map(bookingInfo => <Grid item xs={12}>
+                    {Object.values(filteredSortedBooking).map(bookingInfo => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"

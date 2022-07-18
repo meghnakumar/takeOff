@@ -3,40 +3,41 @@ const mongoose = require("mongoose");
 const max = 10000;
 const min = 500;
 
-const CardSchema = new mongoose.Schema({
-	cardName: {
-		type: String,
-		required: true,
-	},
-    cardNumber: {
-		type: String,
-		required: true,
-	},
-    cardExpiry: {
-		type: Date,
-		required: true,
-	},
-    cardType: {
-		type: String,
-		required: true,
-	},
-});
-
+const CardSchema = new mongoose.Schema(
+  {
+    card_name: {
+      type: String,
+      required: true,
+    },
+    card_number: {
+      type: String,
+      required: true,
+    },
+    card_company: {
+      type: String,
+      required: true,
+    },
+    card_type: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+);
 
 const PaymentSchema = new mongoose.Schema({
-	user_id: {
-		type: String,
-		required: true,
-	},
-    Balance:{
-        type: Number,
-        Default: Math.floor(Math.random()*(max-min+1)+min),
-    },
-	Cards: {
-		type: [CardSchema],
-		required: true,
-	},
-	
+  userId: {
+    type: String,
+    required: true,
+  },
+  balance: {
+    type: Number,
+    Default: Math.floor(Math.random() * (max - min + 1) + min),
+  },
+  cards: {
+    type: [CardSchema],
+    required: true,
+  },
 });
 
-module.exports = Payments = mongoose.model("payments", PaymentSchema);
+module.exports = Payments = mongoose.model("payment", PaymentSchema, "payment");

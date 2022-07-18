@@ -32,6 +32,7 @@ Renders the room details about a specific hotel and provides the option to creat
 
 const HotelDetail = () => {
     let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
+    const [userIdPresent, setUserIdPresent] = useState(false)
     const goToReadReviews = useNavigate();
     const location = useLocation();
     const [departureValue, setDepartureValue] = useState(null);
@@ -67,6 +68,11 @@ const HotelDetail = () => {
         userId:userId,
         hotelId:location.state.hotelid,
         img: location.state.img
+    })
+
+    useEffect(()=>{
+        if(userId !== undefined)
+            setUserIdPresent(true)
     })
 
 
