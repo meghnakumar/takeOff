@@ -123,16 +123,26 @@ export default function SignupForm(props) {
     }, 500);
   }
 
+
+  const loginFailed = () => {
+      showSnackBox(false);
+      setTimeout(() => {
+          showSnackBox(false);
+      }, 500);
+    }
+
   const SaveUserDetails = () => {   
     const result = validationscheck();
     if(result !== "noerror"){
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
-                    loginSuccessful();
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( ()=>{
+          console.log("abc");
+          
+          loginSuccessful();
 
-                });
+          });
     } 
   }
   
@@ -166,8 +176,9 @@ export default function SignupForm(props) {
             </div>
             <br></br>
 
-            {snackBox ?
-              <Snackbox message="User logged in succesfully" severity="success" /> : null
+            {
+            snackBox ?
+              <Snackbox message="User logged in succesfully" severity="success" /> : <Snackbox message="Wrong credential!" severity="error" />
             }
 
             <div className='reg-text'>
@@ -176,7 +187,7 @@ export default function SignupForm(props) {
             </div>
 
             <div className='reg-text'>
-                <a href="/reset">Forgot password?</a>
+                <a href="/generateReset">Forgot password?</a>
             </div>
         </form>
         
