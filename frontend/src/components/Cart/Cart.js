@@ -10,17 +10,20 @@ import CartTotal from "./CartTotal/CartTotal";
 import { useEffect } from "react";
 
 const Cart = () => {
-  // get userId using Redux
+  const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
 
-  const [userId, setUserId] = useState("user1");
+  const [userId, setUserId] = useState(
+    JSON.parse(localStorage.getItem("userDetails"))._id
+  );
+
   useEffect(() => {
     // set userid
   });
   return (
     <div className="Cart">
       <CartHeader />
-      <CartTotal userid={userId} />
-      <CartList userid={userId} />
+      <CartTotal userid={userid} />
+      <CartList userid={userid} />
     </div>
   );
 };
