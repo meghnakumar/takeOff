@@ -1,16 +1,30 @@
 import React from "react";
 import "./WalletHistory.scss";
-import FlightTakeoffSharpIcon from "@mui/icons-material/FlightTakeoffSharp";
-import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
 import CheckSharpIcon from "@mui/icons-material/CheckSharp";
 import ClearSharpIcon from "@mui/icons-material/ClearSharp";
-import BedSharpIcon from "@mui/icons-material/BedSharp";
 import AccountBalanceWalletSharpIcon from "@mui/icons-material/AccountBalanceWalletSharp";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
+import { baseURL } from "../../../services/httpService";
+import CelebrationSharpIcon from "@mui/icons-material/CelebrationSharp";
 
 //references
 //https://mui.com/material-ui/
 
-const WalletHistory = () => {
+const WalletHistory = (props) => {
+  const [history, setHistory] = useState();
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    const res = axios
+      .get(baseURL + `/wallet/history/` + props.userId)
+      .then((result) => {
+        setHistory(result.data);
+        console.log(result.data);
+      });
+  }, []);
+
   return (
     <div className="WalletHistory">
       <div className="wallet-history-bg">
@@ -32,102 +46,158 @@ const WalletHistory = () => {
             </div>
           </div>
 
-          <div className="card">
-            <div className="card-body">
-              <div className="row flex-center">
-                <div className="row">
-                  <div className="col-lg-1 icon div-v">
-                    <FlightTakeoffSharpIcon fontSize="large"></FlightTakeoffSharpIcon>
-                  </div>
-                  <div className="col-lg-3 col-md-3">
-                    <div className="row div-v1">
-                      <div className="col-lg-5 col-md-5 div-10">Toronto</div>
-                      <div className="col-lg-2 col-md-2 div-10">
-                        <ArrowForwardSharpIcon />
+          {history &&
+            history.map((item) => {
+              if (
+                item["type"] === "booking" &&
+                item["status"] === "successful"
+              ) {
+                return (
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="row flex-center">
+                        <div className="row">
+                          <div className="col-lg-1 icon div-v">
+                            <CelebrationSharpIcon fontSize="large"></CelebrationSharpIcon>
+                          </div>
+                          <div className="col-lg-3 col-md-3">
+                            <div className="row div-v1  div-10">
+                              {item.message}
+                            </div>
+                            <div className="div-v2 div-10">{item.date}</div>
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v  div-10">
+                            <div>{item._id.substring(10)}</div>
+                          </div>
+                          <div className="col-lg-2 col-md-2 div-v">
+                            - ${item.price}
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v">
+                            <div className="row transaction-successful">
+                              <div className="col-lg-2">
+                                <CheckSharpIcon />{" "}
+                              </div>
+                              <div className="col-lg-10">Successful</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="col-lg-5 col-md-5 div-10">Halifax</div>
                     </div>
-                    <div className="div-v2 div-10">Air Canada, IS 555</div>
-                    <div className="div-v2 div-10">July 11, 2022</div>
                   </div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    <div>964266273648</div>
-                  </div>
-                  <div className="col-lg-2 col-md-2 div-v">- $115.87</div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    <div className="row transaction-successful">
-                      <div className="col-lg-2">
-                        <CheckSharpIcon />{" "}
+                );
+              } else if (
+                item["type"] === "booking" &&
+                item["status"] === "unsuccessful"
+              ) {
+                return (
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="row flex-center">
+                        <div className="row">
+                          <div className="col-lg-1 icon div-v">
+                            <CelebrationSharpIcon fontSize="large"></CelebrationSharpIcon>
+                          </div>
+                          <div className="col-lg-3 col-md-3">
+                            <div className="row div-v1  div-10">
+                              {item.message}
+                            </div>
+                            <div className="div-v2 div-10">{item.date}</div>
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v  div-10">
+                            <div>{item._id.substring(10)}</div>
+                          </div>
+                          <div className="col-lg-2 col-md-2 div-v">
+                            - ${item.price}
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v">
+                            <div className="row transaction-unsuccessful">
+                              <div className="col-lg-2">
+                                <ClearSharpIcon />{" "}
+                              </div>
+                              <div className="col-lg-10">Unsuccessful</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="col-lg-10">Successful</div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* -------------------------- */}
-
-          <div className="card">
-            <div className="card-body">
-              <div className="row flex-center">
-                <div className="row">
-                  <div className="col-lg-1 icon div-v">
-                    <BedSharpIcon fontSize="large"></BedSharpIcon>
-                  </div>
-                  <div className="col-lg-3 col-md-3">
-                    <div className="row div-v1  div-10">Radisson Blu Hotel</div>
-                    <div className="div-v2 div-10">
-                      249 Queen's Quay West, Toronto
-                    </div>
-                    <div className="div-v2 div-10">July 11-15, 2022</div>
-                  </div>
-                  <div className="col-lg-3 col-md-3 div-v  div-10">
-                    <div>374266835696</div>
-                  </div>
-                  <div className="col-lg-2 col-md-2 div-v">- $256.87</div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    <div className="row transaction-unsuccessful">
-                      <div className="col-lg-2">
-                        <ClearSharpIcon />{" "}
+                );
+              } else if (
+                item["type"] === "add" &&
+                item["status"] === "successful"
+              ) {
+                return (
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="row flex-center">
+                        <div className="row">
+                          <div className="col-lg-1 icon div-v">
+                            <AccountBalanceWalletSharpIcon fontSize="large"></AccountBalanceWalletSharpIcon>
+                          </div>
+                          <div className="col-lg-3 col-md-3">
+                            <div className="row div-v1  div-10">
+                              {item.message}
+                            </div>
+                            <div className="div-v2 div-10">{item.date}</div>
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v  div-10">
+                            <div>{item._id.substring(10)}</div>
+                          </div>
+                          <div className="col-lg-2 col-md-2 div-v">
+                            + ${item.price}
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v">
+                            <div className="row transaction-successful">
+                              <div className="col-lg-2">
+                                <CheckSharpIcon />{" "}
+                              </div>
+                              <div className="col-lg-10">Successful</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="col-lg-10">Unsuccessful</div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* -------------------------------- */}
-
-          <div className="card">
-            <div className="card-body">
-              <div className="row flex-center">
-                <div className="row">
-                  <div className="col-lg-1 icon div-v">
-                    <AccountBalanceWalletSharpIcon fontSize="large"></AccountBalanceWalletSharpIcon>
-                  </div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    Adding Money to Wallet
-                  </div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    <div>563856374958</div>
-                  </div>
-                  <div className="col-lg-2 col-md-2 div-v">+ $400.00</div>
-                  <div className="col-lg-3 col-md-3 div-v">
-                    <div className="row transaction-successful">
-                      <div className="col-lg-2">
-                        <CheckSharpIcon />{" "}
+                );
+              } else if (
+                item["type"] === "add" &&
+                item["status"] === "unsuccessful"
+              ) {
+                return (
+                  <div className="card">
+                    <div className="card-body">
+                      <div className="row flex-center">
+                        <div className="row">
+                          <div className="col-lg-1 icon div-v">
+                            <AccountBalanceWalletSharpIcon fontSize="large"></AccountBalanceWalletSharpIcon>
+                          </div>
+                          <div className="col-lg-3 col-md-3">
+                            <div className="row div-v1  div-10">
+                              {item.message}
+                            </div>
+                            <div className="div-v2 div-10">{item.date}</div>
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v  div-10">
+                            <div>{item._id.substring(10)}</div>
+                          </div>
+                          <div className="col-lg-2 col-md-2 div-v">
+                            - ${item.price}
+                          </div>
+                          <div className="col-lg-3 col-md-3 div-v">
+                            <div className="row transaction-unsuccessful">
+                              <div className="col-lg-2">
+                                <ClearSharpIcon />{" "}
+                              </div>
+                              <div className="col-lg-10">Unsuccessful</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="col-lg-10">Successful</div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                );
+              }
+            })}
         </div>
       </div>
     </div>
