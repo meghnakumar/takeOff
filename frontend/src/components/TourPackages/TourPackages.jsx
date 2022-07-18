@@ -19,7 +19,14 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
 import { getTours } from "../../services/tourServices";
-const theme = createTheme();
+import "./tours.scss";
+const theme = createTheme({
+	palette: {
+		background: {
+			default: "#e0f8fe",
+		},
+	},
+});
 const style = {
 	position: "absolute",
 	top: "50%",
@@ -56,16 +63,25 @@ export default function Album() {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<main>
-				{/* Hero unit */}
+				<div className={"tourPackages"}>
+					<h1
+						style={{
+							color: " #c9d0d4",
+							fontFamily: "Helvetica Neue",
+							fontSize: "46px",
+						}}
+					>
+						“The journey of a thousand miles begins with a single step.”
+					</h1>
+				</div>
 				<Container sx={{ py: 8 }} maxWidth="md">
-					{/* End hero unit */}
 					<Grid container spacing={4}>
 						{tour.map((card) => (
-							<Grid item key={card.id}>
+							<Grid item key={card.id} container spacing={5} sx={{ mt: 1 }}>
 								<Card
 									sx={{
 										display: "flex",
-										width: 800,
+										width: 1000,
 										height: 320,
 										color: "#00838f",
 									}}
@@ -91,7 +107,7 @@ export default function Album() {
 												variant="h5"
 												sx={{ color: "#00838f" }}
 											>
-												{card.price}
+												${card.price}
 											</Typography>
 										</CardContent>
 										<CardActions>
@@ -107,7 +123,7 @@ export default function Album() {
 									<CardMedia
 										component="img"
 										sx={{ width: 200 }}
-										image="https://source.unsplash.com/random"
+										image="https://images.unsplash.com/photo-1523568129082-a8d6c095638e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=788&q=80"
 										alt="Live from space album cover"
 									/>
 								</Card>
@@ -128,7 +144,7 @@ export default function Album() {
 												<Card sx={{ minWidth: 600 }}>
 													<CardMedia
 														component="img"
-														image="https://source.unsplash.com/random"
+														image="https://images.unsplash.com/photo-1523568129082-a8d6c095638e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=788&q=80"
 														alt="party"
 														sx={{ maxHeight: 120 }}
 													/>
@@ -153,7 +169,7 @@ export default function Album() {
 															color="text.secondary"
 															sx={{ mt: 2, color: "#00838f" }}
 														>
-															{card.price}
+															${card.price}
 														</Typography>
 														<Typography
 															variant="subtitle1"
@@ -187,7 +203,7 @@ export default function Album() {
 															paragraph
 															sx={{ mt: 2, color: "#00838f" }}
 														>
-															Arrival - {card.trans_arrival_destination} :{" "}
+															Arrival - {card.destination} :{" "}
 															{card.trans_arrival}
 														</Typography>
 													</CardContent>
