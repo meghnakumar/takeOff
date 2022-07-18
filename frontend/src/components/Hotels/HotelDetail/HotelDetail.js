@@ -31,7 +31,7 @@ Renders the room details about a specific hotel and provides the option to creat
 //https://mui.com/material-ui/
 
 const HotelDetail = () => {
-
+    let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
     const goToReadReviews = useNavigate();
     const location = useLocation();
     const [departureValue, setDepartureValue] = useState(null);
@@ -64,10 +64,11 @@ const HotelDetail = () => {
         numberOfRooms:0,
         guestName:'',
         status:'',
-        userId:'',
+        userId:userId,
         hotelId:location.state.hotelid,
-        img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
+        img: location.state.img
     })
+
 
     //function to handle all the form input and provide appropriate validation checks for it.
     const handleOnInput = (e) => {
@@ -150,11 +151,6 @@ const HotelDetail = () => {
 
     }
 
-    useEffect(()=>{
-        console.log(location.state)
-    })
-
-
     //function to perform actions on submitting the form by calling the add to cart API and then storing it in booking collection by making a an api call
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -177,7 +173,7 @@ const HotelDetail = () => {
                     const bookingId = result.data._id
                     const cartItem = {
                         type:"hotel",
-                        userId:"user1",
+                        userId:userId,
                         itemId:bookingId,
                         price: hotelBookingSummary.price
                     }
@@ -229,7 +225,6 @@ const HotelDetail = () => {
 
 
     const handleReviewsClick = () => {
-        console.log(location.state)
         goToReadReviews("/read-reviews", {state:{hotelid:location.state.hotelid, reviews:location.state.reviews}})
     }
 
@@ -262,7 +257,6 @@ const HotelDetail = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>{hotelData.name}</h1>*/}
                             <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>{location.state.hotelname}</div>
                         </div>
 
@@ -295,7 +289,7 @@ const HotelDetail = () => {
                                     <Typography gutterBottom variant="h5" fontFamily="fantasy" component="div">
                                         {roomInfo.name}
                                     </Typography>
-                                    <Typography fontWeight="bold" variant="h6">$120 +$45 taxes & fees</Typography>
+                                    <Typography fontWeight="bold" variant="h6">${roomInfo.price} +${roomInfo.tax} taxes & fees</Typography>
                                     <Typography color="text.primary">
                                         {roomInfo.size}
                                     </Typography>
@@ -376,7 +370,6 @@ const HotelDetail = () => {
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error" >Cancel</Button>
                             <Button type="submit" onClick={()=>{
-                                console.log("location", location.state.place)
                                 setHotelBookingSummary({
                                     startDate: departureValue,
                                     endDate:returnValue,
@@ -389,10 +382,10 @@ const HotelDetail = () => {
                                     guestName:guestName,
                                     email:email,
                                     status:'Pending',
-                                    userId:'user1',
+                                    userId:userId,
                                     hotelId:hotelBookingSummary.hotelId,
                                     price: parseInt(roomNumber)*(createBooking.roomInfo.price+createBooking.roomInfo.tax),
-                                    img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
+                                    img:location.state.img
                                 });
                             }}>Add to cart</Button>
                         </DialogActions>

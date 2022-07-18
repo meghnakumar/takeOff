@@ -22,12 +22,15 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import {
     cancelHotelBooking,
     getHotelBookingByUserId,
     modifyHotelBooking
 } from "../../../services/hotelServices";
-import {addReviewHotel} from "../../../services/reviewsService"
+import {addReviewHotel} from "../../../services/reviewsService";
+import moment from "moment";
 
 /*Author: Created by Meghna Kumar
 Renders the list of bookings for the user by sorting them from latest to oldest. Providing modify and cancel option for upcoming bookings and
@@ -38,6 +41,9 @@ add review option for completed bookings*/
 //references
 //https://mui.com/material-ui/
 const Bookings = () => {
+    let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
+    let firstName = JSON.parse(localStorage.getItem("userDetails")).firstName;
+    let lastName = JSON.parse(localStorage.getItem("userDetails")).lastName;
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
     const [modifiedEmail, setEmail] = useState();
@@ -47,7 +53,12 @@ const Bookings = () => {
     const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
     const [modifyBooking, setModifyBooking] = useState({bookingInfo: ""});
     const [bookingData, setBookingData] = useState([]);
-    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate));
+    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate)).map(booking => {
+        let dateFormatting = booking
+        dateFormatting.startDate = moment(new Date(booking.startDate)).format('ddd MMM D YYYY')
+        dateFormatting.endDate = moment(new Date(booking.endDate)).format('ddd MMM D YYYY')
+        return dateFormatting
+    });
     let hotelNameFetched='';
     let hotelLocationFetched = '';
     const [hotelId, setHotelId] = useState();
@@ -69,7 +80,8 @@ const Bookings = () => {
     const [feedback, setFeedback] = useState();
     const [rating, setRating] = useState();
     const [feedbackSummary, setFeedbackSummary] = useState({
-        name:'user1',
+        userId:userId,
+        name:firstName+" "+lastName,
         hotelName:'',
         location:'',
         feedback:'',
@@ -77,9 +89,11 @@ const Bookings = () => {
     });
     const [openReviewSnackBar, setOpenReviewSnackBar] = useState(false);
 
+    const handleCloseReviewDialog = () => {
+        setOpenReview(false)
+    }
     const handleReviewClick = (bookingInfo) =>{
         setOpenReview(true);
-        console.log("Booking Info::::::::::::", bookingInfo)
         hotelNameFetched = bookingInfo.hotelName
         hotelLocationFetched = bookingInfo.location
         setHotelId(bookingInfo.hotelId)
@@ -87,18 +101,6 @@ const Bookings = () => {
             return {...prevState, hotelName: hotelNameFetched,location:hotelLocationFetched}
         })
     }
-
-    const handleCloseReview = () => {
-        if(reviewValidationError.ratingError===''&&
-        reviewValidationError.feedbackError===''){
-            setOpenReview(false)
-            setOpenReviewSnackBar(true);
-        }
-        else{
-            setShowErrors(true)
-        }
-    }
-
     const handleOnInput = (e) => {
 
         const {id, value} = e.target;
@@ -145,7 +147,7 @@ const Bookings = () => {
 
 
     useEffect(() => {
-        getHotelBookingByUserId("user1").then(result => {
+        getHotelBookingByUserId(userId).then(result => {
             setBookingData(result.data);
         }).catch(err => {
             console.error(err);
@@ -161,7 +163,7 @@ const Bookings = () => {
 
     const handleClose = () => {
         setOpen(false);
-        getHotelBookingByUserId("user1").then(result => {
+        getHotelBookingByUserId(userId).then(result => {
             setBookingData(result.data);
         }).catch(err => {
             console.error(err);
@@ -187,21 +189,25 @@ const Bookings = () => {
         e.preventDefault();
         setOpenModifyForm(false)
         setOpenModifySnackBar(true);
-        console.log('modified data',modifySummary)
         modifyHotelBooking(modifySummary, modifyBooking.bookingInfo._id).then(result =>{
             console.log(result.data)
         })
     }
+
+    // here
     const handleReviewSubmit = (e) => {
         e.preventDefault();
-        setOpenReview(false)
-        setOpenReviewSnackBar(true);
-        console.log("Hotel name in review::::::::::",hotelNameFetched)
-        console.log("Hotel location:::::::::::",hotelLocationFetched)
-        console.log('feedback summary',feedbackSummary)
-        addReviewHotel(feedbackSummary, hotelId).then(result =>{
-            console.log(result.data)
-        })
+        if(reviewValidationError.ratingError===''&&
+            reviewValidationError.feedbackError===''){
+            setOpenReview(false)
+            setOpenReviewSnackBar(true);
+            addReviewHotel(feedbackSummary, hotelId).then(result =>{
+                console.log(result.data)
+            })
+        }
+        else{
+            setShowErrors(true)
+        }
     }
 
     const handleFeedbackInput = (e) =>{
@@ -267,9 +273,7 @@ const Bookings = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</h1>*/}
                             <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</div>
-                           {/* <Typography variant="h4" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</Typography>*/}
                         </div>
                     </div>
                 </div>
@@ -362,6 +366,7 @@ const Bookings = () => {
                         cancelHotelBooking(removeBooking.bookingInfo._id).then(result =>{
                             console.log(result.data)
                         })
+                        sortedBookings = sortedBookings.filter(booking => booking._id != removeBooking.bookingInfo._id);
                         handleClose();
                         setOpenSnackBar(true)
 
@@ -470,7 +475,19 @@ const Bookings = () => {
             </Snackbar>
 
             {/*Add Review starts*/}
-            <Dialog open={openReview} onClose={handleCloseReview}>
+            <Dialog open={openReview} onClose={handleCloseReviewDialog}>
+                <IconButton
+                    aria-label="close"
+                    onClick={handleCloseReviewDialog}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <DialogTitle>Add Review</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -498,6 +515,9 @@ const Bookings = () => {
                             }
 
                             }>Add</Button>
+                            <Button onClick={handleCloseReviewDialog}>
+                                Cancel
+                            </Button>
                         </DialogActions>
 
                     </Form>
