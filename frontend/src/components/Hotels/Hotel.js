@@ -13,7 +13,7 @@ const Hotel = (props) => {
     const [openWishlistAlert, setOpenWishlistAlert] = useState({message:"", visibility:false});
     const goToDetailsPage= useNavigate();
     useEffect(()=>{
-        console.log(props.reviews)
+        console.log("capturing reviews::::::::::",props.feedback)
     })
 
 
@@ -33,7 +33,7 @@ const Hotel = (props) => {
 
     //function to redirect to the hotel detail page based on which hotel cards book button is clicked.
     const handleBookClick = () =>{
-        goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, place:place}})
+        goToDetailsPage("/hotel-detail", {state:{hotelid:id, rooms:props.rooms, hotelname:hotelname, place:place, reviews: props.feedback}})
 
     }
     return(
