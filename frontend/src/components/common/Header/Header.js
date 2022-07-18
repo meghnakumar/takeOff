@@ -10,7 +10,7 @@ import Logo from "../../../assets/images/flight.png";
 import { useNavigate } from "react-router-dom";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-const Header = () => {
+const Header = (props) => {
 
   const [userName, setUserName] = useState();
   const navigator = useNavigate();
@@ -20,7 +20,8 @@ const Header = () => {
 
   useEffect(() => {
     getUserName();
-  }, []);
+    console.log("isLoggedIn", props.isLoggedIn);
+  }, [props.isLoggedIn]);
 
   const getUserName = () => {
     let fullName = "";
@@ -111,14 +112,6 @@ return (
                 <li><Link className="dropdown-item" to="/profile" >My Profile</Link></li>
                 <li><Link className="dropdown-item" to="/bookings" >Hotel bookings</Link></li>
                 <li><Link className="dropdown-item" to="/flight-bookings" >Flight bookings</Link></li>
-                {/* <li>
-                  <a style={{color: "#000"}} className="dropdown-item">TEST
-                  </a>
-                  <ul className="submenu dropdown-menu">
-                  <li><Link className="dropdown-item" to="/profile" >Flight booking</Link></li>
-                  <li><Link className="dropdown-item" to="/bookings" >Hotel booking</Link></li>
-                  </ul>
-                </li> */}
                 <li><Link className="dropdown-item" to="/cart" >Cart</Link></li>
                 <li><Link className="dropdown-item" to="/wallet" >Wallet</Link></li>
                 <li className="dropdown-item logout" onClick={() => { logout() }}>Logout</li>

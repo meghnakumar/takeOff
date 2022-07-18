@@ -28,48 +28,17 @@ import Profile from "./components/Profile/Profile";
 import FlightBookings from "./components/Flights/FlightBookings/FlightBookings";
 
 
-//user management imports
-import userContext from "./context/userContext";
-import { getUsers } from "./services/userServices";
-import {
-	fetchUser,
-	addUser,
-	updateUser,
-} from "./services/userServices";
-
 function App() {
 	const location = useLocation();
-	const [ishome, setHome] = useState(false);
-	const [user, setUser] = useState([]);
-	useEffect(() => {
-		if (location.pathname === "/" || location.pathname === "/home") {
-			setHome(true);
-		} else {
-			setHome(false);
-		}
-
-
-
-        const getData = async () => {
-        			const { data: userData } = await fetchUser();
-        			setUser(userData);
-
-        		};
-
-		getData();
-	}, []);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	return (
-
-
-
-			<div className="App">
-				{ishome ? (
+	<div className="App">
+				{(location.pathname === "/" || location.pathname === "/home") ? (
 					<></>
 				) : (
 					<div>
-						<Header></Header> <div className="header-footer-margin"></div>
-
+						<Header isLoggedIn = {isLoggedIn} ></Header> <div className="header-footer-margin"></div>
 					</div>
 				)}
 				<Routes>
@@ -92,10 +61,10 @@ function App() {
 					<Route path="read-reviews" element={<ReadReviews />} />
 					<Route path="wallet" element={<Wallet />} />
 					<Route path="cart" element={<Cart />} />
-					<Route path="login" element={<Login />} />
+					<Route path="login" element={<Login setIsLoggedIn = {setIsLoggedIn} />} />
 					<Route path="signup" element={<SignUp />} />
 					<Route path="reset" element={<Reset />} />
-					<Route path="logout" element={<Logout />} />
+					<Route path="logout" element={<Logout setIsLoggedIn = {setIsLoggedIn} />} />
 					<Route path="profile" element={<Profile />} />
 				</Routes>
 </div>
