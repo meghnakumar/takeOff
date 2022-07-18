@@ -1,114 +1,51 @@
-
-  
-
-  
-
 <!--- The following README.md sample file was adapted from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md by Gabriella Mosquera for academic use --->
 
- 
-  
+# Assignment 3 | Group 13 - 'TakeOff'
 
-# Group 13 - Project Proposal 'TakeOff'
-  
-'TakeOff' is a travel management website which aims on providing the users with a one stop platform for flights, hotels, events and tours booking. The deployed website is currently a semi functional prototype demonstrating each feature of the website and the experience it will provide to the users. The website aims on providing a feedback to the user for all their actions. Every button provides a message to the user enhancing the user experience and usability of the website and also making sure that users are aware what each functionality offers. 
-  
+'TakeOff' is a travel management website which aims on providing the users with a one stop platform for flights, hotels, events and tours booking. The deployed website is currently a semi functional prototype demonstrating each feature of the website and the experience it will provide to the users. The website aims on providing a feedback to the user for all their actions. Every button provides a message to the user enhancing the user experience and usability of the website and also making sure that users are aware what each functionality offers.
 
-*  *Date Created*: 14 June 2022
+## Group Information
 
-  
-
-*  *Last Modification Date*: 16 June 2022
-
-  
-
-*  *Heroku URL*: <https://gp-13-we-project.herokuapp.com/>
-
-*  *Netlify URL*: <https://csci-5709-group13-takeoff.netlify.app/>
-  
-
-*  *Gitlab URL*: <https://git.cs.dal.ca/meghnak/csci-5709-group13/-/tree/main>
-
-  
-
-  
+- _Group No_: 13
+- _Date Created_: July 15, 2022
+- _Last Modification Date_: July 18, 2022
+- _Website URL_: <https://take-off-fe.herokuapp.com/>
+- _Git URL_: <https://git.cs.dal.ca/meghnak/csci-5709-group13/-/tree/main>
 
 ## Authors
-  
 
-* [Meghna Kumar](meghna.kumar@dal.ca) - *(Developer)*
-* [Bhavesh Lalwani](bhavesh.lalwani@dal.ca) - *(Developer)*
-* [Sharad Kumar](sharad.kumar@dal.ca) - *(Developer)*
-* [Harshit Lakhani](harshit.lakhani@dal.ca) - *(Developer)*
-* [Kalpit Macchi](kalpit.macchi@dal.ca) - *(Developer)*
-* [Jayasree Koluthungan](jy525824@dal.ca) - *(Developer)*
-
-  
-  
-
-  
+- [Meghna Kumar](meghna.kumar@dal.ca) - _(Developer)_
+- [Bhavesh Lalwani](bhavesh.lalwani@dal.ca) - _(Developer)_
+- [Sharad Kumar](sharad.kumar@dal.ca) - _(Developer)_
+- [Harshit Lakhani](harshit.lakhani@dal.ca) - _(Developer)_
+- [Kalpit Macchi](kalpit.macchi@dal.ca) - _(Developer)_
+- [Jayasree Koluthungan](jy525824@dal.ca) - _(Developer)_
 
 ## Getting Started
 
-  
-
-To get this app up and ready in your local, please adhere by the below details
-
-  
+To get this app up and ready in your local, please adhere by the below details.
 
 ### Prerequisites
 
-  
-
-  
-
-To have a local copy of this lab / assingnment / project up and running on your local machine, you will first need to install the following software / libraries / plug-ins
-
-  
-
-  
+To have a local copy of this lab / assingnment / project up and running on your local machine, you will first need to install the following software / libraries / plug-ins.
 
 ```
-
-  
-
 1. Install npm to run the app
 
 2. Any IDE as per your preference - used Webstorm
 
 3. CSS Library used - react-bootstrap
 
-4. Component Library used - Material UI and Chakra UI  
-
-``` 
-
-  
+4. Component Library used - Material UI and Chakra UI
+```
 
 See the following section for detailed step-by-step instructions on how to install this software / libraries / plug-ins
 
-  
-
-  
-
 ### Installing
-
-  
-
-  
 
 A step by step series of examples that tell you how to get a development env running
 
-  
-
-  
-  
-  
-
-  
-
 ```
-
-  
-
 1. Install Node in the System - Download it from <https://nodejs.org/en/download/>
 
 2. Install any IDE of the required preference - example Webstorm from JetBrains
@@ -124,167 +61,117 @@ A step by step series of examples that tell you how to get a development env run
 7. This will start the application on localhost:3000
 
 8. The application will be up and running on the browser
-
-  
-
 ```
-
-  
-
-  
 
 The application when running will render the home page of the website displaying all the options the website offers. All the options are accessible via routing and each feature can be accessed by the user with proper feedbacks added to help user understand the functionality.
 
 It is a completely responsive website, hence all the components on the pages adjusts on the screen irrespective of the device.
 
-  
-
-  
-
-## Running the tests
-
-  
-
-  
-
-This project has no test cases
-
-  
-
-  
-
-### Break down into end to end tests
-
-  
-
-  
-
-NA
-
-  
-
-  
-
-```
-
-  
-
-NA
-
-  
-
-```
-
-  
-
-  
-
-### And coding style tests
-
-  
-
-  
-
-NA
-
-  
-
-  
-
-```
-
-  
-
-NA
-
-  
-
-```
-
-  
-
-  
-
 ## Deployment
 
-  
-
-This project is deployed on Heroku and netlify.
-
-To deploy either Heroku CLI or CI/CD pipeline on git can be used.
-
-  
-
-  
+This project is deployed on Heroku.
 
 ## Built With
 
-  
-
-  
-
 <!--- Provide a list of the frameworks used to build this application, your list should include the name of the framework used, the url where the framework is available for download and what the framework was used for, see the example below --->
 
-  
+- [React](https://reactjs.org/) - Frontend library
 
-  
+- [Node](https://nodejs.org/en/download/) - Backend Javascript runtime
 
-* [React](https://reactjs.org/) - Frontend library
+- [NPM](https://www.npmjs.com/) - Package Manager
 
-* [Node](https://nodejs.org/en/download/) - Backend Javascript runtime
+- [Webstorm](https://www.jetbrains.com/webstorm/) - IDE
 
-* [NPM](https://www.npmjs.com/) - Package Manager
+- [Heroku](https://id.heroku.com/login) - Deployment Platform
 
-* [Webstorm](https://www.jetbrains.com/webstorm/) - IDE
+- [Material UI](https://mui.com/) - React Component Based library
+- [Chakra UI](https://chakra-ui.com/) - React Component Based library
 
-* [Heroku](https://id.heroku.com/login) - Deployment Platform
+- [react-bootstrap](https://react-bootstrap.netlify.app/getting-started/introduction/) - CSS React library
 
-* [Material UI](https://mui.com/) - React Component Based library
-* [Chakra UI](https://chakra-ui.com/) - React Component Based library
+- [Google Chrome](https://www.google.com/chrome/?brand=YTUH&gclsrc=aw.ds&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-M6CqP2YuWDYt-kUixqdZh3aJZmmYidnlKteQBojtpHPIToxTL5ZlYaAtzXEALw_wcB) - Browser used for testing
 
-* [react-bootstrap](https://react-bootstrap.netlify.app/getting-started/introduction/) - CSS React library
+## Work Division
 
-* [Google Chrome](https://www.google.com/chrome/?brand=YTUH&gclsrc=aw.ds&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-M6CqP2YuWDYt-kUixqdZh3aJZmmYidnlKteQBojtpHPIToxTL5ZlYaAtzXEALw_wcB) - Browser used for testing
+#### Sharad Kumar
 
-  
-  
-  
-  
-  
-  
-  
+<br/>
+#### Meghna Kumar
 
-  
+<br/>
+#### Bhavesh Lalwani
 
+<br/>
+#### Jayasree Kulothungan
 
+<br/>
+#### Kalpit Machhi
+
+Feature developed:
+
+- **Cart Management**
+  - Adding items to cart
+  - Calculating cart total
+  - Removing items from cart
+  - Displaying cart items
+    <br/>
+- **Wallet Management**
+  - Adding items to cart
+  - Calculating cart total
+  - Removing items from cart
+  - Displaying cart items
+
+**Front-end Files**
+
+_1. frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
+_2. rontend\src\components\Cart\CartHeader\CartHeader.js_: It is child component for displaying the header for the cart page.
+_3. frontend\src\components\Cart\CartList\CartList.js_: It makes a get request to fetch all the cart items for the user. Then, it displays the list of items. It also provides a button to delete a cart item which makes a delete request. It removes the item from the database.
+_4. frontend\src\components\Cart\CartTotal\CartTotal.js_: It is responsible for getting the item data from the database and calculating the total amount for the cart items.
+_5. frontend\src\components\Wallet\Wallet.js_: It is the parent component for the wallet feature.
+_6. frontend\src\components\Wallet\WalletHistory\WalletHistory.js_: It makes a get request to fetch the wallet history from the database and displays the wallet transactions.
+_7. frontend\src\components\Wallet\WalletBalance\WalletBalance.js_: It is responsible for dispaying the current wallet balance to the user.
+
+**Back-end Files**
+
+_1. backend\routes\cartRoute.js_: It includes all the routes for the cart feature.
+_2. backend\controller\cart.js_: It includes the controller logic for adding item to the cart, deleting item from the cart, and getting cart items from the database.
+_3. backend\models\cartModel.js_: It contains the model schema for the cart table.
+_4. backend\routes\walletRoute.js_: It includes all the routes for the wallet feature.
+_5. backend\controller\wallet.js_: It contains controller logic for adding money to wallet, getting wallet balance, and fetching wallet history.
+_6. backend\models\walletModel.js_: It contains the model schema for the wallet table.
+<br/>
+
+#### Harshit Lakhani
+
+<br/>
 ## Sources Used
+
 The following sources were used in understanding some parts of this tutorial
 
 1. https://mui.com/material-ui/react-card/
-Referred to understand how the Card component of Material UI works and how it can be used in the website. Most of the pages like - Hotel detail page, flight detail page, flight bookings page have used it.
+   Referred to understand how the Card component of Material UI works and how it can be used in the website. Most of the pages like - Hotel detail page, flight detail page, flight bookings page have used it.
 
 2. https://mui.com/material-ui/react-grid/
-Referred to understand how to align card components in the form of grid. The files using card components have mostly used mui grid to align the cards.
- 
+   Referred to understand how to align card components in the form of grid. The files using card components have mostly used mui grid to align the cards.
+
 3. https://mui.com/material-ui/react-snackbar/
-Used Material UI's snackbar component to pop a toast message on click of certain user actions. 
+   Used Material UI's snackbar component to pop a toast message on click of certain user actions.
 
 4. https://mui.com/material-ui/react-dialog/
-User Material UI's dialog component to have booking form and modified it as per the requirement of the website.
+   User Material UI's dialog component to have booking form and modified it as per the requirement of the website.
 
 5. https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js
-Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
+   Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
 
 6. https://mui.com/material-ui/api/text-field/
-Referred to access text field and its properties while building signup form
+   Referred to access text field and its properties while building signup form
 
 7. https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
-Referred to access regex expression for email validation
+   Referred to access regex expression for email validation
 
 8. https://mui.com/material-ui/material-icons/?query=account
-Referred to access account icons to be places in profile screen
-
-  
+   Referred to access account icons to be places in profile screen
 
 ## Group Project Team - Group 13
 
@@ -302,10 +189,6 @@ Referred to access account icons to be places in profile screen
 
 - Meghna Kumar
 
-  
-
-  
-
 ## Acknowledgments
 
 - IDE Reference: https://www.jetbrains.com/webstorm/
@@ -316,14 +199,11 @@ Referred to access account icons to be places in profile screen
 
 - Frontend Library Reference: https://reactjs.org/
 
-- CSS Reference: https://react-bootstrap.netlify.app/getting-started/introduction/ 
+- CSS Reference: https://react-bootstrap.netlify.app/getting-started/introduction/
 
 - Color combination Reference: https://material.io/design/color/the-color-system.html
 
 - Component library Reference: https://mui.com/ and https://chakra-ui.com/
-
-
-  
 
 ### Image/Icon Reference
 
@@ -333,33 +213,29 @@ Referred to access account icons to be places in profile screen
 
 - Hotel Card Image Reference: https://unsplash.com/photos/jmkMl20jNS0
 
-- Hotel Card My bookings page References:  https://search.openverse.engineering/image/b1d8eef1-5ef9-411a-804d-e4148ef297eb
-https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
-https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
-https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
-https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
+- Hotel Card My bookings page References: https://search.openverse.engineering/image/b1d8eef1-5ef9-411a-804d-e4148ef297eb
+  https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
+  https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
+  https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
+  https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
 
 - Hotel detail room type image Reference: https://search.openverse.engineering/image/b3bbb3d2-b758-40f6-83c2-33bb3dd4d6aa
-https://search.openverse.engineering/image/b1277ef8-ce4d-4725-ac01-d50db359494f
-https://search.openverse.engineering/image/275e55c6-73fb-4197-bead-41e800b3724f
-https://search.openverse.engineering/image/302dc0c5-d728-4bcc-bb23-f4f9d0481b15
+  https://search.openverse.engineering/image/b1277ef8-ce4d-4725-ac01-d50db359494f
+  https://search.openverse.engineering/image/275e55c6-73fb-4197-bead-41e800b3724f
+  https://search.openverse.engineering/image/302dc0c5-d728-4bcc-bb23-f4f9d0481b15
 
--User Icon: https://mui.com/material-ui/material-icons/?query=user&theme=Outlined&selected=AccountCircleOutlined
-
-
-
+- User Icon: https://mui.com/material-ui/material-icons/?query=user&theme=Outlined&selected=AccountCircleOutlined
 
 ## References
-[1] Mui.com. 2022. _React Card component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-card/> [Accessed 13 June 2022].
 
-[2] Mui.com. 2022. _React Grid component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-grid/> [Accessed 14 June 2022].
+[1] Mui.com. 2022. _React Card component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-card/> [Accessed 11 July 2022].
 
-[3] Mui.com. 2022. _React Snackbar component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-snackbar/> [Accessed 16 June 2022].
+[2] Mui.com. 2022. _React Grid component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-grid/> [Accessed 4 July 2022].
 
-[4] Mui.com. 2022. _React Dialog component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-dialog/> [Accessed 16 June 2022].
+[3] Mui.com. 2022. _React Snackbar component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-snackbar/> [Accessed 29 June 2022].
 
-[5] JS, S., Balan, P., Louis, V. and Shukla, M., 2022. _Sort array by dates in React JS_. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js> [Accessed 16 June 2022].
+[4] Mui.com. 2022. _React Dialog component - Material UI_. [online] Available at: <https://mui.com/material-ui/react-dialog/> [Accessed 2 July 2022].
 
-[6] Creative Commons. 2022. _When we share, everyone wins - Creative Commons_. [online] Available at: <https://creativecommons.org/> [Accessed 16 June 2022].
+[5] JS, S., Balan, P., Louis, V. and Shukla, M., 2022. _Sort array by dates in React JS_. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js> [Accessed 16 July 2022].
 
- 
+[6] Creative Commons. 2022. _When we share, everyone wins - Creative Commons_. [online] Available at: <https://creativecommons.org/> [Accessed 1 July 2022].
