@@ -12,7 +12,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 
 const Header = () => {
 
-  const [userName, setUserName] = React.useState();
+  const [userName, setUserName] = useState();
   const navigator = useNavigate();
   const handleHomeRedirection = () => {
     navigator("/");
