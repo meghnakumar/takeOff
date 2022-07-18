@@ -4,7 +4,6 @@
 
 const Wallet = require("../models/walletModel");
 const WalletHistory = require("../models/walletHistoryModel");
-const mongodb = require("mongodb");
 
 module.exports.getWalletBalance = (req, res) => {
   Wallet.find({ userId: req.params.userId })
@@ -114,6 +113,7 @@ module.exports.addTransaction = (req, res) => {
     price: req.body.price,
     date: req.body.date,
     message: req.body.message,
+    status: req.body.status,
   });
   console.log(item);
 
