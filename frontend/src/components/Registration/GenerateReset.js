@@ -72,6 +72,8 @@ export default function ResetGenerateForm() {
 
   const passwordRest = () => {
     showSnackBox(true);
+    localStorage.setItem("email",PersonalDetailsList.Email);
+    
     setTimeout(() => {
         send(
             'service_aks72nt',

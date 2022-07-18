@@ -6,7 +6,7 @@ import './Registration.scss'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
-
+import {updateUser} from '../../services/userServices';
 //references
 //https://mui.com/material-ui/api/text-field/
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
@@ -38,10 +38,14 @@ export default function SignupForm() {
 
   const passwordRest = () => {
     showSnackBox(true);
+    let email=localStorage.getItem("email");
+    console.log("email is : "+email);
+    console.log("password is : "+PersonalDetailsList.Password);
     setTimeout(() => {
       showSnackBox(false);
+      updateUser({email:email, password:PersonalDetailsList.Password});
       navigate('/login', {state:null})
-    }, 3000);
+    }, 2000);
   }
 
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i

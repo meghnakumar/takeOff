@@ -25,14 +25,39 @@ module.exports.getUser = (req, res) => {
 
 
 module.exports.editUser = (req, res) => {
-	Users
-		.findOneAndUpdate(req.params.userId, req.body)
-		.then((info) =>
-			res.json({
-				msg: "Updated successfully",
-			})
-		)
-		.catch((err) => res.status(400).json({ error: "Unable to undate info" }));
+  const email = req.body.email;
+  const password = req.body.password;
+
+  Users.find({email : email})
+  .then((info) => {
+    console.log(info)
+    console.log(password)
+    console.log(email)
+    console.log("Updating password.");
+    info[0].password = req.body.password;
+    console.log(info[0]);
+
+    const result = info[0]
+      .save()
+      .then(() => {
+        console.log("Password updated.");
+      })
+      .catch(() => {
+        console.log("Password updation failed!");
+      });
+
+    res.json(result);
+  })
+
+
+	// Users
+	// 	.updateOne({email: new mongodb.ObjectID(req.params.id)}, {$set: req.body})
+	// 	.then((info) =>
+	// 		res.json({
+	// 			msg: "Updated successfully",
+	// 		})
+	// 	)
+	// 	.catch((err) => res.status(400).json({ error: "Unable to undate info" }));
 };
 
 // @route POST api/users/register
