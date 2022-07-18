@@ -25,17 +25,17 @@ export default function SignupForm() {
     setTimeout(() => {
         console.log(toSend);
         send(
-                  'service_aks72nt',
-                  'template_j2fcgeg',
-                  toSend,
-                  'BbOaPQawKNmE3FZf4'
-                )
-                  .then((response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                  })
-                  .catch((err) => {
-                    console.log('FAILED...', err);
-                  });
+              'service_aks72nt',
+              'template_j2fcgeg',
+              toSend,
+              'BbOaPQawKNmE3FZf4'
+            )
+              .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+              })
+              .catch((err) => {
+                console.log('FAILED...', err);
+              });
       showSnackBox(false);
       navigate('/login', {state:null})
     }, 1000);
@@ -84,14 +84,6 @@ const namepattern = /^[a-z]+$/i;
     ConfirmPassword : ""
   });
 
-//  let obj = {
-//      UserID : ,
-//      UserName:,
-//      FirstName: ,
-//      LastName :,
-//      Email : ,
-//  }
-//  localStorage.setItem("userDetails", obj);
 
 const [buttonPopup, setButtonPopup]=useState(false);
 
