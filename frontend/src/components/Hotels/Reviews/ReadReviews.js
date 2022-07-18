@@ -64,15 +64,16 @@ const ReadReviews = () =>{
        setReviewData(location.state.reviews)
         return () => {
             console.log(reviewData);
-            if(reviewData !== ''){
-                setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
+            if(location.state.reviews !== undefined){
+                console.log("here with", reviewData)
+                setSortedReviews(location.state.reviews.sort((a, b) => a.rating - b.rating));
             }
 
         };
     }, []);
 
 
-    const [sortReviews, setSortReviews] = React.useState('lowToHigh');
+    const [sortReviews, setSortReviews] = React.useState("lowToHigh");
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         console.log(event.target.value);
