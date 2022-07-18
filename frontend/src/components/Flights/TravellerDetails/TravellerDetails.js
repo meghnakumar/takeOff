@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Card, CardContent} from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useNavigate } from "react-router-dom";
 import Snackbox from '../../common/Snackbox/Snackbox';
 import { Box, FormControl, InputLabel, MenuItem, Select, Button } from '@mui/material';
 import { createFlightBooking, updateFlightBooking } from "./../../../services/flightBookingService";
@@ -34,6 +35,7 @@ const TravellerDetails = (props) => {
   const [cartBox, showCartBox] = useState();
   const [bookingModified, setBookingModified] = useState();
   const [travelerDetails, setTravelerDetails] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if(props.isModify) {
@@ -80,6 +82,7 @@ const TravellerDetails = (props) => {
       let travelerObj = props.flightObj;
       travelerObj.userId = userId;
       travelerObj.travelerDetails = travelerDetails;
+      travelerObj.price = travelerDetails[0].fareType == "standard" ? travelerObj.price : (props.flightObj.price + 30);
       travelerObj.status = "pending";
       createFlightBooking(travelerObj).then(result => {
         console.log(result);
@@ -95,7 +98,8 @@ const TravellerDetails = (props) => {
             showCartBox(true);
             setTimeout(() => {
               showCartBox(false);
-            }, 3000);
+              navigate("/cart");
+            }, 1000);
           })
         }
       }).catch(err => {
@@ -145,11 +149,6 @@ const TravellerDetails = (props) => {
     }
   }
 
-  const handleCountryChange = (event) => {
-    const { target: { value } } = event;
-    setCountry(value)
-  }
-
   const addTraveller = () => {
     setTravelerCount(travelerCount+1);
     let obj = {
@@ -165,7 +164,6 @@ const TravellerDetails = (props) => {
     } else {
       setTravelerDetails(travelerDetails => [...travelerDetails, obj]);
     }
-    console.log("travellers array", travelerDetails);
     showSnackBox(true);
     setTimeout(() => {
       showSnackBox(false);
@@ -275,9 +273,10 @@ const TravellerDetails = (props) => {
                     labelId="fare-type-label"
                     value={fareType}
                     label="Fare type"
+                    disabled={props.isModify}
                     onChange={handleFareChange}
                   >
-                    <MenuItem value={"standart"}>Standard</MenuItem>
+                    <MenuItem value={"standard"}>Standard</MenuItem>
                     <MenuItem value={"comfort"}>Comfort</MenuItem>
                   </Select>
                 </FormControl>

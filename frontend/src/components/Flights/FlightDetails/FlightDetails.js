@@ -15,7 +15,7 @@ import {useLocation} from "react-router-dom";
 const FlightDetails = () => {
   const flightDetails = useLocation().state.flightDetails;
   const flightReqDetails = useLocation().state.flightReqDetails;
-  console.log("navigationData ", flightDetails);
+  console.log("flight details ", flightDetails);
   console.log("flightReqDetails ", flightReqDetails);
   let flightObj = {
     flightCompany: flightDetails.flightCompany,
@@ -54,7 +54,7 @@ const FlightDetails = () => {
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Standard</b></div>
-                  <div>$ 150</div>
+                  <div>$ {flightDetails?.price} </div>
                 </div>
                 <p className="ta-l">Fare offered by airline.</p>
                 <div className="d-flex justify-content-between mb-3 p-2">
@@ -75,15 +75,13 @@ const FlightDetails = () => {
                 {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
               </CardActions>
             </Card>
-            {/* </ButtonBase> */}
 
             {/* 2nd fare card */}
-            {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
             <Card className="m-tp-16 col-sm-12 col-md-5" style={{ fontSize: "16px" }}>
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Comfort</b></div>
-                  <div>$ 180</div>
+                  <div>$ {flightDetails?.price + 30} </div>
                 </div>
                 <p className="ta-l">Fare offered by airline.</p>
                 <div className="d-flex justify-content-between mb-3 p-2">
@@ -100,11 +98,7 @@ const FlightDetails = () => {
                 </div>
                 <div></div>
               </CardContent>
-              <CardActions>
-                {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
-              </CardActions>
             </Card>
-            {/* </ButtonBase> */}
           </div>
         </div>
       </Paper>

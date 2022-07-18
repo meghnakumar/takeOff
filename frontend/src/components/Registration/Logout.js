@@ -14,7 +14,7 @@ import { send } from 'emailjs-com';
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
 //https://mui.com/material-ui/material-icons/?query=account
 
-export default function SignupForm() {
+export default function SignupForm(props) {
 
   let flag = "y";
 
@@ -41,6 +41,7 @@ export default function SignupForm() {
                     )
                       .then((response) => {
                         console.log('SUCCESS!', response.status, response.text);
+                        props.setIsLoggedIn(true);
                       })
                       .catch((err) => {
                         console.log('FAILED...', err);
