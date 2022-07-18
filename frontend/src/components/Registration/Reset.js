@@ -31,12 +31,7 @@ export default function SignupForm() {
   const [snackBox, showSnackBox] = React.useState();
 
   const [errorMessage,updateErrorMessage] = useState({
-    email : "",
-    userName:"",
-    phoneNumber: "",
-    firstName: "",
-    lastName : "",
-    DOB: "",
+    otp : "",
     password: "",
     confirmpassword: ""
   });
@@ -50,16 +45,13 @@ export default function SignupForm() {
   }
 
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-const namepattern = /^[a-z]+$/i;
+
 
   const [PersonalDetailsList, UpdatePersonalDetailsList] = useState({
-    UserID : "1",
-    UserName:"",
-    FirstName: "",
-    LastName : "",
-    Email : "",
+    Otp:"",
     Password : "",
-    ConfirmPassword : ""
+    ConfirmPassword : "",
+    
   });
 
 const [buttonPopup, setButtonPopup]=useState(false);
@@ -77,14 +69,15 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
     console.log(PersonalDetailsList);
     const errorlist = {};
-
+    let otp=localStorage.getItem("OTP");
+    console.log("otp is "+otp);
     if(PersonalDetailsList.Email===''){
-      errorlist.email="Email is required!";
+      errorlist.email="Otp field is empty!";
       flag = "n";
     }
-    else if(!emailpattern.test(PersonalDetailsList.Email))
+    else if(otp!==PersonalDetailsList.Email)
     {
-        errorlist.email = "Incorrect Email entered"
+        errorlist.email = "Incorrect OTP entered"
         flag = "n"; 
     }
 
@@ -92,8 +85,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
       errorlist.password="Password is required!";
       flag = "n";
     }
-    else if(PersonalDetailsList.Password.length<8){
-      errorlist.password="Please enter a password having atleast 8 characters"
+    else if(PersonalDetailsList.Password.length<5){
+      errorlist.password="Please enter a password having atleast 5 characters"
       flag = "n";
     }
     else if(PersonalDetailsList.Password.length>15){
@@ -105,8 +98,8 @@ const [buttonPopup, setButtonPopup]=useState(false);
         errorlist.confirmpassword="Confirm Password is required!";
         flag = "n";
       }
-      else if(PersonalDetailsList.ConfirmPassword.length<8){
-        errorlist.confirmpassword="Please enter a confirm password having atleast 8 characters"
+      else if(PersonalDetailsList.ConfirmPassword.length<5){
+        errorlist.confirmpassword="Please enter a confirm password having atleast 5 characters"
         flag = "n";
       }
       else if(PersonalDetailsList.ConfirmPassword.length>15){
@@ -145,9 +138,10 @@ const [buttonPopup, setButtonPopup]=useState(false);
             
               <br></br>
               <div class="mb-12 mt-12">
-              <TextField fullWidth='100%' size='small' id="email" label="email" variant="outlined"  name="Email" type='email' onChange={(e) => handleUserDetails(e)}/>
-              {errorMessage.email && <div> {errorMessage.email} </div>}
-              </div>
+            <TextField id="email" fullWidth='100%' label="OTP" variant="outlined" name="Email" onChange={(e) => handleUserDetails(e)}/>
+            {errorMessage.email && <div> {errorMessage.email} </div>}
+            </div>
+
               <br></br>
               <div class="mb-12 mt-12">
               <TextField fullWidth='100%' size='small' id="password" label="password" variant="outlined" name="Password" type='password' onChange={(e) => handleUserDetails(e) }/>
