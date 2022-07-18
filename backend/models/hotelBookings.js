@@ -57,6 +57,10 @@ const HotelBookingSchema = new mongoose.Schema({
     price:{
         type:Number,
         required:true
+    },
+    hotelId:{
+        type:String,
+        required:true
     }
 });
 

@@ -1,4 +1,4 @@
-import React, {useState,useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Form} from "react-bootstrap";
 import {
     Alert,
@@ -6,7 +6,7 @@ import {
     Card,
     CardActionArea,
     CardContent,
-    CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+    CardMedia, Dialog, DialogActions, DialogContent, DialogTitle,
     Grid,
     Paper, Snackbar,
     Typography
@@ -19,7 +19,6 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
-import {red} from "@mui/material/colors";
 import {useLocation} from "react-router-dom";
 import {createHotelBooking} from "../../../services/hotelServices";
 import {addCartItem} from "../../../services/cartServices";
@@ -33,6 +32,8 @@ Renders the room details about a specific hotel and provides the option to creat
 
 const HotelDetail = () => {
 
+    const goToReadReviews = useNavigate();
+    const location = useLocation();
     const [departureValue, setDepartureValue] = useState(null);
     const [returnValue, returnSetValue] = useState(null);
     const [guestName, setGuestName] = useState();
@@ -64,6 +65,7 @@ const HotelDetail = () => {
         guestName:'',
         status:'',
         userId:'',
+        hotelId:location.state.hotelid,
         img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
     })
 
@@ -169,6 +171,7 @@ const HotelDetail = () => {
             email !== null &&
             contact !== null &&
             roomNumber !== null) {
+            console.log("booking summary:::::::::::::::",hotelBookingSummary)
             createHotelBooking(hotelBookingSummary).then(result => {
                 if(result.status === 200){
                     const bookingId = result.data._id
@@ -197,9 +200,6 @@ const HotelDetail = () => {
 
 
 
-    const goToReadReviews = useNavigate();
-
-    const location = useLocation();
 
     //function to validate start date change
     const handleOnChangeStartDate = (value) =>{
@@ -390,6 +390,7 @@ const HotelDetail = () => {
                                     email:email,
                                     status:'Pending',
                                     userId:'user1',
+                                    hotelId:hotelBookingSummary.hotelId,
                                     price: parseInt(roomNumber)*(createBooking.roomInfo.price+createBooking.roomInfo.tax),
                                     img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
                                 });
