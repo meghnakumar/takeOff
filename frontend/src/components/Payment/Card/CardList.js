@@ -27,9 +27,12 @@ const PaymentCardList = ({ cards }) => {
 
   let getSelectedCard = (id) => {
     let details = {};
-    cards.map((card) => {
-      if (card.id === id) {
-        details = "You have selected card ending with " + card.digit + ".";
+    cards.map((card, index) => {
+      if (index === id) {
+        details =
+          "You have selected card ending with " +
+          card.card_number.substr(-4) +
+          ".";
         setSelectionStatus("success");
       }
     });
@@ -38,17 +41,24 @@ const PaymentCardList = ({ cards }) => {
   };
 
   const handleSelectedCard = (id) => () => {
+    console.log(id);
     setHighLight(id);
     setSelectedCard(getSelectedCard(id));
+  };
+
+  const getCardBackground = (index) => {
+    return backgrounds[index % 6];
   };
 
   return (
     <Box>
       <Stack direction={["row"]} className="overflow">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Card
+            id={index}
+            key={index}
             card={card}
-            bg={backgrounds[Math.floor(Math.random() * backgrounds.length)]}
+            bg={getCardBackground(index)}
             highlight={highlight}
             handleSelectedCard={handleSelectedCard}
           />

@@ -39,69 +39,52 @@ import {
 
 function App() {
 	const location = useLocation();
-	const [ishome, setHome] = useState(false);
-	const [user, setUser] = useState([]);
-	useEffect(() => {
-		if (location.pathname === "/" || location.pathname === "/home") {
-			setHome(true);
-		} else {
-			setHome(false);
-		}
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const { data: userData } = await fetchUser();
+      setUser(userData);
+    };
+    getData();
+  }, []);
 
-
-
-        const getData = async () => {
-        			const { data: userData } = await fetchUser();
-        			setUser(userData);
-
-        		};
-
-		getData();
-	}, []);
-
-	return (
-
-
-
-			<div className="App">
-				{ishome ? (
-					<></>
-				) : (
-					<div>
-						<Header></Header> <div className="header-footer-margin"></div>
-
-					</div>
-				)}
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="home" element={<Home />} />
-					<Route path="flights" element={<Flights />} />
-					<Route path="flight-details" element={<FlightDetails />} />
-					<Route path="flight-bookings" element={<FlightBookings />} />
-					<Route path="booking" element={<Bookings />} />
-					<Route path="events" element={<Events />} />
-					<Route path="events-booking" element={<BookingEvents />} />
-					<Route path="hotels" element={<Dashboard2 />} />
-					<Route path="tour-packages" element={<TourPackages />} />
-					<Route path="tour-booking" element={<BookingTours />} />
-					<Route path="Offers" element={<Offers />} />
-					<Route path="bus" element={<Bus />} />
-					<Route path="hotel-detail" element={<HotelDetail />} />
-					<Route path="bookings" element={<Bookings />} />
-					<Route path="payment" element={<Payment />} />
-					<Route path="read-reviews" element={<ReadReviews />} />
-					<Route path="wallet" element={<Wallet />} />
-					<Route path="cart" element={<Cart />} />
-					<Route path="login" element={<Login />} />
-					<Route path="signup" element={<SignUp />} />
-					<Route path="reset" element={<Reset />} />
-					<Route path="logout" element={<Logout />} />
-					<Route path="profile" element={<Profile />} />
-				</Routes>
-</div>
-
-
-	);
+  return (
+    <div className="App">
+      {location.pathname === "/" || location.pathname === "/home" ? (
+        <></>
+      ) : (
+        <div>
+          <Header></Header> <div className="header-footer-margin"></div>
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="flights" element={<Flights />} />
+        <Route path="flight-details" element={<FlightDetails />} />
+        <Route path="flight-bookings" element={<FlightBookings />} />
+        <Route path="booking" element={<Bookings />} />
+        <Route path="events" element={<Events />} />
+        <Route path="events-booking" element={<BookingEvents />} />
+        <Route path="hotels" element={<Dashboard2 />} />
+        <Route path="tour-packages" element={<TourPackages />} />
+        <Route path="tour-booking" element={<BookingTours />} />
+        <Route path="Offers" element={<Offers />} />
+        <Route path="bus" element={<Bus />} />
+        <Route path="hotel-detail" element={<HotelDetail />} />
+        <Route path="bookings" element={<Bookings />} />
+        <Route path="payment" element={<Payment />} />
+        <Route path="read-reviews" element={<ReadReviews />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="reset" element={<Reset />} />
+        <Route path="logout" element={<Logout />} />
+        <Route path="profile" element={<Profile />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
