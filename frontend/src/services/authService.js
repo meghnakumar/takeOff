@@ -1,11 +1,13 @@
 import http from "./httpService";
 import {addInitialBalance} from "./walletServices";
+import {addInitialUser} from "./paymentService";
 
 
 const apiEndpoint = "/auth/jwt/create/";
 const apiUserEndpoint = "/users/login";
 const apiUserSignupEndpoint = "/users/addUser";
 const apiUserFetchEndpoint = "/users/fetch";
+
 
 
 
@@ -44,6 +46,7 @@ async function signup(firstName,lastName, userName,email,password,confirmPasswor
              setUserToken(email);
              localStorage.setItem("token",res.data.token);
              addInitialBalance(JSON.parse(localStorage.getItem("userDetails"))._id);
+             addInitialUser(JSON.parse(localStorage.getItem("userDetails"))._id);
 
              }).catch((err)=>{
              console.log("data "+err);

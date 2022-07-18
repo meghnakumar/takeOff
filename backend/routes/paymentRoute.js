@@ -10,6 +10,6 @@ router.get("/getcards", getCards);
 router.post("/addcard", addCard);
 
 // to get the biggest offer going on
-router.post("/addinitialuser", addInitialUser);
+router.get("/addinitialuser/:id", addInitialUser);
 
 module.exports = router;
