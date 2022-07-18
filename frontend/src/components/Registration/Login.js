@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { send } from 'emailjs-com';
 import Snackbox from '../common/Snackbox/Snackbox';
 import {login} from '../../services/authService';
 import './Registration.scss'
@@ -20,12 +21,23 @@ export default function SignupForm() {
   const handleUserDetails = (e) => {
 
     const {name, value} = e.target;
+
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
+    console.log("email sent : ",toSend)
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
     console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
     
   }
+
+  const [toSend, setToSend] = useState({
+      from_name: "team@takeoff.com",
+      to_name: "",
+      reply_to:"",
+      Email:"",
+      message: "You are logged in! Welcome to the takeoff",
+    });
 
   const [errorMessage,updateErrorMessage] = useState({
     email : "",
@@ -92,8 +104,21 @@ export default function SignupForm() {
   const loginSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
-      showSnackBox(false);
-      navigate('/profile', {state:null})
+        send(
+              'service_aks72nt',
+              'template_j2fcgeg',
+              toSend,
+              'BbOaPQawKNmE3FZf4'
+            )
+              .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+              })
+              .catch((err) => {
+                console.log('FAILED...', err);
+              });
+
+        showSnackBox(false);
+        navigate('/profile', {state:null})
     }, 500);
   }
 
