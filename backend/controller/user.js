@@ -49,15 +49,6 @@ module.exports.editUser = (req, res) => {
     res.json(result);
   })
 
-
-	// Users
-	// 	.updateOne({email: new mongodb.ObjectID(req.params.id)}, {$set: req.body})
-	// 	.then((info) =>
-	// 		res.json({
-	// 			msg: "Updated successfully",
-	// 		})
-	// 	)
-	// 	.catch((err) => res.status(400).json({ error: "Unable to undate info" }));
 };
 
 // @route POST api/users/register

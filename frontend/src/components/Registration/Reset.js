@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
 import {updateUser} from '../../services/userServices';
+const bcrypt = require("bcryptjs");
+
 //references
 //https://mui.com/material-ui/api/text-field/
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
@@ -16,8 +18,6 @@ export default function SignupForm() {
 
   let flag = "y";
 
-
-  
   const handleUserDetails = (e) => {
 
     console.log("entered");
@@ -39,7 +39,15 @@ export default function SignupForm() {
   const passwordRest = () => {
     showSnackBox(true);
     let email=localStorage.getItem("email");
-    console.log("email is : "+email);
+    
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(PersonalDetailsList.Password, salt, (err, hash) => {
+        if (err) throw err;
+        PersonalDetailsList.Password = hash;
+        
+      });
+    });
+
     console.log("password is : "+PersonalDetailsList.Password);
     setTimeout(() => {
       showSnackBox(false);
@@ -49,7 +57,6 @@ export default function SignupForm() {
   }
 
 const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-
 
   const [PersonalDetailsList, UpdatePersonalDetailsList] = useState({
     Otp:"",
@@ -71,10 +78,10 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
   const validationscheck = () => {
 
-    console.log(PersonalDetailsList);
+    
     const errorlist = {};
     let otp=localStorage.getItem("OTP");
-    console.log("otp is "+otp);
+    
     if(PersonalDetailsList.Email===''){
       errorlist.email="Otp field is empty!";
       flag = "n";
