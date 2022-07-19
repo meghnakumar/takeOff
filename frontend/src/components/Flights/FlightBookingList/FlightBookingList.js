@@ -126,8 +126,8 @@ const FlightBookingList = () => {
                 <div className='small-txt'>{item?.flightDate}</div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>Travlers</div>
-                <div className='small-txt '>{item?.noOfTravelers}</div>
+                <div>Fare Type</div>
+                <div className='small-txt '>{item?.travelerDetails[0].fareType}</div>
               </div>
               <div className="col-lg-1 col-4">
                 <div>Cost</div>
@@ -191,10 +191,10 @@ const FlightBookingList = () => {
                     onClick={() => handleClickOpen(item?._id)} startIcon={<DeleteIcon/>}>
                     Cancel
                   </Button>
-                  <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
+                  {/* <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
                     onClick={() => alert("In progress, This is part of feature 2.")} startIcon={<RefreshIcon />}>
                     Rebook
-                  </Button>
+                  </Button> */}
                   
               </div>
           </div>
