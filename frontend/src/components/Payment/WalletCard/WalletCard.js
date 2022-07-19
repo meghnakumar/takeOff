@@ -22,10 +22,11 @@ import { useState } from "react";
 import CardList from "../Card/CardList";
 import { FaCaretDown, FaMoneyBill } from "react-icons/fa";
 import { DeductConfirm, Confirmation } from "./DeductConfirm";
-import { modifyHotelBooking } from "../../../services/hotelServices";
+import { updateHotelBookingStatus }  from "../../../services/hotelServices";
 import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
+import { GiCombinationLock } from "react-icons/gi";
 
 const WalletCard = ({ wallet, price, cart, cards, balance }) => {
   const toast = useToast();
@@ -82,11 +83,11 @@ const WalletCard = ({ wallet, price, cart, cards, balance }) => {
     cart.map((item) => {
       let res = JSON.parse(JSON.stringify({ status: "confirmed" }));
       if (item.type == "hotel") {
-        modifyHotelBooking(res, item.itemId);
+        updateHotelBookingStatus({"status":"confirmed"}, item.ItemId);
       } else if (item.type == "flight") {
-        updateBookingStatus(res, item.itemId);
+        updateBookingStatus(res, item.ItemId);
       } else if (item.type == "event") {
-        updateEventBooking(res, item.itemId);
+        updateEventBooking(res, item.ItemId);
       }
       deleteCartItem(item._id);
     });
