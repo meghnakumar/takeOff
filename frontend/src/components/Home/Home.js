@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 //references
 //https://mui.com/material-ui/
 
-const Home = () => {
+const Home = ({ isLoggedIn }) => {
   const navigator = useNavigate("/home");
 
   const handleNavigation = (value) => {
@@ -67,13 +67,13 @@ const Home = () => {
           >
             <Flex justifyContent="center">
               <Center>
-                <Image src={Logo} w="35px" h="35px" />
-                <Text ml={2} color="white" fontSize="22px" fontWeight="bold">
+                <Image src={Logo} w="45px" h="45px" />
+                <Text ml={2} color="white" fontSize="42px" fontWeight="bold">
                   Takeoff
                 </Text>
               </Center>
             </Flex>
-            <HomeSearch />
+            {/* <HomeSearch /> */}
           </GridItem>
 
           <GridItem
@@ -133,6 +133,7 @@ const Home = () => {
                 bg="white"
                 onClick={() => handleNavigation("login")}
                 style={{ cursor: "pointer" }}
+                display={!isLoggedIn ? "block" : "none"}
               >
                 <Badge variant="subtle" colorScheme="blue">
                   Login
