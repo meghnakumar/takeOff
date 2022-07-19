@@ -5,7 +5,7 @@ import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login,setUserToken} from '../../services/authService';
 import './Registration.scss'
 import { send } from 'emailjs-com';
 
@@ -29,6 +29,8 @@ export default function SignupForm(props) {
   }
 
   const [snackBox, showSnackBox] = React.useState();
+  const [errorSnackBox, showErrorSnackBox] = React.useState();
+
 
   const loginSuccessful = () => {
     showSnackBox(true);
@@ -63,7 +65,7 @@ export default function SignupForm(props) {
   });
 
   const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-  const namepattern = /^[a-z]+$/i;
+
 
   const [PersonalDetailsList, UpdatePersonalDetailsList] = useState({
     UserID : "1",
@@ -119,6 +121,13 @@ export default function SignupForm(props) {
         return "noerror";
   }
 
+  const loginFailed = () => {
+    console.log("login failed")
+    showErrorSnackBox(true);
+      setTimeout(() => {
+        showErrorSnackBox(false);
+      }, 1000);
+    }
 
   const SaveUserDetails = () => {   
 
@@ -127,8 +136,14 @@ export default function SignupForm(props) {
           updateErrorMessage(result);
         } else{
 
-            login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
-                        loginSuccessful();
+          login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+            if(res){
+              setUserToken(PersonalDetailsList.Email);
+              localStorage.setItem("token",res.data.token);
+              loginSuccessful();
+            }else{
+              loginFailed();
+            }
             });
         }
   }
@@ -171,9 +186,14 @@ export default function SignupForm(props) {
             <div class="mb-3 mt-3">
             <Button id="submit" className="registrationbutton" size='small' variant="contained" onClick={SaveUserDetails}>Submit</Button>
             </div>
-                        
-            {snackBox ?
+             
+            {
+            snackBox ?
               <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+            {
+            errorSnackBox ?
+              <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
             <div className='reg-text'>

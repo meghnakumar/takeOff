@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { send } from 'emailjs-com';
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login, setUserToken} from '../../services/authService';
 import './Registration.scss'
 
 //references
@@ -99,8 +99,13 @@ export default function SignupForm(props) {
         return "noerror";
   }
 
+<<<<<<< HEAD
   const [success, showSuccess] = React.useState();
   const [error, showError] = React.useState();
+=======
+  const [snackBox, showSnackBox] = React.useState();
+  const [errorSnackBox, showErrorSnackBox] = React.useState();
+>>>>>>> cb5efad (added error messages for wrong credential)
 
   const loginSuccessful = () => {
     showSuccess(true);
@@ -125,10 +130,18 @@ export default function SignupForm(props) {
 
 
   const loginFailed = () => {
+<<<<<<< HEAD
     showError(true);
       setTimeout(() => {
         showError(false);
       }, 500);
+=======
+    console.log("login failed")
+    showErrorSnackBox(true);
+      setTimeout(() => {
+        showErrorSnackBox(false);
+      }, 1000);
+>>>>>>> cb5efad (added error messages for wrong credential)
     }
 
   const SaveUserDetails = () => {   
@@ -137,11 +150,16 @@ export default function SignupForm(props) {
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( ()=>{
-          console.log("abc");
-          
-          loginSuccessful();
-
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+          if(res){
+            setUserToken(PersonalDetailsList.Email);
+            localStorage.setItem("token",res.data.token);
+            loginSuccessful();
+          }else{
+            loginFailed();
+          }
+          }).catch(err => {
+            loginFailed();
           });
     } 
   }
@@ -177,11 +195,19 @@ export default function SignupForm(props) {
             <br></br>
 
             {
+<<<<<<< HEAD
             success ?
               <Snackbox message="User logged in succesfully" severity="success" /> : null
             }
             {
               error ? 
+=======
+            snackBox ?
+              <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+            {
+            errorSnackBox ?
+>>>>>>> cb5efad (added error messages for wrong credential)
               <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
