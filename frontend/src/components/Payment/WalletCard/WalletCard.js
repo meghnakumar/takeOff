@@ -27,7 +27,8 @@ import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
 import { GiCombinationLock } from "react-icons/gi";
-
+import { updateMoney, addTransaction } from "../../../services/walletServices";
+import moment from "moment";
 
 const WalletCard = ({
   wallet,
@@ -98,7 +99,17 @@ const WalletCard = ({
       } else if (item.type == "event") {
         updateEventBooking(res, item.ItemId);
       }
+
       deleteCartItem(item._id);
+    });
+    updateMoney({ userId: userid, amount: price });
+    addTransaction({
+      type: "purchase",
+      userId: userid,
+      price: price,
+      date: moment().format("YYYY-MM-DD"),
+      message: "transaction successfull!",
+      status: "confirmed",
     });
     setPaymentStatus(true);
   };

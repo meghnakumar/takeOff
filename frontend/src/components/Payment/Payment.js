@@ -7,7 +7,7 @@ import wallet from "../../assets/data/wallet.js";
 import { getCartItems } from "../../services/cartServices";
 import { getAllCards } from "../../services/paymentService";
 import { getWalletBalance } from "../../services/walletServices";
-import { addMoney, updateMoney } from "../../services/walletServices";
+import { addMoney } from "../../services/walletServices";
 import { useState, useEffect } from "react";
 
 import "./Payment.scss";
