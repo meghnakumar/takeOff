@@ -32,9 +32,11 @@ async function login(email, password) {
 function setUserToken(email){
     let url=apiUserFetchEndpoint+"/"+email;
            console.log(url);
-            http.get(url).then((user)=>{
+            return http.get(url).then((user)=>{
                 console.log("user data : "+user.data[0].lastName);
                 localStorage.setItem("userDetails", JSON.stringify(user.data[0]));
+                addInitialBalance(JSON.parse(localStorage.getItem("userDetails"))._id)
+                addInitialUser(JSON.parse(localStorage.getItem("userDetails"))._id);
             })
 }
 
@@ -42,12 +44,8 @@ async function signup(firstName,lastName, userName,email,password,confirmPasswor
 
   http.post(apiUserSignupEndpoint, { firstName,lastName, userName,email,password,confirmPassword })
   .then((res) => {
-
              setUserToken(email);
-             localStorage.setItem("token",res.data.token);
-             addInitialBalance(JSON.parse(localStorage.getItem("userDetails"))._id);
-             addInitialUser(JSON.parse(localStorage.getItem("userDetails"))._id);
-
+             localStorage.setItem("token", res.data.token);
              }).catch((err)=>{
              console.log("data "+err);
              });

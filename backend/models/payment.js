@@ -35,9 +35,9 @@ const PaymentSchema = new mongoose.Schema({
     Default: Math.floor(Math.random() * (max - min + 1) + min),
   },
   cards: {
-    type: [CardSchema],
+    type: Object,
     required: true,
-  },
+   }
 });
 
-module.exports = Payments = mongoose.model("payment", PaymentSchema, "payment");
+module.exports = Payments = mongoose.model("payments", PaymentSchema);
