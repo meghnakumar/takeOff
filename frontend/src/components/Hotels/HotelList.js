@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography, TextField} from "@mui/material";
 import Hotel from "./Hotel";
-import SearchBar from "./SearchBar";
 import {getHotels} from "../../services/hotelServices";
 
 /*Author: Created by Meghna Kumar

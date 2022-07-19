@@ -57,6 +57,7 @@ const WalletBalance = (props) => {
           price: parseInt(addMoney),
           date: moment().format("YYYY-MM-DD"),
           message: "Added money",
+          status: "successful"
         };
         const r = axios
           .post(baseURL + `/wallet/transaction`, data)

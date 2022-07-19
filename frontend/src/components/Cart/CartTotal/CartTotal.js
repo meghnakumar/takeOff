@@ -33,7 +33,7 @@ const CartTotal = (props) => {
           </div>
           <div className="row">
             <div className="cart-total div-10">
-              ${Math.round(cartTotal * 1.15)}
+              ${Math.round(cartTotal + Math.round(cartTotal * 0.15))}
             </div>
           </div>
           <div className="div-10">
