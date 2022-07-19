@@ -103,7 +103,7 @@ export default function SignupForm(props) {
   const [errorSnackBox, showErrorSnackBox] = React.useState();
 
   const loginSuccessful = () => {
-    showSuccess(true);
+    showSnackBox(true);
     setTimeout(() => {
         send(
               'service_aks72nt',
@@ -118,7 +118,7 @@ export default function SignupForm(props) {
               .catch((err) => {
                 console.log('FAILED...', err);
               });
-              showSuccess(false);
+              showSnackBox(false);
         navigate('/', {state:null})
     }, 500);
   }
