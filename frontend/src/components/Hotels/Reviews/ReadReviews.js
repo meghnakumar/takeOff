@@ -72,16 +72,18 @@ const ReadReviews = () =>{
         };
     }, []);
 
-
+    let reviewList = sortedReviews
     const [sortReviews, setSortReviews] = React.useState("lowToHigh");
     const handleChange = (event) => {
         setSortReviews(event.target.value);
         console.log(event.target.value);
         if (event.target.value === "lowToHigh"){
             setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
+            reviewList = reviewData.sort((a, b) => a.rating - b.rating)
         }
         else {
             setSortedReviews(reviewData.sort((a, b) => b.rating - a.rating));
+            reviewList = reviewData.sort((a, b) => b.rating - a.rating)
         }
     };
 
@@ -122,7 +124,7 @@ const ReadReviews = () =>{
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {sortedReviews?.length ? sortedReviews.map(review => <Grid item xs={12}>
+                    {reviewList?.length ? reviewList.map(review => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"
