@@ -42,7 +42,7 @@ To have a local copy of this lab / assingnment / project up and running on your 
 See the following section for detailed step-by-step instructions on how to install this software / libraries / plug-ins
 
 ### Installing
-
+ 
 A step by step series of examples that tell you how to get a development env running
 
 ```
@@ -86,9 +86,10 @@ This project is deployed on Heroku.
 - [Heroku](https://id.heroku.com/login) - Deployment Platform
 
 - [Material UI](https://mui.com/) - React Component Based library
+
 - [Chakra UI](https://chakra-ui.com/) - React Component Based library
 
-- [react-bootstrap](https://react-bootstrap.netlify.app/getting-started/introduction/) - CSS React library
+- [react-bootstrap](https://react-bootstrap.netlify.app/getting-started/introduction/) - CSS React library  
 
 - [Google Chrome](https://www.google.com/chrome/?brand=YTUH&gclsrc=aw.ds&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-M6CqP2YuWDYt-kUixqdZh3aJZmmYidnlKteQBojtpHPIToxTL5ZlYaAtzXEALw_wcB) - Browser used for testing
 
@@ -96,25 +97,26 @@ This project is deployed on Heroku.
 
 #### Sharad Kumar
 
-
+ 
 #### Meghna Kumar
 
 Feature developed:
 
-- **Hotel Management**
-  - Display list of hotels
-  - Display details about each hotel
-  - Create a booking and add it to cart
-  - Display list of upcoming and previous bookings
-  - Modify an existing booking
-  - Cancel an existing booking
+-  **Hotel Management**
+
+- Display list of hotels
+- Display details about each hotel
+- Create a booking and add it to cart
+- Display list of upcoming and previous bookings
+- Modify an existing booking
+- Cancel an existing booking
 
 - **Review and Feedback**
-  - Add a review for hotel
-  - Display the reviews for hotel
-  - Sort the reviews by rating
-  
+- Add a review for hotel
+- Display the reviews for hotel
+- Sort the reviews by rating
 
+  
 **Front-end Files**
 
 1. _frontend/src/components/Hotels/Bookings/Bookings.js - This page contains all the hotel booking history for the user. It displays the bookings sorted with dates. Upcoming bookings are displayed first and completed bookings later. For upcoming bookings two options are provided modify and cancel the booking.
@@ -134,10 +136,50 @@ Feature developed:
 4. _backend/routes/hotelRoute.js - This file contains all the routes for each logic provided in hotelAndReviews controller class.
 5. _backend/server.js (partially)
 
-
-
+  
+  
 #### Bhavesh Lalwani
+Feature developed:
+**Transport Management**
+- Searching for flights
+- Displaying the list of flights
+- Booking flights  
+- Modify an existing flight booking
+- Cancel an existing flight booking
 
+**Trip Management**
+- Display trip history
+
+**Front-end Files**
+1. frontend\src\services\flightBookingService.js - Creates a connection with the backend and makes the API call for all methods required for flight booking.
+2. frontend\src\services\flightServices.js - Creates a connection with the backend and makes the API call for all flight related API calls.
+3. frontend\src\components\Flights\FlightBookingList\FlightBookingList.js - This component shows the list of flight bookings created by user
+4. frontend\src\components\Flights\FlightBookingList\FlightBookingList.scss - This component constains styling for flight booking cards
+5. frontend\src\components\Flights\FlightBookings\FlightBookings.js - This component is landing page for flight bookings and it is also parent component of flight booking list.
+6. frontend\src\components\Flights\FlightBookings\FlightBookings.scss - It contains styling for flight bookings page
+7. frontend\src\components\Flights\FlightDetails\FlightDetails.js - This component shows the details of the flight selected by the user 
+8. frontend\src\components\Flights\FlightDetails\FlightDetails.scss - This file has contains the styling for flight details page
+9. frontend\src\components\Flights\FlightList\FlightList.js - This component contains the code for displaying the available flights
+10. frontend\src\components\Flights\FlightList\FlightList.scss - This file contains the styling for flight cards page
+11. frontend\src\components\Flights\SearchFlights\SearchFlights.js - This component contains form which allows users to look for their required flights
+12. frontend\src\components\Flights\SearchFlights\SearchFlights.scss - This file contains styling for search flight component
+13. frontend\src\components\Flights\TravellerDetails\TravellerDetails.js - This component has a form for adding traveler details and adding flight booking to the cart
+14. frontend\src\components\Flights\TravellerDetails\TravellerDetails.scss- this file contains styling for traveler details form
+15. frontend\src\components\Flights\countries.js - This file contains the countries list
+16. frontend\src\components\Flights\Flights.js - This component in landing page for flights page. It is the parent component for search flight and flight list components.
+17. frontend\src\components\Flights\Flights.scss - This file has code for Navbar styling
+18. frontend\src\components\common\Header\Header.js - This file has code for the navbar and logic for dynamically updating the links before and after login/logout 
+19. frontend\src\components\common\Header\Header.scss - This file has code for Navbar styling
+
+
+**Back-end Files**
+1. backend\server.js (partially)
+2. backend\routes\FlightRoute.js - It contains all the routes for the flight landing page
+3. backend\routes\FlightBookingRoute.js - It contains all the routes for the flight booking page
+4. backend\models\flightBookings.js - It contathe ins the model schema for flight bookings
+5. backend\models\flightList.js - It contains the model schema for flight lists
+6. backend\controller\flightBookings.js - It contains logic for getting the flight bookings, adding, modifying, and canceling the flight bookings
+7. backend\controller\flights.js - It contains logic for getting the list of available flights
 
 #### Jayasree Kulothungan
 
@@ -147,35 +189,53 @@ Feature developed:
 Feature developed:
 
 - **Cart Management**
-  - Adding items to cart
-  - Calculating cart total
-  - Removing items from cart
-  - Displaying cart items
+- Adding items to cart
+- Calculating cart total
+- Removing items from cart
+- Displaying cart items
 
 - **Wallet Management**
-  - Adding items to cart
-  - Calculating cart total
-  - Removing items from cart
-  - Displaying cart items
+- Adding items to cart
+- Calculating cart total
+- Removing items from cart
+- Displaying cart items
 
 **Front-end Files**
 
-1. _frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
-2. _frontend\src\components\Cart\CartHeader\CartHeader.js_: It is child component for displaying the header for the cart page.
-3. _frontend\src\components\Cart\CartList\CartList.js_: It makes a get request to fetch all the cart items for the user. Then, it displays the list of items. It also provides a button to delete a cart item which makes a delete request. It removes the item from the database.
-4. _frontend\src\components\Cart\CartTotal\CartTotal.js_: It is responsible for getting the item data from the database and calculating the total amount for the cart items.
-5. _frontend\src\components\Wallet\Wallet.js_: It is the parent component for the wallet feature.
-6. _frontend\src\components\Wallet\WalletHistory\WalletHistory.js_: It makes a get request to fetch the wallet history from the database and displays the wallet transactions.
-7. _frontend\src\components\Wallet\WalletBalance\WalletBalance.js_: It is responsible for dispaying the current wallet balance to the user.
+  
+
+1.  _frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
+
+2.  _frontend\src\components\Cart\CartHeader\CartHeader.js_: It is child component for displaying the header for the cart page.
+
+3.  _frontend\src\components\Cart\CartList\CartList.js_: It makes a get request to fetch all the cart items for the user. Then, it displays the list of items. It also provides a button to delete a cart item which makes a delete request. It removes the item from the database.
+
+4.  _frontend\src\components\Cart\CartTotal\CartTotal.js_: It is responsible for getting the item data from the database and calculating the total amount for the cart items.
+
+5.  _frontend\src\components\Wallet\Wallet.js_: It is the parent component for the wallet feature.
+
+6.  _frontend\src\components\Wallet\WalletHistory\WalletHistory.js_: It makes a get request to fetch the wallet history from the database and displays the wallet transactions.
+
+7.  _frontend\src\components\Wallet\WalletBalance\WalletBalance.js_: It is responsible for dispaying the current wallet balance to the user.
+
+  
 
 **Back-end Files**
 
-1. _backend\routes\cartRoute.js_: It includes all the routes for the cart feature.
-2. _backend\controller\cart.js_: It includes the controller logic for adding item to the cart, deleting item from the cart, and getting cart items from the database.
-3. _backend\models\cartModel.js_: It contains the model schema for the cart table.
-4. _backend\routes\walletRoute.js_: It includes all the routes for the wallet feature.
-5. _backend\controller\wallet.js_: It contains controller logic for adding money to wallet, getting wallet balance, and fetching wallet history.
-6. _backend\models\walletModel.js_: It contains the model schema for the wallet table.
+  
+
+1.  _backend\routes\cartRoute.js_: It includes all the routes for the cart feature.
+
+2.  _backend\controller\cart.js_: It includes the controller logic for adding item to the cart, deleting item from the cart, and getting cart items from the database.
+
+3.  _backend\models\cartModel.js_: It contains the model schema for the cart table.
+
+4.  _backend\routes\walletRoute.js_: It includes all the routes for the wallet feature.
+
+5.  _backend\controller\wallet.js_: It contains controller logic for adding money to wallet, getting wallet balance, and fetching wallet history.
+
+6.  _backend\models\walletModel.js_: It contains the model schema for the wallet table.
+
 <br/>
 
 #### Harshit Lakhani
@@ -186,28 +246,28 @@ Feature developed:
 The following sources were used in understanding some parts of this tutorial
 
 1. https://mui.com/material-ui/react-card/
-   Referred to understand how the Card component of Material UI works and how it can be used in the website. Most of the pages like - Hotel detail page, flight detail page, flight bookings page have used it.
+Referred to understand how the Card component of Material UI works and how it can be used in the website. Most of the pages like - Hotel detail page, flight detail page, flight bookings page have used it.
 
 2. https://mui.com/material-ui/react-grid/
-   Referred to understand how to align card components in the form of grid. The files using card components have mostly used mui grid to align the cards.
+Referred to understand how to align card components in the form of grid. The files using card components have mostly used mui grid to align the cards.
 
 3. https://mui.com/material-ui/react-snackbar/
-   Used Material UI's snackbar component to pop a toast message on click of certain user actions.
+Used Material UI's snackbar component to pop a toast message on click of certain user actions.
 
 4. https://mui.com/material-ui/react-dialog/
-   User Material UI's dialog component to have booking form and modified it as per the requirement of the website.
+User Material UI's dialog component to have booking form and modified it as per the requirement of the website.
 
 5. https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-js
-   Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
+Referred to the sorting array by dates explanation here to have the sort by functionality enabled and working on hotel listing page and reviews page.
 
 6. https://mui.com/material-ui/api/text-field/
-   Referred to access text field and its properties while building signup form
+Referred to access text field and its properties while building signup form
 
 7. https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
-   Referred to access regex expression for email validation
+Referred to access regex expression for email validation
 
 8. https://mui.com/material-ui/material-icons/?query=account
-   Referred to access account icons to be places in profile screen
+Referred to access account icons to be places in profile screen
 
 ## Group Project Team - Group 13
 
@@ -250,15 +310,15 @@ The following sources were used in understanding some parts of this tutorial
 - Hotel Card Image Reference: https://unsplash.com/photos/jmkMl20jNS0
 
 - Hotel Card My bookings page References: https://search.openverse.engineering/image/b1d8eef1-5ef9-411a-804d-e4148ef297eb
-  https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
-  https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
-  https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
-  https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
+https://search.openverse.engineering/image/7f80a973-574e-4c5c-9a57-fa14502a29eb
+https://search.openverse.engineering/image/afb60f89-c00c-45e7-863c-745fb22dbb45
+https://search.openverse.engineering/image/e061dc6e-1806-4cec-9441-1b4420ef11fb
+https://search.openverse.engineering/image/772ea16d-0a82-48df-97ee-e6fa7beea510
 
 - Hotel detail room type image Reference: https://search.openverse.engineering/image/b3bbb3d2-b758-40f6-83c2-33bb3dd4d6aa
-  https://search.openverse.engineering/image/b1277ef8-ce4d-4725-ac01-d50db359494f
-  https://search.openverse.engineering/image/275e55c6-73fb-4197-bead-41e800b3724f
-  https://search.openverse.engineering/image/302dc0c5-d728-4bcc-bb23-f4f9d0481b15
+https://search.openverse.engineering/image/b1277ef8-ce4d-4725-ac01-d50db359494f
+https://search.openverse.engineering/image/275e55c6-73fb-4197-bead-41e800b3724f
+https://search.openverse.engineering/image/302dc0c5-d728-4bcc-bb23-f4f9d0481b15
 
 - User Icon: https://mui.com/material-ui/material-icons/?query=user&theme=Outlined&selected=AccountCircleOutlined
 

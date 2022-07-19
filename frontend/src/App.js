@@ -29,10 +29,14 @@ import NotFound from "./components/common/Routes/notFound";
 
 function App() {
 	const location = useLocation();
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(true);
 
 	useEffect(() => {
-
+      if(JSON.parse(localStorage.getItem("userDetails"))) {
+        setIsLoggedIn(true);
+      }else {
+        setIsLoggedIn(false);
+      }
 	}, [])
 
   return (
