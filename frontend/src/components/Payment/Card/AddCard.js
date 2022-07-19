@@ -46,8 +46,8 @@ const AddBankCard = () => {
         card_type: cardType,
         card_company: cardCompany,
       };
-      let cardFinal = JSON.parse(JSON.stringify(card));
-      addCard(cardFinal).then((response) => {
+      // let cardFinal = JSON.parse(JSON.stringify());
+      addCard(card).then((response) => {
         if (response.status === 200) {
           toast({
             title: "Card Added",
