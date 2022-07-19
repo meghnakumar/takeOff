@@ -19,7 +19,7 @@ export const updateFlightBooking = async (bookingInfo,id) => {
 };
 
 export const updateBookingStatus = (body, id) => {
-  return http.get(`${updateBookingStatusAPI}${id}`, body);
+  return http.put(`${updateBookingStatusAPI}${id}`, body);
 };
 
 export const getFlightBookingByUserId = (userId) =>{

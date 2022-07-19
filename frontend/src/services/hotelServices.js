@@ -36,6 +36,6 @@ export const cancelHotelBooking = (id) => {
     return http.get(`${cancelHotelBookingAPIEndpoint}${id}`)
 }
 
-export const updateHotelBookingStatus = (id) =>{
-    return http.put(`${updateHotelBookingStatusAPIEndpoint}${id}`)
+export const updateHotelBookingStatus = (body,id) =>{
+    return http.put(`${updateHotelBookingStatusAPIEndpoint}${id}`, body)
 }
