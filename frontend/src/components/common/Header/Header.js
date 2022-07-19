@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Image, Text, ChakraProvider, Flex, Center, Box } from "@chakra-ui/react";
 import Logo from "../../../assets/images/flight.png";
 import { useNavigate } from "react-router-dom";
+import {logout} from '../../../services/authService'
+import Snackbox from '../Snackbox/Snackbox';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Header = (props) => {
@@ -33,10 +35,33 @@ const Header = (props) => {
     return fullName;
   };
 
-  const logout = () => {
+  const logouts = () => {
     setUserName("");
+    console.log("D");
     localStorage.clear();
+    LogOutUser();
   };
+
+
+  const LogOutUser = () => {
+    console.log("C");
+    logout();
+    logoutSuccessful();
+  }
+  
+  const [snackBox, showSnackBox] = React.useState();
+
+  const logoutSuccessful = () => {
+    console.log("A");
+    showSnackBox(true);
+    setTimeout(() => {
+      console.log("B");
+      showSnackBox(false);
+      navigate('/logout', {state:null})
+    }, 1000);
+  }
+
+  const navigate = useNavigate();
 
 return (
   <div className="fixed-top">
@@ -113,7 +138,7 @@ return (
                 <li><Link className="dropdown-item" to="/flight-bookings" >Flight bookings</Link></li>
                 <li><Link className="dropdown-item" to="/cart" >Cart</Link></li>
                 <li><Link className="dropdown-item" to="/wallet" >Wallet</Link></li>
-                <li className="dropdown-item logout" onClick={() => { logout() }}>Logout</li>
+                <li className="dropdown-item logout" onClick={() => { logouts() }}>Logout</li>
               </ul>
             </li>
              : 
@@ -121,6 +146,9 @@ return (
               <Link className="nav-link" to="/login" ><AccountCircleOutlinedIcon /> Login</Link>
             </li>
             }
+            {snackBox ?
+                <Snackbox message="User logged out succesfully" severity="success" /> : null
+              }
           </ul>
         </div>
       </div>
