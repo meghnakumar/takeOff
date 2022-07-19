@@ -23,7 +23,7 @@ import './Profile.scss'
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
 //https://mui.com/material-ui/material-icons/?query=account
 
-export default function ProfileScreen() {
+export default function ProfileScreen(props) {
     const [userFullName, setFullName] = React.useState();
     const [userEmail, setEmail] = React.useState();
     const [userName, setUserName] = React.useState();
@@ -67,9 +67,9 @@ export default function ProfileScreen() {
 
 
   const LogOutUser = () => {
-
     logout();
     logoutSuccessful();
+    props.setIsLoggedIn(false);
   }
   
   const [snackBox, showSnackBox] = React.useState();
