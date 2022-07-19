@@ -92,7 +92,7 @@ const WalletCard = ({
     cart.map((item) => {
       let res = JSON.parse(JSON.stringify({ status: "confirmed" }));
       if (item.type == "hotel") {
-        updateHotelBookingStatus({"status":"confirmed"}, item.ItemId);
+        updateHotelBookingStatus(res, item.ItemId);
       } else if (item.type == "flight") {
         updateBookingStatus(res, item.ItemId);
       } else if (item.type == "event") {

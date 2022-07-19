@@ -122,7 +122,7 @@ module.exports.getItems = (req, res) => {
         }
       }
 
-      delay(2000).then(() => {
+      delay(500).then(() => {
         res.json(output);
       });
     })
