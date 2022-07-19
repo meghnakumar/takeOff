@@ -20,6 +20,7 @@ import { RiHotelFill } from "react-icons/ri";
 import { GiPartyPopper } from "react-icons/gi";
 import { BiTrip } from "react-icons/bi";
 import { TbDiscount2 } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
 
 import { useNavigate } from "react-router-dom";
 
@@ -40,8 +41,10 @@ const Home = ({ isLoggedIn }) => {
       navigator("/events");
     } else if (value === "offers") {
       navigator("/offers");
+    } else if (value == "profile") {
+      navigator("/profile");
     } else {
-      navigator("/tour-packages");
+      navigator("/home");
     }
   };
 
@@ -65,10 +68,10 @@ const Home = ({ isLoggedIn }) => {
             colStart={{ base: 2, md: 4 }}
             colEnd={{ base: 10, md: 8 }}
           >
-            <Flex justifyContent="center">
+            <Flex justifyContent="center" mt={10}>
               <Center>
-                <Image src={Logo} w="45px" h="45px" />
-                <Text ml={2} color="white" fontSize="42px" fontWeight="bold">
+                <Image src={Logo} w="55px" h="55px" />
+                <Text ml={2} color="white" fontSize="50px" fontWeight="bold">
                   Takeoff
                 </Text>
               </Center>
@@ -148,6 +151,30 @@ const Home = ({ isLoggedIn }) => {
                   Login into your account for faster checkout.
                 </Text>
               </Box>
+
+              <Box
+                p="5"
+                minW="280px"
+                borderRadius={5}
+                bg="white"
+                onClick={() => handleNavigation("profile")}
+                style={{ cursor: "pointer" }}
+                display={isLoggedIn ? "block" : "none"}
+              >
+                <Badge variant="subtle" colorScheme="blue">
+                  Profile
+                </Badge>
+                <Flex mt={3} justifyContent="left">
+                  <CgProfile size="40px" />
+                  <Heading mt={2} ml={2} as="h4" size="md">
+                    Profile
+                  </Heading>
+                </Flex>
+                <Text mt={3} noOfLines={2} fontSize="sm" opacity={0.5}>
+                  Check Your profile details.
+                </Text>
+              </Box>
+
               <Box
                 p="5"
                 minW="280px"
