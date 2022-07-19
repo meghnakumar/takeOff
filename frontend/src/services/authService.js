@@ -13,19 +13,9 @@ const apiUserFetchEndpoint = "/users/fetch";
 
 const tokenKey = "token";
 
-async function login(email, password) {
+function login(email, password) {
 
-
-  http.post(apiUserEndpoint, { email, password }).then((res) => {
-      console.log("data "+res.data.success);
-
-       setUserToken(email);
-      localStorage.setItem("token",res.data.token);
-
-
-  }).catch((err)=>{
-  console.log("data "+err);
-  });
+  return http.post(apiUserEndpoint, { email, password })
 
 }
 
@@ -73,4 +63,5 @@ export  {
   login,
   signup,
   logout,
+  setUserToken
 };

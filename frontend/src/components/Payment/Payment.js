@@ -7,7 +7,7 @@ import wallet from "../../assets/data/wallet.js";
 import { getCartItems } from "../../services/cartServices";
 import { getAllCards } from "../../services/paymentService";
 import { getWalletBalance } from "../../services/walletServices";
-
+import { addMoney, updateMoney } from "../../services/walletServices";
 import { useState, useEffect } from "react";
 
 import "./Payment.scss";
@@ -17,9 +17,9 @@ const Payment = () => {
   const [price, setNewPrice] = useState(0);
   const [cards, setCards] = useState("");
   const [balance, setBalance] = useState(0);
+  const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
 
   const getData = () => {
-    const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
     const fetchCartPromise = getCartItems(userid);
     const fetchCardPromise = getAllCards(userid);
     const fetchBalance = getWalletBalance(userid);
@@ -35,7 +35,7 @@ const Payment = () => {
         data.map((item) => {
           total += item.price;
         });
-        setNewPrice(total);
+        setNewPrice(Math.round(total + total * 0.15));
       });
 
     fetchCardPromise
@@ -43,7 +43,6 @@ const Payment = () => {
         return response.data;
       })
       .then((data) => {
-        console.log(data);
         setCards(data);
       });
 
@@ -55,6 +54,11 @@ const Payment = () => {
         console.log(data);
         setBalance(data);
       });
+  };
+
+  const handleWalletRecharge = (rechargeAmount) => {
+    addMoney({ userId: userid, amount: parseInt(rechargeAmount) });
+    setBalance(balance + parseInt(rechargeAmount));
   };
 
   useEffect(() => {
@@ -81,6 +85,7 @@ const Payment = () => {
               cart={cart}
               cards={cards}
               balance={balance}
+              handleWalletRecharge={handleWalletRecharge}
             />
             <AddCard />
           </Box>

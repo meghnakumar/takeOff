@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { send } from 'emailjs-com';
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login, setUserToken} from '../../services/authService';
 import './Registration.scss'
 
 //references
@@ -99,11 +99,11 @@ export default function SignupForm(props) {
         return "noerror";
   }
 
-  const [success, showSuccess] = React.useState();
-  const [error, showError] = React.useState();
+  const [snackBox, showSnackBox] = React.useState();
+  const [errorSnackBox, showErrorSnackBox] = React.useState();
 
   const loginSuccessful = () => {
-    showSuccess(true);
+    showSnackBox(true);
     setTimeout(() => {
         send(
               'service_aks72nt',
@@ -118,17 +118,18 @@ export default function SignupForm(props) {
               .catch((err) => {
                 console.log('FAILED...', err);
               });
-              showSuccess(false);
+              showSnackBox(false);
         navigate('/', {state:null})
     }, 500);
   }
 
 
   const loginFailed = () => {
-    showError(true);
+    console.log("login failed")
+    showErrorSnackBox(true);
       setTimeout(() => {
-        showError(false);
-      }, 500);
+        showErrorSnackBox(false);
+      }, 1000);
     }
 
   const SaveUserDetails = () => {   
@@ -137,11 +138,16 @@ export default function SignupForm(props) {
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( ()=>{
-          console.log("abc");
-          
-          loginSuccessful();
-
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+          if(res){
+            setUserToken(PersonalDetailsList.Email);
+            localStorage.setItem("token",res.data.token);
+            loginSuccessful();
+          }else{
+            loginFailed();
+          }
+          }).catch(err => {
+            loginFailed();
           });
     } 
   }
@@ -177,11 +183,11 @@ export default function SignupForm(props) {
             <br></br>
 
             {
-            success ?
+            snackBox ?
               <Snackbox message="User logged in succesfully" severity="success" /> : null
             }
             {
-              error ? 
+            errorSnackBox ?
               <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
