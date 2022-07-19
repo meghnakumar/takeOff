@@ -43,16 +43,18 @@ const WalletBalance = (props) => {
   };
 
   const handleAddMoney = () => {
+    var b = balance + parseInt(addMoney);
+    setBalance(b)
     const res = axios
       .post(baseURL + `/wallet`, {
         userId: props.userId,
-        amount: addMoney,
+        amount: parseInt(addMoney),
       })
       .then((result) => {
-        var data = {
+        const data = {
           type: "add",
           userId: props.userId,
-          price: addMoney,
+          price: parseInt(addMoney),
           date: moment().format("YYYY-MM-DD"),
           message: "Added money",
         };
