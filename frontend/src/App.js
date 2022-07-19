@@ -43,6 +43,7 @@ function App() {
 		};
 		getData();
 	}, []);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
@@ -50,12 +51,12 @@ function App() {
         <></>
       ) : (
         <div>
-          <Header></Header> <div className="header-footer-margin"></div>
+          <Header isLoggedIn = {isLoggedIn}></Header> <div className="header-footer-margin"></div>
         </div>
       )}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Home  isLoggedIn = {isLoggedIn} />} />
+        <Route path="home" element={<Home isLoggedIn = {isLoggedIn} />} />
         <Route path="flights" element={<Flights />} />
         <Route path="flight-details" element={<FlightDetails />} />
         <Route path="flight-bookings" element={<FlightBookings />} />
@@ -73,11 +74,11 @@ function App() {
         <Route path="read-reviews" element={<ReadReviews />} />
         <Route path="wallet" element={<Wallet />} />
         <Route path="cart" element={<Cart />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login setIsLoggedIn = {setIsLoggedIn} />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="reset" element={<Reset />} />
 		<Route path="generateReset" element={<GenerateReset />} />
-        <Route path="logout" element={<Logout />} />
+        <Route path="logout" element={<Logout setIsLoggedIn = {setIsLoggedIn} />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
     </div>
