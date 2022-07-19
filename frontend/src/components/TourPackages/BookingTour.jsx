@@ -38,6 +38,7 @@ const style = {
 export default function BookTours() {
 	const location = useLocation();
 	const navigate = useNavigate();
+	let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
 	const tourId = location.state.tourId;
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
@@ -91,7 +92,7 @@ export default function BookTours() {
 				seat: seat,
 				contact: number,
 				tourId: tourId,
-				userId: "user1",
+				userId: userId,
 				date: date,
 				days: location.state.days,
 				destination: location.state.destination,
