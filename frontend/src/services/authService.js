@@ -44,9 +44,7 @@ async function signup(firstName,lastName, userName,email,password,confirmPasswor
 
 
 function logout() {
-  console.log("deleting token");
-  localStorage.removeItem("token");
-  localStorage.removeItem("userDetails")
+  localStorage.clear();
 }
 
 function getJwt() {

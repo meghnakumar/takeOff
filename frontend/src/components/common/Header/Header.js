@@ -39,6 +39,7 @@ const Header = (props) => {
     setUserName("");
     console.log("D");
     localStorage.clear();
+    props.setIsLoggedIn(false);
     LogOutUser();
   };
 
