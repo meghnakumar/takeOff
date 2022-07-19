@@ -99,6 +99,42 @@ This project is deployed on Heroku.
 
 #### Meghna Kumar
 
+Feature developed:
+
+- **Hotel Management**
+  - Display list of hotels
+  - Display details about each hotel
+  - Create a booking and add it to cart
+  - Display list of upcoming and previous bookings
+  - Modify an existing booking
+  - Cancel an existing booking
+
+- **Review and Feedback**
+  - Add a review for hotel
+  - Display the reviews for hotel
+  - Sort the reviews by rating
+  
+
+**Front-end Files**
+
+1. _frontend/src/components/Hotels/Bookings/Bookings.js - This page contains all the hotel booking history for the user. It displays the bookings sorted with dates. Upcoming bookings are displayed first and completed bookings later. For upcoming bookings two options are provided modify and cancel the booking.
+2. _frontend/src/components/Hotels/HotelDetail/HotelDetail.js - This page contains the details about a specific hotel including the type of rooms available and their prices. Each room card opens a booking form using which user can create a booking which gets added to the cart.
+3. _frontend/src/components/Hotels/Dashboard.js - This is tha landing page for hotel. It displays the list of hotels for the location selected from the dropdown.
+4. _frontend/src/components/Hotels/Hotel.js - This component has the code for the hotel card that gets rendered on the hotel landing page.
+5. _frontend/src/components/Hotels/HotelList.js - This component contains the logic of calling the Hotel component in loop for rendering the hotel cards based on number of hotels fetched from DB.
+6. _frontend/src/components/Hotels/SearchBar.js - It provides the functionality to search for a specific hotel from the list of hotels on the hotel landing page.
+7. _frontend/src/services/hotelServices.js - Creates a connection with the backend and makes the API call.
+8. _frontend/src/components/Hotels/Reviews/ReadReviews.js - This component is used to display the list of reviews available for a hotel.
+
+**Back-end Files**
+
+1. _backend/controller/hotelAndReviews.js - It contains the logic for retrieving the list of hotels, modifying existing booking, cancelling a booking and creating a booking. It further provides a logic for updating the status of a booking after successful payment.
+2. _backend/models/hotelBookings.js - This is a model class for storing all the attributes for hotel booking corresponding to hotelbooking collectio mongoDB.
+3. _backend/models/hotelList.js - This is a model class for storing all the attributes for list of hotels corresponsing to hotels collection in mongoDB.
+4. _backend/routes/hotelRoute.js - This file contains all the routes for each logic provided in hotelAndReviews controller class.
+5. _backend/server.js (partially)
+
+
 
 #### Bhavesh Lalwani
 
