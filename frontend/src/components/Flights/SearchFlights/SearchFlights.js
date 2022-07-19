@@ -28,7 +28,7 @@ const SearchFlights = ({setIsButtonClicked, setReqFlights}) => {
 const flightSource = [
   { title: 'Toronto', place: 'Toronto, Canada', code: "YYZ" },
   { title: 'Halifax', place: 'Halifax, Canada', code: "YHZ" },
-  { title: 'Dartmouth', place: 'Dartmouth, Canada', code: "YQY" },
+  { title: 'Moncton', place: 'Moncton, Canada', code: "YSJ" },
   { title: 'Montreal', place: 'Montreal, Canada', code: "YHZ" }];
   useEffect(() => {
     setFromLocationList(flightSource);
