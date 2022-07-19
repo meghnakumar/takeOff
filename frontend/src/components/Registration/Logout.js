@@ -47,7 +47,7 @@ export default function SignupForm(props) {
                         console.log('FAILED...', err);
                       });
       showSnackBox(false);
-      navigate('/profile', {state:null})
+      navigate('/', {state:null})
     }, 3000);
   }
 

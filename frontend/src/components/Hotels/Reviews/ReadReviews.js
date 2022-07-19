@@ -122,7 +122,7 @@ const ReadReviews = () =>{
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {Object.values(sortedReviews).map(review => <Grid item xs={12}>
+                    {sortedReviews?.length ? sortedReviews.map(review => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"
@@ -149,7 +149,7 @@ const ReadReviews = () =>{
 
                             </Grid>
                         </Grid>
-                    </Grid>)}
+                    </Grid>): <div style={{marginTop: "20px", paddingLeft: "16px"}}><b>No review to display</b></div>}
                 </Grid>
             </Paper>
 

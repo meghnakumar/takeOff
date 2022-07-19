@@ -2,11 +2,11 @@ import http from "./httpService";
 
 const getCardsEndpoint = "/payment/getcards";
 const addCardEndpoint = "/payment/addcard";
-const addInitialUserEndpoint = "payment/addinitialuser";
+const addInitialUserEndpoint = "/payment/addinitialuser/";
 
 export const addInitialUser = async (id) => {
 
-  return http.get(`${addInitialUserEndpoint}?id=${id}`);
+  return http.get(`${addInitialUserEndpoint}${id}`);
   
   };
 

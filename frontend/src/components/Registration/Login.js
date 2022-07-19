@@ -99,10 +99,11 @@ export default function SignupForm(props) {
         return "noerror";
   }
 
-  const [snackBox, showSnackBox] = React.useState();
+  const [success, showSuccess] = React.useState();
+  const [error, showError] = React.useState();
 
   const loginSuccessful = () => {
-    showSnackBox(true);
+    showSuccess(true);
     setTimeout(() => {
         send(
               'service_aks72nt',
@@ -117,17 +118,16 @@ export default function SignupForm(props) {
               .catch((err) => {
                 console.log('FAILED...', err);
               });
-
-        showSnackBox(false);
-        navigate('/profile', {state:null})
+              showSuccess(false);
+        navigate('/', {state:null})
     }, 500);
   }
 
 
   const loginFailed = () => {
-      showSnackBox(false);
+    showError(true);
       setTimeout(() => {
-          showSnackBox(false);
+        showError(false);
       }, 500);
     }
 
@@ -177,8 +177,12 @@ export default function SignupForm(props) {
             <br></br>
 
             {
-            snackBox ?
-              <Snackbox message="User logged in succesfully" severity="success" /> : <Snackbox message="Wrong credential!" severity="error" />
+            success ?
+              <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+            {
+              error ? 
+              <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
             <div className='reg-text'>
