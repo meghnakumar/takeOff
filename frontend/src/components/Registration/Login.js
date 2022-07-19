@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { send } from 'emailjs-com';
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login, setUserToken} from '../../services/authService';
 import './Registration.scss'
 
 //references
@@ -137,10 +137,16 @@ export default function SignupForm(props) {
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( ()=>{
-          console.log("abc");
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+          if(res){
+            setUserToken(PersonalDetailsList.Email);
+            localStorage.setItem("token",res.data.token);
+            loginSuccessful();
+          }else{
+            loginFailed();
+          }
           
-          loginSuccessful();
+          
 
           });
     } 
