@@ -104,12 +104,12 @@ const WalletCard = ({
     });
     updateMoney({ userId: userid, amount: price });
     addTransaction({
-      type: "purchase",
+      type: "booking",
       userId: userid,
       price: price,
       date: moment().format("YYYY-MM-DD"),
-      message: "transaction successfull!",
-      status: "confirmed",
+      message: "Booking",
+      status: "successful",
     });
     setPaymentStatus(true);
   };
