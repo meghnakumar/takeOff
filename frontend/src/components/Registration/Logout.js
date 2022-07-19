@@ -50,7 +50,7 @@ export default function SignupForm(props) {
                       });
       showSnackBox(false);
       navigate('/', {state:null})
-    }, 3000);
+    }, 1000);
   }
 
   const [errorMessage,updateErrorMessage] = useState({

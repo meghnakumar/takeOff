@@ -169,7 +169,7 @@ const CartList = (props) => {
                             <div className="row">
                               <div className="col-lg-6 div-v6">Total</div>
                               <div className="col-lg-6 div-v6">
-                                ${Math.round(item.price * 1.15)}
+                                ${Math.round(item.price + Math.round(item.price * 0.15) )}
                               </div>
                             </div>
                           </div>
