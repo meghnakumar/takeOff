@@ -27,7 +27,16 @@ import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
 
-const WalletCard = ({ wallet, price, cart, cards, balance }) => {
+
+const WalletCard = ({
+  wallet,
+  price,
+  cart,
+  cards,
+  balance,
+  handleWalletRecharge,
+}) => {
+  const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
   const toast = useToast();
 
   const {
@@ -202,7 +211,10 @@ const WalletCard = ({ wallet, price, cart, cards, balance }) => {
                   size="lg"
                   fontSize="15px"
                   colorScheme="purple"
-                  onClick={AddMoneyonClose}
+                  onClick={() => {
+                    handleWalletRecharge(rechargeAmount);
+                    AddMoneyonClose();
+                  }}
                 >
                   Recharge
                 </Button>
