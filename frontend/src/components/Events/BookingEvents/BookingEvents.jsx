@@ -139,7 +139,6 @@ export default function BookEvents() {
 		try {
 			addCartItem(addToCart)
 				.then((res) => {
-					console.log(res.status);
 				})
 				.catch((err) => {
 					console.error(err);

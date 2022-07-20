@@ -23,7 +23,6 @@ export default function SignupForm(props) {
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
     
   }
@@ -42,7 +41,6 @@ export default function SignupForm(props) {
                       'BbOaPQawKNmE3FZf4'
                     )
                       .then((response) => {
-                        console.log('SUCCESS!', response.status, response.text);
                         props.setIsLoggedIn(true);
                       })
                       .catch((err) => {
@@ -87,7 +85,6 @@ export default function SignupForm(props) {
 
   const validationscheck = () => {
 
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     if(PersonalDetailsList.Email===''){
@@ -114,7 +111,6 @@ export default function SignupForm(props) {
       flag = "n";
     }
 
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else
@@ -122,7 +118,6 @@ export default function SignupForm(props) {
   }
 
   const loginFailed = () => {
-    console.log("login failed")
     showErrorSnackBox(true);
       setTimeout(() => {
         showErrorSnackBox(false);

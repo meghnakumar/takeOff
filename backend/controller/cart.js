@@ -14,8 +14,7 @@ function delay(time) {
 module.exports.getItems = (req, res) => {
   Cart.find({ userId: req.params.userId })
     .then((info) => {
-      console.log("Cart item data fetched.");
-
+     
       var output = [];
       let userId = req.params.userId;
 

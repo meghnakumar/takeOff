@@ -37,7 +37,6 @@ const Header = (props) => {
 
   const logouts = () => {
     setUserName("");
-    console.log("D");
     localStorage.clear();
     props.setIsLoggedIn(false);
     LogOutUser();
@@ -45,7 +44,6 @@ const Header = (props) => {
 
 
   const LogOutUser = () => {
-    console.log("C");
     logout();
     logoutSuccessful();
   }
@@ -53,10 +51,8 @@ const Header = (props) => {
   const [snackBox, showSnackBox] = React.useState();
 
   const logoutSuccessful = () => {
-    console.log("A");
     showSnackBox(true);
     setTimeout(() => {
-      console.log("B");
       showSnackBox(false);
       navigate('/logout', {state:null})
     }, 1000);

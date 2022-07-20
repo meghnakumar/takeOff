@@ -73,7 +73,6 @@ module.exports.updateMoney = (req, res) => {
     .then((info) => {
       console.log("Updating wallet balance.");
       info[0].balance -= req.body.amount;
-      console.log(info[0]);
 
       const result = info[0]
         .save()
@@ -115,7 +114,6 @@ module.exports.addTransaction = (req, res) => {
     message: req.body.message,
     status: req.body.status,
   });
-  console.log(item);
 
   const result = item
     .save()

@@ -21,7 +21,6 @@ const WalletHistory = (props) => {
       .get(baseURL + `/wallet/history/` + props.userId)
       .then((result) => {
         setHistory(result.data);
-        console.log(result.data);
       });
   }, []);
 

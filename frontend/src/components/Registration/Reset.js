@@ -20,11 +20,9 @@ export default function SignupForm() {
 
   const handleUserDetails = (e) => {
 
-    console.log("entered");
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
   }
 
@@ -48,7 +46,6 @@ export default function SignupForm() {
       });
     });
 
-    console.log("password is : "+PersonalDetailsList.Password);
     setTimeout(() => {
       showSnackBox(false);
       updateUser({email:email, password:PersonalDetailsList.Password});
@@ -122,8 +119,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
       }
 
 
-
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else

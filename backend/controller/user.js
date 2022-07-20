@@ -30,13 +30,8 @@ module.exports.editUser = (req, res) => {
 
   Users.find({email : email})
   .then((info) => {
-    console.log(info)
-    console.log(password)
-    console.log(email)
-    console.log("Updating password.");
     info[0].password = req.body.password;
-    console.log(info[0]);
-
+    
     const result = info[0]
       .save()
       .then(() => {
@@ -55,17 +50,12 @@ module.exports.editUser = (req, res) => {
 // @desc Register user
 // @access Public
 module.exports.addUser = (req, res) => {
-    console.log("A1");
-
-
+  
     Users.findOne({ email: req.body.email }).then(user => {
-    console.log("B1");
         if (user) {
-          console.log("C1");
           return res.status(400).json({ email: "Email already exists" });
 
         } else {
-        console.log("D");
           const newUser = new Users({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -103,17 +93,11 @@ module.exports.login = (req, res) => {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
 
-    // Check password
-    console.log(" a1"+password);
-    console.log(" a2"+user.password);
 
     bcrypt.compare(password, user.password).then(isMatch => {
-      console.log("A");
-
       if (isMatch) {
         // User matched
         // Create JWT Payload
-        console.log("B");
 
         const payload = {
           id: user.id,
@@ -128,7 +112,6 @@ module.exports.login = (req, res) => {
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-          console.log("C");
             console.log("token is "+token)
             return res.
             status(200).json({

@@ -7,7 +7,6 @@ Contains all the functions for hotels and the operations related to modify, canc
 
 //Retrieves the list of all the hotels from the hotels collection
 module.exports.getAll = (req, res) => {
-    console.log("making hotel list db call")
     Hotels.find().then((hotels) => res.json(hotels));
 };
 

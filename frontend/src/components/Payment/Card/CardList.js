@@ -41,7 +41,6 @@ const PaymentCardList = ({ cards }) => {
   };
 
   const handleSelectedCard = (id) => () => {
-    console.log(id);
     setHighLight(id);
     setSelectedCard(getSelectedCard(id));
   };

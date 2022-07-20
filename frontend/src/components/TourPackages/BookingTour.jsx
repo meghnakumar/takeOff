@@ -129,11 +129,9 @@ export default function BookTours() {
 		}
 	};
 	const handleAddToCart = (addToCart) => {
-		console.log(addToCart);
 		try {
 			addCartItem(addToCart)
 				.then((res) => {
-					console.log(res.status);
 				})
 				.catch((err) => {
 					console.error(err);

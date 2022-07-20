@@ -21,9 +21,7 @@ function login(email, password) {
 
 function setUserToken(email){
     let url=apiUserFetchEndpoint+"/"+email;
-           console.log(url);
             return http.get(url).then((user)=>{
-                console.log("user data : "+user.data[0].lastName);
                 localStorage.setItem("userDetails", JSON.stringify(user.data[0]));
                 addInitialBalance(JSON.parse(localStorage.getItem("userDetails"))._id)
                 addInitialUser(JSON.parse(localStorage.getItem("userDetails"))._id);

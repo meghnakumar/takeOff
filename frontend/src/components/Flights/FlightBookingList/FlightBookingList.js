@@ -61,13 +61,11 @@ const FlightBookingList = () => {
   const handleModifyClickOpen = (item) => {
     setOpenModify(true);
     setModifyBooking(item);
-    console.log("Modify item ", item)
   };
 
   const confirmCancelBooking = () => {
     cancelFlightBooking(cancelId).then(result =>{
       fetchBookings();
-      console.log(result.data)
     })
     handleClose();
     setOpenSnackBar(true);
@@ -87,7 +85,6 @@ const FlightBookingList = () => {
 
   const handleClickOpen = (id) => {
     setCancelId(id);
-    console.log(removeBooking);
     setOpen(true);
 };
   
