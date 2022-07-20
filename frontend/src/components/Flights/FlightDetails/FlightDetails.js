@@ -15,8 +15,6 @@ import {useLocation} from "react-router-dom";
 const FlightDetails = () => {
   const flightDetails = useLocation().state.flightDetails;
   const flightReqDetails = useLocation().state.flightReqDetails;
-  console.log("flight details ", flightDetails);
-  console.log("flightReqDetails ", flightReqDetails);
   let flightObj = {
     flightCompany: flightDetails.flightCompany,
     flightId: flightDetails.flightId,
@@ -30,7 +28,6 @@ const FlightDetails = () => {
     flightDate: flightReqDetails.departureDate,
     noOfTravelers: flightReqDetails.travelersCount
   }
-  console.log("flight details object", flightObj);
   return (
     <div className="flightBooking">
       <Paper

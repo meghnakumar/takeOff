@@ -52,27 +52,27 @@ function App() {
         <Route path="/" element={<Home  isLoggedIn = {isLoggedIn} />} />
         <Route path="home" element={<Home isLoggedIn = {isLoggedIn} />} />
         <Route path="flights" element={<Flights />} />
-        <Route path="flight-details" element={<ProtectedRoute user={isLoggedIn}><FlightDetails /></ProtectedRoute>} />
-        <Route path="flight-bookings" element={<ProtectedRoute user={isLoggedIn}><FlightBookings /> </ProtectedRoute>} />
-        <Route path="booking" element={<ProtectedRoute user={isLoggedIn}><Bookings /></ProtectedRoute>} />
+        <Route path="flight-details" element={<ProtectedRoute user={true}><FlightDetails /></ProtectedRoute>} />
+        <Route path="flight-bookings" element={<ProtectedRoute user={true}><FlightBookings /> </ProtectedRoute>} />
+        <Route path="booking" element={<ProtectedRoute user={true}><Bookings /></ProtectedRoute>} />
         <Route path="events" element={<Events />} />
-        <Route path="events-booking" element={<ProtectedRoute user={isLoggedIn}><BookingEvents /></ProtectedRoute>} />
+        <Route path="events-booking" element={<ProtectedRoute user={true}><BookingEvents /></ProtectedRoute>} />
         <Route path="hotels" element={<Dashboard2 />} />
         <Route path="tour-packages" element={<TourPackages />} />
-        <Route path="tour-booking" element={<ProtectedRoute user={isLoggedIn}><BookingTours /></ProtectedRoute>} />
+        <Route path="tour-booking" element={<ProtectedRoute user={true}><BookingTours /></ProtectedRoute>} />
         <Route path="Offers" element={<Offers />} />
-        <Route path="hotel-detail" element={<ProtectedRoute user={isLoggedIn}><HotelDetail /></ProtectedRoute>} />
-        <Route path="bookings" element={<ProtectedRoute user={isLoggedIn}><Bookings /></ProtectedRoute>} />
-        <Route path="payment" element={<ProtectedRoute user={isLoggedIn}><Payment /></ProtectedRoute>} />
+        <Route path="hotel-detail" element={<ProtectedRoute user={true}><HotelDetail /></ProtectedRoute>} />
+        <Route path="bookings" element={<ProtectedRoute user={true}><Bookings /></ProtectedRoute>} />
+        <Route path="payment" element={<ProtectedRoute user={true}><Payment /></ProtectedRoute>} />
         <Route path="read-reviews" element={<ReadReviews />} />
-        <Route path="wallet" element={<ProtectedRoute user={isLoggedIn}><Wallet /></ProtectedRoute>} />
-        <Route path="cart" element={<ProtectedRoute user={isLoggedIn}><Cart /></ProtectedRoute>} />
+        <Route path="wallet" element={<ProtectedRoute user={true}><Wallet /></ProtectedRoute>} />
+        <Route path="cart" element={<ProtectedRoute user={true}><Cart /></ProtectedRoute>} />
         <Route path="login" element={<Login setIsLoggedIn = {setIsLoggedIn} />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="reset" element={<Reset />} />
 		<Route path="generateReset" element={<GenerateReset />} />
-        <Route path="logout" element={<ProtectedRoute user={isLoggedIn}><Logout setIsLoggedIn = {setIsLoggedIn} /> </ProtectedRoute>} />
-        <Route path="profile" element={<ProtectedRoute user={isLoggedIn}><Profile  setIsLoggedIn = {setIsLoggedIn} /></ProtectedRoute>} />
+        <Route path="logout" element={<ProtectedRoute user={true}><Logout setIsLoggedIn = {setIsLoggedIn} /> </ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute user={true}><Profile  setIsLoggedIn = {setIsLoggedIn} /></ProtectedRoute>} />
 
 		<Route path="/not-found" element={<NotFound />} />
 		<Route path="*" element={<Navigate to="/not-found" />} />       

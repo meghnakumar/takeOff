@@ -40,7 +40,6 @@ const TravellerDetails = (props) => {
   useEffect(() => {
     if(props.isModify) {
       let travelerObj = props.modifyBooking.travelerDetails[0];
-      console.log(props.modifyBooking);
       setFirstName(travelerObj.firstName);
       setLastName(travelerObj.lastName);
       setEmail(travelerObj.email);
@@ -85,7 +84,6 @@ const TravellerDetails = (props) => {
       travelerObj.price = travelerDetails[0].fareType == "standard" ? travelerObj.price : (props.flightObj.price + 30);
       travelerObj.status = "pending";
       createFlightBooking(travelerObj).then(result => {
-        console.log(result);
         if (result.status === 200) {
           const bookingId = result.data._id
           const cartItem = {

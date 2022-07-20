@@ -62,7 +62,6 @@ const WalletBalance = (props) => {
         const r = axios
           .post(baseURL + `/wallet/transaction`, data)
           .then((result) => {
-            console.log("Transaction saved!");
           })
           .catch((e) => {
             console.log("Failed to save transaction.");

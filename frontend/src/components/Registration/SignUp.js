@@ -23,7 +23,6 @@ export default function SignupForm() {
   const signupSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
-        console.log(toSend);
         send(
               'service_aks72nt',
               'template_j2fcgeg',
@@ -31,7 +30,6 @@ export default function SignupForm() {
               'BbOaPQawKNmE3FZf4'
             )
               .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
               })
               .catch((err) => {
                 console.log('FAILED...', err);
@@ -47,7 +45,6 @@ export default function SignupForm() {
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
   }
 
@@ -92,7 +89,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
     if(result !== "noerror"){
       updateErrorMessage(result);
     }else{
-       console.log("front 1"+PersonalDetailsList.FirstName);
        signup(PersonalDetailsList.FirstName,PersonalDetailsList.LastName,PersonalDetailsList.UserName,PersonalDetailsList.Email,PersonalDetailsList.Password,PersonalDetailsList.ConfirmPassword).then(()=>{
             
             signupSuccessful();
@@ -104,7 +100,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
   const validationscheck = () => {
 
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     
@@ -172,9 +167,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
         flag = "n";
       }
 
-
-
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else

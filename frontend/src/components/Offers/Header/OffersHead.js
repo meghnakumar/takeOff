@@ -36,8 +36,6 @@ const OffersHead = () => {
     getData();
   }, []);
 
-  console.log(mainoffer);
-
   const handleCopyClipboard = (e) => {
     const value = e.target.value;
     navigator.clipboard

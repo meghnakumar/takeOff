@@ -22,16 +22,12 @@ const HotelList = (props) => {
     };
 
     const [sortedHotels, setSortedHotels] = useState([]);
-    //const [filteredHotels, setFilteresHotels] = useState([]);
-    //to load the hotel list data as soon as the page loads/reloads
     useEffect(() => {
         getHotels().then(result => {
             setHotels(result.data);
-            console.log(result.data)
             setSortedHotels(result.data.sort((a, b) => a.rating - b.rating));
         })
-        //setFilteresHotels(sortedHotels.filter((item) => item.location === props.location))
-
+      
     }, []);
 
     //filter the list based on the selected location
@@ -39,32 +35,19 @@ const HotelList = (props) => {
     let filteredHotels = sortedHotels.filter((item) => item.location === props.location);
     const handleOnSearch=(e)=> {
         const search = e.target.value
-        console.log("search:::::::::", search)
         if(search===''){
             filteredHotels = sortedHotels.filter((item) => item.location === props.location);
-            //setFilteresHotels(sortedHotels.filter((item) => item.location === props.location))
-            console.log("Inside search",filteredHotels)
         }
         else{
             const filteredText = filteredHotels.filter(find=>{
                 return find.name.toUpperCase().includes(search.toUpperCase());
             });
-            console.log("filteres hotel",filteredText)
-            //setFilteresHotels(filteredText)
             filteredHotels = filteredText
-            console.log("got added", filteredHotels)
         }
     }
 
     return(
         <div>
-            {/*<SearchBar/>*/}
-            {/*<div className="container-fluid">*/}
-            {/*    /!*<div className="row mb-1">*!/*/}
-            {/*        <div className="col-12 col-sm-6" style={{paddingTop: '5px'}}>*/}
-            {/*           </div>*/}
-            {/*        <TextField id="outlined-basic" label="Search" variant="outlined" onChange={handleOnSearch}/>*/}
-            {/*</div>*/}
 
             { <Paper
             sx={{

@@ -60,12 +60,9 @@ const ReadReviews = () =>{
     const [reviewData, setReviewData] = useState("");
     const [sortedReviews, setSortedReviews] = useState("");
     useEffect(() => {
-       console.log(location.state.reviews)
        setReviewData(location.state.reviews)
         return () => {
-            console.log(reviewData);
             if(location.state.reviews !== undefined){
-                console.log("here with", reviewData)
                 setSortedReviews(location.state.reviews.sort((a, b) => a.rating - b.rating));
             }
 
@@ -76,7 +73,6 @@ const ReadReviews = () =>{
     const [sortReviews, setSortReviews] = React.useState("lowToHigh");
     const handleChange = (event) => {
         setSortReviews(event.target.value);
-        console.log(event.target.value);
         if (event.target.value === "lowToHigh"){
             setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
             reviewList = reviewData.sort((a, b) => a.rating - b.rating)

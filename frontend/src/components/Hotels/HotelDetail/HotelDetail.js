@@ -173,7 +173,6 @@ const HotelDetail = () => {
             email !== null &&
             contact !== null &&
             roomNumber !== null) {
-            console.log("booking summary:::::::::::::::",hotelBookingSummary)
             createHotelBooking(hotelBookingSummary).then(result => {
                 if(result.status === 200){
                     const bookingId = result.data._id
@@ -184,7 +183,6 @@ const HotelDetail = () => {
                         price: hotelBookingSummary.price
                     }
                     addCartItem(cartItem).then(result =>{
-                        console.log("successfully added to cart", result.data)
                     })
 
                 }

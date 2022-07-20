@@ -23,10 +23,8 @@ export default function SignupForm(props) {
     const {name, value} = e.target;
 
     setToSend({ ...toSend, [e.target.name]: e.target.value });
-    console.log("email sent : ",toSend)
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
     
   }
@@ -64,8 +62,6 @@ export default function SignupForm(props) {
   });
 
   const validationscheck = () => {
-
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     if(PersonalDetailsList.Email===''){
@@ -91,8 +87,6 @@ export default function SignupForm(props) {
       errorlist.password="Please enter a password having less than 15 characters"
       flag = "n";
     }
-
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else
@@ -112,7 +106,6 @@ export default function SignupForm(props) {
               'BbOaPQawKNmE3FZf4'
             )
               .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
                 props.setIsLoggedIn(true);
               })
               .catch((err) => {
@@ -125,7 +118,6 @@ export default function SignupForm(props) {
 
 
   const loginFailed = () => {
-    console.log("login failed")
     showErrorSnackBox(true);
       setTimeout(() => {
         showErrorSnackBox(false);

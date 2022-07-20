@@ -47,11 +47,9 @@ export default function ResetGenerateForm() {
   const handleUserDetails = (e) => {
 
     setToSend({ ...toSend, [e.target.name]: e.target.value });
-    console.log("email sent : ",toSend)
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
   }
 
@@ -82,7 +80,6 @@ export default function ResetGenerateForm() {
             'BbOaPQawKNmE3FZf4'
           )
             .then((response) => {
-              console.log('SUCCESS!', response.status, response.text);
             })
             .catch((err) => {
               console.log('FAILED...', err);
@@ -118,7 +115,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
 
   const validationscheck = () => {
 
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     if(PersonalDetailsList.Email===''){
@@ -131,8 +127,6 @@ const [buttonPopup, setButtonPopup]=useState(false);
         flag = "n"; 
     }
 
-
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else

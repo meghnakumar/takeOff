@@ -109,7 +109,6 @@ const Bookings = () => {
         setShowErrors(false)
         if (id === 'email') {
             setEmail(value)
-            console.log(modifiedEmail)
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, emailError: "Email cannot be empty"}
@@ -159,7 +158,6 @@ const Bookings = () => {
 
 
     const handleClickOpen = () => {
-        console.log(removeBooking);
         setOpen(true);
     };
 
@@ -174,7 +172,6 @@ const Bookings = () => {
     };
 
     const handleModifyClick = () => {
-        console.log(modifyBooking)
         setOpenModifyForm(true)
 
     }
@@ -192,7 +189,6 @@ const Bookings = () => {
         setOpenModifyForm(false)
         setOpenModifySnackBar(true);
         modifyHotelBooking(modifySummary, modifyBooking.bookingInfo._id).then(result =>{
-            console.log(result.data)
         })
     }
 
@@ -204,7 +200,6 @@ const Bookings = () => {
             setOpenReview(false)
             setOpenReviewSnackBar(true);
             addReviewHotel(feedbackSummary, hotelId).then(result =>{
-                console.log(result.data)
             })
         }
         else{
@@ -366,7 +361,6 @@ const Bookings = () => {
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button color="error" onClick={() => {
                         cancelHotelBooking(removeBooking.bookingInfo._id).then(result =>{
-                            console.log(result.data)
                         })
                         sortedBookings = sortedBookings.filter(booking => booking._id != removeBooking.bookingInfo._id);
                         handleClose();

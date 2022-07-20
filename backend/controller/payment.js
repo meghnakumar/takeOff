@@ -3,7 +3,6 @@ const cards = require("../models/cards");
 
 module.exports.addInitialUser = (req, res) => {
   const user = { userId: req.params.id, balance: 0, cards: [] };
-  console.log(user);
   payment
     .create(user)
     .then((info) => res.json(info))

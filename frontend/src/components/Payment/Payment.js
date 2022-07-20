@@ -30,7 +30,6 @@ const Payment = () => {
       })
       .then((data) => {
         let total = 0;
-        console.log(data);
         setCart(data);
         data.map((item) => {
           total += item.price;
@@ -51,7 +50,6 @@ const Payment = () => {
         return response.data;
       })
       .then((data) => {
-        console.log(data);
         setBalance(data);
       });
   };
