@@ -8,17 +8,16 @@ const WalletHistory = require("../models/walletHistoryModel");
 module.exports.getWalletBalance = (req, res) => {
   Wallet.find({ userId: req.params.userId })
     .then((info) => {
-      console.log("Wallet balance fetched.");
+      // console.log("Wallet balance fetched.");
       res.json(info[0].balance);
     })
     .catch((err) => {
-      console.log("Error in fetching wallet balance.");
+      // console.log("Error in fetching wallet balance.");
       res.status(404).json({ error: "Unable to find info" });
     });
 };
 
 module.exports.addInitialBalance = (req, res) => {
-  console.log(req.params.userId);
   const item = new Wallet({
     userId: req.params.userId,
     balance: 100,
@@ -27,10 +26,10 @@ module.exports.addInitialBalance = (req, res) => {
   const result = item
     .save()
     .then(() => {
-      console.log("Initial wallet balance added.");
+      // console.log("Initial wallet balance added.");
     })
     .catch(() => {
-      console.log("Initial wallet balance insertion failed!");
+      // console.log("Initial wallet balance insertion failed!");
     });
 
   res.json(result);
@@ -42,51 +41,45 @@ module.exports.addMoney = (req, res) => {
 
   Wallet.find({ userId: req.body.userId })
     .then((info) => {
-      console.log("Adding to wallet balance.");
-      // res.json(info[0].balance);
-      // var balance = info[0].balance;
+      // console.log("Adding to wallet balance.");
       info[0].balance += req.body.amount;
-      console.log(info[0]);
 
       const result = info[0]
         .save()
         .then(() => {
-          console.log("Money added to the wallet.");
+          // console.log("Money added to the wallet.");
         })
         .catch(() => {
-          console.log("Money insertion failed!");
+          // console.log("Money insertion failed!");
         });
 
       res.json(result);
     })
     .catch((err) => {
-      console.log("Error in fetching wallet balance.");
+      // console.log("Error in fetching wallet balance.");
       res.status(404).json({ error: "Unable to find info" });
     });
 };
 
 module.exports.updateMoney = (req, res) => {
-  var userId = req.body.userId;
-  var amount = req.body.amount;
-
   Wallet.find({ userId: req.body.userId })
     .then((info) => {
-      console.log("Updating wallet balance.");
+      // console.log("Updating wallet balance.");
       info[0].balance -= req.body.amount;
 
       const result = info[0]
         .save()
         .then(() => {
-          console.log("Wallet money updated.");
+          // console.log("Wallet money updated.");
         })
         .catch(() => {
-          console.log("Money updation failed!");
+          // console.log("Money updation failed!");
         });
 
       res.json(result);
     })
     .catch((err) => {
-      console.log("Error in fetching wallet balance.");
+      // console.log("Error in fetching wallet balance.");
       res.status(404).json({ error: "Unable to find info" });
     });
 };
@@ -96,11 +89,11 @@ module.exports.getWalletHistory = (req, res) => {
 
   WalletHistory.find({ userId: req.params.userId })
     .then((info) => {
-      console.log("Wallet history fetched.");
+      // console.log("Wallet history fetched.");
       res.json(info);
     })
     .catch((err) => {
-      console.log("Error in fetching wallet history.");
+      // console.log("Error in fetching wallet history.");
       res.status(404).json({ error: "Unable to find info" });
     });
 };
@@ -118,10 +111,10 @@ module.exports.addTransaction = (req, res) => {
   const result = item
     .save()
     .then(() => {
-      console.log("Item added to the wallet history.");
+      // console.log("Item added to the wallet history.");
     })
     .catch(() => {
-      console.log("Item insertion failed!");
+      // console.log("Item insertion failed!");
     });
 
   res.json(result);
