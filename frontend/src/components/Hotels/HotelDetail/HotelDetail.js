@@ -228,15 +228,13 @@ const HotelDetail = () => {
     }
 
 
+    //function to redirect to the reviews page when user clicks on review button
     const handleReviewsClick = () => {
         goToReadReviews("/read-reviews", {state:{hotelid:location.state.hotelid, reviews:location.state.reviews}})
     }
 
 
     const [createBooking, setCreateBooking] = useState({roomInfo:"", show:false});
-
-
-    // Modal props
 
     const [openSnackBar, setOpenSnackBar] = useState(false);
 
