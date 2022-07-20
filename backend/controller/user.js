@@ -112,7 +112,7 @@ module.exports.login = (req, res) => {
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-            console.log("token is "+token)
+          
             return res.
             status(200).json({
               success: true,
