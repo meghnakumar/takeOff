@@ -74,10 +74,10 @@ export default function ResetGenerateForm() {
     
     setTimeout(() => {
         send(
-            'service_aks72nt',
-            'template_ml6rtkn',
+            'service_ejay0zu',
+            'template_5izzbqf',
             toSend,
-            'BbOaPQawKNmE3FZf4'
+            'xWpzSTTLJH2QppF1G'
           )
             .then((response) => {
             })
