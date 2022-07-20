@@ -96,6 +96,77 @@ This project is deployed on Heroku.
 ## Work Division
 
 #### Sharad Kumar
+## Features:
+
+1.  User Management
+
+User management is the main essential part of our web application because it acts as entry point for our application. In this feature, the main aim is to show the user the dynamic feed post of roadmaps of the user and rendering it based on the most liked feed post. Moreover, if the user likes one feed post and that he/she wants to save the post for future reference then they can use the save feature to save that specific post. After that, the saved feed post of the roadmap will be pushed into the ‘favorite bucket’ from which the user can view the saved post..
+
+## Task Of the Above feature
+
+- The login of users .
+
+- Registration of new users.
+
+- Profile page.
+
+- Logout page.
+
+- Session management
+
+- User authentication
+
+2. Notification
+
+Notification is used to notify users about the progress that has been made by the user during login process. User is notified using email
+
+- Login notification
+- Signup notification
+- Login failed notification
+- OTP notification
+
+
+## File Names:
+
+### 1. Frontend Files and their routes which are developed
+
+-src/App.jsx
+
+-src/services/userService.js
+
+-src/context/userContext.js
+
+-src/components/Registration/Login.js
+
+-src/components/Registration/Logout.js
+
+-src/components/Registration/SignUp.js
+
+-src/components/Profile/Profile.js
+
+
+
+
+### 2. Backend Files developed
+
+- backend/controller/user.js
+
+- backend/models/userModel.js
+
+- backend/routes/userRoute.js
+
+- backend/server.js
+
+
+## Endpoints for the API calls
+
+- GET:- /users/fetch/:email
+
+- POST:- /users/addUser
+
+- POST:- /users/login
+
+- PUT:- /users/update/:userId
 
  
 #### Meghna Kumar
