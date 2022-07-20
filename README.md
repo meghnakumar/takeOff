@@ -254,6 +254,42 @@ Feature developed:
 
 #### Jayasree Kulothungan
 
+Feature developed:
+
+**Event Management**
+- Display list of events
+- Display details about each event
+- Create a booking and add it to cart
+- Modify an existing booking
+- Cancel an existing booking
+
+**Tour Management**
+- Display list of tour packages
+- Display details about each tour packages
+- Create a booking and add it to cart
+- Modify an existing booking
+- Cancel an existing booking
+
+**Front-end Files**
+1. frontend/src/components/Events/eventList/Events.jsx - The events.jsx file contains the code to display all the event cards and the filtering function to display cards based on the city and date
+2. frontend/src/components/Events/BookingEvents/BookingEvents - The BookingEvents.jsx file contains the code to enter booking information and modal to display the booking summary.
+3. frontend/src/components/TourPackages/TourPackages.jsx - The TourPackages.jsx file contains the code to display all the tour cards and the filtering function to display cards based on the city and date
+4. frontend/src/components/TourPackages/BookingTour.jsx - The BookingTour.jsx  file contains the code to enter booking information and modal to display the booking summary.
+
+**Back-end Files**
+1. backend/models/eventModel.js - Contains the mongoDB model for events table
+2. backend/models/bookingEvents.js - Contains the mongoDB model for eventBookings table.
+3. backend/controller/event.js - Contains the logics for getting data from mongoDB evnts table.
+4. backend/controller/eventBooking.js - Contains the logic for creating, updating and getting booking information.
+5. backend/routes/eventRoute.js - Contains the API end point route for getting events.
+6. backend/routes/eventBookingRoute.js - Contains the API endpoint routes for creating, updating and getting booking information.
+7. backend/models/tourPackageModel.js - Contains the mongoDB model for tour package table.
+8. backend/models/tourBookingModel.js - Contains the mongoDB model for tourPackageBookings  table.
+9. backend/controller/tourPackage.js -  Contains the logics for getting data from mongoDB tour package table.
+10. backend/controller/tourBooking.js - Contains the logic for creating, updating and getting booking information. 
+11. backend/routes/tourBookingRoute.js - Contains the API endpoint routes for creating, updating and getting booking information.
+12. backend/routes/tourPackageRoute.js - Contains the API end point route for getting tour packages.
+
 
 #### Kalpit Machhi
 
