@@ -4,11 +4,8 @@ const { getAll, getById, getHotelBooking, cancelHotelBooking, modifyHotelBooking
     updateBookingStatus
 } = require("../controller/hotelAndReviews");
 
-// @route GET /hotels/get
-// @description get all hotels list
-// @access Public
 /*Author: Created by Meghna Kumar
-Contains routes for all the functions exposed in controller hotelAndReviews*/
+Contains routes for all the functions exposed in controller hotelAndReviews. Covers both Hotel Management and Review & Feedback feature*/
 
 router.get("/get", getAll);
 router.get("/get/:id",getById);

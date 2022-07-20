@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+/*Author: Created by Meghna Kumar
+Model class for hotel bookings object*/
 const HotelBookingSchema = new mongoose.Schema({
     startDate:{
         type: String,

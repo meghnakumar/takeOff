@@ -61,7 +61,6 @@ const Hotel = (props) => {
                                        height="207"
                                        alt={props.name}
                             />
-                            {/*<img src = {this.props.img}/>*/}
                         </Grid>
                         <Grid item xs={12} md={8}>
                             <CardContent style={{paddingBottom: "4px", paddingTop: "8px"}}>
@@ -111,67 +110,6 @@ const Hotel = (props) => {
                     </Grid>
                 </Grid>
             </Grid>
-            {/*<Grid container spacing={2}>
-                <Grid item sm={12} md={2}>
-
-                    <CardImg alt="complex" src={background}/>
-
-                </Grid>
-                <Grid item sm={12} md={10} container>
-                    <Grid item xs container direction="column" alignContent="flex-start">
-                        <Grid
-                            container
-                            direction="row"
-                            justifyContent="space-between"
-                            alignItems="flex-start"
-                        >
-
-                            <Typography variant="subtitle1" component="div">
-                                {props.name}
-                            </Typography>
-
-                            <Typography variant="subtitle1" component="div">
-                                <FavoriteIcon style={{
-                                    color:addedToWishlist? 'red':'grey' }} onClick={handleClick}/>
-                            </Typography>
-
-                        </Grid>
-                        <Grid
-                            container
-                            direction="row"
-                            justifyContent="flex-start"
-                            alignItems="flex-start">
-                            {[...Array(props.rating)].map(() => {
-                                return (
-                                    <span className="star" style={{color: '#ffd700'}}>&#9733;</span>
-                                );
-                            })}
-                        </Grid>
-
-
-                        <Typography variant="body2" align="left" color="text.secondary">
-                            {props.description}
-                        </Typography>
-
-                        <Grid
-                            container
-                            direction="row"
-                            justifyContent="flex-end"
-                            alignItems="flex-start">
-                            <Button type="button" style={{
-                                "marginTop": "4px",
-                                "padding": "8px 24px",
-                                "borderRadius": "25px"
-                            }} variant="contained" onClick={handleBookClick}>
-                                Book
-                            </Button>
-                        </Grid>
-
-                    </Grid>
-
-                </Grid>
-
-            </Grid>*/}
             <div>
                 <Snackbar anchorOrigin={{vertical: "bottom", horizontal: "right"}} open={openWishlistAlert.visibility} autoHideDuration={2000}
                           onClose={() => setOpenWishlistAlert(false)}>

@@ -40,6 +40,7 @@ add review option for completed bookings*/
 
 //references
 //https://mui.com/material-ui/
+//https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
 const Bookings = () => {
     let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
     let firstName = JSON.parse(localStorage.getItem("userDetails")).firstName;
@@ -94,6 +95,8 @@ const Bookings = () => {
     const handleCloseReviewDialog = () => {
         setOpenReview(false)
     }
+
+    //to set review variables to be added to request when review button is clicked
     const handleReviewClick = (bookingInfo) =>{
         setOpenReview(true);
         hotelNameFetched = bookingInfo.hotelName
@@ -103,6 +106,8 @@ const Bookings = () => {
             return {...prevState, hotelName: hotelNameFetched,location:hotelLocationFetched}
         })
     }
+
+    //handle the validations for modify form input
     const handleOnInput = (e) => {
 
         const {id, value} = e.target;
@@ -143,9 +148,6 @@ const Bookings = () => {
         }
     }
 
-    // Reference: https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
-
-
 
     useEffect(() => {
         getHotelBookingByUserId(userId).then(result => {
@@ -183,7 +185,7 @@ const Bookings = () => {
 
 
 
-
+    //to call the backend api and update the modified detail for the booking
     const handleModifySubmit = (e) => {
         e.preventDefault();
         setOpenModifyForm(false)
@@ -192,7 +194,7 @@ const Bookings = () => {
         })
     }
 
-    // here
+    //to call the backend api to add the review to the hotel enetered by user
     const handleReviewSubmit = (e) => {
         e.preventDefault();
         if(reviewValidationError.ratingError===''&&
@@ -207,6 +209,7 @@ const Bookings = () => {
         }
     }
 
+    //handle validations for feedback form input
     const handleFeedbackInput = (e) =>{
         const{id,value} = e.target
         if(id==='rating'){
