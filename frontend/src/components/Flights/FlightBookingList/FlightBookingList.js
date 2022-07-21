@@ -93,7 +93,7 @@ const FlightBookingList = () => {
   <div className="flight-list-bg">
     <div className='container res-p'>
     <div className="h3">Upcoming bookings</div>
-      {upcomingBookings?.length ? upcomingBookings
+      {upcomingBookings?.length ? upcomingBookings.filter(item=>(item.status==="confirmed"))
         .map((item, index) => {
           return (
       <div className="card" key={index}>
@@ -146,7 +146,7 @@ const FlightBookingList = () => {
         }) : <b> No upcoming flights bookings </b>
       }
       <div className="h3">Past bookings</div>
-      {pastBookings?.length ? pastBookings
+      {pastBookings?.length ? pastBookings.filter(item=>(item.status==="confirmed"))
         .map((item, index) => {
           return (
       <div className="card" key={index}>
