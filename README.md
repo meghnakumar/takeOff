@@ -307,9 +307,9 @@ Feature developed:
 - Removing items from cart
 - Displaying cart items
 
+
 **Front-end Files**
 
-  
 
 1.  _frontend\src\components\Cart\Cart.js_: It is the parent component for the cart feature. It displays the cart page for users.
 
@@ -346,6 +346,44 @@ Feature developed:
 <br/>
 
 #### Harshit Lakhani
+
+Feature developed:
+
+- **Offers Management**
+- Creatig interesting offers for customers.
+- Shows details of offers
+- Copy offer codes on clipboard
+- Offer check on payments page
+- Minimum amount, maximum amount, type based offer validation 
+
+- **Payment Management**
+- Transaction management
+- Credit/Debit card saving for quick checkout
+- Add wallet balance using cards
+- Apply offers on final payable Amount
+- Final payment using wallet balance
+
+
+**Front-end Files**
+
+1.  _frontend/src/components/Payment/Payment.js_: It's main parent component for whole payment's page.
+2. _frontend/src/components/Payment/Card/Card.js_: It's design layout for the debit/credit card.
+3. _frontend/src/components/Payment/Card/CardList.js_: It's design for card list.
+4. _frontend/src/components/Payment/Cart/Cart.js_: It's design for cart balance and promo validation
+5. _frontend/src/components/WalletaCard/WalletCard.js_: It's design for wallet balance, pay now and add money feature.
+6. _frontend/src/components/Offers/Offers.js_: It's a design for main offers page.
+7. _frontend/src/components/Header/OffersHead.js_: It's a design for offers page's head.
+8. _frontend/src/components/Grid/OfferGrid.js_: It's a design for all the offer's grid.
+9. _frontend/src/components/Home/Home.js_: Design for landing page.
+
+**Backend Files**
+
+1. _backend/controller/offers.js_: It's a cotroller for offers feature.
+2. _backend/controller/payment.js_: It's a controller for payment feature.
+3. _backend/models/offers.js_: It's a database schema for offers feature.
+4. _backend/models/payment.js_: It's a database schema for payment feature.
+5. _backend/routes/offersRoute.js_: It's a routes page for offers feature.
+6. _backend/routes/paymentRoute.js_: It's a routes page for payments feature.
 
 
 ## Sources Used
