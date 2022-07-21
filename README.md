@@ -1,6 +1,6 @@
 <!--- The following README.md sample file was adapted from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md by Gabriella Mosquera for academic use --->
 
-# Assignment 3 | Group 13 - 'TakeOff'
+# Group 13 - 'TakeOff'
 
 'TakeOff' is a travel management website which aims on providing the users with a one stop platform for flights, hotels, events and tours booking. The deployed website is currently a semi functional prototype demonstrating each feature of the website and the experience it will provide to the users. The website aims on providing a feedback to the user for all their actions. Every button provides a message to the user enhancing the user experience and usability of the website and also making sure that users are aware what each functionality offers.
 
@@ -100,9 +100,7 @@ This project is deployed on Heroku.
 
 1.  User Management
 
-User management is the main essential part of our web application because it acts as entry point for our application. In this feature, the main aim is to show the user the dynamic feed post of roadmaps of the user and rendering it based on the most liked feed post. Moreover, if the user likes one feed post and that he/she wants to save the post for future reference then they can use the save feature to save that specific post. After that, the saved feed post of the roadmap will be pushed into the ‘favorite bucket’ from which the user can view the saved post..
-
-## Task Of the Above feature
+Task Of the Above feature
 
 - The login of users .
 
@@ -118,17 +116,15 @@ User management is the main essential part of our web application because it act
 
 2. Notification
 
-Notification is used to notify users about the progress that has been made by the user during login process. User is notified using email
-
 - Login notification
 - Signup notification
 - Login failed notification
 - OTP notification
 
 
-## File Names:
+**File Names:**
 
-### 1. Frontend Files and their routes which are developed
+**1. Frontend Files and their routes which are developed**
 
 -src/App.jsx
 
@@ -147,7 +143,7 @@ Notification is used to notify users about the progress that has been made by th
 
 
 
-### 2. Backend Files developed
+**2. Backend Files developed**
 
 - backend/controller/user.js
 
@@ -156,17 +152,6 @@ Notification is used to notify users about the progress that has been made by th
 - backend/routes/userRoute.js
 
 - backend/server.js
-
-
-## Endpoints for the API calls
-
-- GET:- /users/fetch/:email
-
-- POST:- /users/addUser
-
-- POST:- /users/login
-
-- PUT:- /users/update/:userId
 
  
 #### Meghna Kumar
