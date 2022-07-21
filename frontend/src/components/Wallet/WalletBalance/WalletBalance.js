@@ -44,7 +44,7 @@ const WalletBalance = (props) => {
 
   const handleAddMoney = () => {
     var b = balance + parseInt(addMoney);
-    setBalance(b)
+    setBalance(b);
     const res = axios
       .post(baseURL + `/wallet`, {
         userId: props.userId,
@@ -57,15 +57,12 @@ const WalletBalance = (props) => {
           price: parseInt(addMoney),
           date: moment().format("YYYY-MM-DD"),
           message: "Added money",
-          status: "successful"
+          status: "successful",
         };
         const r = axios
           .post(baseURL + `/wallet/transaction`, data)
-          .then((result) => {
-          })
-          .catch((e) => {
-            console.log("Failed to save transaction.");
-          });
+          .then((result) => {})
+          .catch((e) => {});
 
         alert("Money added to wallet.");
         setOpen(false);

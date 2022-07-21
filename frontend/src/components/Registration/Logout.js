@@ -35,10 +35,10 @@ export default function SignupForm(props) {
     showSnackBox(true);
     setTimeout(() => {
         send(
-                      'service_aks72nt',
-                      'template_j2fcgeg',
+                      'service_ejay0zu',
+                      'template_0x2ieie',
                       toSend,
-                      'BbOaPQawKNmE3FZf4'
+                      'xWpzSTTLJH2QppF1G'
                     )
                       .then((response) => {
                         props.setIsLoggedIn(true);

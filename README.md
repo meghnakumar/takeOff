@@ -96,6 +96,77 @@ This project is deployed on Heroku.
 ## Work Division
 
 #### Sharad Kumar
+## Features:
+
+1.  User Management
+
+User management is the main essential part of our web application because it acts as entry point for our application. In this feature, the main aim is to show the user the dynamic feed post of roadmaps of the user and rendering it based on the most liked feed post. Moreover, if the user likes one feed post and that he/she wants to save the post for future reference then they can use the save feature to save that specific post. After that, the saved feed post of the roadmap will be pushed into the ‘favorite bucket’ from which the user can view the saved post..
+
+## Task Of the Above feature
+
+- The login of users .
+
+- Registration of new users.
+
+- Profile page.
+
+- Logout page.
+
+- Session management
+
+- User authentication
+
+2. Notification
+
+Notification is used to notify users about the progress that has been made by the user during login process. User is notified using email
+
+- Login notification
+- Signup notification
+- Login failed notification
+- OTP notification
+
+
+## File Names:
+
+### 1. Frontend Files and their routes which are developed
+
+-src/App.jsx
+
+-src/services/userService.js
+
+-src/context/userContext.js
+
+-src/components/Registration/Login.js
+
+-src/components/Registration/Logout.js
+
+-src/components/Registration/SignUp.js
+
+-src/components/Profile/Profile.js
+
+
+
+
+### 2. Backend Files developed
+
+- backend/controller/user.js
+
+- backend/models/userModel.js
+
+- backend/routes/userRoute.js
+
+- backend/server.js
+
+
+## Endpoints for the API calls
+
+- GET:- /users/fetch/:email
+
+- POST:- /users/addUser
+
+- POST:- /users/login
+
+- PUT:- /users/update/:userId
 
  
 #### Meghna Kumar
@@ -182,6 +253,42 @@ Feature developed:
 7. backend\controller\flights.js - It contains logic for getting the list of available flights
 
 #### Jayasree Kulothungan
+
+Feature developed:
+
+**Event Management**
+- Display list of events
+- Display details about each event
+- Create a booking and add it to cart
+- Modify an existing booking
+- Cancel an existing booking
+
+**Tour Management**
+- Display list of tour packages
+- Display details about each tour packages
+- Create a booking and add it to cart
+- Modify an existing booking
+- Cancel an existing booking
+
+**Front-end Files**
+1. frontend/src/components/Events/eventList/Events.jsx - The events.jsx file contains the code to display all the event cards and the filtering function to display cards based on the city and date
+2. frontend/src/components/Events/BookingEvents/BookingEvents - The BookingEvents.jsx file contains the code to enter booking information and modal to display the booking summary.
+3. frontend/src/components/TourPackages/TourPackages.jsx - The TourPackages.jsx file contains the code to display all the tour cards and the filtering function to display cards based on the city and date
+4. frontend/src/components/TourPackages/BookingTour.jsx - The BookingTour.jsx  file contains the code to enter booking information and modal to display the booking summary.
+
+**Back-end Files**
+1. backend/models/eventModel.js - Contains the mongoDB model for events table
+2. backend/models/bookingEvents.js - Contains the mongoDB model for eventBookings table.
+3. backend/controller/event.js - Contains the logics for getting data from mongoDB evnts table.
+4. backend/controller/eventBooking.js - Contains the logic for creating, updating and getting booking information.
+5. backend/routes/eventRoute.js - Contains the API end point route for getting events.
+6. backend/routes/eventBookingRoute.js - Contains the API endpoint routes for creating, updating and getting booking information.
+7. backend/models/tourPackageModel.js - Contains the mongoDB model for tour package table.
+8. backend/models/tourBookingModel.js - Contains the mongoDB model for tourPackageBookings  table.
+9. backend/controller/tourPackage.js -  Contains the logics for getting data from mongoDB tour package table.
+10. backend/controller/tourBooking.js - Contains the logic for creating, updating and getting booking information. 
+11. backend/routes/tourBookingRoute.js - Contains the API endpoint routes for creating, updating and getting booking information.
+12. backend/routes/tourPackageRoute.js - Contains the API end point route for getting tour packages.
 
 
 #### Kalpit Machhi

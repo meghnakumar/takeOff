@@ -13,49 +13,13 @@ import React, {useEffect, useState} from "react";
 import {getHotels} from "../../../services/hotelServices";
 import {useLocation} from "react-router-dom";
 
+/*Author: Created by Meghna Kumar
+Renders the list of reviews and ratings available for a hotel*/
+
 //references
 //https://mui.com/material-ui/
 
 const ReadReviews = () =>{
-
-   /* const reviewData = {
-        "reviews": [
-            {
-                "name": "Suyash Medhavi",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 4
-            },
-            {
-                "name": "Ananaya Tiwari",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 3
-            },
-            {
-                "name": "Priya Tyagi",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 5
-            },
-            {
-                "name": "Shriya Srivastava",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 5
-            },
-            {
-                "name": "Varun Dhawan",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 2
-            }]
-        }*/
     const location = useLocation();
     const [reviewData, setReviewData] = useState("");
     const [sortedReviews, setSortedReviews] = useState("");
