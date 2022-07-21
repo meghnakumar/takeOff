@@ -50,7 +50,7 @@ const CartList = (props) => {
 
           {items &&
             items.map((item) => {
-              if (item.type === " ") {
+              if (item.type === "flight") {
                 return (
                   <div className="card c1">
                     <div className="card-body">
