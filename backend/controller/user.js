@@ -25,31 +25,37 @@ module.exports.getUser = (req, res) => {
 
 
 module.exports.editUser = (req, res) => {
-	Users
-		.findOneAndUpdate(req.params.userId, req.body)
-		.then((info) =>
-			res.json({
-				msg: "Updated successfully",
-			})
-		)
-		.catch((err) => res.status(400).json({ error: "Unable to undate info" }));
+  const email = req.body.email;
+  const password = req.body.password;
+
+  Users.find({email : email})
+  .then((info) => {
+    info[0].password = req.body.password;
+    
+    const result = info[0]
+      .save()
+      .then(() => {
+        console.log("Password updated.");
+      })
+      .catch(() => {
+        console.log("Password updation failed!");
+      });
+
+    res.json(result);
+  })
+
 };
 
 // @route POST api/users/register
 // @desc Register user
 // @access Public
 module.exports.addUser = (req, res) => {
-    console.log("A1");
-
-
+  
     Users.findOne({ email: req.body.email }).then(user => {
-    console.log("B1");
         if (user) {
-          console.log("C1");
           return res.status(400).json({ email: "Email already exists" });
 
         } else {
-        console.log("D");
           const newUser = new Users({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -77,9 +83,6 @@ module.exports.addUser = (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 module.exports.login = (req, res) => {
-    console.log("A1"+req.body.email)
-    console.log("B1"+req.body.password)
-
 
     const email = req.body.email;
     const password = req.body.password;
@@ -90,17 +93,11 @@ module.exports.login = (req, res) => {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
 
-    // Check password
-    console.log(" a1"+password);
-    console.log(" a2"+user.password);
 
     bcrypt.compare(password, user.password).then(isMatch => {
-      console.log("A");
-
       if (isMatch) {
         // User matched
         // Create JWT Payload
-        console.log("B");
 
         const payload = {
           id: user.id,
@@ -115,8 +112,7 @@ module.exports.login = (req, res) => {
             expiresIn: 31556926 // 1 year in seconds
           },
           (err, token) => {
-          console.log("C");
-            console.log("token is "+token)
+          
             return res.
             status(200).json({
               success: true,

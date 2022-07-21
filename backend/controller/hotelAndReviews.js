@@ -7,7 +7,6 @@ Contains all the functions for hotels and the operations related to modify, canc
 
 //Retrieves the list of all the hotels from the hotels collection
 module.exports.getAll = (req, res) => {
-    console.log("making hotel list db call")
     Hotels.find().then((hotels) => res.json(hotels));
 };
 
@@ -53,10 +52,19 @@ module.exports.cancelHotelBooking = (req, res) => {
 
 //Adds review for a particular hotel provided by the user
 module.exports.addReviews=(req,res)=>{
-    Hotels.update({_id: new mongodb.ObjectID(req.params.id)},{$push: {"reviews":req.body}})
-        .then((info) => res.json({msg:"Review added successfully"}))
-        .catch((err) => res.json(err));
-};
+    try{
+        Hotels.findOneAndUpdate({_id: new mongodb.ObjectID(req.params.id)},{$push: {"reviews":req.body}})
+            .then((info) =>{
+                 return res.status(200).json({info: info, msg:"Review added successfully"})
+            })
+    }
+
+    catch(err){
+        return res.status(500).json({
+            message: 'Internal server error',
+            success: false
+        })
+}}
 
 //updates the status of booking from pending to confirmed on succesful payment for the booking
 module.exports.updateBookingStatus=(req,res)=>{

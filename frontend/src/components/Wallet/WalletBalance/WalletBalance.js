@@ -12,12 +12,27 @@ import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
+import { baseURL } from "../../../services/httpService";
 
 //references
 //https://mui.com/material-ui/
 
-const WalletBalance = () => {
-  const [open, setOpen] = React.useState(false);
+const WalletBalance = (props) => {
+  const [userId, setUserId] = useState();
+  const [balance, setBalance] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [addMoney, setAddMoney] = useState(0);
+
+  useEffect(() => {
+    const res = axios
+      .get(baseURL + `/wallet/` + props.userId)
+      .then((result) => {
+        setBalance(result.data);
+      });
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,6 +41,37 @@ const WalletBalance = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleAddMoney = () => {
+    var b = balance + parseInt(addMoney);
+    setBalance(b);
+    const res = axios
+      .post(baseURL + `/wallet`, {
+        userId: props.userId,
+        amount: parseInt(addMoney),
+      })
+      .then((result) => {
+        const data = {
+          type: "add",
+          userId: props.userId,
+          price: parseInt(addMoney),
+          date: moment().format("YYYY-MM-DD"),
+          message: "Added money",
+          status: "successful",
+        };
+        const r = axios
+          .post(baseURL + `/wallet/transaction`, data)
+          .then((result) => {})
+          .catch((e) => {});
+
+        alert("Money added to wallet.");
+        setOpen(false);
+      })
+      .catch((e) => {
+        alert("Failed to add money to wallet.");
+      });
+  };
+
   return (
     <div className="WalletBalance">
       <div className="wallet-balance-bg">
@@ -36,18 +82,15 @@ const WalletBalance = () => {
             </div>
 
             <div className="row">
-              <div className="col-lg-4">
-                <div className="balance">7,450</div>
+              <div className="col-lg-6">
+                <div className="balance add-money-btn">
+                  C$ {Math.round(balance)}
+                </div>
                 <hr />
-                <div className="small-txt">Reward Points</div>
-              </div>
-              <div className="col-lg-4">
-                <div className="balance">$450.75</div>
-                <hr />
-                <div className="small-txt">Current Balance</div>
+                <div className="small-txt add-money-btn">Current Balance</div>
               </div>
 
-              <div className="col-lg-4 col-12 m-top-16 add-money-btn">
+              <div className="col-lg-6 col-12 m-top-16 add-money-btn">
                 <Button
                   type="submit"
                   variant="contained"
@@ -79,6 +122,9 @@ const WalletBalance = () => {
                           Amount
                         </InputLabel>
                         <Input
+                          onChange={(event) => {
+                            setAddMoney(event.target.value);
+                          }}
                           id="standard-adornment-amount"
                           startAdornment={
                             <InputAdornment position="start">$</InputAdornment>
@@ -146,7 +192,7 @@ const WalletBalance = () => {
 
                           color: "white",
                         }}
-                        onClick={handleClose}
+                        onClick={handleAddMoney}
                       >
                         Add
                       </Button>

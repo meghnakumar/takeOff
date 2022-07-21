@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import FlightList from '../Flights/FlightList/FlightList';
 import SearchFlights from '../Flights/SearchFlights/SearchFlights';

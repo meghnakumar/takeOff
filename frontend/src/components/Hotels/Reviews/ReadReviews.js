@@ -13,74 +13,37 @@ import React, {useEffect, useState} from "react";
 import {getHotels} from "../../../services/hotelServices";
 import {useLocation} from "react-router-dom";
 
+/*Author: Created by Meghna Kumar
+Renders the list of reviews and ratings available for a hotel*/
+
 //references
 //https://mui.com/material-ui/
 
 const ReadReviews = () =>{
-
-    const reviewData = {
-        "reviews": [
-            {
-                "name": "Suyash Medhavi",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 4
-            },
-            {
-                "name": "Ananaya Tiwari",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 3
-            },
-            {
-                "name": "Priya Tyagi",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 5
-            },
-            {
-                "name": "Shriya Srivastava",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 5
-            },
-            {
-                "name": "Varun Dhawan",
-                "hotelName": "Hotel Miramar",
-                "location": "San Juan, Puerto Rico",
-                "feedback": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                "rating": 2
-            }]
-        }
     const location = useLocation();
-    //const [reviewData, setReviewData] = useState("");
+    const [reviewData, setReviewData] = useState("");
     const [sortedReviews, setSortedReviews] = useState("");
     useEffect(() => {
-        console.log(location.state.reviews)
-       // setReviewData(location.state.reviews)
+       setReviewData(location.state.reviews)
         return () => {
-            console.log(reviewData);
-            if(reviewData.reviews !== ''){
-                setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            if(location.state.reviews !== undefined){
+                setSortedReviews(location.state.reviews.sort((a, b) => a.rating - b.rating));
             }
 
         };
     }, []);
 
-
-    const [sortReviews, setSortReviews] = React.useState('lowToHigh');
+    let reviewList = sortedReviews
+    const [sortReviews, setSortReviews] = React.useState("lowToHigh");
     const handleChange = (event) => {
         setSortReviews(event.target.value);
-        console.log(event.target.value);
         if (event.target.value === "lowToHigh"){
-            setSortedReviews(reviewData.reviews.sort((a, b) => a.rating - b.rating));
+            setSortedReviews(reviewData.sort((a, b) => a.rating - b.rating));
+            reviewList = reviewData.sort((a, b) => a.rating - b.rating)
         }
         else {
-            setSortedReviews(reviewData.reviews.sort((a, b) => b.rating - a.rating));
+            setSortedReviews(reviewData.sort((a, b) => b.rating - a.rating));
+            reviewList = reviewData.sort((a, b) => b.rating - a.rating)
         }
     };
 
@@ -121,7 +84,7 @@ const ReadReviews = () =>{
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {Object.values(sortedReviews).map(review => <Grid item xs={12}>
+                    {reviewList?.length ? reviewList.map(review => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"
@@ -148,7 +111,7 @@ const ReadReviews = () =>{
 
                             </Grid>
                         </Grid>
-                    </Grid>)}
+                    </Grid>): <div style={{marginTop: "20px", paddingLeft: "16px"}}><b>No review to display</b></div>}
                 </Grid>
             </Paper>
 

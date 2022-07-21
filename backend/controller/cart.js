@@ -14,8 +14,6 @@ function delay(time) {
 module.exports.getItems = (req, res) => {
   Cart.find({ userId: req.params.userId })
     .then((info) => {
-      console.log("Cart item data fetched.");
-
       var output = [];
       let userId = req.params.userId;
 
@@ -122,12 +120,12 @@ module.exports.getItems = (req, res) => {
         }
       }
 
-      delay(2000).then(() => {
+      delay(500).then(() => {
         res.json(output);
       });
     })
     .catch((err) => {
-      console.log("Error in fetching cart data.");
+      // console.log("Error in fetching cart data.");
       res.status(404).json({ error: "Unable to find info" });
     });
 };
@@ -143,10 +141,10 @@ module.exports.addItem = (req, res) => {
   const result = item
     .save()
     .then(() => {
-      console.log("Item is added to the cart.");
+      // console.log("Item is added to the cart.");
     })
     .catch(() => {
-      console.log("Item insertion failed!");
+      // console.log("Item insertion failed!");
     });
 
   res.json(result);
@@ -157,10 +155,10 @@ module.exports.deleteItem = (req, res) => {
 
   const result = Cart.deleteOne({ _id: new mongodb.ObjectId(cartId) })
     .then(() => {
-      console.log("Item is deleted.");
+      // console.log("Item is deleted.");
     })
     .catch(() => {
-      console.log("Failed to delete item!");
+      // console.log("Failed to delete item!");
     });
 
   res.json(result);

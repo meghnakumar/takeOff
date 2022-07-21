@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React,  { useState, useEffect} from 'react';
 import './FlightBookingList.scss';
 import { Button, 
@@ -29,19 +33,18 @@ const FlightBookingList = () => {
   const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [openModify, setOpenModify] = React.useState(false);
-  const userId = "user1"; 
+  const [modifyBooking, setModifyBooking] = React.useState({});
   useEffect(() => {
     fetchBookings();
   }, []);
 
   const fetchBookings = () => {
-    getFlightBooking(userId).then(result => {
+    let id = JSON.parse(localStorage.getItem("userDetails"))._id;
+    getFlightBooking(id).then(result => {
       let bookingsData = result.data;
       let currentDate = new Date();
-      if(upcomingBookings.length > 0) {
-        setUpcomingBookings([]);
-        setPastBookings([]);
-      }
+      setUpcomingBookings([]);
+      setPastBookings([]);
       for(const element of bookingsData) {
         let flightDate = new Date(element.flightDate + " GMT-0300");
         if(flightDate.getDate() < currentDate.getDate()) {
@@ -49,10 +52,7 @@ const FlightBookingList = () => {
         }else {
           setUpcomingBookings(upcomingBookings => [...upcomingBookings, element]);
         }
-        console.log("booking data inside for loop", element);
       }
-      console.log("postBookings", pastBookings);
-      console.log("upcoming Bookings", upcomingBookings);
     }).catch(err => {
       console.error(err);
     });
@@ -60,12 +60,12 @@ const FlightBookingList = () => {
 
   const handleModifyClickOpen = (item) => {
     setOpenModify(true);
+    setModifyBooking(item);
   };
 
   const confirmCancelBooking = () => {
     cancelFlightBooking(cancelId).then(result =>{
       fetchBookings();
-      console.log(result.data)
     })
     handleClose();
     setOpenSnackBar(true);
@@ -85,7 +85,6 @@ const FlightBookingList = () => {
 
   const handleClickOpen = (id) => {
     setCancelId(id);
-    console.log(removeBooking);
     setOpen(true);
 };
   
@@ -94,7 +93,7 @@ const FlightBookingList = () => {
   <div className="flight-list-bg">
     <div className='container res-p'>
     <div className="h3">Upcoming bookings</div>
-      {upcomingBookings?.length ? upcomingBookings
+      {upcomingBookings?.length ? upcomingBookings.filter(item=>(item.status==="confirmed"))
         .map((item, index) => {
           return (
       <div className="card" key={index}>
@@ -124,8 +123,8 @@ const FlightBookingList = () => {
                 <div className='small-txt'>{item?.flightDate}</div>
               </div>
               <div className="col-lg-1 col-4">
-                <div>Travlers</div>
-                <div className='small-txt '>{item?.noOfTravelers}</div>
+                <div>Fare Type</div>
+                <div className='small-txt '>{item?.travelerDetails[0].fareType}</div>
               </div>
               <div className="col-lg-1 col-4">
                 <div>Cost</div>
@@ -147,7 +146,7 @@ const FlightBookingList = () => {
         }) : <b> No upcoming flights bookings </b>
       }
       <div className="h3">Past bookings</div>
-      {pastBookings?.length ? pastBookings
+      {pastBookings?.length ? pastBookings.filter(item=>(item.status==="confirmed"))
         .map((item, index) => {
           return (
       <div className="card" key={index}>
@@ -189,10 +188,10 @@ const FlightBookingList = () => {
                     onClick={() => handleClickOpen(item?._id)} startIcon={<DeleteIcon/>}>
                     Cancel
                   </Button>
-                  <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
+                  {/* <Button style={{marginLeft: "8px"}} color="secondary" type="button" variant="outlined" 
                     onClick={() => alert("In progress, This is part of feature 2.")} startIcon={<RefreshIcon />}>
                     Rebook
-                  </Button>
+                  </Button> */}
                   
               </div>
           </div>
@@ -237,7 +236,7 @@ const FlightBookingList = () => {
       <DialogTitle>Modify traveler details</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <TravellerDetails />
+            <TravellerDetails setOpenModify = {setOpenModify} isModify={true} modifyBooking={modifyBooking} />
           </DialogContentText>
         </DialogContent>
       </Dialog>

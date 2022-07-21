@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React from 'react';
 import './FlightDetails.scss';
 import { Card, CardActions, CardContent, Paper } from "@mui/material";
@@ -11,8 +15,6 @@ import {useLocation} from "react-router-dom";
 const FlightDetails = () => {
   const flightDetails = useLocation().state.flightDetails;
   const flightReqDetails = useLocation().state.flightReqDetails;
-  console.log("navigationData ", flightDetails);
-  console.log("flightReqDetails ", flightReqDetails);
   let flightObj = {
     flightCompany: flightDetails.flightCompany,
     flightId: flightDetails.flightId,
@@ -26,7 +28,6 @@ const FlightDetails = () => {
     flightDate: flightReqDetails.departureDate,
     noOfTravelers: flightReqDetails.travelersCount
   }
-  console.log("flight details object", flightObj);
   return (
     <div className="flightBooking">
       <Paper
@@ -50,7 +51,7 @@ const FlightDetails = () => {
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Standard</b></div>
-                  <div>$ 150</div>
+                  <div>$ {flightDetails?.price} </div>
                 </div>
                 <p className="ta-l">Fare offered by airline.</p>
                 <div className="d-flex justify-content-between mb-3 p-2">
@@ -71,15 +72,13 @@ const FlightDetails = () => {
                 {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
               </CardActions>
             </Card>
-            {/* </ButtonBase> */}
 
             {/* 2nd fare card */}
-            {/* <ButtonBase className='col-sm-12 col-md-5' focusRipple={true}> */}
             <Card className="m-tp-16 col-sm-12 col-md-5" style={{ fontSize: "16px" }}>
               <CardContent>
                 <div className="d-flex justify-content-between mb-3">
                   <div> <b>Comfort</b></div>
-                  <div>$ 180</div>
+                  <div>$ {flightDetails?.price + 30} </div>
                 </div>
                 <p className="ta-l">Fare offered by airline.</p>
                 <div className="d-flex justify-content-between mb-3 p-2">
@@ -96,11 +95,7 @@ const FlightDetails = () => {
                 </div>
                 <div></div>
               </CardContent>
-              <CardActions>
-                {/* <Button size="small" onClick={() => buttonClicked(item?.id)}><b>See Details</b></Button> */}
-              </CardActions>
             </Card>
-            {/* </ButtonBase> */}
           </div>
         </div>
       </Paper>
@@ -120,7 +115,7 @@ const FlightDetails = () => {
         <div className='container res-p' style={{ backgroundColor: "#b3e3f4" }}>
           <div className='row justify-content-center'>
             <div className="col-12">
-              <TravellerDetails flightObj = {flightObj} />
+              <TravellerDetails isModify={false} flightObj = {flightObj} />
             </div>
           </div>
         </div>

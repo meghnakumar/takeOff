@@ -1,6 +1,5 @@
-import cards from "../../../assets/data/cards";
 import Card from "./Card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Payment.scss";
 import {
   Stack,
@@ -18,21 +17,22 @@ import BG4 from "../../../assets/images/DebitCard1.png";
 import BG5 from "../../../assets/images/DebitCard2.png";
 import BG6 from "../../../assets/images/DebitCard3.png";
 
-const PaymentCardList = () => {
+const PaymentCardList = ({ cards }) => {
   const [highlight, setHighLight] = useState("");
   const [selectedCardDetails, setSelectedCard] = useState(
     "You have not selected any card."
   );
   const [selectionStatus, setSelectionStatus] = useState("info");
-
   const backgrounds = [BG1, BG2, BG3, BG4, BG5, BG6];
-  const iterator = backgrounds.values();
 
   let getSelectedCard = (id) => {
     let details = {};
-    cards.map((card) => {
-      if (card.id === id) {
-        details = "You have selected card ending with " + card.digit + ".";
+    cards.map((card, index) => {
+      if (index === id) {
+        details =
+          "You have selected card ending with " +
+          card.card_number.substr(-4) +
+          ".";
         setSelectionStatus("success");
       }
     });
@@ -45,13 +45,19 @@ const PaymentCardList = () => {
     setSelectedCard(getSelectedCard(id));
   };
 
+  const getCardBackground = (index) => {
+    return backgrounds[index % 6];
+  };
+
   return (
     <Box>
       <Stack direction={["row"]} className="overflow">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Card
+            id={index}
+            key={index}
             card={card}
-            bg={iterator.next().value}
+            bg={getCardBackground(index)}
             highlight={highlight}
             handleSelectedCard={handleSelectedCard}
           />

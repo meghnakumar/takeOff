@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React, { useEffect } from 'react';
 import './SearchFlights.scss';
 import TextField from '@mui/material/TextField';
@@ -24,8 +28,8 @@ const SearchFlights = ({setIsButtonClicked, setReqFlights}) => {
 const flightSource = [
   { title: 'Toronto', place: 'Toronto, Canada', code: "YYZ" },
   { title: 'Halifax', place: 'Halifax, Canada', code: "YHZ" },
-  { title: 'Sydney', place: 'Sydney, Canada', code: "YQY" },
-  { title: 'Moncton', place: 'Moncton, Canada', code: "YHZ" }];
+  { title: 'Moncton', place: 'Moncton, Canada', code: "YSJ" },
+  { title: 'Montreal', place: 'Montreal, Canada', code: "YHZ" }];
   useEffect(() => {
     setFromLocationList(flightSource);
     setToLocationList(flightSource);
@@ -85,10 +89,10 @@ const flightSource = [
   return (
   <div className={"SearchFlights"}>
     <div className="container res-p border">
-      <h2 className='b-title'>Book International and Domestic flights</h2>
+      <div className='h4 b-title row justify-content-center'>Book International and Domestic flights</div>
       <form>
-        <div className="row">
-          <div className="col-6 col-md-4 col-lg-2 m-top-16">
+        <div className="row justify-content-center">
+          <div className="col-6 col-md-4 col-lg-2 m-top-16 ">
             <Stack spacing={2} >
               <Autocomplete
                 onChange={(event, value) => handleFromLocation(value)}
@@ -141,7 +145,8 @@ const flightSource = [
               />
             </LocalizationProvider>
           </div>
-          <div className="col-6 col-md-4 col-lg-2 m-top-16">
+          {/* Number of travlers */}
+          {/* <div className="col-6 col-md-4 col-lg-2 m-top-16">
             <TextField
               required
               autoComplete="off"
@@ -153,7 +158,7 @@ const flightSource = [
               error={Boolean(errors?.numberOfTravellers)}
               helperText={(errors?.numberOfTravellers)}
             />
-          </div>
+          </div> */}
           <div className="col-6 col-md-4 col-lg-2 m-top-16">
             <Box>
               <FormControl fullWidth>

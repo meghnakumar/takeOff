@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+/*Author: Created by Meghna Kumar
+Model class for hotel object*/
+
 const HotelSchema = new mongoose.Schema({
     name: {
         type: String,

@@ -44,8 +44,16 @@ app.use("/tours/booking", tourBookingRoute);
 const cartRoute = require("./routes/cartRoute");
 app.use("/cart", cartRoute);
 
+// Wallet
+const walletRoute = require("./routes/walletRoute");
+app.use("/wallet", walletRoute);
+
 const OffersRoute = require("./routes/offersRoute");
 app.use("/offers", OffersRoute);
+
+const PaymentRoute = require("./routes/paymentRoute");
+app.use("/payment", PaymentRoute);
+
 //Users
 const userRoute = require("./routes/userRoute");
 app.use("/users", userRoute);

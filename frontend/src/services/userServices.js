@@ -17,9 +17,9 @@ export const addUser = async(userInfo) => {
     return http.post(`${usersAddAPIEndpoint}`,userInfo);
 };
 
-export const updateUser = async(userInfo) => {
-    var emailId=userInfo.email
-    return http.put(`${usersUpdateAPIEndpoint}/${emailId}`,userInfo);
+export const updateUser = async(userData) => {
+    
+    return http.put(`${usersUpdateAPIEndpoint}`,userData);
 };
 
 

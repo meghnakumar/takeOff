@@ -19,8 +19,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { createEventBooking } from "../../services/eventBookingServices";
-import { addCartItem } from "../../services/cartServices";
+import { createEventBooking } from "../../../services/eventBookingServices";
+import { addCartItem } from "../../../services/cartServices";
 import { useNavigate } from "react-router-dom";
 const theme = createTheme({});
 const style = {
@@ -38,7 +38,7 @@ const style = {
 export default function BookEvents() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	//const eventId = location.state.eventId;
+	let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => {
 		setOpen(true);
@@ -99,7 +99,7 @@ export default function BookEvents() {
 				lastName: lastName,
 				seat: seat,
 				contact: number,
-				userId: "user1",
+				userId: userId,
 				eventId: location.state.eventId,
 				title: location.state.title,
 				city: location.state.city,
@@ -139,7 +139,6 @@ export default function BookEvents() {
 		try {
 			addCartItem(addToCart)
 				.then((res) => {
-					console.log(res.status);
 				})
 				.catch((err) => {
 					console.error(err);
@@ -156,13 +155,6 @@ export default function BookEvents() {
 	};
 	const onConfirmation = () => {
 		handleCreateEventBooking(bookingSummary);
-		// const addToCart = {
-		// 	type: type,
-		// 	userId: bookingSummary.userId,
-		// 	itemId: bookingId,
-		// 	price: bookingSummary.price,
-		// };
-		// handleAddToCart(addToCart);
 		navigate("/events");
 	};
 	return (

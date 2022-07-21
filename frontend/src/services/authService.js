@@ -1,5 +1,6 @@
 import http from "./httpService";
-
+import {addInitialBalance} from "./walletServices";
+import {addInitialUser} from "./paymentService";
 
 
 const apiEndpoint = "/auth/jwt/create/";
@@ -9,30 +10,21 @@ const apiUserFetchEndpoint = "/users/fetch";
 
 
 
+
 const tokenKey = "token";
 
-async function login(email, password) {
+function login(email, password) {
 
-
-  http.post(apiUserEndpoint, { email, password }).then((res) => {
-      console.log("data "+res.data.success);
-
-       setUserToken(email);
-      localStorage.setItem("token",res.data.token);
-
-
-  }).catch((err)=>{
-  console.log("data "+err);
-  });
+  return http.post(apiUserEndpoint, { email, password })
 
 }
 
 function setUserToken(email){
     let url=apiUserFetchEndpoint+"/"+email;
-           console.log(url);
-            http.get(url).then((user)=>{
-                console.log("user data : "+user.data[0].lastName);
+            return http.get(url).then((user)=>{
                 localStorage.setItem("userDetails", JSON.stringify(user.data[0]));
+                addInitialBalance(JSON.parse(localStorage.getItem("userDetails"))._id)
+                addInitialUser(JSON.parse(localStorage.getItem("userDetails"))._id);
             })
 }
 
@@ -40,9 +32,8 @@ async function signup(firstName,lastName, userName,email,password,confirmPasswor
 
   http.post(apiUserSignupEndpoint, { firstName,lastName, userName,email,password,confirmPassword })
   .then((res) => {
-             console.log("data "+res.data);
              setUserToken(email);
-             localStorage.setItem("token",res.data.token);
+             localStorage.setItem("token", res.data.token);
              }).catch((err)=>{
              console.log("data "+err);
              });
@@ -51,9 +42,7 @@ async function signup(firstName,lastName, userName,email,password,confirmPasswor
 
 
 function logout() {
-  console.log("deleting token");
-  localStorage.removeItem("token");
-  localStorage.removeItem("userDetails")
+  localStorage.clear();
 }
 
 function getJwt() {
@@ -64,25 +53,11 @@ function loginWithJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
 
-//async function getCurrentUser() {
-//  try {
-//    const jwt = getJwt();
-//    if (jwt === null) return null;
-//    jwtDecode(jwt);
-//
-//    http.setJwt(jwt);
-//    const data  = await http.get(apiUserEndpoint);
-//
-//  } catch (ex) {
-//    return null;
-//  }
-//}
+
 
 export  {
   login,
   signup,
   logout,
-//  getCurrentUser,
-//  loginWithJwt,
-//  getJwt,
+  setUserToken
 };

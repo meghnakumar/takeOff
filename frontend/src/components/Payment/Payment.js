@@ -4,9 +4,10 @@ import AddCard from "./Card/AddCard";
 import Cart from "./Cart/Cart";
 
 import wallet from "../../assets/data/wallet.js";
-import payment from "../../assets/data/payment.js";
 import { getCartItems } from "../../services/cartServices";
-
+import { getAllCards } from "../../services/paymentService";
+import { getWalletBalance } from "../../services/walletServices";
+import { addMoney } from "../../services/walletServices";
 import { useState, useEffect } from "react";
 
 import "./Payment.scss";
@@ -14,10 +15,16 @@ import "./Payment.scss";
 const Payment = () => {
   const [cart, setCart] = useState([]);
   const [price, setNewPrice] = useState(0);
+  const [cards, setCards] = useState("");
+  const [balance, setBalance] = useState(0);
+  const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
 
   const getData = () => {
-    const fetchPromise = getCartItems("user1");
-    fetchPromise
+    const fetchCartPromise = getCartItems(userid);
+    const fetchCardPromise = getAllCards(userid);
+    const fetchBalance = getWalletBalance(userid);
+
+    fetchCartPromise
       .then((response) => {
         return response.data;
       })
@@ -27,8 +34,29 @@ const Payment = () => {
         data.map((item) => {
           total += item.price;
         });
-        setNewPrice(total);
+        setNewPrice(Math.round(total + total * 0.15));
       });
+
+    fetchCardPromise
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        setCards(data);
+      });
+
+    fetchBalance
+      .then((response) => {
+        return response.data;
+      })
+      .then((data) => {
+        setBalance(data);
+      });
+  };
+
+  const handleWalletRecharge = (rechargeAmount) => {
+    addMoney({ userId: userid, amount: parseInt(rechargeAmount) });
+    setBalance(balance + parseInt(rechargeAmount));
   };
 
   useEffect(() => {
@@ -49,7 +77,14 @@ const Payment = () => {
         >
           <Box>
             <Cart price={price} setNewPrice={setNewPrice} cart={cart} />
-            <WalletCard price={price} wallet={wallet} cart={cart} />
+            <WalletCard
+              price={price}
+              wallet={wallet}
+              cart={cart}
+              cards={cards}
+              balance={balance}
+              handleWalletRecharge={handleWalletRecharge}
+            />
             <AddCard />
           </Box>
         </GridItem>

@@ -20,8 +20,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Snackbar from "@mui/material/Snackbar";
-import { getEvents } from "../../services/eventServices";
-
+import { getEvents } from "../../../services/eventServices";
+import "../Events.scss";
 const theme = createTheme();
 const style = {
 	position: "absolute",
@@ -84,83 +84,87 @@ export default function Events() {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<main>
-				{/* Hero unit */}
 				<Box
 					sx={{
-						bgcolor: "#e0f7fa",
+						backgroundImage: "linear-gradient(315deg, #54d6f1 0%, #056e83 74%)",
 						pt: 8,
 						pb: 6,
 					}}
 				>
-					<Container maxWidth="xl">
-						<Card sx={{ width: 1, height: 300 }}>
-							<Box
-								sx={{
-									marginTop: 0,
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-								}}
-								component="form"
-							>
-								<Typography
-									component="h1"
-									variant="h2"
-									align="center"
-									color="text.primary"
-									gutterBottom
-									sx={{
-										color: "#00838f",
-										fontFamily: "Helvetica Neue",
-										fontWeight: 1,
-										alignContent: "center",
-									}}
-								>
-									Book Events and Enjoy!!!
-								</Typography>
+					<Container maxWidth="lg">
+						<Grid container spacing={4}>
+							<Card sx={{ width: "100%", height: 300, display: "flex" }}>
+								<Box sx={{ display: "flex", flexDirection: "column" }}>
+									<CardContent sx={{ flex: "1 0 auto" }}>
+										<Typography
+											component="div"
+											variant="h2"
+											sx={{
+												color: "#00838f",
+												fontFamily: "Helvetica Neue",
+												fontWeight: 2,
+												fontSize: "46px",
+											}}
+										>
+											Explore events around Canada...
+										</Typography>
+										<Typography
+											variant="subtitle1"
+											color="text.secondary"
+											component="div"
+										>
+											<TextField
+												margin="normal"
+												name="City"
+												label="City"
+												type="text"
+												id="City"
+												onChange={(e) => {
+													setCity(e.target.value);
+												}}
+												sx={{ color: "#00838f", width: 300, top: 40 }}
+											/>
 
-								<Grid
-									container
-									direction="row"
-									justifyContent="center"
-									alignItems="center"
-								>
-									<TextField
-										margin="normal"
-										name="City"
-										label="City"
-										type="text"
-										id="City"
-										onChange={(e) => {
-											setCity(e.target.value);
-										}}
-										sx={{ color: "#00838f", width: 300 }}
-									/>
-
-									<TextField
-										margin="normal"
-										name="Date"
-										label="Date"
-										type="date"
-										id="Date"
-										defaultValue={new Date().toISOString().split("T")[0]}
-										onChange={(e) => {
-											setdatePricker(e.target.value);
-										}}
-										sx={{ color: "#00838f", width: 300, left: 40 }}
-									/>
-								</Grid>
-								<Button
-									variant="text"
-									size="large"
-									endIcon={<SearchIcon />}
-									sx={{ color: "#00838f", width: 200, top: 40, height: 60 }}
-									onClick={handleSubmit}
-								>
-									Search
-								</Button>
-							</Box>
-						</Card>
+											<TextField
+												margin="normal"
+												name="Date"
+												label="Date"
+												type="date"
+												id="Date"
+												defaultValue={new Date().toISOString().split("T")[0]}
+												onChange={(e) => {
+													setdatePricker(e.target.value);
+												}}
+												sx={{ color: "#00838f", width: 300, left: 40, top: 40 }}
+											/>
+										</Typography>
+										<CardActions>
+											<Button
+												variant="text"
+												size="large"
+												endIcon={<SearchIcon />}
+												sx={{
+													color: "#00838f",
+													width: 200,
+													top: 40,
+													height: 60,
+													left: "35%",
+												}}
+												onClick={handleSubmit}
+											>
+												Search
+											</Button>
+										</CardActions>
+									</CardContent>
+								</Box>
+								<CardMedia
+									component="img"
+									sx={{ width: "41%" }}
+									image="https://images.unsplash.com/photo-1523568129082-a8d6c095638e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=788&q=80"
+									alt="Live from space album cover"
+								/>
+							</Card>
+						</Grid>
 					</Container>
 				</Box>
 
@@ -180,12 +184,12 @@ export default function Events() {
 									}
 								})
 								.map((card) => (
-									<Grid item key={card.id} xs={12} sm={6} md={4}>
+									<Grid item key={card._id} xs={12} sm={6} md={4}>
 										<Card sx={{ maxWidth: 345 }}>
 											<CardMedia
 												component="img"
 												height="140"
-												image="https://source.unsplash.com/random"
+												image="https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?cs=srgb&dl=pexels-sebastian-ervi-1763067.jpg&fm=jpg"
 												alt="event images"
 											/>
 											<CardContent>
@@ -240,7 +244,7 @@ export default function Events() {
 															<CardMedia
 																component="img"
 																maxHeight="100"
-																image="https://source.unsplash.com/random"
+																image="https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?cs=srgb&dl=pexels-sebastian-ervi-1763067.jpg&fm=jpg"
 																alt="party"
 																sx={{ maxHeight: 200 }}
 															/>

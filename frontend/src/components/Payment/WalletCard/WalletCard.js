@@ -22,12 +22,23 @@ import { useState } from "react";
 import CardList from "../Card/CardList";
 import { FaCaretDown, FaMoneyBill } from "react-icons/fa";
 import { DeductConfirm, Confirmation } from "./DeductConfirm";
-import { modifyHotelBooking } from "../../../services/hotelServices";
+import { updateHotelBookingStatus }  from "../../../services/hotelServices";
 import { updateEventBooking } from "../../../services/eventBookingServices";
 import { updateBookingStatus } from "../../../services/flightBookingService";
 import { deleteCartItem } from "../../../services/cartServices";
+import { GiCombinationLock } from "react-icons/gi";
+import { updateMoney, addTransaction } from "../../../services/walletServices";
+import moment from "moment";
 
-const WalletCard = ({ wallet, price, cart }) => {
+const WalletCard = ({
+  wallet,
+  price,
+  cart,
+  cards,
+  balance,
+  handleWalletRecharge,
+}) => {
+  const userid = JSON.parse(localStorage.getItem("userDetails"))._id;
   const toast = useToast();
 
   const {
@@ -82,13 +93,23 @@ const WalletCard = ({ wallet, price, cart }) => {
     cart.map((item) => {
       let res = JSON.parse(JSON.stringify({ status: "confirmed" }));
       if (item.type == "hotel") {
-        modifyHotelBooking(res, item.itemId);
+        updateHotelBookingStatus(res, item.ItemId);
       } else if (item.type == "flight") {
-        updateBookingStatus(res, item.itemId);
+        updateBookingStatus(res, item.ItemId);
       } else if (item.type == "event") {
-        updateEventBooking(res, item.itemId);
+        updateEventBooking(res, item.ItemId);
       }
+
       deleteCartItem(item._id);
+    });
+    updateMoney({ userId: userid, amount: price });
+    addTransaction({
+      type: "booking",
+      userId: userid,
+      price: price,
+      date: moment().format("YYYY-MM-DD"),
+      message: "Booking",
+      status: "successful",
     });
     setPaymentStatus(true);
   };
@@ -123,7 +144,7 @@ const WalletCard = ({ wallet, price, cart }) => {
         Your Balance
       </Heading>
       <Text mt={5} fontWeight="bold" fontSize="28px">
-        $ {wallet.balance}
+        $ {balance}
       </Text>
       <Stack direction="row" mt={5} spacing="14px">
         <Button
@@ -152,7 +173,7 @@ const WalletCard = ({ wallet, price, cart }) => {
                 Select Card
               </Text>
               <Box>
-                <CardList />
+                <CardList cards={cards ? cards : []} />
               </Box>
             </ModalBody>
 
@@ -202,7 +223,10 @@ const WalletCard = ({ wallet, price, cart }) => {
                   size="lg"
                   fontSize="15px"
                   colorScheme="purple"
-                  onClick={AddMoneyonClose}
+                  onClick={() => {
+                    handleWalletRecharge(rechargeAmount);
+                    AddMoneyonClose();
+                  }}
                 >
                   Recharge
                 </Button>

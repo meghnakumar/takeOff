@@ -1,4 +1,4 @@
-import React, {useState,useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Form} from "react-bootstrap";
 import {
     Alert,
@@ -6,7 +6,7 @@ import {
     Card,
     CardActionArea,
     CardContent,
-    CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+    CardMedia, Dialog, DialogActions, DialogContent, DialogTitle,
     Grid,
     Paper, Snackbar,
     Typography
@@ -19,7 +19,6 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
-import {red} from "@mui/material/colors";
 import {useLocation} from "react-router-dom";
 import {createHotelBooking} from "../../../services/hotelServices";
 import {addCartItem} from "../../../services/cartServices";
@@ -32,7 +31,10 @@ Renders the room details about a specific hotel and provides the option to creat
 //https://mui.com/material-ui/
 
 const HotelDetail = () => {
-
+    let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
+    const [userIdPresent, setUserIdPresent] = useState(false)
+    const goToReadReviews = useNavigate();
+    const location = useLocation();
     const [departureValue, setDepartureValue] = useState(null);
     const [returnValue, returnSetValue] = useState(null);
     const [guestName, setGuestName] = useState();
@@ -63,9 +65,16 @@ const HotelDetail = () => {
         numberOfRooms:0,
         guestName:'',
         status:'',
-        userId:'',
-        img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
+        userId:userId,
+        hotelId:location.state.hotelid,
+        img: location.state.img
     })
+
+    useEffect(()=>{
+        if(userId !== undefined)
+            setUserIdPresent(true)
+    })
+
 
     //function to handle all the form input and provide appropriate validation checks for it.
     const handleOnInput = (e) => {
@@ -148,11 +157,6 @@ const HotelDetail = () => {
 
     }
 
-    useEffect(()=>{
-        console.log(location.state)
-    })
-
-
     //function to perform actions on submitting the form by calling the add to cart API and then storing it in booking collection by making a an api call
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -174,12 +178,11 @@ const HotelDetail = () => {
                     const bookingId = result.data._id
                     const cartItem = {
                         type:"hotel",
-                        userId:"user1",
+                        userId:userId,
                         itemId:bookingId,
                         price: hotelBookingSummary.price
                     }
                     addCartItem(cartItem).then(result =>{
-                        console.log("successfully added to cart", result.data)
                     })
 
                 }
@@ -197,9 +200,6 @@ const HotelDetail = () => {
 
 
 
-    const goToReadReviews = useNavigate();
-
-    const location = useLocation();
 
     //function to validate start date change
     const handleOnChangeStartDate = (value) =>{
@@ -228,16 +228,13 @@ const HotelDetail = () => {
     }
 
 
+    //function to redirect to the reviews page when user clicks on review button
     const handleReviewsClick = () => {
-        console.log(location.state)
         goToReadReviews("/read-reviews", {state:{hotelid:location.state.hotelid, reviews:location.state.reviews}})
     }
 
 
     const [createBooking, setCreateBooking] = useState({roomInfo:"", show:false});
-
-
-    // Modal props
 
     const [openSnackBar, setOpenSnackBar] = useState(false);
 
@@ -262,7 +259,6 @@ const HotelDetail = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>{hotelData.name}</h1>*/}
                             <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>{location.state.hotelname}</div>
                         </div>
 
@@ -295,7 +291,7 @@ const HotelDetail = () => {
                                     <Typography gutterBottom variant="h5" fontFamily="fantasy" component="div">
                                         {roomInfo.name}
                                     </Typography>
-                                    <Typography fontWeight="bold" variant="h6">$120 +$45 taxes & fees</Typography>
+                                    <Typography fontWeight="bold" variant="h6">${roomInfo.price} +${roomInfo.tax} taxes & fees</Typography>
                                     <Typography color="text.primary">
                                         {roomInfo.size}
                                     </Typography>
@@ -376,7 +372,6 @@ const HotelDetail = () => {
                         <DialogActions className="mt-1">
                             <Button type="reset" color="error" >Cancel</Button>
                             <Button type="submit" onClick={()=>{
-                                console.log("location", location.state.place)
                                 setHotelBookingSummary({
                                     startDate: departureValue,
                                     endDate:returnValue,
@@ -389,9 +384,10 @@ const HotelDetail = () => {
                                     guestName:guestName,
                                     email:email,
                                     status:'Pending',
-                                    userId:'user1',
+                                    userId:userId,
+                                    hotelId:hotelBookingSummary.hotelId,
                                     price: parseInt(roomNumber)*(createBooking.roomInfo.price+createBooking.roomInfo.tax),
-                                    img:'https://live.staticflickr.com/4152/5118876374_19128d90d0_b.jpg'
+                                    img:location.state.img
                                 });
                             }}>Add to cart</Button>
                         </DialogActions>

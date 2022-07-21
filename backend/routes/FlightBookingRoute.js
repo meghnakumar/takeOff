@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 const express = require("express");
 const router = express.Router();
 const { getAllFlightBookings, getFlightBookings, addFlightBooking, modifyFlightBooking, updateBookingStatus, cancelFlightBooking } = require("../controller/flightBookings");
@@ -23,8 +27,15 @@ router.put("/update/:id", modifyFlightBooking);
 // @access Public
 router.get("/:id", getFlightBookings);
 
-
+// @route PUT /flightbookings/updateBookingStatus/:id
+// @Update status of flight booking
+// @access Public
 router.put("/updateBookingStatus/:id", updateBookingStatus)
+
+
+// @route PUT /flightbookings/cancel/:id
+// @Cancel flight booking
+// @access Public
 router.get("/cancel/:id", cancelFlightBooking)
 
 module.exports = router;

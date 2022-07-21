@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 export const Flights = [
     {
         flightCompany: "Air Canada",

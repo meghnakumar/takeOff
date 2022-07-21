@@ -23,6 +23,6 @@ router.post("/login", login);
 // @description update info based on id
 // @access Public
 
-router.put("/update/:userId", editUser);
+router.put("/update", editUser);
 
 module.exports = router;

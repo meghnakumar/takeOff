@@ -5,36 +5,50 @@ import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login,setUserToken} from '../../services/authService';
 import './Registration.scss'
+import { send } from 'emailjs-com';
 
 //references
 //https://mui.com/material-ui/api/text-field/
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
 //https://mui.com/material-ui/material-icons/?query=account
 
-export default function SignupForm() {
+export default function SignupForm(props) {
 
   let flag = "y";
 
   const handleUserDetails = (e) => {
-
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
     const {name, value} = e.target;
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
     
   }
 
   const [snackBox, showSnackBox] = React.useState();
+  const [errorSnackBox, showErrorSnackBox] = React.useState();
+
 
   const loginSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
+        send(
+                      'service_ejay0zu',
+                      'template_0x2ieie',
+                      toSend,
+                      'xWpzSTTLJH2QppF1G'
+                    )
+                      .then((response) => {
+                        props.setIsLoggedIn(true);
+                      })
+                      .catch((err) => {
+                        console.log('FAILED...', err);
+                      });
       showSnackBox(false);
-      navigate('/profile', {state:null})
-    }, 3000);
+      navigate('/', {state:null})
+    }, 1000);
   }
 
   const [errorMessage,updateErrorMessage] = useState({
@@ -49,7 +63,7 @@ export default function SignupForm() {
   });
 
   const emailpattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-  const namepattern = /^[a-z]+$/i;
+
 
   const [PersonalDetailsList, UpdatePersonalDetailsList] = useState({
     UserID : "1",
@@ -61,9 +75,16 @@ export default function SignupForm() {
     ConfirmPassword : ""
   });
 
+    const [toSend, setToSend] = useState({
+        from_name: "team@takeoff.com",
+        to_name: "",
+        reply_to:"",
+        Email:"",
+        message: "You are logged in! Welcome to the takeoff",
+      });
+
   const validationscheck = () => {
 
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     if(PersonalDetailsList.Email===''){
@@ -90,13 +111,18 @@ export default function SignupForm() {
       flag = "n";
     }
 
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else
         return "noerror";
   }
 
+  const loginFailed = () => {
+    showErrorSnackBox(true);
+      setTimeout(() => {
+        showErrorSnackBox(false);
+      }, 1000);
+    }
 
   const SaveUserDetails = () => {   
 
@@ -105,8 +131,14 @@ export default function SignupForm() {
           updateErrorMessage(result);
         } else{
 
-            login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
-                        loginSuccessful();
+          login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+            if(res){
+              setUserToken(PersonalDetailsList.Email);
+              localStorage.setItem("token",res.data.token);
+              loginSuccessful();
+            }else{
+              loginFailed();
+            }
             });
         }
   }
@@ -149,9 +181,14 @@ export default function SignupForm() {
             <div class="mb-3 mt-3">
             <Button id="submit" className="registrationbutton" size='small' variant="contained" onClick={SaveUserDetails}>Submit</Button>
             </div>
-                        
-            {snackBox ?
+             
+            {
+            snackBox ?
               <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+            {
+            errorSnackBox ?
+              <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
             <div className='reg-text'>

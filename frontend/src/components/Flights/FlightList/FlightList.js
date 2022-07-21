@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 import React, {useEffect, useState} from 'react';
 import './FlightList.scss';
 import { Button } from '@mui/material';
@@ -62,7 +66,7 @@ const FlightList = (props) => {
                     <div className='small-txt'>{item?.destination}</div>
                   </div>
                   <div className="col-lg-2 col-3">
-                    <div className='small-txt'>{item?.stops == 0 ? "No Stops" :  item?.stops + " stops"}</div>
+                    <div className='small-txt'>{item?.stops == 0 ? "No Stops" : (item.stops == 1 ? item.stops + " stop" : item.stops + " stops")}</div>
                   </div>
                   <div className="col-lg-2 col-3 ">
                     <div>$ {item?.price}</div>

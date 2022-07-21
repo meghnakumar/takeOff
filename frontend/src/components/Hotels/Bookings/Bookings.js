@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Alert,
     Button,
@@ -22,13 +22,15 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import {
     cancelHotelBooking,
-    createBooking,
     getHotelBookingByUserId,
-    getHotels,
     modifyHotelBooking
 } from "../../../services/hotelServices";
+import {addReviewHotel} from "../../../services/reviewsService";
+import moment from "moment";
 
 /*Author: Created by Meghna Kumar
 Renders the list of bookings for the user by sorting them from latest to oldest. Providing modify and cancel option for upcoming bookings and
@@ -38,13 +40,31 @@ add review option for completed bookings*/
 
 //references
 //https://mui.com/material-ui/
+//https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
 const Bookings = () => {
+    let userId = JSON.parse(localStorage.getItem("userDetails"))._id;
+    let firstName = JSON.parse(localStorage.getItem("userDetails")).firstName;
+    let lastName = JSON.parse(localStorage.getItem("userDetails")).lastName;
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [openModifySnackBar, setOpenModifySnackBar] = useState(false);
     const [modifiedEmail, setEmail] = useState();
     const [modifiedContact, setContact] = useState();
     const [showErrors, setShowErrors] = useState(false);
     const [openModifyForm, setOpenModifyForm] = useState(false);
+    const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
+    const [modifyBooking, setModifyBooking] = useState({bookingInfo: ""});
+    const [bookingData, setBookingData] = useState([]);
+    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate)).map(booking => {
+        let dateFormatting = booking
+        dateFormatting.startDate = moment(new Date(booking.startDate)).format('ddd MMM D YYYY')
+        dateFormatting.endDate = moment(new Date(booking.endDate)).format('ddd MMM D YYYY')
+        return dateFormatting
+    });
+
+    let filteredSortedBooking = sortedBookings.filter(item=>(item.status==="confirmed"))
+    let hotelNameFetched='';
+    let hotelLocationFetched = '';
+    const [hotelId, setHotelId] = useState();
     const [validationError, setValidationError] = useState({
         emailError: 'Please enter email',
         contactNumberError: 'Please enter the contact number'
@@ -55,28 +75,45 @@ const Bookings = () => {
     })
 
     const [openReview, setOpenReview] = useState(false);
-    const handleReviewClick = () =>{
+    const [open, setOpen] = React.useState(false);
+    const [modifySummary, setModifySummary] = React.useState({
+        email: modifiedEmail,
+        contactNumber:modifiedContact
+    })
+    const [feedback, setFeedback] = useState();
+    const [rating, setRating] = useState();
+    const [feedbackSummary, setFeedbackSummary] = useState({
+        userId:userId,
+        name:firstName+" "+lastName,
+        hotelName:'',
+        location:'',
+        feedback:'',
+        rating:0
+    });
+    const [openReviewSnackBar, setOpenReviewSnackBar] = useState(false);
+
+    const handleCloseReviewDialog = () => {
+        setOpenReview(false)
+    }
+
+    //to set review variables to be added to request when review button is clicked
+    const handleReviewClick = (bookingInfo) =>{
         setOpenReview(true);
+        hotelNameFetched = bookingInfo.hotelName
+        hotelLocationFetched = bookingInfo.location
+        setHotelId(bookingInfo.hotelId)
+        setFeedbackSummary(prevState => {
+            return {...prevState, hotelName: hotelNameFetched,location:hotelLocationFetched}
+        })
     }
 
-    const handleCloseReview = () => {
-        if(reviewValidationError.ratingError===''&&
-        reviewValidationError.feedbackError===''){
-            setOpenReview(false)
-            setOpenReviewSnackBar(true);
-        }
-        else{
-            setShowErrors(true)
-        }
-    }
-
+    //handle the validations for modify form input
     const handleOnInput = (e) => {
 
         const {id, value} = e.target;
         setShowErrors(false)
         if (id === 'email') {
             setEmail(value)
-            console.log(modifiedEmail)
             if (value === "") {
                 setValidationError(prevState => {
                     return {...prevState, emailError: "Email cannot be empty"}
@@ -111,35 +148,24 @@ const Bookings = () => {
         }
     }
 
-    // Reference: https://stackoverflow.com/questions/41058681/sort-array-by-dates-in-react-jsaa
 
-
-    const [removeBooking, setRemoveBooking] = useState({bookingInfo: "", show: false});
-    const [modifyBooking, setModifyBooking] = useState({bookingInfo: ""});
-    const [bookingData, setBookingData] = useState([]);
-    let sortedBookings = bookingData.sort((a, b) => Date.parse(b.startDate) - Date.parse(a.startDate));
     useEffect(() => {
-        getHotelBookingByUserId("user1").then(result => {
+        getHotelBookingByUserId(userId).then(result => {
             setBookingData(result.data);
         }).catch(err => {
             console.error(err);
         });
     }, []);
 
-    const [open, setOpen] = React.useState(false);
-    const [modifySummary, setModifySummary] = React.useState({
-        email: modifiedEmail,
-        contactNumber:modifiedContact
-    })
+
 
     const handleClickOpen = () => {
-        console.log(removeBooking);
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
-        getHotelBookingByUserId("user1").then(result => {
+        getHotelBookingByUserId(userId).then(result => {
             setBookingData(result.data);
         }).catch(err => {
             console.error(err);
@@ -148,7 +174,6 @@ const Bookings = () => {
     };
 
     const handleModifyClick = () => {
-        console.log(modifyBooking)
         setOpenModifyForm(true)
 
     }
@@ -160,22 +185,31 @@ const Bookings = () => {
 
 
 
-
-    const handleSubmit = (e) => {
+    //to call the backend api and update the modified detail for the booking
+    const handleModifySubmit = (e) => {
         e.preventDefault();
         setOpenModifyForm(false)
         setOpenModifySnackBar(true);
-        console.log('modified data',modifySummary)
         modifyHotelBooking(modifySummary, modifyBooking.bookingInfo._id).then(result =>{
-            console.log(result.data)
         })
-
-
-
     }
 
-    const [feedback, setFeedback] = useState();
-    const [rating, setRating] = useState();
+    //to call the backend api to add the review to the hotel enetered by user
+    const handleReviewSubmit = (e) => {
+        e.preventDefault();
+        if(reviewValidationError.ratingError===''&&
+            reviewValidationError.feedbackError===''){
+            setOpenReview(false)
+            setOpenReviewSnackBar(true);
+            addReviewHotel(feedbackSummary, hotelId).then(result =>{
+            })
+        }
+        else{
+            setShowErrors(true)
+        }
+    }
+
+    //handle validations for feedback form input
     const handleFeedbackInput = (e) =>{
         const{id,value} = e.target
         if(id==='rating'){
@@ -228,12 +262,6 @@ const Bookings = () => {
 
     }
 
-    const [openReviewSnackBar, setOpenReviewSnackBar] = useState(false);
-
-
-
-
-
     return (
         <div>
             <Paper sx={{
@@ -245,9 +273,7 @@ const Bookings = () => {
                 <div className="container-fluid">
                     <div className="row mb-1 align-items-center justify-content-between">
                         <div className="col-6 col-sm-6" style={{paddingTop: '5px'}}>
-                            {/*<h1 style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</h1>*/}
                             <div className="h2" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</div>
-                           {/* <Typography variant="h4" style={{fontFamily: 'fantasy', textAlign: "left"}}>My Bookings</Typography>*/}
                         </div>
                     </div>
                 </div>
@@ -257,7 +283,7 @@ const Bookings = () => {
                     direction="row"
                     justifyContent="start"
                     spacing={3} className="text-start">
-                    {Object.values(sortedBookings).map(bookingInfo => <Grid item xs={12}>
+                    {Object.values(filteredSortedBooking).map(bookingInfo => <Grid item xs={12}>
                         <Grid container
                               direction="row"
                               justifyContent="start"
@@ -307,7 +333,7 @@ const Bookings = () => {
 
                                 <Button hidden={Date.parse(bookingInfo.startDate) > new Date()} variant="outlined"
                                         color="secondary" className="float-end me-3 mb-1" startIcon={<StarIcon/>}
-                                onClick={()=>handleReviewClick()}>
+                                onClick={()=>handleReviewClick(bookingInfo)}>
                                     Review
                                 </Button>
                             </Grid>
@@ -338,8 +364,8 @@ const Bookings = () => {
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button color="error" onClick={() => {
                         cancelHotelBooking(removeBooking.bookingInfo._id).then(result =>{
-                            console.log(result.data)
                         })
+                        sortedBookings = sortedBookings.filter(booking => booking._id != removeBooking.bookingInfo._id);
                         handleClose();
                         setOpenSnackBar(true)
 
@@ -363,7 +389,7 @@ const Bookings = () => {
                     maxWidth={"sm"}>
                 <DialogTitle>Modify Booking</DialogTitle>
                 <DialogContent>
-                    <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
+                    <Form onSubmit={handleModifySubmit} onReset={handleCloseBookingForm}>
                         <Form.Group className="mb-2">
                             <Form.Label>Guest Name</Form.Label>
                             <Form.Control id="guestName" defaultValue={modifyBooking.bookingInfo.guestName} disabled/>
@@ -430,7 +456,8 @@ const Bookings = () => {
                             <Button type="submit" onClick={()=>{setModifySummary({
                                 email: modifiedEmail,
                                 contactNumber:parseInt(modifiedContact)
-                            })}}>Modify</Button>
+                            })}
+                            }>Modify</Button>
                         </DialogActions>
 
                     </Form>
@@ -447,13 +474,25 @@ const Bookings = () => {
             </Snackbar>
 
             {/*Add Review starts*/}
-            <Dialog open={openReview} onClose={handleCloseReview}>
+            <Dialog open={openReview} onClose={handleCloseReviewDialog}>
+                <IconButton
+                    aria-label="close"
+                    onClick={handleCloseReviewDialog}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <DialogTitle>Add Review</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                        Please add a feedback and rating for your stay.
                     </DialogContentText>
-                    <Form onSubmit={handleSubmit} onReset={handleCloseBookingForm}>
+                    <Form onSubmit={handleReviewSubmit} onReset={handleCloseBookingForm}>
                         <Form.Group className="mb-2">
                             <Form.Label>Rate out of 5</Form.Label>
                             <Form.Control id="rating" placeholder="rate out of 5" type='number' max='5' min='0' onChange={(e)=>handleFeedbackInput(e)}/>
@@ -465,7 +504,19 @@ const Bookings = () => {
                             <Form.Label hidden={!showErrors} style={{color:'red'}}>{reviewValidationError.feedbackError}</Form.Label>
                         </Form.Group>
                         <DialogActions>
-                            <Button onClick={handleCloseReview}>Add</Button>
+                            <Button type="submit" onClick={()=>{setFeedbackSummary({
+                                name:feedbackSummary.name,
+                                hotelName:feedbackSummary.hotelName,
+                                location:feedbackSummary.location,
+                                feedback:feedback,
+                                rating:rating
+                            })
+                            }
+
+                            }>Add</Button>
+                            <Button onClick={handleCloseReviewDialog}>
+                                Cancel
+                            </Button>
                         </DialogActions>
 
                     </Form>

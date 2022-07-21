@@ -1,8 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
-import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography} from "@mui/material";
-import {hotels} from './HotelsDummy'
+import {Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Typography, TextField} from "@mui/material";
 import Hotel from "./Hotel";
-import SearchBar from "./SearchBar";
 import {getHotels} from "../../services/hotelServices";
 
 /*Author: Created by Meghna Kumar
@@ -24,21 +22,32 @@ const HotelList = (props) => {
     };
 
     const [sortedHotels, setSortedHotels] = useState([]);
-
-    //to load the hotel list data as soon as the page loads/reloads
     useEffect(() => {
         getHotels().then(result => {
             setHotels(result.data);
             setSortedHotels(result.data.sort((a, b) => a.rating - b.rating));
         })
+      
     }, []);
 
     //filter the list based on the selected location
+
     let filteredHotels = sortedHotels.filter((item) => item.location === props.location);
+    const handleOnSearch=(e)=> {
+        const search = e.target.value
+        if(search===''){
+            filteredHotels = sortedHotels.filter((item) => item.location === props.location);
+        }
+        else{
+            const filteredText = filteredHotels.filter(find=>{
+                return find.name.toUpperCase().includes(search.toUpperCase());
+            });
+            filteredHotels = filteredText
+        }
+    }
 
     return(
         <div>
-            <SearchBar/>
 
             { <Paper
             sx={{

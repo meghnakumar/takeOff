@@ -4,8 +4,9 @@ import Button from '@mui/material/Button';
 import { useState ,useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { send } from 'emailjs-com';
 import Snackbox from '../common/Snackbox/Snackbox';
-import {login} from '../../services/authService';
+import {login, setUserToken} from '../../services/authService';
 import './Registration.scss'
 
 //references
@@ -13,19 +14,28 @@ import './Registration.scss'
 //https://www.tutlane.com/example/angularjs/angularjs-ng-pattern-email-validation-example
 //https://mui.com/material-ui/material-icons/?query=account
 
-export default function SignupForm() {
+export default function SignupForm(props) {
 
   let flag = "y";
 
   const handleUserDetails = (e) => {
 
     const {name, value} = e.target;
+
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
     const PersonalList = {...PersonalDetailsList};
     PersonalList[name] = value;
-    console.log(PersonalList);
     UpdatePersonalDetailsList(PersonalList);
     
   }
+
+  const [toSend, setToSend] = useState({
+      from_name: "team@takeoff.com",
+      to_name: "",
+      reply_to:"",
+      Email:"",
+      message: "You are logged in! Welcome to the takeoff",
+    });
 
   const [errorMessage,updateErrorMessage] = useState({
     email : "",
@@ -52,8 +62,6 @@ export default function SignupForm() {
   });
 
   const validationscheck = () => {
-
-    console.log(PersonalDetailsList);
     const errorlist = {};
 
     if(PersonalDetailsList.Email===''){
@@ -79,8 +87,6 @@ export default function SignupForm() {
       errorlist.password="Please enter a password having less than 15 characters"
       flag = "n";
     }
-
-    console.log(errorlist);
     if(flag === "n")
         return errorlist;
     else
@@ -88,14 +94,35 @@ export default function SignupForm() {
   }
 
   const [snackBox, showSnackBox] = React.useState();
+  const [errorSnackBox, showErrorSnackBox] = React.useState();
 
   const loginSuccessful = () => {
     showSnackBox(true);
     setTimeout(() => {
-      showSnackBox(false);
-      navigate('/profile', {state:null})
+        send(
+              'service_ejay0zu',
+              'template_0x2ieie',
+              toSend,
+              'xWpzSTTLJH2QppF1G'
+            )
+              .then((response) => {
+                props.setIsLoggedIn(true);
+              })
+              .catch((err) => {
+                console.log('FAILED...', err);
+              });
+              showSnackBox(false);
+        navigate('/', {state:null})
     }, 500);
   }
+
+
+  const loginFailed = () => {
+    showErrorSnackBox(true);
+      setTimeout(() => {
+        showErrorSnackBox(false);
+      }, 1000);
+    }
 
   const SaveUserDetails = () => {   
     const result = validationscheck();
@@ -103,10 +130,17 @@ export default function SignupForm() {
       updateErrorMessage(result);
     } else{
 
-        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then(()=>{
-                    loginSuccessful();
-
-                });
+        login(PersonalDetailsList.Email,PersonalDetailsList.Password).then( res=>{
+          if(res){
+            setUserToken(PersonalDetailsList.Email);
+            localStorage.setItem("token",res.data.token);
+            loginSuccessful();
+          }else{
+            loginFailed();
+          }
+          }).catch(err => {
+            loginFailed();
+          });
     } 
   }
   
@@ -140,8 +174,13 @@ export default function SignupForm() {
             </div>
             <br></br>
 
-            {snackBox ?
+            {
+            snackBox ?
               <Snackbox message="User logged in succesfully" severity="success" /> : null
+            }
+            {
+            errorSnackBox ?
+              <Snackbox message="Wrong credential!" severity="error" /> : null
             }
 
             <div className='reg-text'>
@@ -150,7 +189,7 @@ export default function SignupForm() {
             </div>
 
             <div className='reg-text'>
-                <a href="/reset">Forgot password?</a>
+                <a href="/generateReset">Forgot password?</a>
             </div>
         </form>
         

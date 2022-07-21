@@ -1,3 +1,7 @@
+/**
+ * @author ${Bhavesh Lalwani}
+ */
+
 const mongoose = require("mongoose");
 
 const FlightBookingSchema = new mongoose.Schema({
