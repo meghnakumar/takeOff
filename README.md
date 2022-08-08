@@ -1,6 +1,6 @@
 <!--- The following README.md sample file was adapted from https://gist.github.com/PurpleBooth/109311bb0361f32d87a2#file-readme-template-md by Gabriella Mosquera for academic use --->
 
-# Group 13 - 'TakeOff'
+# 'TakeOff'
 
 'TakeOff' is a travel management website which aims on providing the users with a one stop platform for flights, hotels, events and tours booking. The deployed website is currently a semi functional prototype demonstrating each feature of the website and the experience it will provide to the users. The website aims on providing a feedback to the user for all their actions. Every button provides a message to the user enhancing the user experience and usability of the website and also making sure that users are aware what each functionality offers.
 
